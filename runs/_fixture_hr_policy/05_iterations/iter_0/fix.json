@@ -1,0 +1,60 @@
+{
+  "iteration": 0,
+  "failures_by_category": {
+    "retrieval_miss": 5,
+    "prompt_defect": 3,
+    "hallucination": 1
+  },
+  "diagnoses": [
+    {
+      "case_id": "ans_003",
+      "category": "retrieval_miss",
+      "evidence": "expected ['doc_02_c000'], retrieved ['doc_01_c000']",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_00",
+      "category": "retrieval_miss",
+      "evidence": "expected ['doc_01_c001','doc_02_c004'], retrieved ['doc_01_c001']",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "oos_03",
+      "category": "prompt_defect",
+      "evidence": "answered an out-of-scope question; refusal rule too weak",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_011",
+      "category": "hallucination",
+      "evidence": "cited chunk ids it never retrieved",
+      "classified_by": "deterministic"
+    }
+  ],
+  "fix": {
+    "category": "retrieval_miss",
+    "rung": "raise_top_k",
+    "rationale": "9 failures classified retrieval_miss; applying raise_top_k",
+    "targets_case_ids": [
+      "ans_003",
+      "ans_008",
+      "edge_multi_00",
+      "edge_multi_01",
+      "edge_amb_00"
+    ],
+    "diff": {
+      "before": {
+        "top_k": 5
+      },
+      "after": {
+        "top_k": 8
+      }
+    }
+  },
+  "score_before": 0.591,
+  "score_after": 0.818,
+  "kept": true,
+  "revert_reason": null,
+  "seconds": 41.2,
+  "tokens": 38400
+}

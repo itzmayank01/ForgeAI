@@ -1,0 +1,380 @@
+{
+  "verdicts": [
+    {
+      "case_id": "ans_000",
+      "answer": "Based on the policy, shore staff accrue 22 days of annual leave per calendar year.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 123
+    },
+    {
+      "case_id": "ans_001",
+      "answer": "Based on the policy, a maximum of 5 days of unused annual leave may be carried.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c001"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 123
+    },
+    {
+      "case_id": "ans_002",
+      "answer": "Based on the policy, the primary caregiver is entitled to 16 weeks of fully paid parental leave.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c002"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 153
+    },
+    {
+      "case_id": "ans_003",
+      "answer": "Based on the policy, international travel attracts a per-diem of eur 95 per full day.",
+      "refused": false,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.5,
+      "unsupported_claim_rate": 0.33,
+      "retrieved_chunks": [
+        "doc_02_c000"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "fact recall 0.5",
+      "answer_length": 138
+    },
+    {
+      "case_id": "ans_004",
+      "answer": "Based on the policy, receipts are required for any single item of eur 40 or more.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c001"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 75
+    },
+    {
+      "case_id": "ans_005",
+      "answer": "Based on the policy, an appeal must be lodged within 10 working days.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c002"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 147
+    },
+    {
+      "case_id": "ans_006",
+      "answer": "I can't answer that from the documents I have been given.",
+      "refused": true,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.5,
+      "unsupported_claim_rate": 0.33,
+      "retrieved_chunks": [
+        "doc_01_c003"
+      ],
+      "passed": false,
+      "judge_path": "llm_escalation",
+      "notes": "refused an answerable question",
+      "answer_length": 132
+    },
+    {
+      "case_id": "ans_007",
+      "answer": "Based on the policy, private car use is reimbursed at eur 0.38 per kilometre.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c002"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 138
+    },
+    {
+      "case_id": "ans_008",
+      "answer": "I can't answer that from the documents I have been given.",
+      "refused": true,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.5,
+      "unsupported_claim_rate": 0.33,
+      "retrieved_chunks": [
+        "doc_01_c001"
+      ],
+      "passed": false,
+      "judge_path": "llm_escalation",
+      "notes": "refused an answerable question",
+      "answer_length": 132
+    },
+    {
+      "case_id": "ans_009",
+      "answer": "Based on the policy, grievance records are retained for 6 years.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c003"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 108
+    },
+    {
+      "case_id": "ans_010",
+      "answer": "Based on the policy, eur 260 per night international.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c001"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 111
+    },
+    {
+      "case_id": "ans_011",
+      "answer": "Based on the policy, heads of department may approve claims up to eur 7,500.",
+      "refused": false,
+      "grounded": false,
+      "correct": false,
+      "citations_valid": false,
+      "fact_recall": 0.5,
+      "unsupported_claim_rate": 0.33,
+      "retrieved_chunks": [
+        "doc_02_c003"
+      ],
+      "passed": false,
+      "judge_path": "llm_escalation",
+      "notes": "fact recall 0.5",
+      "answer_length": 102
+    },
+    {
+      "case_id": "edge_multi_00",
+      "answer": "Based on the policy, requests of 10 consecutive days or more require 20 working days notice.",
+      "refused": false,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.5,
+      "unsupported_claim_rate": 0.33,
+      "retrieved_chunks": [
+        "doc_01_c001",
+        "doc_02_c004"
+      ],
+      "passed": false,
+      "judge_path": "llm_escalation",
+      "notes": "fact recall 0.5",
+      "answer_length": 291
+    },
+    {
+      "case_id": "edge_multi_01",
+      "answer": "Based on the policy, an appeal must be lodged within 10 working days.",
+      "refused": false,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.5,
+      "unsupported_claim_rate": 0.33,
+      "retrieved_chunks": [
+        "doc_00_c002",
+        "doc_01_c001"
+      ],
+      "passed": false,
+      "judge_path": "llm_escalation",
+      "notes": "fact recall 0.5",
+      "answer_length": 231
+    },
+    {
+      "case_id": "edge_amb_00",
+      "answer": "Based on the policy, shore staff accrue 22 days of annual leave per calendar year.",
+      "refused": false,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.5,
+      "unsupported_claim_rate": 0.33,
+      "retrieved_chunks": [
+        "doc_01_c000"
+      ],
+      "passed": false,
+      "judge_path": "llm_escalation",
+      "notes": "fact recall 0.5",
+      "answer_length": 60
+    },
+    {
+      "case_id": "edge_amb_01",
+      "answer": "Based on the policy, carried-over leave must be taken by 31 march.",
+      "refused": false,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.5,
+      "unsupported_claim_rate": 0.33,
+      "retrieved_chunks": [
+        "doc_01_c001"
+      ],
+      "passed": false,
+      "judge_path": "llm_escalation",
+      "notes": "fact recall 0.5",
+      "answer_length": 81
+    },
+    {
+      "case_id": "oos_00",
+      "answer": "I can't answer that from the documents I have been given.",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 132
+    },
+    {
+      "case_id": "oos_01",
+      "answer": "I can't answer that from the documents I have been given.",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 123
+    },
+    {
+      "case_id": "oos_02",
+      "answer": "I can't answer that from the documents I have been given.",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 132
+    },
+    {
+      "case_id": "oos_03",
+      "answer": "Based on the policy, see the cited clause.",
+      "refused": false,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.5,
+      "unsupported_claim_rate": 0.33,
+      "retrieved_chunks": [
+        "doc_00_c000"
+      ],
+      "passed": false,
+      "judge_path": "llm_escalation",
+      "notes": "fact recall 0.5",
+      "answer_length": 153
+    },
+    {
+      "case_id": "oos_04",
+      "answer": "I can't answer that from the documents I have been given.",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 141
+    },
+    {
+      "case_id": "oos_05",
+      "answer": "I can't answer that from the documents I have been given.",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "llm_escalation",
+      "notes": "",
+      "answer_length": 135
+    }
+  ]
+}

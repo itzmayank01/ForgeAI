@@ -1,0 +1,108 @@
+import Link from "next/link";
+import type { ReactNode } from "react";
+
+export function Pill({
+  tone = "neutral", children,
+}: { tone?: "neutral" | "ok" | "warn" | "bad" | "accent"; children: ReactNode }) {
+  const tones = {
+    neutral: "bg-ink/6 text-muted",
+    ok: "bg-ok/12 text-ok",
+    warn: "bg-warn/14 text-warn",
+    bad: "bg-bad/12 text-bad",
+    accent: "bg-accent/12 text-accent",
+  } as const;
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ${tones[tone]}`}
+    >
+      {children}
+    </span>
+  );
+}
+
+export function Stat({
+  label, value, sub, tone = "neutral",
+}: { label: string; value: string; sub?: string; tone?: "neutral" | "ok" | "warn" | "bad" }) {
+  const colors = {
+    neutral: "text-ink", ok: "text-ok", warn: "text-warn", bad: "text-bad",
+  } as const;
+  return (
+    <div className="card p-4">
+      <div className="text-[11px] font-medium uppercase tracking-wider text-muted">{label}</div>
+      <div className={`mono-nums mt-1.5 text-2xl font-bold tracking-tight ${colors[tone]}`}>
+        {value}
+      </div>
+      {sub && <div className="mt-0.5 text-xs text-muted">{sub}</div>}
+    </div>
+  );
+}
+
+export function Section({
+  id, eyebrow, title, lede, children,
+}: {
+  id?: string; eyebrow?: string; title: string; lede?: string; children: ReactNode;
+}) {
+  return (
+    <section id={id} className="mx-auto max-w-content scroll-mt-20 px-4 py-14">
+      {eyebrow && (
+        <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+          {eyebrow}
+        </div>
+      )}
+      <h2 className="display mt-2 text-[clamp(1.6rem,3.4vw,2.4rem)]">{title}</h2>
+      {lede && <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted">{lede}</p>}
+      <div className="mt-7">{children}</div>
+    </section>
+  );
+}
+
+/** A score bar. Width encodes the rate; colour encodes the band. Never rely on
+ *  colour alone — the number is always printed beside it. */
+export function Meter({ value, tone }: { value: number; tone?: "ok" | "warn" | "bad" }) {
+  const band = tone ?? (value >= 0.85 ? "ok" : value >= 0.6 ? "warn" : "bad");
+  const bg = { ok: "bg-ok", warn: "bg-warn", bad: "bg-bad" }[band];
+  return (
+    <div className="flex items-center gap-2.5">
+      <div
+        className="h-1.5 w-full overflow-hidden rounded-full bg-ink/10"
+        role="img"
+        aria-label={`${Math.round(value * 100)} percent`}
+      >
+        <div className={`h-full rounded-full ${bg}`} style={{ width: `${Math.max(value * 100, 1.5)}%` }} />
+      </div>
+      <span className="mono-nums w-10 shrink-0 text-right text-xs font-semibold">
+        {Math.round(value * 100)}%
+      </span>
+    </div>
+  );
+}
+
+export function RunCard({
+  id, brief, passRate, cases, synthetic, iterations,
+}: {
+  id: string; brief: string; passRate: number; cases: number;
+  synthetic: boolean; iterations: number;
+}) {
+  return (
+    <Link
+      href={`/runs/${id}`}
+      className="card group block p-5 transition hover:border-accent/40 hover:shadow-[0_1px_20px_-6px_rgb(var(--ink)/0.18)]"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <h3 className="font-semibold tracking-tight">{id.replace(/^_/, "").replace(/_/g, " ")}</h3>
+        {synthetic ? <Pill tone="warn">fixture</Pill> : <Pill tone="accent">live run</Pill>}
+      </div>
+      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{brief}</p>
+      <div className="mt-4">
+        <Meter value={passRate} />
+      </div>
+      <div className="mt-3 flex gap-4 text-xs text-muted">
+        <span>{cases} cases</span>
+        <span>{iterations} iteration{iterations === 1 ? "" : "s"}</span>
+        <span className="ml-auto text-accent opacity-0 transition group-hover:opacity-100">
+          open →
+        </span>
+      </div>
+    </Link>
+  );
+}

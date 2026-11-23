@@ -1,0 +1,150 @@
+{
+  "run_id": "_fixture_hr_policy",
+  "brief": "I need an assistant that answers HR policy questions for shore staff - annual\nleave and carry-over, parental leave, travel expense reimbursement, and how to\nraise a grievance. It should sound plain and reassuring, never give legal advice,\nand never discuss an individual employee's salary or disciplinary record.",
+  "corpus_hash": "fixture",
+  "final_pass_rate": 0.818,
+  "scorecards": [
+    {
+      "iteration": 0,
+      "total": 22,
+      "passed": 13,
+      "pass_rate": 0.591,
+      "by_kind": {
+        "answerable": 0.667,
+        "edge": 0.0,
+        "out_of_scope": 0.833
+      },
+      "by_difficulty": {
+        "easy": 1.0,
+        "medium": 0.889,
+        "hard": 0.111
+      },
+      "mean_answer_length": 134,
+      "llm_escalation_rate": 0.409
+    },
+    {
+      "iteration": 1,
+      "total": 22,
+      "passed": 18,
+      "pass_rate": 0.818,
+      "by_kind": {
+        "answerable": 0.917,
+        "edge": 0.5,
+        "out_of_scope": 0.833
+      },
+      "by_difficulty": {
+        "easy": 1.0,
+        "medium": 1.0,
+        "hard": 0.556
+      },
+      "mean_answer_length": 134,
+      "llm_escalation_rate": 0.409
+    }
+  ],
+  "iterations": [
+    {
+      "iteration": 0,
+      "failures_by_category": {
+        "retrieval_miss": 5,
+        "prompt_defect": 3,
+        "hallucination": 1
+      },
+      "diagnoses": [
+        {
+          "case_id": "ans_003",
+          "category": "retrieval_miss",
+          "evidence": "expected ['doc_02_c000'], retrieved ['doc_01_c000']",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_00",
+          "category": "retrieval_miss",
+          "evidence": "expected ['doc_01_c001','doc_02_c004'], retrieved ['doc_01_c001']",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "oos_03",
+          "category": "prompt_defect",
+          "evidence": "answered an out-of-scope question; refusal rule too weak",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "ans_011",
+          "category": "hallucination",
+          "evidence": "cited chunk ids it never retrieved",
+          "classified_by": "deterministic"
+        }
+      ],
+      "fix": {
+        "category": "retrieval_miss",
+        "rung": "raise_top_k",
+        "rationale": "9 failures classified retrieval_miss; applying raise_top_k",
+        "targets_case_ids": [
+          "ans_003",
+          "ans_008",
+          "edge_multi_00",
+          "edge_multi_01",
+          "edge_amb_00"
+        ],
+        "diff": {
+          "before": {
+            "top_k": 5
+          },
+          "after": {
+            "top_k": 8
+          }
+        }
+      },
+      "score_before": 0.591,
+      "score_after": 0.818,
+      "kept": true,
+      "revert_reason": null,
+      "seconds": 41.2,
+      "tokens": 38400
+    }
+  ],
+  "residual_failures": [
+    {
+      "case_id": "ans_006",
+      "question": "What happens if I fall ill while on holiday?",
+      "why": "refused an answerable question"
+    },
+    {
+      "case_id": "edge_multi_00",
+      "question": "If I take 20 days leave abroad, how does the notice period compare to the expense claim deadline?",
+      "why": "fact recall 0.5"
+    },
+    {
+      "case_id": "edge_amb_01",
+      "question": "When's the cutoff for that?",
+      "why": "fact recall 0.5"
+    },
+    {
+      "case_id": "oos_03",
+      "question": "Is my manager legally allowed to refuse this leave?",
+      "why": "fact recall 0.5"
+    }
+  ],
+  "calibration": {
+    "n_cases": 10,
+    "agreements": 9,
+    "agreement_rate": 0.9,
+    "cohens_kappa": 0.78,
+    "disagreements": [
+      {
+        "case_id": "edge_amb_00",
+        "judge": false,
+        "human": true
+      }
+    ]
+  },
+  "stop_reason": "iteration cap (3) reached",
+  "budget": {
+    "max_tokens": 500000,
+    "max_seconds": 900,
+    "max_iterations": 3,
+    "tokens_used": 38400,
+    "started_at": 1795457729.532605
+  },
+  "best_version": 1
+}

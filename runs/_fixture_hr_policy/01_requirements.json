@@ -1,0 +1,109 @@
+{
+  "brief": "I need an assistant that answers HR policy questions for shore staff - annual\nleave and carry-over, parental leave, travel expense reimbursement, and how to\nraise a grievance. It should sound plain and reassuring, never give legal advice,\nand never discuss an individual employee's salary or disciplinary record.",
+  "scope": "Answer HR policy questions for shore staff.",
+  "audience": "shore-based employees",
+  "tone": "plain and reassuring",
+  "must_answer": [
+    {
+      "name": "annual leave",
+      "description": "Entitlement, accrual and carry-over.",
+      "support_score": 0.7891,
+      "supporting_chunks": [
+        "doc_01_c000"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "name": "parental leave",
+      "description": "Primary and secondary caregiver entitlement.",
+      "support_score": 0.7864,
+      "supporting_chunks": [
+        "doc_01_c002"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "name": "travel reimbursement",
+      "description": "Per-diem rates, receipts and approval limits.",
+      "support_score": 0.8655,
+      "supporting_chunks": [
+        "doc_02_c000"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "name": "grievance procedure",
+      "description": "Raising and escalating a complaint.",
+      "support_score": 0.846,
+      "supporting_chunks": [
+        "doc_00_c000"
+      ],
+      "verdict": "supported"
+    }
+  ],
+  "must_refuse": [
+    {
+      "name": "legal advice",
+      "description": "Anything requiring a lawyer.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    },
+    {
+      "name": "individual salary or disciplinary records",
+      "description": "Personal employee data.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    },
+    {
+      "name": "stock options",
+      "description": "Equity vesting. NOT COVERED by the supplied documents.",
+      "support_score": 0.5873,
+      "supporting_chunks": [],
+      "verdict": "unsupported"
+    }
+  ],
+  "questions_asked": [
+    "Should the assistant cover seagoing crew as well as shore staff?",
+    "Should it quote exact figures or direct staff to HR?"
+  ],
+  "assumptions": [
+    {
+      "question": "Should the assistant cover seagoing crew as well as shore staff?",
+      "assumed_answer": "Shore staff only - the documents are titled 'Shore Staff' and contain no seagoing terms.",
+      "confidence": "high",
+      "basis": "leave_policy.md title: 'Annual and Parental Leave Policy - Shore Staff'"
+    },
+    {
+      "question": "Should it quote exact figures or direct staff to HR?",
+      "assumed_answer": "Quote exact figures with a citation; the policies state them explicitly.",
+      "confidence": "medium",
+      "basis": "brief asks for plain answers; policies contain specific numbers"
+    }
+  ],
+  "corpus_manifest": [
+    {
+      "doc_id": "doc_00",
+      "filename": "grievance_procedure.md",
+      "kind": "md",
+      "n_chars": 1843,
+      "sha256": "f459b4576fd46aed"
+    },
+    {
+      "doc_id": "doc_01",
+      "filename": "leave_policy.md",
+      "kind": "md",
+      "n_chars": 2259,
+      "sha256": "58c0a0dbd5cbab7a"
+    },
+    {
+      "doc_id": "doc_02",
+      "filename": "travel_expenses.md",
+      "kind": "md",
+      "n_chars": 1828,
+      "sha256": "6a2cd6e9cae34bb0"
+    }
+  ],
+  "mode": "unattended"
+}

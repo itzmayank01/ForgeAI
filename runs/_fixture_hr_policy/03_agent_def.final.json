@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "name": "Shore Staff HR Assistant",
+  "description": "Answers HR policy questions for shore-based staff.",
+  "system_prompt": "ROLE\nYou are an HR policy assistant for shore-based staff.\n\nSCOPE\nYou answer questions about: annual leave, parental leave, travel reimbursement, grievance procedure.\n\nREFUSAL\nYou decline: legal advice, individual salary or disciplinary records, stock options.\nIf the retrieved context does not support an answer, refuse. Refusing is correct behaviour, not failure.\n\nGROUNDING\nAnswer only from the retrieved context. Cite the chunk_id for every claim.\n\nFORMAT\nReply as JSON: answer, citations, refused, confidence.\n\nTONE\nPlain and reassuring.",
+  "retrieval": {
+    "chunk_size": 800,
+    "chunk_overlap": 120,
+    "top_k": 8,
+    "strategy": "dense",
+    "hybrid_alpha": 0.5,
+    "query_rewrite": false,
+    "min_score": 0.25
+  },
+  "tools": [],
+  "output_contract": {
+    "format": "json",
+    "require_citations": true,
+    "refusal_message": "I can't answer that from the documents I have been given.",
+    "answer_schema": {
+      "answer": "string",
+      "citations": "list[chunk_id]",
+      "refused": "bool",
+      "confidence": "float 0-1"
+    }
+  },
+  "temperature": 0.1,
+  "provenance": {
+    "corpus_hash": "fixture",
+    "n_documents": 3,
+    "must_answer": [
+      "annual leave",
+      "parental leave",
+      "travel reimbursement",
+      "grievance procedure"
+    ],
+    "tools_proposed": [
+      "weather",
+      "calculator"
+    ],
+    "tools_rejected": [
+      "weather: claimed requirement 'general helpfulness' matches no must_answer topic",
+      "calculator: claimed requirement 'being useful' matches no must_answer topic"
+    ]
+  }
+}

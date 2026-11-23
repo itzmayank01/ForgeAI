@@ -1,0 +1,56 @@
+{
+  "topics": [
+    {
+      "name": "annual leave",
+      "description": "Entitlement, accrual and carry-over.",
+      "support_score": 0.7891,
+      "supporting_chunks": [
+        "doc_01_c000"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "name": "parental leave",
+      "description": "Primary and secondary caregiver entitlement.",
+      "support_score": 0.7864,
+      "supporting_chunks": [
+        "doc_01_c002"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "name": "travel reimbursement",
+      "description": "Per-diem rates, receipts and approval limits.",
+      "support_score": 0.8655,
+      "supporting_chunks": [
+        "doc_02_c000"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "name": "grievance procedure",
+      "description": "Raising and escalating a complaint.",
+      "support_score": 0.846,
+      "supporting_chunks": [
+        "doc_00_c000"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "name": "stock options",
+      "description": "Equity vesting. NOT COVERED by the supplied documents.",
+      "support_score": 0.5873,
+      "supporting_chunks": [],
+      "verdict": "unsupported"
+    }
+  ],
+  "unsupported": [
+    "stock options"
+  ],
+  "moved_to_refuse": [
+    "stock options"
+  ],
+  "unsupported_ratio": 0.2,
+  "aborted": false,
+  "abort_reason": null
+}
