@@ -59,15 +59,13 @@ class ChunkIndex:
         ]
 
     def support_score(self, query: str, k: int = 3) -> tuple[float, float, list[str]]:
-        """Return (max_sim, topk_mean, chunk_ids) - the deterministic signal
-        behind the groundability guard.
+        """Return (max_sim, topk_mean, chunk_ids) - the signal behind the
+        groundability guard.
 
-        `max_sim` is the discriminating one: it asks "does ANY chunk cover this
-        topic?". A top-k mean averages in unrelated chunks, which on a small
-        corpus inflates absent-but-domain-adjacent topics (an HR corpus with no
-        equity policy still scores "stock options" highly on a mean, because
-        every chunk is vaguely HR-shaped). Measured separation on the HR fixture:
-        present topics 0.83-0.85 max, absent-adjacent 0.54, unrelated 0.44.
+        `max_sim` asks "does ANY chunk cover this?". A top-k mean averages in
+        unrelated chunks, which on a small corpus inflates absent-but-adjacent
+        topics: an HR corpus with no equity policy still scores "stock options"
+        highly on a mean, because every chunk is vaguely HR-shaped.
         """
         if not self.chunks:
             return 0.0, 0.0, []
@@ -78,6 +76,30 @@ class ChunkIndex:
             round(float(np.mean([dense[i] for i in order])), 4),
             [self.chunks[i].chunk_id for i in order],
         )
+
+    def topic_support(self, name: str, description: str, k: int = 3):
+        """Phrasing-robust support for a requirements topic.
+
+        A single probe string is fragile: the same real topic scored 0.758 when
+        described as "Minimum order value and volume discounts" and 0.674 as
+        "MOQ and discounts", which straddles any fixed threshold. Probing
+        several natural phrasings and taking the best asks whether the corpus
+        covers the CONCEPT, not whether one wording happens to embed well.
+        """
+        probes = [
+            name,
+            description,
+            f"{name}. {description}",
+            f"What is the policy on {name}?",
+        ]
+        best_score, best_mean, best_ids = 0.0, 0.0, []
+        for probe in probes:
+            if not probe.strip():
+                continue
+            score, mean, ids = self.support_score(probe, k)
+            if score > best_score:
+                best_score, best_mean, best_ids = score, mean, ids
+        return best_score, best_mean, best_ids
 
     def export_for_web(self, path: Path) -> None:
         """Ship chunks + vectors to the Next.js app so /api/chat does cosine in

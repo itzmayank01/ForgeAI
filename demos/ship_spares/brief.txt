@@ -1,0 +1,6 @@
+Build me a procurement assistant for our ship spares desk. It should answer
+questions about part availability, prices and lead times from the parts
+catalogue, and about supplier terms, minimum order quantities and warranty
+conditions from the supplier agreements. It needs to work out order totals.
+Purchasing officers use it. It must not recommend one supplier over another or
+commit to a delivery date it cannot evidence.

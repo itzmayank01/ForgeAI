@@ -12,12 +12,24 @@ from __future__ import annotations
 from ..ingest.index import ChunkIndex
 from ..models.requirements import GroundabilityReport, RequirementsDoc
 
-# Calibrated on bge-small-en-v1.5 cosine against the HR fixture, where a
-# genuinely covered topic scores 0.83-0.85, a domain-adjacent but absent topic
-# 0.54, and an unrelated topic 0.44. Re-check these if the embedding model
-# changes - they are model-specific, not universal.
-TAU_UNSUPPORTED = 0.62   # below: no chunk actually covers this
-TAU_SUPPORTED = 0.74     # above: clearly covered
+# Thresholds derived empirically, not guessed. Measured max-cosine over 14
+# topic probes across BOTH demo corpora, each written twice (verbose and terse)
+# to test phrasing sensitivity:
+#
+#   genuinely covered   min 0.703
+#   absent from corpus  max 0.653
+#
+# so 0.68 sits in the measured gap. The margin is thin (0.05), and it only
+# holds because index.topic_support() probes several phrasings and takes the
+# best - a single probe string swung one real topic between 0.758 and 0.674.
+#
+# A contrastive signal was tried first and REJECTED on the data: both
+# (max - mean) margin and its z-score OVERLAP between covered and absent topics
+# (-0.033 and -1.01 separation respectively), because an absent topic can still
+# produce one chunk that stands out from a flat field. Plain max was the only
+# signal that separated. Re-derive all of this if the embedding model changes.
+TAU_UNSUPPORTED = 0.68   # below: no chunk actually covers this
+TAU_SUPPORTED = 0.78     # above: clearly covered
 ABORT_RATIO = 0.5        # more than half unsupported: refuse to build
 
 
@@ -28,8 +40,7 @@ def run_groundability(
     kept = []
 
     for topic in requirements.must_answer:
-        query = f"{topic.name}. {topic.description}"
-        score, mean_score, chunk_ids = index.support_score(query)
+        score, mean_score, chunk_ids = index.topic_support(topic.name, topic.description)
         topic.support_score = score
         topic.supporting_chunks = chunk_ids
 
