@@ -1,0 +1,28 @@
+{
+  "brief": "I need an assistant that answers HR policy questions for shore staff - annual\nleave and carry-over, parental leave, travel expense reimbursement, and how to\nraise a grievance. It should sound plain and reassuring, never give legal advice,\nand never discuss an individual employee's salary or disciplinary record.",
+  "documents": [
+    {
+      "doc_id": "doc_00",
+      "filename": "grievance_procedure.md",
+      "kind": "md",
+      "n_chars": 1843,
+      "sha256": "f459b4576fd46aed"
+    },
+    {
+      "doc_id": "doc_01",
+      "filename": "leave_policy.md",
+      "kind": "md",
+      "n_chars": 2259,
+      "sha256": "58c0a0dbd5cbab7a"
+    },
+    {
+      "doc_id": "doc_02",
+      "filename": "travel_expenses.md",
+      "kind": "md",
+      "n_chars": 1828,
+      "sha256": "6a2cd6e9cae34bb0"
+    }
+  ],
+  "skipped": [],
+  "corpus_hash": "b432e1734f54bb0d"
+}

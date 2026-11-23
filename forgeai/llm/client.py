@@ -53,7 +53,7 @@ class LLMClient:
         model: str | None = None,
         temperature: float = 0.1,
         json_mode: bool = False,
-        max_tokens: int = 4096,
+        max_tokens: int = 2048,
     ) -> str:
         payload: dict = {
             "model": model or self.cfg.gen_model,

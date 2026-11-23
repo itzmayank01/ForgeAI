@@ -74,9 +74,17 @@ def bucket_for(model: str) -> TokenBucket:
         return _buckets[model]
 
 
+# Completions land far below their ceiling: measured RequirementsDoc calls use
+# ~2,400 total against a 4,096 allowance. Reserving the full allowance throttled
+# throughput roughly threefold for no benefit, so reserve a realistic fraction
+# and let settle() correct against the server's actual count straight after.
+COMPLETION_FRACTION = 0.45
+MIN_COMPLETION_RESERVE = 400
+
+
 def estimate_tokens(messages: list[dict[str, str]], max_tokens: int) -> int:
-    """Rough but deliberately generous: ~4 chars per token for the prompt, plus
-    the full completion allowance. Under-estimating causes 429s, which are far
-    more expensive than waiting a moment longer."""
+    """~4 chars per token for the prompt, plus a realistic share of the
+    completion allowance rather than all of it."""
     chars = sum(len(m.get("content", "")) for m in messages)
-    return chars // 4 + max_tokens
+    completion = max(MIN_COMPLETION_RESERVE, int(max_tokens * COMPLETION_FRACTION))
+    return chars // 4 + completion
