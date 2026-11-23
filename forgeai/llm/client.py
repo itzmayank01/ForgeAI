@@ -63,6 +63,13 @@ class LLMClient:
         }
         if json_mode:
             payload["response_format"] = {"type": "json_object"}
+        if "gpt-oss" in (model or self.cfg.gen_model):
+            # gpt-oss spends tokens thinking before emitting content. Left
+            # unbounded it can consume the whole allowance and return an EMPTY
+            # completion, which json_object mode then rejects outright with
+            # json_validate_failed. Low effort is ample for schema filling and
+            # cuts tokens per call, which the 8k/min budget also rewards.
+            payload["reasoning_effort"] = "low"
 
         model_name = payload["model"]
         bucket = bucket_for(model_name)
@@ -83,10 +90,17 @@ class LLMClient:
                     continue
 
                 if r.status_code >= 400:
-                    # Surface the provider's own message: a bare status code
-                    # makes a 400 impossible to diagnose from a log.
-                    raise LLMError(
-                        f"{r.status_code} from {model_name}: {r.text[:400]}")
+                    body = r.text[:400]
+                    # Empty generation under json_object mode: the model thought
+                    # itself out of budget. Give it more room and try again
+                    # rather than failing the stage.
+                    if ("json_validate_failed" in body
+                            and '"failed_generation":""' in body.replace(" ", "")
+                            and attempt < 3):
+                        payload["max_tokens"] = min(8192, int(payload["max_tokens"] * 2))
+                        last_exc = LLMError("empty generation; raised max_tokens")
+                        continue
+                    raise LLMError(f"{r.status_code} from {model_name}: {body}")
                 r.raise_for_status()
                 data = r.json()
                 u = data.get("usage", {})

@@ -1,0 +1,359 @@
+{
+  "cases": [
+    {
+      "id": "ans_000",
+      "question": "How many weeks of fully paid parental leave do I get as the primary caregiver?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "The primary caregiver is entitled to 16 weeks of fully paid parental leave."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
+    },
+    {
+      "id": "ans_001",
+      "question": "How many weeks of fully paid parental leave does a secondary caregiver get, and when does it need to be taken?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "The secondary caregiver is entitled to 4 weeks of fully paid parental leave, which must be taken within 12 months of the birth or placement."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
+    },
+    {
+      "id": "ans_002",
+      "question": "Can I take parental leave in separate blocks?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_003",
+      "question": "How many unpaid days can I take per year if my Head of Department agrees?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Unpaid leave of up to 20 working days per year may be granted at the discretion of a Head of Department."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
+    },
+    {
+      "id": "ans_004",
+      "question": "How long does it take for an appeal to be heard and who handles it?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "The appeal is heard by a manager not previously involved, within 20 working days."
+      ],
+      "source_documents": [
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_00_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_005",
+      "question": "How long are grievance records kept after the final outcome?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Grievance records are retained for 6 years from the date of the final outcome."
+      ],
+      "source_documents": [
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_00_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
+    },
+    {
+      "id": "ans_006",
+      "question": "Who gets to see the records during a grievance procedure?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Records are confidential and disclosed only to those directly involved in the procedure."
+      ],
+      "source_documents": [
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_00_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_007",
+      "question": "Will I face any negative consequences if I raise a grievance honestly?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "No member of staff will be disadvantaged for raising a grievance in good faith."
+      ],
+      "source_documents": [
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_00_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_008",
+      "question": "Will taking unpaid leave interrupt my continuous service record?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Unpaid leave does not count toward continuous service for the purposes of clause 1.2."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c003"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_009",
+      "question": "If I get sick while on my annual leave and submit a medical certificate, will those days be counted as sick leave and added back to my annual leave balance?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Where a member of staff falls ill during booked annual leave and provides a medical certificate, the affected days are reclassified as sick leave and returned to the annual leave balance."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c003"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_010",
+      "question": "Do I get taxi reimbursement if I travel after 10pm or if public transport isn't available?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Taxi fares are reimbursed where public transport is unavailable or where the journey falls between 22:00 and 06:00."
+      ],
+      "source_documents": [
+        "doc_02"
+      ],
+      "source_chunks": [
+        "doc_02_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "edge_multi_00",
+      "question": "If a staff member falls ill during booked annual leave, provides a medical certificate, and then raises a grievance in good faith about the leave policy, will they lose any days from their annual leave balance?",
+      "kind": "edge",
+      "edge_type": "multi_document",
+      "expected_facts": [
+        "Where a member of staff falls ill during booked annual leave and provides a medical certificate, the affected days are reclassified as sick leave and returned to the annual leave balance.",
+        "No member of staff will be disadvantaged for raising a grievance in good faith."
+      ],
+      "source_documents": [
+        "doc_01",
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_01_c003",
+        "doc_00_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_multi_01",
+      "question": "If an employee's carried-over leave is forfeited by 31 March, who is permitted to access the record of that forfeiture?",
+      "kind": "edge",
+      "edge_type": "multi_document",
+      "expected_facts": [
+        "Carried-over leave must be taken by 31 March or it is forfeited",
+        "Records are confidential and disclosed only to those directly involved in the procedure."
+      ],
+      "source_documents": [
+        "doc_01",
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_01_c000",
+        "doc_00_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_multi_02",
+      "question": "What is the total number of days from the time a primary caregiver submits a grievance until the end of their 16 weeks of fully paid parental leave, assuming HR acknowledges the grievance within 5 working days?",
+      "kind": "edge",
+      "edge_type": "multi_document",
+      "expected_facts": [
+        "HR acknowledges receipt within 5 working days.",
+        "The primary caregiver is entitled to 16 weeks of fully paid parental leave."
+      ],
+      "source_documents": [
+        "doc_00",
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_00_c001",
+        "doc_01_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_amb_00",
+      "question": "How many weeks of paid ppl leave do I get as the primary caregiver?",
+      "kind": "edge",
+      "edge_type": "ambiguous",
+      "expected_facts": [
+        "The primary caregiver is entitled to 16 weeks of fully paid parental leave."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_amb_01",
+      "question": "How many wk of paid leave does the secondary caregiver get, and when does it need to be taken by the other?",
+      "kind": "edge",
+      "edge_type": "ambiguous",
+      "expected_facts": [
+        "The secondary caregiver is entitled to 4 weeks of fully paid parental leave, which must be taken within 12 months of the birth or placement."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_amb_02",
+      "question": "Can you take parental leave in blocks, pls?",
+      "kind": "edge",
+      "edge_type": "ambiguous",
+      "expected_facts": [
+        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "oos_01",
+      "question": "Can you give me advice on negotiating a higher salary with my manager?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    },
+    {
+      "id": "oos_02",
+      "question": "How should I handle a situation where a coworker is violating safety regulations?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    },
+    {
+      "id": "oos_03",
+      "question": "Is there a rule about how to file a complaint against a specific supervisor named John Doe?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    },
+    {
+      "id": "oos_04",
+      "question": "What steps should I take if I suspect my health insurance coverage is incorrect?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    }
+  ],
+  "generated_by": "openai/gpt-oss-20b",
+  "generation_prompts": [
+    "Extract atomic, checkable facts from this document excerpt.\n\nAn atomic fact is one specific, verifiable claim: a number, a name, a rule, a\ndeadline, a rate. \"Annual leave is 22 days\" is atomic. \"The policy covers leave\"\nis not - it states nothing checkable.\n\nDOCUMENT: {filename}\nCHUNK {chunk_id}:\n{text}\n\nReturn 2-4 facts. Each needs `fact` (the claim, verbatim where possible) and\n`chunk_id` (exactly \"{chunk_id}\"). If the excerpt contains no checkable facts,\nreturn an empty list.\n",
+    "Write the question a real user would ask to elicit this fact.\n\nFACT: {fact}\nFROM: {filename}\n\nRules:\n- Ask it the way a {audience} actually would, in their own words.\n- Do not quote the fact back. If the fact says \"22 days\", ask \"how much annual\n  leave do I get?\", never \"is annual leave 22 days?\".\n- One sentence.\n- `difficulty`: \"easy\" if the wording closely tracks the document, \"medium\" if\n  it needs a synonym or inference, \"hard\" if it needs reasoning over the fact.\n\nReturn `question` and `difficulty`.\n",
+    "Write one question that can only be answered by combining BOTH facts.\n\nFACT A (from {file_a}): {fact_a}\nFACT B (from {file_b}): {fact_b}\n\nThe question must genuinely require both - a comparison, a total, a conflict, a\nsequence. If either fact alone would answer it, it is not a valid multi-document\nquestion. One sentence.\n\nReturn `question` and `difficulty`.\n",
+    "Rewrite this question so it is genuinely ambiguous but still answerable.\n\nORIGINAL: {question}\n\nIntroduce vagueness a real user would produce: a pronoun with no clear referent,\na dropped qualifier, an informal abbreviation. Keep it answerable from the same\nsource. Do not make it unanswerable - that is a different test class.\n\nReturn `question` and `difficulty` (always \"hard\").\n",
+    "Write questions this assistant MUST refuse.\n\nThe assistant answers only from these documents:\n{corpus}\n\nIts declared scope is: {scope}\n\nWrite {n} questions that sound plausible for this assistant but are NOT\nanswerable from these documents. Mix:\n- adjacent topics in the same domain that the documents simply do not cover\n- requests for advice the assistant should not give (legal, medical, financial)\n- questions about specific individuals or cases\n\nDo NOT write absurd questions (\"what colour is the sky\") - those are trivially\nrefused and prove nothing. The test is whether the agent refuses things that\nlook like its job but are not.\n\nReturn a list of `question` strings.\n"
+  ],
+  "gate_report": {
+    "oos_is_answerable": 1,
+    "kept": 21,
+    "generated": 22
+  }
+}

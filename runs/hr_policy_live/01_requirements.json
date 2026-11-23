@@ -1,0 +1,145 @@
+{
+  "brief": "I need an assistant that answers HR policy questions for shore staff - annual\nleave and carry-over, parental leave, travel expense reimbursement, and how to\nraise a grievance. It should sound plain and reassuring, never give legal advice,\nand never discuss an individual employee's salary or disciplinary record.",
+  "scope": "Provide plain, reassuring answers to shore staff HR policy questions.",
+  "audience": "Shore staff seeking information on HR policies.",
+  "tone": "Plain and reassuring, no legal advice, no salary or disciplinary details.",
+  "must_answer": [
+    {
+      "name": "Annual Leave",
+      "description": "How many annual leave days do I accrue and can I carry them over?",
+      "support_score": 0.827,
+      "supporting_chunks": [
+        "doc_01_c001",
+        "doc_01_c000",
+        "doc_01_c002"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "name": "Parental Leave",
+      "description": "What are the parental leave entitlements for shore staff?",
+      "support_score": 0.8366,
+      "supporting_chunks": [
+        "doc_01_c000",
+        "doc_01_c002",
+        "doc_01_c001"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "name": "Travel Expense Reimbursement",
+      "description": "How do I claim travel expenses and what limits apply?",
+      "support_score": 0.8296,
+      "supporting_chunks": [
+        "doc_02_c000",
+        "doc_02_c001",
+        "doc_02_c002"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "name": "Grievance Procedure",
+      "description": "What steps do I follow to raise a grievance?",
+      "support_score": 0.846,
+      "supporting_chunks": [
+        "doc_00_c000",
+        "doc_00_c001",
+        "doc_00_c002"
+      ],
+      "verdict": "supported"
+    }
+  ],
+  "must_refuse": [
+    {
+      "name": "Legal Advice",
+      "description": "Providing legal advice on HR policies.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    },
+    {
+      "name": "Salary or Disciplinary Record",
+      "description": "Discussing an individual's salary or disciplinary history.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    },
+    {
+      "name": "Medical Advice",
+      "description": "Giving medical advice related to workplace health.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    },
+    {
+      "name": "Financial Advice",
+      "description": "Providing financial advice on personal finances.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    }
+  ],
+  "questions_asked": [
+    "Should the assistant provide step-by-step instructions for raising a grievance?",
+    "Should the assistant detail the limits for travel expense reimbursement?",
+    "Should the assistant mention policy reference numbers in responses?",
+    "Should the assistant provide dates for leave entitlements?",
+    "Should the assistant explain carry-over rules for annual leave?"
+  ],
+  "assumptions": [
+    {
+      "question": "Should the assistant provide step-by-step instructions for raising a grievance?",
+      "assumed_answer": "Yes – the policy outlines a clear step‑by‑step grievance procedure. Staff should first raise the matter informally with their line manager within 15 working days (Stage 1). If unresolved, they can submit a formal written grievance to HR using form HR‑09a (Stage 2), with HR acknowledging receipt within 5 working days and convening a hearing within 20 working days. An appeal can be lodged within 10 working days of the written outcome (Stage 3).",
+      "confidence": "high",
+      "basis": "doc_00_c000"
+    },
+    {
+      "question": "Should the assistant detail the limits for travel expense reimbursement?",
+      "assumed_answer": "Yes, the assistant should detail the limits for travel expense reimbursement. The limits include per‑diem allowances of EUR 65 for domestic travel, EUR 95 for international travel, and EUR 130 for high‑cost ports; receipt requirements of EUR 40 per item or a monthly aggregate of EUR 200 for items under EUR 40; accommodation caps of EUR 180 per night domestic and EUR 260 per night international; transport reimbursement of EUR 0.38 per kilometre and taxi fares reimbursed when public transport is unavailable or the journey falls between 22:00 and 06:00; approval limits of EUR 1,500 by line managers, EUR 7,500 by heads of department, and above that Finance Director approval; and submission deadlines of 30 days, 31–60 days with justification, and no reimbursement after 60 days.",
+      "confidence": "high",
+      "basis": "doc_02_c000, doc_02_c001, doc_02_c002"
+    },
+    {
+      "question": "Should the assistant mention policy reference numbers in responses?",
+      "assumed_answer": "The excerpts do not specify whether the assistant should mention policy reference numbers.",
+      "confidence": "low",
+      "basis": "doc_00_c000"
+    },
+    {
+      "question": "Should the assistant provide dates for leave entitlements?",
+      "assumed_answer": "Yes, the assistant should provide dates for leave entitlements, as the policy specifies specific dates for carry‑over, notice periods, and parental leave.",
+      "confidence": "high",
+      "basis": "doc_01_c001, doc_01_c002"
+    },
+    {
+      "question": "Should the assistant explain carry-over rules for annual leave?",
+      "assumed_answer": "Yes. The policy allows a maximum of 5 days of unused annual leave to be carried into the following calendar year, and any carried‑over days must be taken by 31 March or they will be forfeited.",
+      "confidence": "high",
+      "basis": "doc_01_c001"
+    }
+  ],
+  "corpus_manifest": [
+    {
+      "doc_id": "doc_00",
+      "filename": "grievance_procedure.md",
+      "kind": "md",
+      "n_chars": 1843,
+      "sha256": "f459b4576fd46aed"
+    },
+    {
+      "doc_id": "doc_01",
+      "filename": "leave_policy.md",
+      "kind": "md",
+      "n_chars": 2259,
+      "sha256": "58c0a0dbd5cbab7a"
+    },
+    {
+      "doc_id": "doc_02",
+      "filename": "travel_expenses.md",
+      "kind": "md",
+      "n_chars": 1828,
+      "sha256": "6a2cd6e9cae34bb0"
+    }
+  ],
+  "mode": "unattended"
+}

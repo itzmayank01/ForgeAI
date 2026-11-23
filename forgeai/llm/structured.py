@@ -14,7 +14,7 @@ from typing import TypeVar
 
 from pydantic import BaseModel, ValidationError
 
-from .client import LLMClient
+from .client import LLMClient, LLMError
 
 T = TypeVar("T", bound=BaseModel)
 
@@ -118,9 +118,18 @@ def structured(
 
     for attempt in range(max_repairs + 1):
         trace.attempts = attempt + 1
-        raw = client.complete(
-            messages, model=model, temperature=temperature, json_mode=True
-        )
+        try:
+            raw = client.complete(
+                messages, model=model, temperature=temperature, json_mode=True
+            )
+        except LLMError as exc:
+            # The whole design rests on callers having a deterministic fallback.
+            # Propagating here would let one unlucky call kill a 20-minute run,
+            # which is exactly the failure mode the fallbacks exist to prevent.
+            trace.errors.append(str(exc)[:200])
+            if attempt >= max_repairs:
+                return None, trace
+            continue
         candidate = extract_json(raw)
         if candidate is None:
             trace.errors.append("no JSON object found in completion")

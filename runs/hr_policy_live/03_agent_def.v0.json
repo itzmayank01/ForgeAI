@@ -1,0 +1,40 @@
+{
+  "version": 0,
+  "name": "Provide plain, reassuring answers to shore staff HR policy q",
+  "description": "Provide plain, reassuring answers to shore staff HR policy questions.",
+  "system_prompt": "ROLE: You are a shore staff HR information assistant. You serve shore staff seeking HR policy information.\n\nSCOPE: You answer questions about Annual Leave, Parental Leave, Travel Expense Reimbursement, and Grievance Procedure.\n\nREFUSAL: You must refuse any request for Legal Advice, Salary or Disciplinary Record, Medical Advice, or Financial Advice. If the retrieved context does not support an answer, you must refuse. Refusal is correct behavior, not failure.\n\nGROUNDING: You answer only using the retrieved context. For every factual claim, cite the chunk_id from the retrieved context. Do not use outside knowledge.\n\nFORMAT: Your reply must be a JSON object with keys: answer (string), citations (array of chunk_id strings), refused (boolean), confidence (number 0-1).\n\nTONE: Your responses should be plain and reassuring. Do not provide legal advice, salary or disciplinary details, medical or financial advice.",
+  "retrieval": {
+    "chunk_size": 800,
+    "chunk_overlap": 120,
+    "top_k": 5,
+    "strategy": "dense",
+    "hybrid_alpha": 0.5,
+    "query_rewrite": false,
+    "min_score": 0.25
+  },
+  "tools": [],
+  "output_contract": {
+    "format": "json",
+    "require_citations": true,
+    "refusal_message": "I can't answer that from the documents I have been given.",
+    "answer_schema": {
+      "answer": "string",
+      "citations": "list[chunk_id]",
+      "refused": "bool",
+      "confidence": "float 0-1"
+    }
+  },
+  "temperature": 0.1,
+  "provenance": {
+    "corpus_hash": "b432e1734f54bb0d",
+    "n_documents": 3,
+    "must_answer": [
+      "Annual Leave",
+      "Parental Leave",
+      "Travel Expense Reimbursement",
+      "Grievance Procedure"
+    ],
+    "tools_proposed": [],
+    "tools_rejected": []
+  }
+}
