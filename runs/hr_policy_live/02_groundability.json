@@ -1,46 +1,35 @@
 {
   "topics": [
     {
-      "name": "Annual Leave",
-      "description": "How many annual leave days do I accrue and can I carry them over?",
-      "support_score": 0.827,
-      "supporting_chunks": [
-        "doc_01_c001",
-        "doc_01_c000",
-        "doc_01_c002"
-      ],
-      "verdict": "supported"
-    },
-    {
-      "name": "Parental Leave",
-      "description": "What are the parental leave entitlements for shore staff?",
-      "support_score": 0.8366,
-      "supporting_chunks": [
-        "doc_01_c000",
-        "doc_01_c002",
-        "doc_01_c001"
-      ],
-      "verdict": "supported"
-    },
-    {
-      "name": "Travel Expense Reimbursement",
-      "description": "How do I claim travel expenses and what limits apply?",
-      "support_score": 0.8296,
-      "supporting_chunks": [
-        "doc_02_c000",
-        "doc_02_c001",
-        "doc_02_c002"
-      ],
-      "verdict": "supported"
-    },
-    {
-      "name": "Grievance Procedure",
-      "description": "What steps do I follow to raise a grievance?",
+      "name": "grievance procedure",
+      "description": "Questions answerable from grievance_procedure.md.",
       "support_score": 0.846,
       "supporting_chunks": [
         "doc_00_c000",
         "doc_00_c001",
         "doc_00_c002"
+      ],
+      "verdict": "supported"
+    },
+    {
+      "name": "leave policy",
+      "description": "Questions answerable from leave_policy.md.",
+      "support_score": 0.7513,
+      "supporting_chunks": [
+        "doc_01_c000",
+        "doc_01_c001",
+        "doc_01_c002"
+      ],
+      "verdict": "weak"
+    },
+    {
+      "name": "travel expenses",
+      "description": "Questions answerable from travel_expenses.md.",
+      "support_score": 0.796,
+      "supporting_chunks": [
+        "doc_02_c000",
+        "doc_02_c001",
+        "doc_02_c002"
       ],
       "verdict": "supported"
     }

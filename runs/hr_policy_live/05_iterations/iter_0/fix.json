@@ -1,0 +1,84 @@
+{
+  "iteration": 0,
+  "failures_by_category": {
+    "hallucination": 5,
+    "prompt_defect": 1,
+    "wrong_refusal": 2
+  },
+  "diagnoses": [
+    {
+      "case_id": "ans_000",
+      "category": "hallucination",
+      "evidence": "cited chunk ids it never retrieved",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_001",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_002",
+      "category": "hallucination",
+      "evidence": "cited chunk ids it never retrieved",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_003",
+      "category": "wrong_refusal",
+      "evidence": "refused despite retrieving ['doc_01_c002']",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_006",
+      "category": "hallucination",
+      "evidence": "cited chunk ids it never retrieved",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_007",
+      "category": "hallucination",
+      "evidence": "cited chunk ids it never retrieved",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_00",
+      "category": "hallucination",
+      "evidence": "cited chunk ids it never retrieved",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_01",
+      "category": "wrong_refusal",
+      "evidence": "refused despite retrieving ['doc_01_c003']",
+      "classified_by": "deterministic"
+    }
+  ],
+  "fix": {
+    "category": "hallucination",
+    "rung": "add_grounding_clause",
+    "rationale": "8 failures classified hallucination; applying add_grounding_clause",
+    "targets_case_ids": [
+      "ans_000",
+      "ans_002",
+      "ans_006",
+      "ans_007",
+      "edge_multi_00"
+    ],
+    "diff": {
+      "before": {
+        "system_prompt": "<968 chars>"
+      },
+      "after": {
+        "system_prompt": "<1185 chars, GROUNDING revised>"
+      }
+    }
+  },
+  "score_before": 0.556,
+  "score_after": 0.0,
+  "kept": true,
+  "revert_reason": null,
+  "seconds": 2904.0,
+  "tokens": 43527
+}

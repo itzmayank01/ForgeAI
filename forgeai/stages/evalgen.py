@@ -51,8 +51,13 @@ def generate_suite(
     client: LLMClient, chunks: list[Chunk], req: RequirementsDoc,
     index: ChunkIndex, *, target: int = MIN_CASES, log=print,
 ) -> EvalSuite:
+    # Over-generate: the gate exists to drop weak cases, so generating exactly
+    # `target` guarantees finishing under it. A live run generated 22 and kept
+    # 18 against a required 20.
+    OVERSHOOT = 1.5
+    want = int(target * OVERSHOOT)
     rng = random.Random(7)
-    pool = rng.sample(chunks, min(len(chunks), max(10, target)))
+    pool = rng.sample(chunks, min(len(chunks), max(10, want)))
 
     def facts_for(c: Chunk) -> list[_Fact]:
         out, _ = structured(
@@ -89,7 +94,7 @@ def generate_suite(
             difficulty=_difficulty(q.difficulty),
         )
 
-    n_ans = max(10, int(target * 0.55))
+    n_ans = max(14, int(want * 0.55))
     with ThreadPoolExecutor(max_workers=settings.max_concurrency) as ex:
         cases += [c for c in ex.map(answerable, enumerate(harvested[:n_ans])) if c]
 
@@ -100,7 +105,7 @@ def generate_suite(
         and by_chunk[a.chunk_id].doc_id != by_chunk[b.chunk_id].doc_id
     ]
     rng.shuffle(cross)
-    for i, (a, b) in enumerate(cross[:3]):
+    for i, (a, b) in enumerate(cross[:4]):
         ca, cb = by_chunk[a.chunk_id], by_chunk[b.chunk_id]
         q, _ = structured(
             client, model_cls=_Question, temperature=0.4,
@@ -117,7 +122,7 @@ def generate_suite(
             ))
 
     # --- edge: ambiguous ----------------------------------------------------
-    for i, base in enumerate([c for c in cases if c.kind == "answerable"][:3]):
+    for i, base in enumerate([c for c in cases if c.kind == "answerable"][:4]):
         q, _ = structured(
             client, model_cls=_Question, temperature=0.5,
             instruction=P.AMBIGUOUS.format(question=base.question),
@@ -132,7 +137,7 @@ def generate_suite(
             ))
 
     # --- out of scope -------------------------------------------------------
-    n_oos = max(5, int(target * 0.25))
+    n_oos = max(7, int(want * 0.25))
     oos, _ = structured(
         client, model_cls=_Questions, temperature=0.6,
         instruction=P.OUT_OF_SCOPE.format(

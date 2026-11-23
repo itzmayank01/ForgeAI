@@ -10,56 +10,74 @@ Pacing proactively beats retrying reactively: a 429 costs the full reset window
 """
 from __future__ import annotations
 
+import itertools
 import threading
 import time
-from collections import deque
+
+# Completions land far below their ceiling: with reasoning_effort=low a
+# structured call uses ~230 tokens against a 2,048 allowance. Reserve a
+# realistic share up front and correct it against the server's own count the
+# moment the response lands.
+COMPLETION_FRACTION = 0.35
+MIN_COMPLETION_RESERVE = 250
 
 
 class TokenBucket:
-    """Sliding-window limiter. Tracks (timestamp, tokens) over the last window."""
+    """Sliding-window limiter over the last `window` seconds.
+
+    Reservations are keyed by an opaque handle. Correcting by position instead
+    (events[-1]) silently fixes ANOTHER thread's entry under concurrency, so
+    estimates never get replaced by real usage and the bucket throttles several
+    times harder than the limit requires.
+    """
 
     def __init__(self, limit: int = 8000, window: float = 60.0, headroom: float = 0.9):
-        # Headroom absorbs the gap between our estimate and the true count: the
-        # server charges for reasoning tokens we cannot see in advance.
+        # Headroom absorbs the gap between estimate and truth: the server also
+        # charges for reasoning tokens we cannot see in advance.
         self.limit = int(limit * headroom)
         self.window = window
-        self._events: deque[tuple[float, int]] = deque()
+        self._events: dict[int, tuple[float, int]] = {}
+        self._ids = itertools.count()
         self._lock = threading.Lock()
         self._cv = threading.Condition(self._lock)
 
-    def _used(self, now: float) -> int:
-        while self._events and now - self._events[0][0] > self.window:
-            self._events.popleft()
-        return sum(t for _, t in self._events)
+    def _prune(self, now: float) -> int:
+        stale = [k for k, (ts, _) in self._events.items() if now - ts > self.window]
+        for k in stale:
+            del self._events[k]
+        return sum(t for _, t in self._events.values())
 
-    def acquire(self, estimate: int, *, timeout: float = 180.0) -> float:
-        """Block until `estimate` tokens fit. Returns seconds waited."""
+    def acquire(self, estimate: int, *, timeout: float = 120.0) -> int:
+        """Block until `estimate` tokens fit. Returns a handle for settle()."""
         start = time.monotonic()
         with self._cv:
             while True:
                 now = time.monotonic()
-                used = self._used(now)
+                used = self._prune(now)
                 if used + estimate <= self.limit or not self._events:
-                    self._events.append((now, estimate))
-                    return round(time.monotonic() - start, 2)
+                    handle = next(self._ids)
+                    self._events[handle] = (now, estimate)
+                    return handle
                 if time.monotonic() - start > timeout:
-                    self._events.append((now, estimate))  # proceed; let 429 handle it
-                    return round(time.monotonic() - start, 2)
-                oldest = self._events[0][0]
+                    handle = next(self._ids)  # proceed; let a 429 handle it
+                    self._events[handle] = (now, estimate)
+                    return handle
+                oldest = min(ts for ts, _ in self._events.values())
                 self._cv.wait(timeout=max(0.05, self.window - (now - oldest) + 0.05))
 
-    def settle(self, estimate: int, actual: int) -> None:
-        """Correct the reservation once the real usage is known."""
+    def settle(self, handle: int, actual: int) -> None:
+        """Replace this reservation with the real usage."""
         with self._cv:
-            if self._events:
-                ts, _ = self._events[-1]
-                self._events[-1] = (ts, actual)
+            entry = self._events.get(handle)
+            if entry is not None:
+                self._events[handle] = (entry[0], actual)
             self._cv.notify_all()
 
     def penalise(self, seconds: float) -> None:
-        """After a 429: park the whole window so nothing else slips through."""
+        """After a 429: park the window so nothing else slips through."""
         with self._cv:
-            self._events.append((time.monotonic() + seconds - self.window, self.limit))
+            self._events[next(self._ids)] = (
+                time.monotonic() + seconds - self.window, self.limit)
             self._cv.notify_all()
 
 
@@ -72,14 +90,6 @@ def bucket_for(model: str) -> TokenBucket:
         if model not in _buckets:
             _buckets[model] = TokenBucket()
         return _buckets[model]
-
-
-# Completions land far below their ceiling: measured RequirementsDoc calls use
-# ~2,400 total against a 4,096 allowance. Reserving the full allowance throttled
-# throughput roughly threefold for no benefit, so reserve a realistic fraction
-# and let settle() correct against the server's actual count straight after.
-COMPLETION_FRACTION = 0.45
-MIN_COMPLETION_RESERVE = 400
 
 
 def estimate_tokens(messages: list[dict[str, str]], max_tokens: int) -> int:

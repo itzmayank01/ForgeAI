@@ -44,14 +44,31 @@ def build_corpus_summary(refs, texts, chunks) -> CorpusSummary:
     )
 
 
-def run_eval(agent: Agent, suite: EvalSuite) -> dict[str, AgentResponse]:
-    """Concurrent: 20 cases against a fast endpoint is seconds, not a minute.
-    This is what makes a live unattended demo watchable."""
+def run_eval(agent: Agent, suite: EvalSuite,
+             budget: Budget | None = None, log=print) -> dict[str, AgentResponse]:
+    """Concurrent, and budget-aware mid-flight.
+
+    Checking the budget only between iterations let a run overshoot a 900s cap
+    by 3.5x, because a single pass over the suite is itself long. Cases skipped
+    after exhaustion come back as refusals so the scorecard stays complete and
+    honestly reflects what was measured.
+    """
+    stopped = False
+
     def one(case):
+        nonlocal stopped
+        if stopped or (budget is not None and budget.exhausted()):
+            stopped = True
+            return case.id, AgentResponse(
+                answer="(not evaluated: budget exhausted)", refused=True,
+                confidence=0.0, retrieved=[])
         return case.id, agent.answer(case.question)
 
     with ThreadPoolExecutor(max_workers=settings.max_concurrency) as ex:
-        return dict(ex.map(one, suite.cases))
+        out = dict(ex.map(one, suite.cases))
+    if stopped:
+        log("  budget ran out mid-suite; remaining cases recorded as unevaluated")
+    return out
 
 
 def build(
@@ -139,7 +156,7 @@ def build(
             chunk_shape = shape
 
         agent = Agent(definition, index, client)
-        responses = run_eval(agent, suite)
+        responses = run_eval(agent, suite, budget, log)
         verdicts = judge.judge_all(suite.cases, responses, client)
         card = Scorecard.from_verdicts(i, verdicts, suite.cases)
         scorecards.append(card)

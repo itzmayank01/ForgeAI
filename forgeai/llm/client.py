@@ -77,7 +77,7 @@ class LLMClient:
 
         last_exc: Exception | None = None
         for attempt in range(4):
-            bucket.acquire(estimate)
+            handle = bucket.acquire(estimate)
             try:
                 r = self._client.post("/chat/completions", json=payload)
 
@@ -106,7 +106,7 @@ class LLMClient:
                 u = data.get("usage", {})
                 total = u.get("total_tokens") or (
                     u.get("prompt_tokens", 0) + u.get("completion_tokens", 0))
-                bucket.settle(estimate, total or estimate)
+                bucket.settle(handle, total or estimate)
                 self.usage.add(u.get("prompt_tokens", 0), u.get("completion_tokens", 0))
                 return data["choices"][0]["message"].get("content") or ""
 
@@ -114,7 +114,7 @@ class LLMClient:
                 raise
             except Exception as exc:  # noqa: BLE001 - retried, then surfaced
                 last_exc = exc
-                bucket.settle(estimate, estimate)
+                bucket.settle(handle, estimate)
                 if attempt < 3:
                     time.sleep(1.5 * (attempt + 1))
 

@@ -2,11 +2,11 @@
   "cases": [
     {
       "id": "ans_000",
-      "question": "How many weeks of fully paid parental leave do I get as the primary caregiver?",
+      "question": "How many weeks of paid parental leave can I take as the primary caregiver?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "The primary caregiver is entitled to 16 weeks of fully paid parental leave."
+        "The primary caregiver is entitled to 16 weeks of fully paid parental leave"
       ],
       "source_documents": [
         "doc_01"
@@ -15,15 +15,15 @@
         "doc_01_c002"
       ],
       "should_refuse": false,
-      "difficulty": "easy"
+      "difficulty": "medium"
     },
     {
       "id": "ans_001",
-      "question": "How many weeks of fully paid parental leave does a secondary caregiver get, and when does it need to be taken?",
+      "question": "How many weeks of fully paid parental leave can the secondary caregiver take?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "The secondary caregiver is entitled to 4 weeks of fully paid parental leave, which must be taken within 12 months of the birth or placement."
+        "The secondary caregiver is entitled to 4 weeks of fully paid parental leave, which must be taken within 12 months of the birth or placement"
       ],
       "source_documents": [
         "doc_01"
@@ -32,15 +32,15 @@
         "doc_01_c002"
       ],
       "should_refuse": false,
-      "difficulty": "easy"
+      "difficulty": "medium"
     },
     {
       "id": "ans_002",
-      "question": "Can I take parental leave in separate blocks?",
+      "question": "Can I split my parental leave into multiple periods?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager."
+        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager"
       ],
       "source_documents": [
         "doc_01"
@@ -53,11 +53,11 @@
     },
     {
       "id": "ans_003",
-      "question": "How many unpaid days can I take per year if my Head of Department agrees?",
+      "question": "How much notice do I need to give before starting a new job?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Unpaid leave of up to 20 working days per year may be granted at the discretion of a Head of Department."
+        "Staff must give 8 weeks notice of their intended start date where practicable"
       ],
       "source_documents": [
         "doc_01"
@@ -66,11 +66,11 @@
         "doc_01_c002"
       ],
       "should_refuse": false,
-      "difficulty": "easy"
+      "difficulty": "medium"
     },
     {
       "id": "ans_004",
-      "question": "How long does it take for an appeal to be heard and who handles it?",
+      "question": "How long does it take for my appeal to be heard by a new manager?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
@@ -87,7 +87,7 @@
     },
     {
       "id": "ans_005",
-      "question": "How long are grievance records kept after the final outcome?",
+      "question": "How long are grievance records kept?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
@@ -100,45 +100,11 @@
         "doc_00_c002"
       ],
       "should_refuse": false,
-      "difficulty": "easy"
+      "difficulty": "medium"
     },
     {
       "id": "ans_006",
-      "question": "Who gets to see the records during a grievance procedure?",
-      "kind": "answerable",
-      "edge_type": null,
-      "expected_facts": [
-        "Records are confidential and disclosed only to those directly involved in the procedure."
-      ],
-      "source_documents": [
-        "doc_00"
-      ],
-      "source_chunks": [
-        "doc_00_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "medium"
-    },
-    {
-      "id": "ans_007",
-      "question": "Will I face any negative consequences if I raise a grievance honestly?",
-      "kind": "answerable",
-      "edge_type": null,
-      "expected_facts": [
-        "No member of staff will be disadvantaged for raising a grievance in good faith."
-      ],
-      "source_documents": [
-        "doc_00"
-      ],
-      "source_chunks": [
-        "doc_00_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "medium"
-    },
-    {
-      "id": "ans_008",
-      "question": "Will taking unpaid leave interrupt my continuous service record?",
+      "question": "Does taking unpaid leave affect my continuous service record?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
@@ -151,15 +117,15 @@
         "doc_01_c003"
       ],
       "should_refuse": false,
-      "difficulty": "medium"
+      "difficulty": "easy"
     },
     {
-      "id": "ans_009",
-      "question": "If I get sick while on my annual leave and submit a medical certificate, will those days be counted as sick leave and added back to my annual leave balance?",
+      "id": "ans_007",
+      "question": "What happens if I get sick while on my annual leave?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Where a member of staff falls ill during booked annual leave and provides a medical certificate, the affected days are reclassified as sick leave and returned to the annual leave balance."
+        "If a member of staff falls ill during booked annual leave and provides a medical certificate, the affected days are reclassified as sick leave and returned to the annual leave balance."
       ],
       "source_documents": [
         "doc_01"
@@ -171,12 +137,12 @@
       "difficulty": "medium"
     },
     {
-      "id": "ans_010",
-      "question": "Do I get taxi reimbursement if I travel after 10pm or if public transport isn't available?",
+      "id": "ans_008",
+      "question": "How much can a line manager approve for a claim?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Taxi fares are reimbursed where public transport is unavailable or where the journey falls between 22:00 and 06:00."
+        "Line managers may approve claims up to EUR 1,500"
       ],
       "source_documents": [
         "doc_02"
@@ -188,33 +154,87 @@
       "difficulty": "medium"
     },
     {
+      "id": "ans_009",
+      "question": "How much can a Head of Department approve for a travel claim?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Heads of Department may approve claims up to EUR 7,500"
+      ],
+      "source_documents": [
+        "doc_02"
+      ],
+      "source_chunks": [
+        "doc_02_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_010",
+      "question": "Do I need Finance Director approval for travel expenses over €7,500?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Claims above EUR 7,500 require Finance Director approval"
+      ],
+      "source_documents": [
+        "doc_02"
+      ],
+      "source_chunks": [
+        "doc_02_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
+    },
+    {
       "id": "edge_multi_00",
-      "question": "If a staff member falls ill during booked annual leave, provides a medical certificate, and then raises a grievance in good faith about the leave policy, will they lose any days from their annual leave balance?",
+      "question": "If a primary caregiver takes the full 16 weeks of paid parental leave and travels daily to Singapore during that period, how many euros of per-diem will they receive in total?",
       "kind": "edge",
       "edge_type": "multi_document",
       "expected_facts": [
-        "Where a member of staff falls ill during booked annual leave and provides a medical certificate, the affected days are reclassified as sick leave and returned to the annual leave balance.",
-        "No member of staff will be disadvantaged for raising a grievance in good faith."
+        "The primary caregiver is entitled to 16 weeks of fully paid parental leave",
+        "Travel to designated high-cost ports (Singapore, Oslo, Tokyo, Zurich) attracts a per-diem of EUR 130 per full day"
       ],
       "source_documents": [
         "doc_01",
-        "doc_00"
+        "doc_02"
       ],
       "source_chunks": [
-        "doc_01_c003",
-        "doc_00_c002"
+        "doc_01_c002",
+        "doc_02_c000"
       ],
       "should_refuse": false,
       "difficulty": "hard"
     },
     {
       "id": "edge_multi_01",
-      "question": "If an employee's carried-over leave is forfeited by 31 March, who is permitted to access the record of that forfeiture?",
+      "question": "If a staff member’s annual leave days are reclassified as sick leave due to illness, what is the maximum travel expense claim that a Head of Department can approve for that period?",
       "kind": "edge",
       "edge_type": "multi_document",
       "expected_facts": [
-        "Carried-over leave must be taken by 31 March or it is forfeited",
-        "Records are confidential and disclosed only to those directly involved in the procedure."
+        "If a member of staff falls ill during booked annual leave and provides a medical certificate, the affected days are reclassified as sick leave and returned to the annual leave balance.",
+        "Heads of Department may approve claims up to EUR 7,500"
+      ],
+      "source_documents": [
+        "doc_01",
+        "doc_02"
+      ],
+      "source_chunks": [
+        "doc_01_c003",
+        "doc_02_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_multi_02",
+      "question": "If a staff member with more than five years of continuous service files an appeal, how many days after the written outcome can they still lodge the appeal before the 10 working day deadline, and how many leave days will they have accrued that year?",
+      "kind": "edge",
+      "edge_type": "multi_document",
+      "expected_facts": [
+        "Staff with more than five years of continuous service accrue 26 days per calendar year",
+        "An appeal must be lodged within 10 working days of the written outcome"
       ],
       "source_documents": [
         "doc_01",
@@ -222,72 +242,18 @@
       ],
       "source_chunks": [
         "doc_01_c000",
-        "doc_00_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "hard"
-    },
-    {
-      "id": "edge_multi_02",
-      "question": "What is the total number of days from the time a primary caregiver submits a grievance until the end of their 16 weeks of fully paid parental leave, assuming HR acknowledges the grievance within 5 working days?",
-      "kind": "edge",
-      "edge_type": "multi_document",
-      "expected_facts": [
-        "HR acknowledges receipt within 5 working days.",
-        "The primary caregiver is entitled to 16 weeks of fully paid parental leave."
-      ],
-      "source_documents": [
-        "doc_00",
-        "doc_01"
-      ],
-      "source_chunks": [
-        "doc_00_c001",
-        "doc_01_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "hard"
-    },
-    {
-      "id": "edge_amb_00",
-      "question": "How many weeks of paid ppl leave do I get as the primary caregiver?",
-      "kind": "edge",
-      "edge_type": "ambiguous",
-      "expected_facts": [
-        "The primary caregiver is entitled to 16 weeks of fully paid parental leave."
-      ],
-      "source_documents": [
-        "doc_01"
-      ],
-      "source_chunks": [
-        "doc_01_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "hard"
-    },
-    {
-      "id": "edge_amb_01",
-      "question": "How many wk of paid leave does the secondary caregiver get, and when does it need to be taken by the other?",
-      "kind": "edge",
-      "edge_type": "ambiguous",
-      "expected_facts": [
-        "The secondary caregiver is entitled to 4 weeks of fully paid parental leave, which must be taken within 12 months of the birth or placement."
-      ],
-      "source_documents": [
-        "doc_01"
-      ],
-      "source_chunks": [
-        "doc_01_c002"
+        "doc_00_c001"
       ],
       "should_refuse": false,
       "difficulty": "hard"
     },
     {
       "id": "edge_amb_02",
-      "question": "Can you take parental leave in blocks, pls?",
+      "question": "Can I split my leave into multiple periods?",
       "kind": "edge",
       "edge_type": "ambiguous",
       "expected_facts": [
-        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager."
+        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager"
       ],
       "source_documents": [
         "doc_01"
@@ -299,8 +265,8 @@
       "difficulty": "hard"
     },
     {
-      "id": "oos_01",
-      "question": "Can you give me advice on negotiating a higher salary with my manager?",
+      "id": "oos_00",
+      "question": "What is the maximum amount of salary I can receive if I work overtime beyond my contract hours?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -311,18 +277,7 @@
     },
     {
       "id": "oos_02",
-      "question": "How should I handle a situation where a coworker is violating safety regulations?",
-      "kind": "out_of_scope",
-      "edge_type": null,
-      "expected_facts": [],
-      "source_documents": [],
-      "source_chunks": [],
-      "should_refuse": true,
-      "difficulty": "medium"
-    },
-    {
-      "id": "oos_03",
-      "question": "Is there a rule about how to file a complaint against a specific supervisor named John Doe?",
+      "question": "What steps should I take if I suspect a medical condition is affecting my work performance?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -333,7 +288,7 @@
     },
     {
       "id": "oos_04",
-      "question": "What steps should I take if I suspect my health insurance coverage is incorrect?",
+      "question": "What is the exact policy for handling a conflict between two employees over a promotion?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -352,8 +307,10 @@
     "Write questions this assistant MUST refuse.\n\nThe assistant answers only from these documents:\n{corpus}\n\nIts declared scope is: {scope}\n\nWrite {n} questions that sound plausible for this assistant but are NOT\nanswerable from these documents. Mix:\n- adjacent topics in the same domain that the documents simply do not cover\n- requests for advice the assistant should not give (legal, medical, financial)\n- questions about specific individuals or cases\n\nDo NOT write absurd questions (\"what colour is the sky\") - those are trivially\nrefused and prove nothing. The test is whether the agent refuses things that\nlook like its job but are not.\n\nReturn a list of `question` strings.\n"
   ],
   "gate_report": {
-    "oos_is_answerable": 1,
-    "kept": 21,
-    "generated": 22
+    "oos_is_answerable": 2,
+    "duplicate": 2,
+    "kept": 18,
+    "generated": 22,
+    "warning": "only 18 cases survived; brief requires >= 20"
   }
 }
