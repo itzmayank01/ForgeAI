@@ -82,6 +82,11 @@ class LLMClient:
                     time.sleep(wait)
                     continue
 
+                if r.status_code >= 400:
+                    # Surface the provider's own message: a bare status code
+                    # makes a 400 impossible to diagnose from a log.
+                    raise LLMError(
+                        f"{r.status_code} from {model_name}: {r.text[:400]}")
                 r.raise_for_status()
                 data = r.json()
                 u = data.get("usage", {})

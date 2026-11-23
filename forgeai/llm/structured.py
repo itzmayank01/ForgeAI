@@ -139,8 +139,12 @@ def structured(
                 trace.errors.append(errs)
 
         if attempt < max_repairs:  # feed the failure back and try again
+            # A reasoning model can return empty content (it spent the budget
+            # thinking). An empty assistant turn is rejected with a 400, so
+            # substitute a marker rather than echoing nothing back.
+            echoed = raw[:1500].strip() or "(empty response)"
             messages += [
-                {"role": "assistant", "content": raw[:1500]},
+                {"role": "assistant", "content": echoed},
                 {
                     "role": "user",
                     "content": (

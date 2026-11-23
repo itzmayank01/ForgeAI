@@ -82,7 +82,8 @@ def build(
 
     # --- 1. intake ----------------------------------------------------------
     log("[1/6] intake interview")
-    req = intake.run_intake(client, brief, summary, interactive=interactive, log=log)
+    req = intake.run_intake(client, brief, summary, interactive=interactive,
+                            index=index, log=log)
     log(f"  {len(req.must_answer)} must-answer, {len(req.must_refuse)} must-refuse, "
         f"{len(req.questions_asked)} questions")
 

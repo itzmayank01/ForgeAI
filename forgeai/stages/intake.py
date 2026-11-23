@@ -7,8 +7,10 @@ answer as an explicit Assumption. Surfacing assumptions beats skipping them.
 """
 from __future__ import annotations
 
+from ..ingest.index import ChunkIndex
 from ..llm.client import LLMClient
 from ..llm.structured import structured
+from ..models.agent_def import RetrievalConfig
 from ..models.common import CorpusSummary
 from ..models.requirements import MAX_QUESTIONS, Assumption, RequirementsDoc, Topic
 from ..prompts import intake as P
@@ -52,6 +54,7 @@ def run_intake(
     summary: CorpusSummary,
     *,
     interactive: bool = False,
+    index: ChunkIndex | None = None,
     ask=input,
     log=print,
 ) -> RequirementsDoc:
@@ -86,10 +89,20 @@ def run_intake(
                 ))
         return doc
 
-    for q in doc.questions_asked:  # unattended: answer, and show your working
+    # Unattended: answer each question from RETRIEVED TEXT, not just the file
+    # listing. Without this the model concludes "the policy does not specify a
+    # carry-over limit" about a policy whose clause 2.1 states it plainly.
+    cfg = RetrievalConfig(top_k=4, min_score=0.0)
+    for q in doc.questions_asked:
+        context = corpus
+        if index is not None:
+            hits = index.search(q, cfg)
+            if hits:
+                context = "\n\n".join(f"[{h.chunk_id}] {h.text}" for h in hits)
+
         a, _ = structured(
             client,
-            instruction=P.SELF_ANSWER.format(brief=brief, corpus=corpus, question=q),
+            instruction=P.SELF_ANSWER.format(brief=brief, context=context, question=q),
             model_cls=Assumption,
             temperature=0.1,
         )
