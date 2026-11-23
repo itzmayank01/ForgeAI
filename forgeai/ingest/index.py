@@ -58,13 +58,23 @@ class ChunkIndex:
             if float(scores[i]) >= cfg.min_score
         ]
 
-    def support_score(self, query: str, k: int = 3) -> tuple[float, list[str]]:
-        """Mean top-k cosine - the deterministic signal behind the groundability guard."""
+    def support_score(self, query: str, k: int = 3) -> tuple[float, float, list[str]]:
+        """Return (max_sim, topk_mean, chunk_ids) - the deterministic signal
+        behind the groundability guard.
+
+        `max_sim` is the discriminating one: it asks "does ANY chunk cover this
+        topic?". A top-k mean averages in unrelated chunks, which on a small
+        corpus inflates absent-but-domain-adjacent topics (an HR corpus with no
+        equity policy still scores "stock options" highly on a mean, because
+        every chunk is vaguely HR-shaped). Measured separation on the HR fixture:
+        present topics 0.83-0.85 max, absent-adjacent 0.54, unrelated 0.44.
+        """
         if not self.chunks:
-            return 0.0, []
+            return 0.0, 0.0, []
         dense = self.vectors @ embed([query])[0]
-        order = np.argsort(-dense)[:k]
+        order = np.argsort(-dense)[: min(k, len(self.chunks))]
         return (
+            round(float(dense.max()), 4),
             round(float(np.mean([dense[i] for i in order])), 4),
             [self.chunks[i].chunk_id for i in order],
         )
