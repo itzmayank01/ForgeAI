@@ -14,7 +14,7 @@ from typing import TypeVar
 
 from pydantic import BaseModel, ValidationError
 
-from .client import LLMClient, LLMError
+from .client import LLMClient, LLMError, QuotaExhausted
 
 T = TypeVar("T", bound=BaseModel)
 
@@ -122,6 +122,8 @@ def structured(
             raw = client.complete(
                 messages, model=model, temperature=temperature, json_mode=True
             )
+        except QuotaExhausted:
+            raise  # a daily cap must stop the run, not degrade it silently
         except LLMError as exc:
             # The whole design rests on callers having a deterministic fallback.
             # Propagating here would let one unlucky call kill a 20-minute run,

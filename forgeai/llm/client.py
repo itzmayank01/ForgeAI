@@ -36,6 +36,13 @@ class LLMError(RuntimeError):
     pass
 
 
+class QuotaExhausted(LLMError):
+    """Daily cap hit. Distinct from LLMError because callers must NOT fall back
+    and carry on: every later stage would fail the same way, producing a run
+    full of empty artifacts that looks like a factory defect rather than a
+    billing limit."""
+
+
 class LLMClient:
     def __init__(self, cfg: Settings | None = None) -> None:
         self.cfg = cfg or settings
@@ -82,7 +89,15 @@ class LLMClient:
                 r = self._client.post("/chat/completions", json=payload)
 
                 if r.status_code == 429:
-                    # Honour the server's own reset window; guessing wastes it.
+                    # A DAILY cap is not worth waiting on: it drips for hours.
+                    # Grinding through it is how a run burned 3.1 hours to
+                    # produce nothing. Fail fast and say so instead.
+                    if "per day" in r.text.lower() or "tpd" in r.text.lower():
+                        raise QuotaExhausted(
+                            f"daily token quota exhausted for {model_name}. "
+                            f"Runs cannot proceed until it resets. "
+                            f"Detail: {r.text[:200]}")
+                    # Otherwise honour the server's own reset window.
                     wait = _retry_after(r) or min(60.0, 2.0 ** attempt * 5)
                     bucket.penalise(wait)
                     last_exc = LLMError(f"rate limited, waited {wait:.0f}s")

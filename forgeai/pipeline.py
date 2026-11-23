@@ -16,7 +16,7 @@ from .config import settings
 from .ingest.chunker import chunk_corpus
 from .ingest.index import ChunkIndex
 from .ingest.loaders import load_folder
-from .llm.client import LLMClient
+from .llm.client import LLMClient, QuotaExhausted
 from .models.agent_def import AgentDefinition
 from .models.common import CorpusSummary
 from .models.evals import CaseVerdict, EvalSuite, Scorecard
