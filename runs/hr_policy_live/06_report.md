@@ -5,20 +5,48 @@ leave and carry-over, parental leave, travel expense reimbursement, and how to
 raise a grievance. It should sound plain and reassuring, never give legal advice,
 and never discuss an individual employee's salary or disciplinary record.
 
-> **Not scored.** No evaluation pass completed, so this run has no pass rate. Stopped because: incomplete eval pass (resume to finish).
+**Final pass rate: 86%** (agent v0, stopped because: iteration cap (2) reached)
 
-> Reporting 0% here would be a fabricated number. Re-run with `--resume` to finish the suite.
-
-Budget: 0/500,000 tokens, 164.8s/2400s, 0/2 iterations.
+Budget: 52,565/500,000 tokens, 190.6s/2400s, 2/2 iterations.
 
 ## Per-iteration scorecard
 
 | iter | pass rate | passed/total | answerable | out of scope | edge | LLM-escalated |
 |---|---|---|---|---|---|---|
+| 0 | 86% | 24/28 | 100% | 100% | 50% | 4% |
+| 1 | 86% | 24/28 | 100% | 100% | 50% | 4% |
+| 2 | 82% | 23/28 | 93% | 100% | 50% | 4% |
+
+## What changed, and whether it helped
+
+> No fix beat the baseline. Every attempted change was reverted and the shipped agent is the one the generator produced first. That is a real result: on this corpus the generated definition was already at its best, and the loop's job was to establish that rather than to improve on it.
+
+**Iteration 0: `prompt_defect` -> `patch_format_block`** (REVERTED - scored 86% against best 86%; reverted to v0)
+
+- Diagnosed: {'prompt_defect': 2, 'wrong_refusal': 1, 'hallucination': 1}
+- Rationale: 4 failures classified prompt_defect; applying patch_format_block
+- Changed: `{'system_prompt': '<995 chars>'}` -> `{'system_prompt': '<1014 chars, FORMAT revised>'}`
+- Targeted: edge_multi_00, edge_multi_03
+- Score: 86% -> 86% (delta +0%)
+
+**Iteration 1: `prompt_defect` -> `patch_scope_block`** (REVERTED - scored 82% against best 86%; reverted to v0)
+
+- Diagnosed: {'prompt_defect': 2, 'wrong_refusal': 1, 'hallucination': 1}
+- Rationale: 4 failures classified prompt_defect; applying patch_scope_block
+- Changed: `{'system_prompt': '<995 chars>'}` -> `{'system_prompt': '<1081 chars, SCOPE revised>'}`
+- Targeted: edge_multi_00, edge_multi_03
+- Score: 86% -> 82% (delta -4%)
 
 ## What still fails
 
-No residual failures. Treat a 100% score with suspicion: check the eval suite's gate report for how many cases were dropped, and the judge calibration below before believing it.
+4 of 28 cases still fail:
+
+| case | question | why |
+|---|---|---|
+| `edge_multi_00` | If an employee submits an appeal 8 working days after receiving a writ | fact recall 0.0 |
+| `edge_multi_01` | If a staff member falls ill during booked annual leave and provides a  | refused an answerable question |
+| `edge_multi_02` | If an employee appeals a grievance decision, within how many working d | cited chunks it never retrieved |
+| `edge_multi_03` | What is the maximum travel expense amount a line manager can approve i | fact recall 0.5 |
 
 ## Judge calibration
 

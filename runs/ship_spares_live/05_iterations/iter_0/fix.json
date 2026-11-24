@@ -1,0 +1,70 @@
+{
+  "iteration": 0,
+  "failures_by_category": {
+    "retrieval_miss": 4,
+    "wrong_refusal": 2
+  },
+  "diagnoses": [
+    {
+      "case_id": "ans_000",
+      "category": "retrieval_miss",
+      "evidence": "expected ['doc_00_c010'], retrieved ['doc_00_c000', 'doc_00_c004', 'doc_00_c005', 'doc_00_c006', 'doc_00_c008']",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_009",
+      "category": "retrieval_miss",
+      "evidence": "refused; expected ['doc_00_c012'] never retrieved",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_011",
+      "category": "retrieval_miss",
+      "evidence": "refused; expected ['doc_00_c012'] never retrieved",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_02",
+      "category": "wrong_refusal",
+      "evidence": "refused despite retrieving ['doc_00_c010']",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_amb_00",
+      "category": "retrieval_miss",
+      "evidence": "refused; expected ['doc_00_c010'] never retrieved",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_amb_01",
+      "category": "wrong_refusal",
+      "evidence": "refused despite retrieving ['doc_00_c010']",
+      "classified_by": "deterministic"
+    }
+  ],
+  "fix": {
+    "category": "retrieval_miss",
+    "rung": "raise_top_k",
+    "rationale": "6 failures classified retrieval_miss; applying raise_top_k",
+    "targets_case_ids": [
+      "ans_000",
+      "ans_009",
+      "ans_011",
+      "edge_amb_00"
+    ],
+    "diff": {
+      "before": {
+        "top_k": 5
+      },
+      "after": {
+        "top_k": 8
+      }
+    }
+  },
+  "score_before": 0.727,
+  "score_after": 0.0,
+  "kept": true,
+  "revert_reason": null,
+  "seconds": 176.9,
+  "tokens": 36157
+}

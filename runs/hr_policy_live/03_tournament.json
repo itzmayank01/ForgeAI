@@ -1,0 +1,32 @@
+{
+  "candidates": [
+    {
+      "index": 0,
+      "label": "baseline",
+      "pass_rate": 1.0,
+      "passed": 12,
+      "total": 12,
+      "prompt_chars": 995
+    },
+    {
+      "index": 1,
+      "label": "cand-1",
+      "pass_rate": 0.833,
+      "passed": 10,
+      "total": 12,
+      "prompt_chars": 563
+    },
+    {
+      "index": 2,
+      "label": "cand-2",
+      "pass_rate": 0.75,
+      "passed": 9,
+      "total": 12,
+      "prompt_chars": 557
+    }
+  ],
+  "winner": 0,
+  "margin": 0.167,
+  "decisive": true,
+  "note": "baseline wins by 17% over cand-1. That margin is wider than a single case, so the choice is supported by the evidence."
+}

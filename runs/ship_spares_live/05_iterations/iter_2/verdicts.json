@@ -1,0 +1,466 @@
+{
+  "verdicts": [
+    {
+      "case_id": "ans_000",
+      "answer": "The parts catalogue lists the following unit prices in euros: VAL-1084: 1420.4; VAL-1091: 2201.7; VAL-1098: 4779.37; VAL-1105: 3641.26; PUM-1007: 2177.99; PUM-1014: 2443.54; PUM-1021: 3861.07; VAL-1126: 4068.92; VAL-1133: 4450.68; VAL-1140: 4705.96; FIL-1147: 2723.17; FIL-1168: 3397.19; FIL-1175: 3828.14; FIL-1182: 913.99; FIL-1189: 3696.47; VAL-1112: 348.23; VAL-1119: 4065.44.",
+      "refused": false,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c004",
+        "doc_00_c000",
+        "doc_00_c006",
+        "doc_00_c008",
+        "doc_00_c005"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "fact recall 0.0",
+      "answer_length": 380
+    },
+    {
+      "case_id": "ans_001",
+      "answer": "2",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c013",
+        "doc_00_c010",
+        "doc_00_c012",
+        "doc_00_c011",
+        "doc_00_c009"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 1
+    },
+    {
+      "case_id": "ans_002",
+      "answer": "There is no stock of part SEA-1231; the available quantity is 0.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c011",
+        "doc_00_c010",
+        "doc_00_c012",
+        "doc_00_c009",
+        "doc_00_c013"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 64
+    },
+    {
+      "case_id": "ans_003",
+      "answer": "Kowloon Diesel Parts",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c010",
+        "doc_00_c012",
+        "doc_00_c011",
+        "doc_00_c002",
+        "doc_00_c004"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 20
+    },
+    {
+      "case_id": "ans_008",
+      "answer": "Part SEA-1252 is an O-ring kit NBR (heavy duty) in the seal category. It has a unit price of 2181.96 EUR, a lead time of 60 days, a stock quantity of 18 units, and is supplied by Adriatic Supply.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c012",
+        "doc_00_c011",
+        "doc_00_c010",
+        "doc_00_c004",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 195
+    },
+    {
+      "case_id": "ans_009",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c006",
+        "doc_00_c004",
+        "doc_00_c008",
+        "doc_00_c005",
+        "doc_00_c010"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "refused an answerable question",
+      "answer_length": 0
+    },
+    {
+      "case_id": "ans_010",
+      "answer": "The catalogue shows lead times ranging from 2 days to 60 days, depending on the part. For example, the Centrifugal ballast pump (standard) PUM-1007 has a lead time of 45 days [doc_00_c000]; the Heavy\u2011duty ballast pump PUM-1014 is 60 days [doc_00_c000]; the Fuel transfer pump PUM-1021 is 30 days [doc_00_c000]. Hydraulic return filters have a 21\u2011day lead time [doc_00_c009]; the Stern tube seal ring (standard) SEA-1217 is 2 days [doc_00_c010]; the Mechanical shaft seal (heavy duty) SEA-1238 is 60 days [doc_00_c011]; and the O\u2011ring kit (standard) SEA-1245 is 14 days [doc_00_c011].",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000",
+        "doc_00_c009",
+        "doc_00_c010",
+        "doc_00_c011",
+        "doc_00_c007"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 583
+    },
+    {
+      "case_id": "ans_011",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000",
+        "doc_00_c010",
+        "doc_00_c008",
+        "doc_00_c009",
+        "doc_00_c001"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "refused an answerable question",
+      "answer_length": 0
+    },
+    {
+      "case_id": "ans_012",
+      "answer": "Part number PUM-1021 is a Fuel transfer pump (standard). It belongs to the pump category, has a unit price of 3861.07 EUR, a lead time of 30 days, stock quantity of 60 units, and the supplier is Adriatic Supply.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c001",
+        "doc_00_c000",
+        "doc_00_c002",
+        "doc_00_c003",
+        "doc_00_c009"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 211
+    },
+    {
+      "case_id": "edge_multi_02",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c011",
+        "doc_00_c010",
+        "doc_00_c012",
+        "doc_00_c009",
+        "doc_00_c013"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "refused an answerable question",
+      "answer_length": 0
+    },
+    {
+      "case_id": "edge_multi_03",
+      "answer": "The minimum total cost is the minimum order value of EUR\u202f750, as the agreement specifies a minimum order value of EUR\u202f750 excluding freight [doc_01_c000].",
+      "refused": false,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.5,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_01_c000",
+        "doc_01_c001",
+        "doc_02_c002",
+        "doc_00_c000"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "fact recall 0.5",
+      "answer_length": 154
+    },
+    {
+      "case_id": "edge_amb_00",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000",
+        "doc_00_c013",
+        "doc_02_c002",
+        "doc_00_c006",
+        "doc_00_c005"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "refused an answerable question",
+      "answer_length": 0
+    },
+    {
+      "case_id": "edge_amb_01",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c013",
+        "doc_00_c000",
+        "doc_01_c002",
+        "doc_00_c010",
+        "doc_00_c009"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "refused an answerable question",
+      "answer_length": 0
+    },
+    {
+      "case_id": "edge_amb_02",
+      "answer": "The SEA-1231 mechanical shaft seal is not currently in stock (stock quantity is 0).",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c011",
+        "doc_00_c010",
+        "doc_00_c012",
+        "doc_00_c009",
+        "doc_00_c004"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 83
+    },
+    {
+      "case_id": "edge_amb_03",
+      "answer": "The supplier for part SEA-1224 is Kowloon Diesel Parts.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c010",
+        "doc_00_c012",
+        "doc_00_c004",
+        "doc_00_c011",
+        "doc_00_c001"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 55
+    },
+    {
+      "case_id": "oos_00",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c009",
+        "doc_00_c010",
+        "doc_02_c000",
+        "doc_00_c006",
+        "doc_00_c008"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_01",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c010",
+        "doc_02_c001",
+        "doc_00_c009",
+        "doc_00_c011",
+        "doc_01_c001"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_02",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c004",
+        "doc_00_c005",
+        "doc_00_c006",
+        "doc_01_c001",
+        "doc_00_c008"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_03",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_00_c009",
+        "doc_00_c000",
+        "doc_00_c010",
+        "doc_00_c008"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_04",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_02_c001",
+        "doc_01_c001",
+        "doc_01_c000",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_05",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_02_c002",
+        "doc_01_c001",
+        "doc_00_c006",
+        "doc_00_c004"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_06",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000",
+        "doc_00_c002",
+        "doc_00_c001",
+        "doc_00_c004",
+        "doc_00_c010"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    }
+  ]
+}

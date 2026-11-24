@@ -1,0 +1,57 @@
+{
+  "iteration": 1,
+  "failures_by_category": {
+    "prompt_defect": 2,
+    "wrong_refusal": 1,
+    "hallucination": 1
+  },
+  "diagnoses": [
+    {
+      "case_id": "edge_multi_00",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_01",
+      "category": "wrong_refusal",
+      "evidence": "refused despite retrieving ['doc_00_c000', 'doc_01_c003']",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_02",
+      "category": "hallucination",
+      "evidence": "cited chunk ids it never retrieved",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_03",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.5",
+      "classified_by": "deterministic"
+    }
+  ],
+  "fix": {
+    "category": "prompt_defect",
+    "rung": "patch_scope_block",
+    "rationale": "4 failures classified prompt_defect; applying patch_scope_block",
+    "targets_case_ids": [
+      "edge_multi_00",
+      "edge_multi_03"
+    ],
+    "diff": {
+      "before": {
+        "system_prompt": "<995 chars>"
+      },
+      "after": {
+        "system_prompt": "<1081 chars, SCOPE revised>"
+      }
+    }
+  },
+  "score_before": 0.857,
+  "score_after": 0.0,
+  "kept": true,
+  "revert_reason": null,
+  "seconds": 2.1,
+  "tokens": 52302
+}

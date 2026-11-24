@@ -24,6 +24,7 @@
       "confidence": "float 0-1"
     }
   },
+  "model": "",
   "temperature": 0.1,
   "provenance": {
     "corpus_hash": "326f533b14003c35",
