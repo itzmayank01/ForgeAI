@@ -14,6 +14,41 @@ forgeai chat  --run runs/hr_policy_live
 
 ---
 
+## Results
+
+Measured, not claimed: every figure below is read from a committed artifact.
+
+| run | pass rate | cases | iterations | residual | judge agreement |
+|---|---|---|---|---|---|
+| `hr_policy_live` | **86%** | 28 | 2 | 4 | 80% (kappa 0.545) |
+| `ship_spares_live` | **73%** | 22 | 2 | 6 | 50% (kappa 0.0) |
+
+Both runs reverted every fix they tried: neither beat the definition the
+generator produced first. That is a real outcome rather than a missing one -
+the loop's job on these corpora was to establish that the baseline was already
+at its best, and the iteration logs show the scores that settled it.
+
+### What calibration found
+
+The spares judge scored **kappa 0.00** - no better than chance. Reading its
+disagreements showed why: the eval generator was producing questions with no
+referent ("the unit price for *this* part", with no part ever named). The agent
+correctly refused them and the judge marked every refusal a failure.
+
+My own prompt caused it. `AMBIGUOUS` asked for "a pronoun with no clear
+referent" and then demanded the result stay answerable - two instructions that
+cannot both hold. Both prompts were rewritten and the gate now drops such
+questions. HR, which had already had its own faults fixed, moved from 64% /
+kappa 0.21 to **80% / kappa 0.55**.
+
+Publishing kappa 0.00 is the point. It is the number that found the bug.
+
+### Rehearsal on an unseen corpus
+
+`rehearsal/` holds a port-agency brief and documents the factory had never
+seen, used to test the review condition rather than the two demos. A cold
+unattended run completes in roughly two minutes.
+
 ## The problem this is actually solving
 
 Building a RAG agent is easy. Building **evals honest enough to judge an agent

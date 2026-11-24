@@ -1,0 +1,6 @@
+We need an assistant for our port agency desk. It should answer questions about
+port call procedures, documentation deadlines, tariff charges and pilotage
+requirements from our operations manuals. Agents use it while a vessel is
+inbound, so answers must be exact and cite the clause. It must not give customs
+or immigration rulings, and must not estimate charges for ports we have no
+tariff for.
