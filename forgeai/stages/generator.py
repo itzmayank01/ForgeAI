@@ -11,6 +11,7 @@ import re
 
 from pydantic import BaseModel, Field
 
+from ..config import settings
 from ..llm.client import LLMClient
 from ..llm.structured import structured
 from ..models.agent_def import (
@@ -115,6 +116,7 @@ def generate_agent(
         output_contract=OutputContract(refusal_message=(
             "I can't answer that from the documents I have been given."
         )),
+        model=settings.agent_model,
         temperature=0.1,
         provenance={
             "corpus_hash": summary.corpus_hash,

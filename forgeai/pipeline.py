@@ -110,9 +110,12 @@ def run_eval(
             return
         try:
             response = agent.answer(case.question)
-        except QuotaExhausted:
+        except QuotaExhausted as exc:
             with lock:
                 consecutive_quota += 1
+                # Log every one. Silently dropping these meant a pass could
+                # abandon cases and report nothing at all about why.
+                log(f"  {case.id}: quota — {str(exc)[:110]}")
                 if consecutive_quota >= GIVE_UP_AFTER:
                     stopped = True
                     log(f"  {GIVE_UP_AFTER} consecutive quota failures; stopping")

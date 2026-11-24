@@ -58,6 +58,11 @@ class AgentDefinition(BaseModel):
     retrieval: RetrievalConfig = Field(default_factory=RetrievalConfig)
     tools: list[ToolBinding] = Field(default_factory=list)
     output_contract: OutputContract = Field(default_factory=OutputContract)
+    model: str = ""
+    """Which model answers with this definition. Empty falls back to settings
+    for older definitions, but the generator always records it: a definition
+    that does not name its model cannot be reproduced, and the judge's
+    self-preference defense depends on knowing it differs from the judge's."""
     temperature: float = 0.1
     provenance: dict[str, Any] = Field(default_factory=dict)
 

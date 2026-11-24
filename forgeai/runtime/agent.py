@@ -89,7 +89,7 @@ class Agent:
                 f"support an answer, set refused to true."
             ),
             model_cls=AgentAnswer,
-            model=settings.agent_model,
+            model=self.definition.model or settings.agent_model,
             temperature=self.definition.temperature,
         )
         if out is None:  # unusable output is a refusal, never a guess
