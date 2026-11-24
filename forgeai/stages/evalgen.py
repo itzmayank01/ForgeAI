@@ -188,7 +188,7 @@ def quality_gate(cases: list[EvalCase], index: ChunkIndex) -> tuple[list[EvalCas
     """
     kept: list[EvalCase] = []
     dropped = {"empty": 0, "no_expected_facts": 0, "oos_is_answerable": 0,
-               "fact_not_in_source": 0, "duplicate": 0}
+               "fact_not_in_source": 0, "duplicate": 0, "bundled_fact": 0}
     seen: list[str] = []
 
     for c in cases:

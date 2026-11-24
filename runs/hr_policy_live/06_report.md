@@ -5,60 +5,24 @@ leave and carry-over, parental leave, travel expense reimbursement, and how to
 raise a grievance. It should sound plain and reassuring, never give legal advice,
 and never discuss an individual employee's salary or disciplinary record.
 
-**Final pass rate: 82%** (agent v0, stopped because: iteration cap (2) reached)
+> **Not scored.** No evaluation pass completed, so this run has no pass rate. Stopped because: incomplete eval pass (resume to finish).
 
-Budget: 1,745/500,000 tokens, 365.4s/2400s, 2/2 iterations.
+> Reporting 0% here would be a fabricated number. Re-run with `--resume` to finish the suite.
+
+Budget: 0/500,000 tokens, 164.8s/2400s, 0/2 iterations.
 
 ## Per-iteration scorecard
 
 | iter | pass rate | passed/total | answerable | out of scope | edge | LLM-escalated |
 |---|---|---|---|---|---|---|
-| 0 | 82% | 23/28 | 81% | 100% | 67% | 4% |
-| 1 | 75% | 21/28 | 88% | 83% | 33% | 4% |
-| 2 | 82% | 23/28 | 88% | 100% | 50% | 4% |
-
-## What changed, and whether it helped
-
-> No fix beat the baseline. Every attempted change was reverted and the shipped agent is the one the generator produced first. That is a real result: on this corpus the generated definition was already at its best, and the loop's job was to establish that rather than to improve on it.
-
-**Iteration 0: `wrong_refusal` -> `lower_min_score`** (REVERTED - scored 75% against best 82%; reverted to v0)
-
-- Diagnosed: {'hallucination': 1, 'prompt_defect': 1, 'wrong_refusal': 3}
-- Rationale: 5 failures classified wrong_refusal; applying lower_min_score
-- Changed: `{'min_score': 0.25}` -> `{'min_score': 0.15}`
-- Targeted: ans_003, edge_multi_00, edge_multi_02
-- Score: 82% -> 75% (delta -7%)
-
-**Iteration 1: `prompt_defect` -> `patch_format_block`** (REVERTED - scored 82% against best 82%; reverted to v0)
-
-- Diagnosed: {'prompt_defect': 3, 'wrong_refusal': 3, 'hallucination': 1}
-- Rationale: 7 failures classified prompt_defect; applying patch_format_block
-- Changed: `{'system_prompt': '<995 chars>'}` -> `{'system_prompt': '<1282 chars, FORMAT revised>'}`
-- Targeted: ans_001, edge_multi_03, oos_03
-- Score: 75% -> 82% (delta +7%)
 
 ## What still fails
 
-5 of 28 cases still fail:
-
-| case | question | why |
-|---|---|---|
-| `ans_000` | How many weeks of fully paid parental leave do I get as the primary ca | cited chunks it never retrieved |
-| `ans_001` | How many weeks of fully paid parental leave can the secondary caregive | fact recall 0.0 |
-| `ans_003` | How many weeks notice do I need to give before starting a new shift? | refused an answerable question |
-| `edge_multi_00` | If a parent’s leave is split into three separate blocks, how many time | refused an answerable question |
-| `edge_multi_02` | How many days of international travel can an employee claim per diem f | refused an answerable question |
+No residual failures. Treat a 100% score with suspicion: check the eval suite's gate report for how many cases were dropped, and the judge calibration below before believing it.
 
 ## Judge calibration
 
-Agreement with hand labels: **64%** (7/11), Cohen's kappa 0.21.
-
-Disagreements:
-
-- `ans_001`: judge said False, human said True
-- `edge_multi_02`: judge said False, human said True
-- `ans_003`: judge said False, human said True
-- `edge_multi_00`: judge said False, human said True
+Not calibrated. Every number above is unverified - run `forgeai calibrate` against a hand-labelled gold set before trusting this report.
 
 ## Final agent definition
 

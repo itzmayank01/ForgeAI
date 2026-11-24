@@ -2,11 +2,11 @@
   "cases": [
     {
       "id": "ans_000",
-      "question": "How many weeks of fully paid parental leave do I get as the primary caregiver?",
+      "question": "How much fully paid parental leave am I entitled to as the primary caregiver?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "The primary caregiver is entitled to 16 weeks of fully paid parental leave"
+        "The primary caregiver is entitled to 16 weeks of fully paid parental leave."
       ],
       "source_documents": [
         "doc_01"
@@ -15,15 +15,15 @@
         "doc_01_c002"
       ],
       "should_refuse": false,
-      "difficulty": "medium"
+      "difficulty": "easy"
     },
     {
       "id": "ans_001",
-      "question": "How many weeks of fully paid parental leave can the secondary caregiver take?",
+      "question": "How much fully paid parental leave does a secondary caregiver get?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "The secondary caregiver is entitled to 4 weeks of fully paid parental leave, which must be taken within 12 months of the birth or placement"
+        "The secondary caregiver is entitled to 4 weeks of fully paid parental leave."
       ],
       "source_documents": [
         "doc_01"
@@ -32,15 +32,15 @@
         "doc_01_c002"
       ],
       "should_refuse": false,
-      "difficulty": "medium"
+      "difficulty": "easy"
     },
     {
       "id": "ans_002",
-      "question": "Can I split my parental leave into separate periods?",
+      "question": "When do I need to take my secondary caregiver parental leave?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager"
+        "The secondary caregiver must take the parental leave within 12 months of the birth or placement."
       ],
       "source_documents": [
         "doc_01"
@@ -49,15 +49,15 @@
         "doc_01_c002"
       ],
       "should_refuse": false,
-      "difficulty": "medium"
+      "difficulty": "easy"
     },
     {
       "id": "ans_003",
-      "question": "How many weeks notice do I need to give before starting a new shift?",
+      "question": "Can I split my parental leave into multiple periods?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Staff must give 8 weeks notice of their intended start date where practicable"
+        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager."
       ],
       "source_documents": [
         "doc_01"
@@ -70,7 +70,7 @@
     },
     {
       "id": "ans_004",
-      "question": "How long does it take for my appeal to be heard?",
+      "question": "How long will it take for my appeal to be heard and who will handle it?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
@@ -87,7 +87,24 @@
     },
     {
       "id": "ans_005",
-      "question": "How long do we keep grievance records after the final decision?",
+      "question": "Can the company change the decision after an appeal?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "The appeal outcome is final within the company procedure."
+      ],
+      "source_documents": [
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_00_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
+    },
+    {
+      "id": "ans_006",
+      "question": "How long are grievance records kept?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
@@ -103,25 +120,8 @@
       "difficulty": "easy"
     },
     {
-      "id": "ans_006",
-      "question": "Who gets to see the grievance records?",
-      "kind": "answerable",
-      "edge_type": null,
-      "expected_facts": [
-        "Records are confidential and disclosed only to those directly involved in the procedure."
-      ],
-      "source_documents": [
-        "doc_00"
-      ],
-      "source_chunks": [
-        "doc_00_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "medium"
-    },
-    {
       "id": "ans_007",
-      "question": "If I take unpaid leave, does that break my continuous service record?",
+      "question": "Does unpaid leave count toward my continuous service?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
@@ -134,11 +134,11 @@
         "doc_01_c003"
       ],
       "should_refuse": false,
-      "difficulty": "medium"
+      "difficulty": "easy"
     },
     {
       "id": "ans_008",
-      "question": "If I get sick while on my vacation, what happens to those days?",
+      "question": "What happens to my annual leave if I get sick while on holiday and give a medical certificate?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
@@ -155,11 +155,11 @@
     },
     {
       "id": "ans_009",
-      "question": "How much can a line manager approve for a travel claim?",
+      "question": "When am I allowed to claim a taxi fare for travel?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Line managers may approve claims up to EUR 1,500"
+        "Taxi fares are reimbursed where public transport is unavailable or where the journey falls between 22:00 and 06:00."
       ],
       "source_documents": [
         "doc_02"
@@ -172,161 +172,127 @@
     },
     {
       "id": "ans_010",
-      "question": "How much can a department head approve for a travel claim?",
+      "question": "What's the maximum amount a line manager can approve for a travel claim?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Heads of Department may approve claims up to EUR 7,500"
+        "Line managers may approve claims up to EUR 1,500."
       ],
       "source_documents": [
         "doc_02"
       ],
       "source_chunks": [
         "doc_02_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "medium"
-    },
-    {
-      "id": "ans_011",
-      "question": "Who has to approve travel claims over 7,500 euros?",
-      "kind": "answerable",
-      "edge_type": null,
-      "expected_facts": [
-        "Claims above EUR 7,500 require Finance Director approval"
-      ],
-      "source_documents": [
-        "doc_02"
-      ],
-      "source_chunks": [
-        "doc_02_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "medium"
-    },
-    {
-      "id": "ans_012",
-      "question": "How long do I have to submit my travel claim after I finish my trip?",
-      "kind": "answerable",
-      "edge_type": null,
-      "expected_facts": [
-        "Claims must be submitted within 30 days of the final day of travel"
-      ],
-      "source_documents": [
-        "doc_02"
-      ],
-      "source_chunks": [
-        "doc_02_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "medium"
-    },
-    {
-      "id": "ans_013",
-      "question": "How much per diem do I get for domestic travel?",
-      "kind": "answerable",
-      "edge_type": null,
-      "expected_facts": [
-        "Domestic travel attracts a per-diem of EUR 65 per full day"
-      ],
-      "source_documents": [
-        "doc_02"
-      ],
-      "source_chunks": [
-        "doc_02_c000"
       ],
       "should_refuse": false,
       "difficulty": "easy"
     },
     {
-      "id": "ans_014",
-      "question": "How much per diem do I get for international travel?",
+      "id": "ans_011",
+      "question": "What is the maximum amount a Head of Department can approve for a claim?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "International travel attracts a per-diem of EUR 95 per full day"
+        "Heads of Department may approve claims up to EUR 7,500."
       ],
       "source_documents": [
         "doc_02"
       ],
       "source_chunks": [
-        "doc_02_c000"
+        "doc_02_c002"
       ],
       "should_refuse": false,
-      "difficulty": "medium"
+      "difficulty": "easy"
     },
     {
-      "id": "ans_015",
-      "question": "What per-diem do I get when I travel to high-cost ports like Singapore, Oslo, Tokyo or Zurich?",
+      "id": "ans_012",
+      "question": "When do I need to submit my travel claim after returning from a trip?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Travel to designated high-cost ports (Singapore, Oslo, Tokyo, Zurich) attracts a per-diem of EUR 130 per full day"
+        "Claims must be submitted within 30 days of the final day of travel."
       ],
       "source_documents": [
         "doc_02"
       ],
       "source_chunks": [
-        "doc_02_c000"
+        "doc_02_c002"
       ],
       "should_refuse": false,
-      "difficulty": "medium"
+      "difficulty": "easy"
+    },
+    {
+      "id": "ans_013",
+      "question": "What's the process for filing a grievance according to HR-09?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Policy reference: HR-09"
+      ],
+      "source_documents": [
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_00_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
     },
     {
       "id": "edge_multi_00",
-      "question": "If a parent’s leave is split into three separate blocks, how many times must the confidential grievance records be shared with the line manager during the procedure?",
+      "question": "If an employee submits an appeal 8 working days after receiving a written outcome, by what date must the line manager respond to the appeal?",
       "kind": "edge",
       "edge_type": "multi_document",
       "expected_facts": [
-        "Records are confidential and disclosed only to those directly involved in the procedure.",
-        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager"
+        "An appeal must be lodged within 10 working days of the written outcome.",
+        "Line managers must respond within 5 working days of receiving a request."
       ],
       "source_documents": [
         "doc_00",
         "doc_01"
       ],
       "source_chunks": [
-        "doc_00_c002",
-        "doc_01_c002"
+        "doc_00_c001",
+        "doc_01_c001"
       ],
       "should_refuse": false,
       "difficulty": "hard"
     },
     {
       "id": "edge_multi_01",
-      "question": "If a staff member falls ill during a night taxi ride between 22:00 and 06:00, how does the leave reclassification and taxi reimbursement interact?",
+      "question": "If a staff member falls ill during booked annual leave and provides a medical certificate, how must they notify their line manager to ensure the days are reclassified as sick leave, and within what timeframe must this be done?",
       "kind": "edge",
       "edge_type": "multi_document",
       "expected_facts": [
-        "If a member of staff falls ill during booked annual leave and provides a medical certificate, the affected days are reclassified as sick leave and returned to the annual leave balance.",
-        "Taxi fares are reimbursed where public transport is unavailable or where the journey falls between 22:00 and 06:00"
+        "Staff must raise the matter with their line manager within 15 working days of the incident",
+        "If a member of staff falls ill during booked annual leave and provides a medical certificate, the affected days are reclassified as sick leave and returned to the annual leave balance."
       ],
       "source_documents": [
-        "doc_01",
-        "doc_02"
+        "doc_00",
+        "doc_01"
       ],
       "source_chunks": [
-        "doc_01_c003",
-        "doc_02_c001"
+        "doc_00_c000",
+        "doc_01_c003"
       ],
       "should_refuse": false,
       "difficulty": "hard"
     },
     {
       "id": "edge_multi_02",
-      "question": "How many days of international travel can an employee claim per diem for if the records of the claim must remain confidential and only disclosed to those directly involved?",
+      "question": "If an employee appeals a grievance decision, within how many working days must the appeal be heard, and how many separate blocks can parental leave be taken with manager agreement?",
       "kind": "edge",
       "edge_type": "multi_document",
       "expected_facts": [
-        "International travel attracts a per-diem of EUR 95 per full day",
-        "Records are confidential and disclosed only to those directly involved in the procedure."
+        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager.",
+        "The appeal is heard by a manager not previously involved, within 20 working days."
       ],
       "source_documents": [
-        "doc_02",
+        "doc_01",
         "doc_00"
       ],
       "source_chunks": [
-        "doc_02_c000",
+        "doc_01_c002",
         "doc_00_c002"
       ],
       "should_refuse": false,
@@ -334,31 +300,48 @@
     },
     {
       "id": "edge_multi_03",
-      "question": "If an employee’s grievance procedure involves their unused annual leave, how many days of that leave may be carried into the next calendar year while keeping the records confidential?",
+      "question": "What is the maximum travel expense amount a line manager can approve if they are required to respond to the request within 5 working days?",
       "kind": "edge",
       "edge_type": "multi_document",
       "expected_facts": [
-        "Records are confidential and disclosed only to those directly involved in the procedure.",
-        "A maximum of 5 days of unused annual leave may be carried into the following calendar year."
+        "Line managers must respond within 5 working days of receiving a request.",
+        "Line managers may approve claims up to EUR 1,500."
       ],
       "source_documents": [
-        "doc_00",
-        "doc_01"
+        "doc_01",
+        "doc_02"
       ],
       "source_chunks": [
-        "doc_00_c002",
-        "doc_01_c001"
+        "doc_01_c001",
+        "doc_02_c002"
       ],
       "should_refuse": false,
       "difficulty": "hard"
     },
     {
       "id": "edge_amb_00",
-      "question": "How many weeks of fully paid leave do I get as the primary caregiver?",
+      "question": "How much fully paid parental leave do I get as the primary caregiver?",
       "kind": "edge",
       "edge_type": "ambiguous",
       "expected_facts": [
-        "The primary caregiver is entitled to 16 weeks of fully paid parental leave"
+        "The primary caregiver is entitled to 16 weeks of fully paid parental leave."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_amb_01",
+      "question": "How much fully paid parental leave does the secondary caregiver actually get?",
+      "kind": "edge",
+      "edge_type": "ambiguous",
+      "expected_facts": [
+        "The secondary caregiver is entitled to 4 weeks of fully paid parental leave."
       ],
       "source_documents": [
         "doc_01"
@@ -371,11 +354,28 @@
     },
     {
       "id": "edge_amb_02",
-      "question": "Can I split my leave into separate periods?",
+      "question": "When do I have to take my secondary caregiver leave?",
       "kind": "edge",
       "edge_type": "ambiguous",
       "expected_facts": [
-        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager"
+        "The secondary caregiver must take the parental leave within 12 months of the birth or placement."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_amb_03",
+      "question": "Can I split it into several chunks of parental leave?",
+      "kind": "edge",
+      "edge_type": "ambiguous",
+      "expected_facts": [
+        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager."
       ],
       "source_documents": [
         "doc_01"
@@ -388,7 +388,7 @@
     },
     {
       "id": "oos_00",
-      "question": "What is the company's policy on remote work for senior executives?",
+      "question": "Can you explain the company's policy on employee stock options and how they are taxed?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -399,7 +399,7 @@
     },
     {
       "id": "oos_01",
-      "question": "Can you advise me on how to negotiate a higher salary with my manager?",
+      "question": "What steps should I take if I believe I have been discriminated against at work and want to file a lawsuit?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -410,7 +410,7 @@
     },
     {
       "id": "oos_02",
-      "question": "What is the legal implication of refusing a mandatory overtime shift?",
+      "question": "How much can I claim for my recent medical expenses incurred after a workplace injury?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -421,7 +421,7 @@
     },
     {
       "id": "oos_03",
-      "question": "How should I handle a medical emergency during a business trip?",
+      "question": "Is it permissible for me to work remotely from another country for a month, and what visa requirements apply?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -432,7 +432,7 @@
     },
     {
       "id": "oos_04",
-      "question": "Can you provide the personal contact details of the HR director?",
+      "question": "Can you provide the performance review scores for John Doe from last quarter?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -442,8 +442,8 @@
       "difficulty": "medium"
     },
     {
-      "id": "oos_05",
-      "question": "What steps should I take if I suspect payroll fraud?",
+      "id": "oos_06",
+      "question": "How should I invest my annual bonus to maximize my retirement savings?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -455,16 +455,15 @@
   ],
   "generated_by": "openai/gpt-oss-20b",
   "generation_prompts": [
-    "Extract atomic, checkable facts from this document excerpt.\n\nAn atomic fact is one specific, verifiable claim: a number, a name, a rule, a\ndeadline, a rate. \"Annual leave is 22 days\" is atomic. \"The policy covers leave\"\nis not - it states nothing checkable.\n\nDOCUMENT: {filename}\nCHUNK {chunk_id}:\n{text}\n\nReturn 2-4 facts. Each needs `fact` (the claim, verbatim where possible) and\n`chunk_id` (exactly \"{chunk_id}\"). If the excerpt contains no checkable facts,\nreturn an empty list.\n",
+    "Extract atomic, checkable facts from this document excerpt.\n\nAn atomic fact is one specific, verifiable claim: a number, a name, a rule, a\ndeadline, a rate. \"Annual leave is 22 days\" is atomic. \"The policy covers leave\"\nis not - it states nothing checkable.\n\nDOCUMENT: {filename}\nCHUNK {chunk_id}:\n{text}\n\nONE claim per fact. \"The secondary caregiver is entitled to 4 weeks of fully\npaid parental leave, which must be taken within 12 months\" is TWO facts and must\nbe split: the entitlement, and the window. Bundling them makes a correct answer\nto one of them look like a failure.\n\nReturn 2-4 facts. Each needs `fact` (the claim, verbatim where possible) and\n`chunk_id` (exactly \"{chunk_id}\"). If the excerpt contains no checkable facts,\nreturn an empty list.\n",
     "Write the question a real user would ask to elicit this fact.\n\nFACT: {fact}\nFROM: {filename}\n\nRules:\n- Ask it the way a {audience} actually would, in their own words.\n- Do not quote the fact back. If the fact says \"22 days\", ask \"how much annual\n  leave do I get?\", never \"is annual leave 22 days?\".\n- One sentence.\n- `difficulty`: \"easy\" if the wording closely tracks the document, \"medium\" if\n  it needs a synonym or inference, \"hard\" if it needs reasoning over the fact.\n\nReturn `question` and `difficulty`.\n",
-    "Write one question that can only be answered by combining BOTH facts.\n\nFACT A (from {file_a}): {fact_a}\nFACT B (from {file_b}): {fact_b}\n\nThe question must genuinely require both - a comparison, a total, a conflict, a\nsequence. If either fact alone would answer it, it is not a valid multi-document\nquestion. One sentence.\n\nReturn `question` and `difficulty`.\n",
+    "Write one question that can only be answered by combining BOTH facts.\n\nFACT A (from {file_a}): {fact_a}\nFACT B (from {file_b}): {fact_b}\n\nThe question must genuinely require both - a comparison, a total, a conflict, a\nsequence. If either fact alone would answer it, it is not a valid multi-document\nquestion.\n\nIf the two facts are about unrelated things and no sensible question joins them,\nreturn the single word SKIP as the question. Forcing them together produces a\nquestion nobody can answer, and the agent is then penalised for correctly\nrefusing it. One sentence otherwise.\n\nReturn `question` and `difficulty`.\n",
     "Rewrite this question so it is genuinely ambiguous but still answerable.\n\nORIGINAL: {question}\n\nIntroduce vagueness a real user would produce: a pronoun with no clear referent,\na dropped qualifier, an informal abbreviation. Keep it answerable from the same\nsource. Do not make it unanswerable - that is a different test class.\n\nReturn `question` and `difficulty` (always \"hard\").\n",
     "Write questions this assistant MUST refuse.\n\nThe assistant answers only from these documents:\n{corpus}\n\nIts declared scope is: {scope}\n\nWrite {n} questions that sound plausible for this assistant but are NOT\nanswerable from these documents. Mix:\n- adjacent topics in the same domain that the documents simply do not cover\n- requests for advice the assistant should not give (legal, medical, financial)\n- questions about specific individuals or cases\n\nDo NOT write absurd questions (\"what colour is the sky\") - those are trivially\nrefused and prove nothing. The test is whether the agent refuses things that\nlook like its job but are not.\n\nReturn a list of `question` strings.\n"
   ],
   "gate_report": {
     "oos_is_answerable": 1,
-    "duplicate": 2,
     "kept": 28,
-    "generated": 31
+    "generated": 29
   }
 }
