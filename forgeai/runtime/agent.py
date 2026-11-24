@@ -10,6 +10,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, Field
 
+from ..config import settings
 from ..ingest.index import ChunkIndex
 from ..llm.client import LLMClient
 from ..llm.structured import structured
@@ -37,10 +38,20 @@ class AgentResponse(BaseModel):
     tool_calls: list[dict] = Field(default_factory=list)
 
 
-def format_context(chunks: list[RetrievedChunk]) -> str:
+CHUNK_CHARS = 700
+"""Retrieved text dominates every agent call, so it is the only lever that
+meaningfully changes a run's token cost. 700 characters keeps whole policy
+clauses intact while cutting a top_k=8 context roughly in half."""
+
+
+def format_context(chunks: list[RetrievedChunk], limit: int = CHUNK_CHARS) -> str:
     if not chunks:
         return "(no context retrieved)"
-    return "\n\n".join(f"[{c.chunk_id}] {c.text}" for c in chunks)
+    parts = []
+    for c in chunks:
+        text = c.text if len(c.text) <= limit else c.text[:limit].rsplit(" ", 1)[0] + " …"
+        parts.append(f"[{c.chunk_id}] {text}")
+    return "\n\n".join(parts)
 
 
 class Agent:
@@ -78,6 +89,7 @@ class Agent:
                 f"support an answer, set refused to true."
             ),
             model_cls=AgentAnswer,
+            model=settings.agent_model,
             temperature=self.definition.temperature,
         )
         if out is None:  # unusable output is a refusal, never a guess

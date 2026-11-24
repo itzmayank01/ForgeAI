@@ -51,6 +51,69 @@ def build(
 
 
 @app.command()
+def budget(
+    docs: Path = typer.Option(..., help="Folder of source documents."),
+    cases: int = typer.Option(22, help="Eval cases to plan for."),
+    iterations: int = typer.Option(2, help="Loop iterations to plan for."),
+) -> None:
+    """Estimate a run's token cost per model BEFORE spending it.
+
+    Daily caps are per model, so what matters is not the total but whether any
+    single bucket overflows. Free tier is 200,000 per model per day.
+    """
+    import httpx
+
+    from .config import settings
+    from .ingest.chunker import chunk_corpus
+    from .ingest.loaders import load_folder
+    from .runtime.agent import CHUNK_CHARS
+
+    refs, texts, _ = load_folder(docs)
+    chunks = chunk_corpus(refs, texts, 800, 120)
+
+    # Per-call estimates measured from live runs: a structured call with
+    # reasoning_effort=low lands near 250 tokens plus its prompt.
+    ctx = (CHUNK_CHARS * 5) // 4            # top_k=5 of trimmed chunks
+    per_agent = ctx + 400 + 300             # context + prompt + completion
+    per_small = 700
+
+    plan = {
+        settings.gen_model: 4 * per_small + 2 * per_small + cases * per_agent * iterations,
+        settings.evalgen_model: (len(chunks) + cases + 8) * per_small,
+        settings.judge_model: int(cases * 0.25) * per_small * iterations,
+    }
+
+    console.print(f"\n[bold]{len(refs)} documents · {len(chunks)} chunks · "
+                  f"{cases} cases · {iterations} iterations[/bold]\n")
+    console.print(f"{'model':28} {'projected':>10} {'cap':>9}  status")
+    ok = True
+    for model, tokens in plan.items():
+        over = tokens > 200_000
+        ok &= not over
+        flag = "[red]OVER[/red]" if over else "[green]fits[/green]"
+        console.print(f"{model:28} {tokens:>10,} {200_000:>9,}  {flag}")
+
+    console.print(f"\ntotal across buckets: {sum(plan.values()):,}")
+    console.print("Caps are per model, so the total is not the limit - "
+                  "only a single bucket overflowing is.")
+
+    # Report whatever headroom the provider says is left right now.
+    try:
+        h = {"Authorization": f"Bearer {settings.require_key()}"}
+        console.print()
+        for model in plan:
+            r = httpx.post(f"{settings.base_url}/chat/completions", headers=h, timeout=20,
+                           json={"model": model, "messages": [{"role": "user", "content": "hi"}],
+                                 "max_tokens": 5})
+            state = "[red]exhausted[/red]" if r.status_code == 429 else "[green]available[/green]"
+            console.print(f"  {model:28} {state}")
+    except Exception as exc:  # noqa: BLE001 - a probe failure must not fail the estimate
+        console.print(f"[dim]could not probe live quota: {exc}[/dim]")
+
+    raise typer.Exit(0 if ok else 1)
+
+
+@app.command()
 def chat(
     run: Path = typer.Option(..., help="A run directory produced by `build`."),
     definition: Path = typer.Option(None, help="Override the agent definition path."),

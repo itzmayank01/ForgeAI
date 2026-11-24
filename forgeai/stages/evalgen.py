@@ -54,14 +54,14 @@ def generate_suite(
     # Over-generate: the gate exists to drop weak cases, so generating exactly
     # `target` guarantees finishing under it. A live run generated 22 and kept
     # 18 against a required 20.
-    OVERSHOOT = 1.5
+    OVERSHOOT = 1.25
     want = int(target * OVERSHOOT)
     rng = random.Random(7)
     pool = rng.sample(chunks, min(len(chunks), max(10, want)))
 
     def facts_for(c: Chunk) -> list[_Fact]:
         out, _ = structured(
-            client, model_cls=_Facts, temperature=0.1,
+            client, model_cls=_Facts, temperature=0.1, model=settings.evalgen_model,
             instruction=P.EXTRACT_FACTS.format(
                 filename=c.filename, chunk_id=c.chunk_id, text=c.text[:1800]),
         )
@@ -81,7 +81,7 @@ def generate_suite(
         if c is None:
             return None
         q, _ = structured(
-            client, model_cls=_Question, temperature=0.4,
+            client, model_cls=_Question, temperature=0.4, model=settings.evalgen_model,
             instruction=P.FACT_TO_QUESTION.format(
                 fact=f.fact, filename=c.filename, audience=req.audience),
         )
@@ -108,7 +108,7 @@ def generate_suite(
     for i, (a, b) in enumerate(cross[:4]):
         ca, cb = by_chunk[a.chunk_id], by_chunk[b.chunk_id]
         q, _ = structured(
-            client, model_cls=_Question, temperature=0.4,
+            client, model_cls=_Question, temperature=0.4, model=settings.evalgen_model,
             instruction=P.MULTI_DOC.format(
                 file_a=ca.filename, fact_a=a.fact, file_b=cb.filename, fact_b=b.fact),
         )
@@ -124,7 +124,7 @@ def generate_suite(
     # --- edge: ambiguous ----------------------------------------------------
     for i, base in enumerate([c for c in cases if c.kind == "answerable"][:4]):
         q, _ = structured(
-            client, model_cls=_Question, temperature=0.5,
+            client, model_cls=_Question, temperature=0.5, model=settings.evalgen_model,
             instruction=P.AMBIGUOUS.format(question=base.question),
         )
         if q:
@@ -139,7 +139,7 @@ def generate_suite(
     # --- out of scope -------------------------------------------------------
     n_oos = max(7, int(want * 0.25))
     oos, _ = structured(
-        client, model_cls=_Questions, temperature=0.6,
+        client, model_cls=_Questions, temperature=0.6, model=settings.evalgen_model,
         instruction=P.OUT_OF_SCOPE.format(
             corpus=", ".join(sorted({c.filename for c in chunks})),
             scope=req.scope, n=n_oos),

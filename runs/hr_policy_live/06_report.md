@@ -9,7 +9,7 @@ and never discuss an individual employee's salary or disciplinary record.
 
 > Reporting 0% here would be a fabricated number. Re-run with `--resume` to finish the suite.
 
-Budget: 0/500,000 tokens, 8.0s/900s, 0/2 iterations.
+Budget: 0/500,000 tokens, 6.6s/900s, 0/2 iterations.
 
 ## Per-iteration scorecard
 

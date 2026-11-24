@@ -16,6 +16,14 @@ else
 fi
 [ -n "$GROQ_API_KEY" ] && echo "             GROQ_API_KEY also exported in shell"
 
+if [ -x .venv/bin/python ]; then
+  .venv/bin/python -c "
+from forgeai.config import settings
+n = len(settings.api_keys)
+print(f'key pool:    {n} key(s) -> ~{n * 3 * 200:,}k tokens/day across 3 models')
+" 2>/dev/null
+fi
+
 if command -v gh >/dev/null 2>&1; then
   if gh auth status >/dev/null 2>&1; then
     echo "github:      logged in as $(gh api user --jq .login 2>/dev/null || echo '?')"

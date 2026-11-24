@@ -9,6 +9,7 @@ from dataclasses import dataclass, field
 import httpx
 
 from ..config import Settings, settings
+from .keypool import KeyPool, NoKeyAvailable
 from .ratelimit import bucket_for, estimate_tokens
 
 
@@ -19,17 +20,20 @@ class Usage:
     prompt_tokens: int = 0
     completion_tokens: int = 0
     calls: int = 0
+    by_model: dict[str, int] = field(default_factory=dict)
     _lock: threading.Lock = field(default_factory=threading.Lock, repr=False)
 
     @property
     def total(self) -> int:
         return self.prompt_tokens + self.completion_tokens
 
-    def add(self, prompt: int, completion: int) -> None:
+    def add(self, prompt: int, completion: int, model: str = "") -> None:
         with self._lock:
             self.prompt_tokens += prompt
             self.completion_tokens += completion
             self.calls += 1
+            if model:
+                self.by_model[model] = self.by_model.get(model, 0) + prompt + completion
 
 
 class LLMError(RuntimeError):
@@ -47,11 +51,20 @@ class LLMClient:
     def __init__(self, cfg: Settings | None = None) -> None:
         self.cfg = cfg or settings
         self.usage = Usage()
-        self._client = httpx.Client(
-            base_url=self.cfg.base_url,
-            timeout=self.cfg.request_timeout,
-            headers={"Authorization": f"Bearer {self.cfg.require_key()}"},
-        )
+        keys = self.cfg.api_keys or ([self.cfg.require_key()] if self.cfg.api_key else [])
+        if not keys:
+            self.cfg.require_key()  # raises with the setup message
+        self.pool = KeyPool(keys)
+        self._clients: dict[str, httpx.Client] = {}
+
+    def _http(self, key: str) -> httpx.Client:
+        if key not in self._clients:
+            self._clients[key] = httpx.Client(
+                base_url=self.cfg.base_url,
+                timeout=self.cfg.request_timeout,
+                headers={"Authorization": f"Bearer {key}"},
+            )
+        return self._clients[key]
 
     def complete(
         self,
@@ -79,64 +92,76 @@ class LLMClient:
             payload["reasoning_effort"] = "low"
 
         model_name = payload["model"]
-        bucket = bucket_for(model_name)
         estimate = estimate_tokens(messages, max_tokens)
-
         last_exc: Exception | None = None
-        for attempt in range(4):
-            handle = bucket.acquire(estimate)
+
+        # One attempt per key, plus a couple of transient retries. Each key has
+        # its own daily cap, so exhausting one is a reason to switch rather than
+        # to fail.
+        for attempt in range(self.pool.size + 3):
             try:
-                r = self._client.post("/chat/completions", json=payload)
+                state = self.pool.acquire(model_name)
+            except NoKeyAvailable as exc:
+                raise QuotaExhausted(str(exc)) from exc
+
+            # Rate limits are per key AND per model, so the bucket must be too.
+            bucket = bucket_for(f"{state.label}|{model_name}")
+            handle = bucket.acquire(estimate)
+
+            try:
+                r = self._http(state.key).post("/chat/completions", json=payload)
 
                 if r.status_code == 429:
-                    # A DAILY cap is not worth waiting on: it drips for hours.
-                    # Grinding through it is how a run burned 3.1 hours to
-                    # produce nothing. Fail fast and say so instead.
-                    if "per day" in r.text.lower() or "tpd" in r.text.lower():
-                        raise QuotaExhausted(
-                            f"daily token quota exhausted for {model_name}. "
-                            f"Runs cannot proceed until it resets. "
-                            f"Detail: {r.text[:200]}")
-                    # Otherwise honour the server's own reset window.
-                    wait = _retry_after(r) or min(60.0, 2.0 ** attempt * 5)
+                    body = r.text
+                    if "per day" in body.lower() or "tpd" in body.lower():
+                        # This key is done for the day on this model; the next
+                        # key starts fresh.
+                        self.pool.mark_exhausted(state, model_name)
+                        bucket.settle(handle, 0)
+                        last_exc = LLMError(f"{state.label} daily cap reached")
+                        continue
+                    wait = _retry_after(r) or min(30.0, 2.0 ** attempt * 4)
                     bucket.penalise(wait)
+                    bucket.settle(handle, estimate)
                     last_exc = LLMError(f"rate limited, waited {wait:.0f}s")
                     time.sleep(wait)
                     continue
 
                 if r.status_code >= 400:
                     body = r.text[:400]
-                    # Empty generation under json_object mode: the model thought
-                    # itself out of budget. Give it more room and try again
-                    # rather than failing the stage.
                     if ("json_validate_failed" in body
                             and '"failed_generation":""' in body.replace(" ", "")
-                            and attempt < 3):
+                            and attempt < self.pool.size + 2):
                         payload["max_tokens"] = min(8192, int(payload["max_tokens"] * 2))
+                        bucket.settle(handle, estimate)
                         last_exc = LLMError("empty generation; raised max_tokens")
                         continue
+                    bucket.settle(handle, estimate)
                     raise LLMError(f"{r.status_code} from {model_name}: {body}")
-                r.raise_for_status()
+
                 data = r.json()
                 u = data.get("usage", {})
                 total = u.get("total_tokens") or (
                     u.get("prompt_tokens", 0) + u.get("completion_tokens", 0))
                 bucket.settle(handle, total or estimate)
-                self.usage.add(u.get("prompt_tokens", 0), u.get("completion_tokens", 0))
+                self.pool.record(state, model_name, total or estimate)
+                self.usage.add(u.get("prompt_tokens", 0), u.get("completion_tokens", 0),
+                               model_name)
                 return data["choices"][0]["message"].get("content") or ""
 
-            except LLMError:
+            except (LLMError, QuotaExhausted):
                 raise
             except Exception as exc:  # noqa: BLE001 - retried, then surfaced
                 last_exc = exc
                 bucket.settle(handle, estimate)
-                if attempt < 3:
+                if attempt < self.pool.size + 2:
                     time.sleep(1.5 * (attempt + 1))
 
-        raise LLMError(f"completion failed after 4 attempts: {last_exc}")
+        raise LLMError(f"completion failed across {self.pool.size} key(s): {last_exc}")
 
     def close(self) -> None:
-        self._client.close()
+        for c in self._clients.values():
+            c.close()
 
 
 def _retry_after(response: httpx.Response) -> float | None:
