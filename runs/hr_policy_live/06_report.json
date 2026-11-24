@@ -120,8 +120,8 @@
       "score_before": 0.821,
       "score_after": 0.75,
       "kept": false,
-      "revert_reason": "score fell 82% -> 75%; reverted to v0",
-      "seconds": 1.2,
+      "revert_reason": "scored 75% against best 82%; reverted to v0",
+      "seconds": 1.7,
       "tokens": 278
     },
     {
@@ -189,16 +189,16 @@
             "system_prompt": "<995 chars>"
           },
           "after": {
-            "system_prompt": "<1377 chars, FORMAT revised>"
+            "system_prompt": "<1346 chars, FORMAT revised>"
           }
         }
       },
       "score_before": 0.75,
       "score_after": 0.821,
       "kept": false,
-      "revert_reason": "score fell 75% -> 82%; reverted to v0",
-      "seconds": 2.3,
-      "tokens": 1635
+      "revert_reason": "scored 82% against best 82%; reverted to v0",
+      "seconds": 2.5,
+      "tokens": 1627
     }
   ],
   "residual_failures": [
@@ -234,8 +234,8 @@
     "max_tokens": 500000,
     "max_seconds": 2400,
     "max_iterations": 2,
-    "tokens_used": 31213,
-    "started_at": 1795503326.509613
+    "tokens_used": 1907,
+    "started_at": 1795503641.962763
   },
   "best_version": 0,
   "evaluated": true

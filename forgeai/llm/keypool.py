@@ -49,19 +49,30 @@ class KeyPool:
     def size(self) -> int:
         return len(self._states)
 
-    def acquire(self, model: str) -> KeyState:
-        """Least-used available key for this model."""
-        now = time.time()
-        with self._lock:
-            live = [s for s in self._states if s.available_for(model, now)]
-            if not live:
+    SHORT_WAIT = 90.0
+    """Below this, waiting for a key beats failing the run: Groq's daily window
+    drips, so a stall is usually seconds rather than hours."""
+
+    def acquire(self, model: str, *, allow_wait: bool = True) -> KeyState:
+        """Least-used available key for this model, waiting out a brief stall."""
+        deadline = time.time() + self.SHORT_WAIT
+        while True:
+            now = time.time()
+            with self._lock:
+                live = [s for s in self._states if s.available_for(model, now)]
+                if live:
+                    return min(live, key=lambda s: s.tokens_for(model))
                 soonest = min(
                     (s.exhausted_until.get(model, 0) for s in self._states), default=0)
-                wait = max(0, int(soonest - now))
+
+            wait = soonest - now
+            if not allow_wait or wait <= 0 or now >= deadline:
+                mins = max(0, int(wait) // 60)
                 raise NoKeyAvailable(
                     f"all {len(self._states)} key(s) exhausted for {model}; "
-                    f"next resets in ~{wait // 60}m")
-            return min(live, key=lambda s: s.tokens_for(model))
+                    f"next resets in ~{mins}m" if mins
+                    else f"all {len(self._states)} key(s) exhausted for {model}")
+            time.sleep(min(5.0, max(0.5, wait)))
 
     def record(self, state: KeyState, model: str, tokens: int) -> None:
         with self._lock:

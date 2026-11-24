@@ -7,7 +7,7 @@ and never discuss an individual employee's salary or disciplinary record.
 
 **Final pass rate: 82%** (agent v0, stopped because: iteration cap (2) reached)
 
-Budget: 31,213/500,000 tokens, 253.2s/2400s, 2/2 iterations.
+Budget: 1,907/500,000 tokens, 9.1s/2400s, 2/2 iterations.
 
 ## Per-iteration scorecard
 
@@ -19,7 +19,9 @@ Budget: 31,213/500,000 tokens, 253.2s/2400s, 2/2 iterations.
 
 ## What changed, and whether it helped
 
-**Iteration 0: `wrong_refusal` -> `lower_min_score`** (REVERTED - score fell 82% -> 75%; reverted to v0)
+> No fix beat the baseline. Every attempted change was reverted and the shipped agent is the one the generator produced first. That is a real result: on this corpus the generated definition was already at its best, and the loop's job was to establish that rather than to improve on it.
+
+**Iteration 0: `wrong_refusal` -> `lower_min_score`** (REVERTED - scored 75% against best 82%; reverted to v0)
 
 - Diagnosed: {'hallucination': 1, 'prompt_defect': 1, 'wrong_refusal': 3}
 - Rationale: 5 failures classified wrong_refusal; applying lower_min_score
@@ -27,11 +29,11 @@ Budget: 31,213/500,000 tokens, 253.2s/2400s, 2/2 iterations.
 - Targeted: ans_003, edge_multi_00, edge_multi_02
 - Score: 82% -> 75% (delta -7%)
 
-**Iteration 1: `prompt_defect` -> `patch_format_block`** (REVERTED - score fell 75% -> 82%; reverted to v0)
+**Iteration 1: `prompt_defect` -> `patch_format_block`** (REVERTED - scored 82% against best 82%; reverted to v0)
 
 - Diagnosed: {'prompt_defect': 3, 'wrong_refusal': 3, 'hallucination': 1}
 - Rationale: 7 failures classified prompt_defect; applying patch_format_block
-- Changed: `{'system_prompt': '<995 chars>'}` -> `{'system_prompt': '<1377 chars, FORMAT revised>'}`
+- Changed: `{'system_prompt': '<995 chars>'}` -> `{'system_prompt': '<1346 chars, FORMAT revised>'}`
 - Targeted: ans_001, edge_multi_03, oos_03
 - Score: 75% -> 82% (delta +7%)
 

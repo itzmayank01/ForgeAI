@@ -114,9 +114,13 @@ class LLMClient:
                 if r.status_code == 429:
                     body = r.text
                     if "per day" in body.lower() or "tpd" in body.lower():
-                        # This key is done for the day on this model; the next
-                        # key starts fresh.
-                        self.pool.mark_exhausted(state, model_name)
+                        # Sideline this (key, model) for exactly as long as the
+                        # server asks. A fixed hour benches keys that Groq says
+                        # are usable again in seconds - its daily window drips
+                        # rather than resetting at midnight, and retry-after on
+                        # these 429s is routinely single digits.
+                        cooldown = _retry_after(r) or 120.0
+                        self.pool.mark_exhausted(state, model_name, cooldown)
                         bucket.settle(handle, 0)
                         last_exc = LLMError(f"{state.label} daily cap reached")
                         continue
