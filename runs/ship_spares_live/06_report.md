@@ -9,7 +9,7 @@ commit to a delivery date it cannot evidence.
 
 **Final pass rate: 57%** (agent v0, stopped because: incomplete eval pass (resume to finish))
 
-Budget: 566/500,000 tokens, 8.2s/2400s, 1/2 iterations.
+Budget: 566/500,000 tokens, 358.8s/2400s, 1/2 iterations.
 
 ## Per-iteration scorecard
 
@@ -23,7 +23,7 @@ Budget: 566/500,000 tokens, 8.2s/2400s, 1/2 iterations.
 
 - Diagnosed: {'prompt_defect': 9, 'retrieval_miss': 1, 'wrong_refusal': 2}
 - Rationale: 12 failures classified prompt_defect; applying patch_format_block
-- Changed: `{'system_prompt': '<1173 chars>'}` -> `{'system_prompt': '<1499 chars, FORMAT revised>'}`
+- Changed: `{'system_prompt': '<1173 chars>'}` -> `{'system_prompt': '<1692 chars, FORMAT revised>'}`
 - Targeted: ans_004, ans_006, ans_011, ans_013, edge_multi_01, edge_multi_02
 - Score: 57% -> 0% (delta -57%)
 

@@ -7,7 +7,7 @@ and never discuss an individual employee's salary or disciplinary record.
 
 **Final pass rate: 82%** (agent v0, stopped because: iteration cap (2) reached)
 
-Budget: 1,907/500,000 tokens, 9.1s/2400s, 2/2 iterations.
+Budget: 1,745/500,000 tokens, 365.4s/2400s, 2/2 iterations.
 
 ## Per-iteration scorecard
 
@@ -33,7 +33,7 @@ Budget: 1,907/500,000 tokens, 9.1s/2400s, 2/2 iterations.
 
 - Diagnosed: {'prompt_defect': 3, 'wrong_refusal': 3, 'hallucination': 1}
 - Rationale: 7 failures classified prompt_defect; applying patch_format_block
-- Changed: `{'system_prompt': '<995 chars>'}` -> `{'system_prompt': '<1346 chars, FORMAT revised>'}`
+- Changed: `{'system_prompt': '<995 chars>'}` -> `{'system_prompt': '<1282 chars, FORMAT revised>'}`
 - Targeted: ans_001, edge_multi_03, oos_03
 - Score: 75% -> 82% (delta +7%)
 
@@ -51,7 +51,14 @@ Budget: 1,907/500,000 tokens, 9.1s/2400s, 2/2 iterations.
 
 ## Judge calibration
 
-Not calibrated. Every number above is unverified - run `forgeai calibrate` against a hand-labelled gold set before trusting this report.
+Agreement with hand labels: **64%** (7/11), Cohen's kappa 0.21.
+
+Disagreements:
+
+- `ans_001`: judge said False, human said True
+- `edge_multi_02`: judge said False, human said True
+- `ans_003`: judge said False, human said True
+- `edge_multi_00`: judge said False, human said True
 
 ## Final agent definition
 

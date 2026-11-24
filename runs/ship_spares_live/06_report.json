@@ -125,7 +125,7 @@
             "system_prompt": "<1173 chars>"
           },
           "after": {
-            "system_prompt": "<1499 chars, FORMAT revised>"
+            "system_prompt": "<1692 chars, FORMAT revised>"
           }
         }
       },
@@ -133,8 +133,8 @@
       "score_after": 0.0,
       "kept": true,
       "revert_reason": null,
-      "seconds": 2.2,
-      "tokens": 1556
+      "seconds": 164.3,
+      "tokens": 1600
     }
   ],
   "residual_failures": [
@@ -206,7 +206,7 @@
     "max_seconds": 2400,
     "max_iterations": 2,
     "tokens_used": 566,
-    "started_at": 1795503580.940922
+    "started_at": 1795503848.7215822
   },
   "best_version": 0,
   "evaluated": true

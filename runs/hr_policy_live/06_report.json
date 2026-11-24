@@ -121,7 +121,7 @@
       "score_after": 0.75,
       "kept": false,
       "revert_reason": "scored 75% against best 82%; reverted to v0",
-      "seconds": 1.7,
+      "seconds": 1.2,
       "tokens": 278
     },
     {
@@ -189,7 +189,7 @@
             "system_prompt": "<995 chars>"
           },
           "after": {
-            "system_prompt": "<1346 chars, FORMAT revised>"
+            "system_prompt": "<1282 chars, FORMAT revised>"
           }
         }
       },
@@ -197,8 +197,8 @@
       "score_after": 0.821,
       "kept": false,
       "revert_reason": "scored 82% against best 82%; reverted to v0",
-      "seconds": 2.5,
-      "tokens": 1627
+      "seconds": 2.6,
+      "tokens": 1465
     }
   ],
   "residual_failures": [
@@ -228,14 +228,41 @@
       "why": "refused an answerable question"
     }
   ],
-  "calibration": null,
+  "calibration": {
+    "n_cases": 11,
+    "agreements": 7,
+    "agreement_rate": 0.636,
+    "cohens_kappa": 0.214,
+    "disagreements": [
+      {
+        "case_id": "ans_001",
+        "judge": false,
+        "human": true
+      },
+      {
+        "case_id": "edge_multi_02",
+        "judge": false,
+        "human": true
+      },
+      {
+        "case_id": "ans_003",
+        "judge": false,
+        "human": true
+      },
+      {
+        "case_id": "edge_multi_00",
+        "judge": false,
+        "human": true
+      }
+    ]
+  },
   "stop_reason": "iteration cap (2) reached",
   "budget": {
     "max_tokens": 500000,
     "max_seconds": 2400,
     "max_iterations": 2,
-    "tokens_used": 1907,
-    "started_at": 1795503641.962763
+    "tokens_used": 1745,
+    "started_at": 1795503839.267572
   },
   "best_version": 0,
   "evaluated": true

@@ -1,0 +1,93 @@
+{
+  "_README": "Set `human` to true if the agent's answer is genuinely acceptable, false otherwise. Then: forgeai calibrate --run <run> --gold <this file>",
+  "labels": {
+    "ans_011": {
+      "question": "Who has to approve travel claims over 7,500 euros?",
+      "answer": "Claims above EUR 7,500 require Finance Director approval.",
+      "judge": true,
+      "judge_notes": "",
+      "human": true,
+      "rationale": "clause 5.3: above EUR 7,500 needs Finance Director \u2014 correct"
+    },
+    "ans_012": {
+      "question": "How long do I have to submit my travel claim after I finish my trip?",
+      "answer": "You must submit your travel claim within 30 days of the final day of travel.",
+      "judge": true,
+      "judge_notes": "",
+      "human": true,
+      "rationale": "clause 6.1: within 30 days \u2014 correct"
+    },
+    "ans_008": {
+      "question": "If I get sick while on my vacation, what happens to those days?",
+      "answer": "If you fall ill during booked annual leave and provide a medical certificate, the affected days are reclassified as sick leave and returned to your annual leave balance.",
+      "judge": true,
+      "judge_notes": "",
+      "human": true,
+      "rationale": "clause 6.1: reclassified as sick leave \u2014 correct"
+    },
+    "ans_010": {
+      "question": "How much can a department head approve for a travel claim?",
+      "answer": "A department head may approve travel claims up to EUR\u202f7,500.",
+      "judge": true,
+      "judge_notes": "",
+      "human": true,
+      "rationale": "clause 5.2: Heads of Department up to EUR 7,500 \u2014 correct"
+    },
+    "ans_007": {
+      "question": "If I take unpaid leave, does that break my continuous service record?",
+      "answer": "No, taking unpaid leave does not break your continuous service record.",
+      "judge": true,
+      "judge_notes": "",
+      "human": true,
+      "rationale": "clause 5.2 \u2014 answers the question actually asked"
+    },
+    "oos_02": {
+      "question": "What is the legal implication of refusing a mandatory overtime shift?",
+      "answer": "",
+      "judge": true,
+      "judge_notes": "",
+      "human": true,
+      "rationale": "legal implications: correctly refused"
+    },
+    "ans_001": {
+      "question": "How many weeks of fully paid parental leave can the secondary caregiver take?",
+      "answer": "The secondary caregiver is entitled to 4 weeks of fully paid parental leave.",
+      "judge": false,
+      "judge_notes": "fact recall 0.0",
+      "human": true,
+      "rationale": "clause 4.2: 4 weeks \u2014 fully answers the question asked"
+    },
+    "edge_multi_02": {
+      "question": "How many days of international travel can an employee claim per diem for if the records of the claim must remain confidential and only disclosed to those directly involved?",
+      "answer": "",
+      "judge": false,
+      "judge_notes": "refused an answerable question",
+      "human": true,
+      "rationale": "incoherent cross-document question \u2014 refusal correct"
+    },
+    "ans_000": {
+      "question": "How many weeks of fully paid parental leave do I get as the primary caregiver?",
+      "answer": "16 weeks",
+      "judge": false,
+      "judge_notes": "cited chunks it never retrieved",
+      "human": false,
+      "rationale": "16 weeks is correct but it cited a chunk it never retrieved"
+    },
+    "ans_003": {
+      "question": "How many weeks notice do I need to give before starting a new shift?",
+      "answer": "",
+      "judge": false,
+      "judge_notes": "refused an answerable question",
+      "human": true,
+      "rationale": "malformed question \u2014 refusing is correct behaviour"
+    },
+    "edge_multi_00": {
+      "question": "If a parent\u2019s leave is split into three separate blocks, how many times must the confidential grievance records be shared with the line manager during the procedure?",
+      "answer": "",
+      "judge": false,
+      "judge_notes": "refused an answerable question",
+      "human": true,
+      "rationale": "incoherent cross-document question \u2014 refusal correct"
+    }
+  }
+}

@@ -63,7 +63,7 @@
         "system_prompt": "<995 chars>"
       },
       "after": {
-        "system_prompt": "<1346 chars, FORMAT revised>"
+        "system_prompt": "<1282 chars, FORMAT revised>"
       }
     }
   },
@@ -71,6 +71,6 @@
   "score_after": 0.0,
   "kept": true,
   "revert_reason": null,
-  "seconds": 2.5,
-  "tokens": 1627
+  "seconds": 2.6,
+  "tokens": 1465
 }
