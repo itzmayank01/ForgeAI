@@ -1,1 +1,185 @@
-{}
+{
+ "ans_000": {
+  "answer": "16 weeks",
+  "citations": [
+   "doc_01_c002",
+   "doc_01_c004"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.8782
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.7801
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
+    "score": 0.7133
+   },
+   {
+    "chunk_id": "doc_01_c003",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
+    "score": 0.6174
+   },
+   {
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
+    "score": 0.5765
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_001": {
+  "answer": "The secondary caregiver is entitled to 4 weeks of fully paid parental leave.",
+  "citations": [
+   "doc_01_c002"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.8722
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.7706
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
+    "score": 0.6938
+   },
+   {
+    "chunk_id": "doc_01_c003",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
+    "score": 0.5959
+   },
+   {
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
+    "score": 0.5867
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_003": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 0.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.6709
+   },
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.658
+   },
+   {
+    "chunk_id": "doc_00_c001",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
+    "score": 0.6398
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
+    "score": 0.6178
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
+    "score": 0.6126
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_002": {
+  "answer": "Yes, you can split your parental leave into up to three separate blocks, provided you have the agreement of your line manager.",
+  "citations": [
+   "doc_01_c002"
+  ],
+  "refused": false,
+  "confidence": 0.95,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.7327
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.7225
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
+    "score": 0.683
+   },
+   {
+    "chunk_id": "doc_01_c003",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
+    "score": 0.6259
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "# Travel and Expense Reimbursement Policy\n**Policy reference:** FIN-11 \u00b7 **Effective:** 1 January 2026\n## 1. Per-diem allowances\n1.1 Domestic travel attracts a per-diem of **EUR 65** per full day.\n1.2 International travel attracts a per-diem of **EUR 95** per full day.\n1.3 Travel to designated high-cost ports (Singapore, Oslo, Tokyo, Zurich)\nattracts a per-diem of **EUR 130** per full day.\n1.4 A part day of **6 hours or more** is claimed at 50% of the applicable rate.\nA part day under 6 hours is not claimable.\n## 2. Receipts\n2.1 Receipts are required for any single item of **EUR 40 or more**.\n2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation",
+    "score": 0.5909
+   }
+  ],
+  "tool_calls": []
+ }
+}

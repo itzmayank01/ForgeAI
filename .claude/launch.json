@@ -4,10 +4,7 @@
     {
       "name": "forgeai-web",
       "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run",
-        "dev"
-      ],
+      "runtimeArgs": ["run", "dev"],
       "port": 3000
     }
   ]
