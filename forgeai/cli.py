@@ -19,6 +19,38 @@ app = typer.Typer(add_completion=False, help="ForgeAI - the agent that builds ag
 console = Console()
 
 
+def _resolve_docs(run: Path) -> Path | None:
+    """Find the corpus a run was built from, by CONTENT not filename.
+
+    demos/hr_policy and demos/hr_policy_changed hold the same filenames with
+    different text - matching on names would silently attach the wrong corpus
+    to a chat session, and the mistake would look like a bad answer rather than
+    a bad lookup. The manifest records a hash per document, so use that.
+    """
+    # Hash through the real loader. A CSV is converted to row-per-line prose
+    # before hashing, so reading the raw bytes gives a different digest and the
+    # spares corpus would never match itself.
+    from .ingest.loaders import load_folder
+
+    manifest = run / "00_inputs" / "manifest.json"
+    if not manifest.exists():
+        return None
+    wanted = {d["sha256"] for d in json.loads(manifest.read_text())["documents"]}
+    if not wanted:
+        return None
+
+    for candidate in sorted(Path(".").glob("*/*/docs")) + sorted(Path(".").glob("*/docs")):
+        if not candidate.is_dir():
+            continue
+        try:
+            refs, _, _ = load_folder(candidate)
+        except Exception:  # noqa: BLE001 - an unreadable folder just does not match
+            continue
+        if wanted <= {r.sha256 for r in refs}:
+            return candidate
+    return None
+
+
 @app.command()
 def build(
     brief: Path = typer.Option(..., help="File containing the one-paragraph brief."),
@@ -120,11 +152,18 @@ def budget(
 def chat(
     run: Path = typer.Option(..., help="A run directory produced by `build`."),
     definition: Path = typer.Option(None, help="Override the agent definition path."),
+    docs: Path = typer.Option(None, help="Document folder, so file-reading tools work."),
 ) -> None:
     """Talk to a generated agent. Loads ANY definition (F8)."""
     from .runtime.runner import chat as run_chat
 
-    run_chat(definition or run / "03_agent_def.final.json", run / "web" / "chunks.json")
+    # csv_lookup reads from the corpus, so without this an attached tool would
+    # silently fail at the one moment someone is watching it.
+    if docs is None:
+        docs = _resolve_docs(run)
+
+    run_chat(definition or run / "03_agent_def.final.json",
+             run / "web" / "chunks.json", docs)
 
 
 @app.command()
