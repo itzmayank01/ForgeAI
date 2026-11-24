@@ -9,6 +9,8 @@ from __future__ import annotations
 
 from ..ingest.index import ChunkIndex
 from ..llm.client import LLMClient
+from pydantic import BaseModel, Field
+
 from ..llm.structured import structured
 from ..models.agent_def import RetrievalConfig
 from ..models.common import CorpusSummary
@@ -24,6 +26,25 @@ def describe_corpus(summary: CorpusSummary) -> str:
         lines.append("\nExcerpts:")
         lines += [f'  "{e[:220]}..."' for e in summary.sample_excerpts[:4]]
     return "\n".join(lines)
+
+
+class _Basics(BaseModel):
+    scope: str
+    audience: str
+    tone: str
+
+
+class _SimpleTopic(BaseModel):
+    name: str
+    description: str = ""
+
+
+class _Topics(BaseModel):
+    topics: list[_SimpleTopic] = Field(default_factory=list)
+
+
+class _Questions(BaseModel):
+    questions: list[str] = Field(default_factory=list)
 
 
 def _fallback(brief: str, summary: CorpusSummary, mode: str) -> RequirementsDoc:
@@ -61,15 +82,53 @@ def run_intake(
     mode = "interactive" if interactive else "unattended"
     corpus = describe_corpus(summary)
 
-    doc, trace = structured(
-        client,
-        instruction=P.DRAFT.format(brief=brief, corpus=corpus, mode=mode),
-        model_cls=RequirementsDoc,
-        temperature=0.2,
-    )
-    if doc is None:
-        log(f"  intake: model failed after {trace.attempts} attempts; using fallback")
-        doc = _fallback(brief, summary, mode)
+    # Decomposed deliberately. Asking a 20B model for the WHOLE RequirementsDoc
+    # in one call - nested topic lists, assumptions, a corpus manifest - failed
+    # every repair attempt on three consecutive live runs and fell back to the
+    # deterministic doc, costing the requirements artifact entirely. Four small
+    # single-purpose calls each succeed where the one big one does not.
+    basics, _ = structured(
+        client, model_cls=_Basics, temperature=0.2,
+        instruction=P.BASICS.format(brief=brief, corpus=corpus))
+
+    answer_topics, _ = structured(
+        client, model_cls=_Topics, temperature=0.2,
+        instruction=P.MUST_ANSWER.format(brief=brief, corpus=corpus))
+
+    refuse_topics, _ = structured(
+        client, model_cls=_Topics, temperature=0.1,
+        instruction=P.MUST_REFUSE.format(brief=brief))
+
+    questions, _ = structured(
+        client, model_cls=_Questions, temperature=0.3,
+        instruction=P.QUESTIONS.format(brief=brief, corpus=corpus))
+
+    fallback = _fallback(brief, summary, mode)
+    if basics is None and answer_topics is None:
+        log("  intake: model failed on every field; using deterministic fallback")
+        doc = fallback
+    else:
+        def _topics(result, default):
+            if result is None or not result.topics:
+                return default
+            return [Topic(name=t.name, description=t.description or t.name)
+                    for t in result.topics]
+
+        doc = RequirementsDoc(
+            brief=brief,
+            scope=basics.scope if basics else fallback.scope,
+            audience=basics.audience if basics else fallback.audience,
+            tone=basics.tone if basics else fallback.tone,
+            must_answer=_topics(answer_topics, fallback.must_answer),
+            must_refuse=_topics(refuse_topics, fallback.must_refuse),
+            questions_asked=(questions.questions[:MAX_QUESTIONS] if questions else []),
+            mode=mode,  # type: ignore[arg-type]
+        )
+        missing = [n for n, v in (("basics", basics), ("must_answer", answer_topics),
+                                  ("must_refuse", refuse_topics), ("questions", questions))
+                   if v is None]
+        if missing:
+            log(f"  intake: fell back on {', '.join(missing)}; rest came from the model")
 
     doc.brief = brief
     doc.mode = mode  # type: ignore[assignment]

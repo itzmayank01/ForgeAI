@@ -4,31 +4,55 @@ Decomposed deliberately: a 8B model asked to 'write the requirements document'
 in one shot produces mush. Each call has exactly one job.
 """
 
-DRAFT = """You are an intake interviewer for an agent factory.
-
-A requester wants an AI assistant built over a document collection.
+BASICS = """Read this brief for an AI assistant and state three things.
 
 BRIEF:
 {brief}
 
-DOCUMENT COLLECTION:
+DOCUMENTS AVAILABLE:
 {corpus}
 
-Write the structured requirements document.
-
-Rules:
 - `scope`: one sentence on what the assistant is for.
-- `audience`: who asks it questions.
-- `tone`: how it should sound.
-- `must_answer`: 3-6 topics the documents should cover. Each needs a short
-  `name` and a one-sentence `description` of what a user would ask about it.
-- `must_refuse`: 2-4 topics it must decline, taken from the brief's explicit
-  prohibitions plus obvious liability areas (legal, medical, financial advice).
-- `questions_asked`: at most 5 genuine ambiguities in the brief. If the brief
-  is clear, return fewer. Never invent questions to fill the list.
-- `brief`: copy the brief verbatim.
-- `mode`: "{mode}"
-- Leave `assumptions` and `corpus_manifest` empty.
+- `audience`: who asks it questions, in a few words.
+- `tone`: how it should sound, in a few words.
+"""
+
+MUST_ANSWER = """List the topics this assistant must be able to answer about.
+
+BRIEF:
+{brief}
+
+DOCUMENTS AVAILABLE:
+{corpus}
+
+Return 3-6 topics. Each needs a short `name` (2-4 words) and a one-sentence
+`description` of what a user would actually ask about it. Draw them from what
+the brief asks for and the documents plausibly cover.
+"""
+
+MUST_REFUSE = """List the topics this assistant must DECLINE to answer.
+
+BRIEF:
+{brief}
+
+Return 2-4 topics. Each needs a short `name` and a one-sentence `description`.
+Include every prohibition the brief states explicitly, then the obvious
+liability areas for this domain (legal, medical or financial advice, and
+anything about a named individual's personal records).
+"""
+
+QUESTIONS = """What is genuinely ambiguous about this brief?
+
+BRIEF:
+{brief}
+
+DOCUMENTS AVAILABLE:
+{corpus}
+
+Return at most 5 questions you would ask the requester before building. Ask
+only about real ambiguities that would change the assistant's behaviour. If the
+brief is clear, return fewer - an empty list is a valid answer. Never invent
+questions to fill the list.
 """
 
 SELF_ANSWER = """You are running UNATTENDED: the requester is not available.
