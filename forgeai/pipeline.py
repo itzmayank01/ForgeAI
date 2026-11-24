@@ -8,6 +8,7 @@ loses ground.
 from __future__ import annotations
 
 import json
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -55,31 +56,68 @@ def build_corpus_summary(refs, texts, chunks) -> CorpusSummary:
     )
 
 
-def run_eval(agent: Agent, suite: EvalSuite,
-             budget: Budget | None = None, log=print) -> dict[str, AgentResponse]:
-    """Concurrent, and budget-aware mid-flight.
+def run_eval(
+    agent: Agent, suite: EvalSuite, budget: Budget | None = None,
+    cache_path: Path | None = None, log=print,
+) -> tuple[dict[str, AgentResponse], bool]:
+    """Answer every case, checkpointing each one as it lands.
 
-    Checking the budget only between iterations let a run overshoot a 900s cap
-    by 3.5x, because a single pass over the suite is itself long. Cases skipped
-    after exhaustion come back as refusals so the scorecard stays complete and
-    honestly reflects what was measured.
+    Returns (responses, complete). Writing only after a full pass meant a quota
+    death discarded every answer already obtained - a 28-case suite that died on
+    case 27 produced nothing. Each response is now persisted immediately, so a
+    resumed run re-answers only what is genuinely missing and progress is
+    monotonic even when the provider only drips capacity.
     """
+    done: dict[str, AgentResponse] = {}
+    if cache_path and cache_path.exists():
+        try:
+            raw = json.loads(cache_path.read_text())
+            done = {k: AgentResponse.model_validate(v) for k, v in raw.items()}
+        except Exception:  # noqa: BLE001 - a corrupt cache just means redo it
+            done = {}
+
+    pending = [c for c in suite.cases if c.id not in done]
+    if done:
+        log(f"  reusing {len(done)} cached answers; {len(pending)} to go")
+
+    lock = threading.Lock()
     stopped = False
 
-    def one(case):
+    def flush() -> None:
+        if cache_path is None:
+            return
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        cache_path.write_text(json.dumps(
+            {k: v.model_dump() for k, v in done.items()}, indent=1))
+
+    def one(case) -> None:
         nonlocal stopped
-        if stopped or (budget is not None and budget.exhausted()):
+        if stopped:
+            return
+        if budget is not None and budget.exhausted():
             stopped = True
-            return case.id, AgentResponse(
-                answer="(not evaluated: budget exhausted)", refused=True,
-                confidence=0.0, retrieved=[])
-        return case.id, agent.answer(case.question)
+            return
+        try:
+            response = agent.answer(case.question)
+        except QuotaExhausted:
+            stopped = True
+            return
+        with lock:
+            done[case.id] = response
+            flush()
 
     with ThreadPoolExecutor(max_workers=settings.max_concurrency) as ex:
-        out = dict(ex.map(one, suite.cases))
-    if stopped:
-        log("  budget ran out mid-suite; remaining cases recorded as unevaluated")
-    return out
+        list(ex.map(one, pending))
+    flush()
+
+    missing = [c.id for c in suite.cases if c.id not in done]
+    if missing:
+        log(f"  stopped with {len(missing)} case(s) unanswered; "
+            f"re-run with --resume to finish them")
+        for cid in missing:  # keep the scorecard complete and honest
+            done[cid] = AgentResponse(
+                answer="(not evaluated)", refused=True, confidence=0.0, retrieved=[])
+    return done, not missing
 
 
 def build(
@@ -185,7 +223,12 @@ def build(
             chunk_shape = shape
 
         agent = Agent(definition, index, client)
-        responses = run_eval(agent, suite, budget, log)
+        cache = out_dir / "05_iterations" / f"iter_{i}" / "responses.json"
+        responses, complete = run_eval(agent, suite, budget, cache, log)
+        if not complete:
+            stop_reason = "incomplete eval pass (resume to finish)"
+            log(f"  stopping: {stop_reason}")
+            break
         verdicts = judge.judge_all(suite.cases, responses, client)
         card = Scorecard.from_verdicts(i, verdicts, suite.cases)
         scorecards.append(card)
