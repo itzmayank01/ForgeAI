@@ -83,3 +83,78 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── depth ────────────────────────────────────────────────────────────────
+   Flat fills on a flat canvas is what reads as templated. These give the page
+   a light source: a warm bloom behind the hero, a receding dot grid, and
+   layered shadows so cards sit above the surface rather than being painted on.
+*/
+.bloom {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 70vh;
+  background:
+    radial-gradient(60% 50% at 70% 20%, rgb(var(--accent) / 0.16), transparent 70%),
+    radial-gradient(45% 40% at 20% 0%, rgb(var(--accent) / 0.07), transparent 70%);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.dotgrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgb(var(--ink) / 0.14) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(75% 60% at 50% 0%, #000 20%, transparent 85%);
+  -webkit-mask-image: radial-gradient(75% 60% at 50% 0%, #000 20%, transparent 85%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.lift {
+  box-shadow:
+    0 1px 2px rgb(var(--ink) / 0.04),
+    0 8px 24px -12px rgb(var(--ink) / 0.14);
+}
+.lift-lg {
+  box-shadow:
+    0 1px 2px rgb(var(--ink) / 0.05),
+    0 24px 64px -28px rgb(var(--ink) / 0.3);
+}
+
+/* Hairline that fades at both ends — reads as crafted rather than a border. */
+.rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(var(--line)), transparent);
+}
+
+/* ── forge console ───────────────────────────────────────────────────────
+   The hero visual. It is the actual pipeline, not decoration: seven stages
+   lighting in sequence, each emitting the artifact it really writes.
+*/
+@keyframes stage-run {
+  0%, 100% { opacity: 0.32; }
+  8%, 22%  { opacity: 1; }
+}
+@keyframes bar-fill {
+  0%   { transform: scaleX(0); }
+  20%  { transform: scaleX(1); }
+  100% { transform: scaleX(1); }
+}
+@keyframes cursor-blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.stage-row { animation: stage-run 9s ease-in-out infinite; }
+.stage-bar {
+  transform-origin: left;
+  animation: bar-fill 9s ease-in-out infinite;
+}
+.blink { animation: cursor-blink 1.1s step-end infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-row, .stage-bar, .blink { animation: none; opacity: 1; }
+  .stage-bar { transform: scaleX(1); }
+}

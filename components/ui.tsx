@@ -38,19 +38,42 @@ export function Stat({
 }
 
 export function Section({
-  id, eyebrow, title, lede, children,
+  id, eyebrow, title, lede, children, split = false,
 }: {
-  id?: string; eyebrow?: string; title: string; lede?: string; children: ReactNode;
+  id?: string; eyebrow?: string; title: string; lede?: string;
+  children: ReactNode; split?: boolean;
 }) {
-  return (
-    <section id={id} className="mx-auto max-w-content scroll-mt-20 px-4 py-14">
+  const head = (
+    <>
       {eyebrow && (
         <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
           {eyebrow}
         </div>
       )}
-      <h2 className="display mt-2 text-[clamp(1.6rem,3.4vw,2.4rem)]">{title}</h2>
-      {lede && <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted">{lede}</p>}
+      <h2 className="display mt-2 text-[clamp(1.6rem,3.2vw,2.3rem)]">{title}</h2>
+      {lede && (
+        <p className="mt-3 max-w-md text-[14.5px] leading-relaxed text-muted">{lede}</p>
+      )}
+    </>
+  );
+
+  // Split puts the heading in a sticky left rail. A full-width heading above a
+  // narrow body leaves the right half of a desktop viewport empty, which is the
+  // single thing that made this page read as a template.
+  if (split) {
+    return (
+      <section id={id} className="mx-auto max-w-content scroll-mt-20 px-4 py-16">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-14">
+          <div className="lg:sticky lg:top-24 lg:self-start">{head}</div>
+          <div className="min-w-0">{children}</div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section id={id} className="mx-auto max-w-content scroll-mt-20 px-4 py-16">
+      {head}
       <div className="mt-7">{children}</div>
     </section>
   );
@@ -102,7 +125,9 @@ export function RunCard({
       </div>
       <div className="mt-3 flex gap-4 text-xs text-muted">
         <span>{cases} cases</span>
-        <span>{iterations} iteration{iterations === 1 ? "" : "s"}</span>
+        {iterations > 0 && (
+          <span>{iterations} iteration{iterations === 1 ? "" : "s"}</span>
+        )}
         <span className="ml-auto text-accent opacity-0 transition group-hover:opacity-100">
           open →
         </span>

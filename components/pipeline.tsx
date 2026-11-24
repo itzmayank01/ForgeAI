@@ -1,34 +1,48 @@
 const STAGES = [
-  { n: "01", name: "Ingest", what: "Parse PDFs, CSVs and markdown. Chunk, embed, index.",
-    out: "corpus manifest + hashes" },
-  { n: "02", name: "Intake", what: "Read the brief, ask up to 5 clarifying questions — or answer them itself and record every assumption.",
-    out: "requirements document" },
-  { n: "03", name: "Groundability", what: "Check the documents can actually support what was asked. Topics they cannot are demoted to must-refuse before any agent exists.",
-    out: "groundability report" },
-  { n: "04", name: "Generate", what: "Compose the system prompt, derive retrieval parameters, select tools — and reject every tool that cannot cite a requirement.",
-    out: "agent definition v0" },
-  { n: "05", name: "Eval", what: "Derive a test set from the documents alone. A gate drops cases that would make the suite a rubber stamp.",
-    out: "eval suite" },
-  { n: "06", name: "Judge → Fix", what: "Score every case, classify each failure, apply one targeted fix, re-run. Revert anything that loses ground.",
-    out: "iteration log + scorecards" },
-  { n: "07", name: "Report", what: "State the final score, what changed and why — and what still fails.",
-    out: "run report" },
+  { n: "00", name: "Ingest", what: "Parse PDFs, CSVs and markdown. Chunk, embed, index.",
+    out: "manifest.json" },
+  { n: "01", name: "Intake", what: "Read the brief, ask up to five clarifying questions — or, unattended, answer them itself and record every assumption with the chunk that justified it.",
+    out: "requirements.json" },
+  { n: "02", name: "Groundability", what: "Check the documents can support what was asked. Topics they cannot are demoted to must-refuse before any agent exists to hallucinate the gap.",
+    out: "groundability.json" },
+  { n: "03", name: "Generate", what: "Compose the system prompt, derive retrieval parameters, select tools — and reject every tool that cannot cite a requirement.",
+    out: "agent_def.v0.json" },
+  { n: "04", name: "Eval", what: "Derive a test set from the documents alone. A gate drops cases that would make the suite a rubber stamp.",
+    out: "eval_suite.json" },
+  { n: "05", name: "Judge → Fix", what: "Score every case, classify each failure, apply one targeted fix, re-run. Revert anything that loses ground.",
+    out: "iter_N/scorecard.json" },
+  { n: "06", name: "Report", what: "State the final score, what changed and why — and what still fails.",
+    out: "report.md" },
 ];
 
+/**
+ * A timeline rather than a card grid. The stages are a sequence, and a grid of
+ * equal boxes says nothing about order — it also leaves a ragged trailing cell
+ * at seven items, which is the tell of a layout nobody looked at.
+ */
 export function PipelineRail() {
   return (
-    <ol className="relative grid gap-px overflow-hidden rounded-2xl border bg-ink/8 sm:grid-cols-2 lg:grid-cols-4">
+    <ol className="relative">
+      {/* spine */}
+      <span
+        aria-hidden
+        className="absolute left-[15px] top-2 bottom-2 w-px bg-gradient-to-b from-accent/50 via-ink/15 to-transparent"
+      />
       {STAGES.map((s, i) => (
-        <li
-          key={s.n}
-          className={`relative bg-surface p-5 ${i === 6 ? "sm:col-span-2 lg:col-span-1" : ""}`}
-        >
-          <div className="flex items-baseline gap-2.5">
-            <span className="mono-nums text-xs font-bold text-accent">{s.n}</span>
-            <h3 className="font-semibold tracking-tight">{s.name}</h3>
+        <li key={s.n} className="relative grid grid-cols-[32px_1fr] gap-4 pb-7 last:pb-0">
+          <span className="relative z-10 mt-0.5 grid h-8 w-8 place-items-center rounded-full border bg-surface">
+            <span className="mono-nums font-mono text-[10px] font-bold text-accent">{s.n}</span>
+          </span>
+
+          <div className="min-w-0 pt-1">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h3 className="text-[15px] font-semibold tracking-tight">{s.name}</h3>
+              <code className="rounded bg-ink/[0.06] px-1.5 py-0.5 font-mono text-[10px] text-muted">
+                {s.out}
+              </code>
+            </div>
+            <p className="mt-1.5 max-w-xl text-[13.5px] leading-relaxed text-muted">{s.what}</p>
           </div>
-          <p className="mt-2 text-[13px] leading-relaxed text-muted">{s.what}</p>
-          <div className="mt-3 font-mono text-[11px] text-muted/80">→ {s.out}</div>
         </li>
       ))}
     </ol>
@@ -37,40 +51,58 @@ export function PipelineRail() {
 
 const GUARDS = [
   {
+    k: "separation",
     title: "The eval generator never sees the agent",
-    body: "Tests derive from the documents alone. The module does not import AgentDefinition, so a suite cannot be quietly tuned to the prompt that was just written.",
+    body: "Tests derive from the documents alone. The module does not import AgentDefinition, so a suite cannot be quietly tuned to the prompt just written.",
+    feature: true,
   },
   {
+    k: "judge",
     title: "The judge never sees the system prompt",
     body: "It runs a different open-weight family from the generator and scores each case against a rubric in isolation — nothing to prefer, no order to be biased by.",
+    feature: true,
   },
-  {
-    title: "Length is recorded, never scored",
-    body: "Scoring is fact recall and unsupported-claim rate, both independent of answer length. Verbosity cannot inflate a result.",
-  },
-  {
-    title: "Determinism first, model last",
-    body: "Refusal is a boolean in the output contract. Citation validity is set arithmetic. Numbers must match exactly. Only the ambiguous residue reaches a model — and the escalation rate is reported.",
-  },
-  {
-    title: "A fix is kept only if it helps",
-    body: "Every iteration is compared against the best score so far, and reverted when it loses ground. Three blind fixes ending worse than the start is a factory defect.",
-  },
-  {
-    title: "The judge is itself checked",
-    body: "Agreement against hand-labelled cases is measured and published with its disagreements. An uncalibrated run says so, in place of the number.",
-  },
+  { k: "verbosity", title: "Length is recorded, never scored",
+    body: "Scoring is fact recall and unsupported-claim rate, both independent of answer length." },
+  { k: "determinism", title: "Determinism first, model last",
+    body: "Refusal is a boolean. Citations are set arithmetic. Numbers must match exactly. Only the residue reaches a model, and the escalation rate is published." },
+  { k: "revert", title: "A fix is kept only if it helps",
+    body: "Every iteration is compared against the best score so far and reverted when it loses ground." },
+  { k: "calibration", title: "The judge is itself checked",
+    body: "Agreement against hand labels is measured and published with its disagreements. An uncalibrated run says so." },
 ];
 
+/**
+ * Two featured panels carry the load-bearing ideas; the rest sit in a quieter
+ * band beneath. Six identical boxes would flatten the hierarchy.
+ */
 export function GuardGrid() {
+  const featured = GUARDS.filter((g) => g.feature);
+  const rest = GUARDS.filter((g) => !g.feature);
+
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {GUARDS.map((g) => (
-        <div key={g.title} className="card p-5">
-          <h3 className="text-[15px] font-semibold leading-snug tracking-tight">{g.title}</h3>
-          <p className="mt-2 text-[13px] leading-relaxed text-muted">{g.body}</p>
-        </div>
-      ))}
+    <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-2">
+        {featured.map((g) => (
+          <div key={g.k} className="card lift relative overflow-hidden p-6">
+            <span
+              aria-hidden
+              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent"
+            />
+            <h3 className="text-[17px] font-semibold leading-snug tracking-tight">{g.title}</h3>
+            <p className="mt-2.5 text-[14px] leading-relaxed text-muted">{g.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="card grid gap-px overflow-hidden bg-ink/[0.07] sm:grid-cols-2">
+        {rest.map((g) => (
+          <div key={g.k} className="bg-surface p-5">
+            <h3 className="text-[14px] font-semibold leading-snug tracking-tight">{g.title}</h3>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-muted">{g.body}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
