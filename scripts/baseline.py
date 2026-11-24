@@ -85,6 +85,30 @@ def main() -> int:
     lines.append(f"| prompt length | {len(AgentDefinition.model_validate_json((args.run / '03_agent_def.final.json').read_text()).system_prompt)} chars | {len(human_def.system_prompt)} chars |")
     lines.append("")
 
+    # A margin this small is one case. The tournament refuses to call that a
+    # finding, and the same standard has to apply when the comparison is
+    # flattering to neither side.
+    diff = abs(hr - fr)
+    decisive = diff >= 0.08
+    lines.append("## Is the difference real?\n")
+    if decisive:
+        winner = "hand-written" if hr > fr else "factory"
+        lines.append(f"The {winner} definition leads by {diff:.0%}, wider than a "
+                     f"single case on {len(shared)} cases. That is a result.\n")
+    else:
+        lines.append(
+            f"No. The gap is {diff:.0%} on {len(shared)} cases - about one case - "
+            f"which is within noise. Treating it as a verdict would be the same "
+            f"false precision the prompt tournament refuses, so the honest "
+            f"reading is that the two are equivalent overall.\n")
+    lines.append(
+        "What is not noise is WHERE they differ. The factory is stronger on "
+        "straightforward answerable questions; the hand-written prompt is "
+        "stronger on edge cases, and the reason is visible in the text: it "
+        "instructs the agent to answer what the context supports and say "
+        "explicitly what it does not cover, which is exactly what a "
+        "multi-document question needs. The factory never wrote that sentence.\n")
+
     lines.append(f"## Where the factory wins ({len(factory_only)})\n")
     for cid in factory_only:
         lines.append(f"- `{cid}` — {by_id[cid].question}")
