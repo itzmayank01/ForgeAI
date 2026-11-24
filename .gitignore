@@ -9,8 +9,10 @@ venv/
 .streamlit/secrets.toml
 
 # web
-web/node_modules/
-web/.next/
-web/data/runs/
-web/out/
+node_modules/
+.next/
+data/runs/
+out/
 .vercel/
+.vercel
+.env*

@@ -1,7 +1,7 @@
 /**
- * Copy run artifacts from ../runs into web/data/runs so they ship with the
- * Vercel build. The factory writes outside web/; Next can only bundle what
- * lives inside it. Runs as a prebuild step.
+ * Copy run artifacts from runs/ into data/runs so they ship with the Vercel
+ * build. Next only bundles what sits under the app root, and runs/ is written
+ * by the Python factory. Runs as a prebuild step.
  */
 import { cp, mkdir, readdir, rm, stat } from "node:fs/promises";
 import { existsSync } from "node:fs";
@@ -9,7 +9,7 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const src = join(here, "..", "..", "runs");
+const src = join(here, "..", "runs");
 const dest = join(here, "..", "data", "runs");
 
 if (!existsSync(src)) {
