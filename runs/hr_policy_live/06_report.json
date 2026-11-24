@@ -197,7 +197,24 @@
       "why": "fact recall 0.5"
     }
   ],
-  "calibration": null,
+  "calibration": {
+    "n_cases": 10,
+    "agreements": 8,
+    "agreement_rate": 0.8,
+    "cohens_kappa": 0.545,
+    "disagreements": [
+      {
+        "case_id": "edge_multi_01",
+        "judge": false,
+        "human": true
+      },
+      {
+        "case_id": "edge_multi_03",
+        "judge": false,
+        "human": true
+      }
+    ]
+  },
   "stop_reason": "iteration cap (2) reached",
   "budget": {
     "max_tokens": 500000,

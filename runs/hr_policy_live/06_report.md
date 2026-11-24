@@ -7,7 +7,7 @@ and never discuss an individual employee's salary or disciplinary record.
 
 **Final pass rate: 86%** (agent v0, stopped because: iteration cap (2) reached)
 
-Budget: 52,565/500,000 tokens, 190.6s/2400s, 2/2 iterations.
+Budget: 52,565/500,000 tokens, 345.7s/2400s, 2/2 iterations.
 
 ## Per-iteration scorecard
 
@@ -50,7 +50,12 @@ Budget: 52,565/500,000 tokens, 190.6s/2400s, 2/2 iterations.
 
 ## Judge calibration
 
-Not calibrated. Every number above is unverified - run `forgeai calibrate` against a hand-labelled gold set before trusting this report.
+Agreement with hand labels: **80%** (8/10), Cohen's kappa 0.55.
+
+Disagreements:
+
+- `edge_multi_01`: judge said False, human said True
+- `edge_multi_03`: judge said False, human said True
 
 ## Final agent definition
 

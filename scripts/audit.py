@@ -197,8 +197,10 @@ stretch = {
     "UI + hosting": (ROOT / "app/page.tsx").exists(),
     "Human checkpoint": "--interactive" in (ROOT / "forgeai/cli.py").read_text()
     or "interactive" in (ROOT / "forgeai/cli.py").read_text(),
-    "Prompt tournament": "tournament" in (ROOT / "forgeai/stages/generator.py").read_text().lower(),
-    "Regression mode": "regress" in (ROOT / "forgeai/cli.py").read_text().lower(),
+    "Prompt tournament": (ROOT / "forgeai/stages/tournament.py").exists()
+    and "tournament: bool" in (ROOT / "forgeai/cli.py").read_text(),
+    "Regression mode": (ROOT / "forgeai/stages/regression.py").exists()
+    and "def regress(" in (ROOT / "forgeai/cli.py").read_text(),
     "Factory vs human baseline": (ROOT / "demos/BASELINE.md").exists(),
 }
 
