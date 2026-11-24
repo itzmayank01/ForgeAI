@@ -299,13 +299,18 @@ def build(
     ]
     report = RunReport(
         run_id=out_dir.name, brief=brief, corpus_hash=summary.corpus_hash,
+        evaluated=bool(scorecards),
         final_pass_rate=best_score if best_score >= 0 else 0.0,
         scorecards=scorecards, iterations=iterations, residual_failures=residual,
         stop_reason=stop_reason or "completed", budget=budget,
         best_version=definition.version,
     )
     _write(out_dir / "06_report.json", report)
-    log(f"[6/6] done: {report.final_pass_rate:.0%} pass, "
-        f"{len(residual)} residual failures, {budget.tokens_used:,} tokens, "
-        f"{budget.seconds_used}s")
+    if report.evaluated:
+        log(f"[6/6] done: {report.final_pass_rate:.0%} pass, "
+            f"{len(residual)} residual failures, {budget.tokens_used:,} tokens, "
+            f"{budget.seconds_used}s")
+    else:
+        log(f"[6/6] stopped before any eval pass completed - NOT SCORED. "
+            f"{stop_reason}")
     return report

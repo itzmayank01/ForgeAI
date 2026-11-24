@@ -16,8 +16,14 @@ def render(report: RunReport, definition: AgentDefinition) -> str:
 
     a(f"# ForgeAI run report - {report.run_id}\n")
     a(f"**Brief.** {report.brief}\n")
-    a(f"**Final pass rate: {report.final_pass_rate:.0%}** "
-      f"(agent v{report.best_version}, stopped because: {report.stop_reason})\n")
+    if not report.evaluated:
+        a("> **Not scored.** No evaluation pass completed, so this run has no "
+          f"pass rate. Stopped because: {report.stop_reason}.\n")
+        a("> Reporting 0% here would be a fabricated number. Re-run with "
+          "`--resume` to finish the suite.\n")
+    else:
+        a(f"**Final pass rate: {report.final_pass_rate:.0%}** "
+          f"(agent v{report.best_version}, stopped because: {report.stop_reason})\n")
 
     if report.budget:
         b = report.budget

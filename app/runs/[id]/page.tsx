@@ -46,7 +46,18 @@ export default async function RunPage({ params }: { params: Promise<{ id: string
         {run.manifest.brief || report?.brief}
       </p>
 
-      {report && (
+      {report && report.evaluated === false && (
+        <div className="card mt-8 border-warn/30 bg-warn/[0.06] p-5">
+          <h2 className="text-sm font-semibold text-warn">Not scored</h2>
+          <p className="mt-1.5 text-sm leading-relaxed text-muted">
+            No evaluation pass completed, so this run has no pass rate. Stopped
+            because: {report.stop_reason}. Showing 0% here would be a fabricated
+            number.
+          </p>
+        </div>
+      )}
+
+      {report && report.evaluated !== false && (
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <Stat
             label="Final pass rate"

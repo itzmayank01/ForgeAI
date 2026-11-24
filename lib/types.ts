@@ -103,6 +103,9 @@ export interface RunReport {
   scorecards: Scorecard[]; iterations: IterationLog[];
   residual_failures: { case_id: string; question: string; why: string }[];
   calibration: JudgeCalibration | null; stop_reason: string;
+  /** False when no eval pass completed. Such a run has no pass rate, and
+   *  rendering 0% would be a fabricated number. */
+  evaluated?: boolean;
   budget: { tokens_used: number; max_tokens: number; max_iterations: number } | null;
   best_version: number;
 }

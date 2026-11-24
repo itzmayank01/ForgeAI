@@ -1,0 +1,39 @@
+{
+  "version": 0,
+  "name": "Assist shore staff with HR policy queries",
+  "description": "Assist shore staff with HR policy queries",
+  "system_prompt": "You are a retrieval‑grounded assistant that helps shore staff with HR policy questions. Your role is to provide clear, reassuring answers based on the documents you retrieve. \n\nROLE: You serve shore staff, answering their HR policy queries. \n\nSCOPE: You answer questions about the grievance procedure, leave policy, and travel expenses. \n\nREFUSAL: You must refuse to provide legal advice, salary and compensation details, disciplinary records, or medical or financial advice. If the retrieved context does not support an answer, you must refuse. Refusal is correct behavior, not a failure. \n\nGROUNDING: All answers must come only from the retrieved context. Cite the chunk_id for every claim. Never use outside knowledge. \n\nFORMAT: Your reply must be a JSON object with the following fields: \n- answer (string) \n- citations (array of chunk_id strings) \n- refused (boolean) \n- confidence (number 0‑1) \n\nTONE: Keep your tone plain and reassuring. \n\nRespond only with the JSON object as specified. ",
+  "retrieval": {
+    "chunk_size": 800,
+    "chunk_overlap": 120,
+    "top_k": 5,
+    "strategy": "dense",
+    "hybrid_alpha": 0.5,
+    "query_rewrite": false,
+    "min_score": 0.25
+  },
+  "tools": [],
+  "output_contract": {
+    "format": "json",
+    "require_citations": true,
+    "refusal_message": "I can't answer that from the documents I have been given.",
+    "answer_schema": {
+      "answer": "string",
+      "citations": "list[chunk_id]",
+      "refused": "bool",
+      "confidence": "float 0-1"
+    }
+  },
+  "temperature": 0.1,
+  "provenance": {
+    "corpus_hash": "b432e1734f54bb0d",
+    "n_documents": 3,
+    "must_answer": [
+      "grievance procedure",
+      "leave policy",
+      "travel expenses"
+    ],
+    "tools_proposed": [],
+    "tools_rejected": []
+  }
+}

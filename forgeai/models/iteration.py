@@ -111,3 +111,7 @@ class RunReport(BaseModel):
     stop_reason: str = ""
     budget: Budget | None = None
     best_version: int = 0
+    evaluated: bool = True
+    """False when no eval pass completed. A run that measured nothing has no
+    pass rate - reporting 0% would be a fabricated number, which is precisely
+    what this project exists not to do."""

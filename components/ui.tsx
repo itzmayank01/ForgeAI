@@ -80,7 +80,7 @@ export function Meter({ value, tone }: { value: number; tone?: "ok" | "warn" | "
 export function RunCard({
   id, brief, passRate, cases, synthetic, iterations,
 }: {
-  id: string; brief: string; passRate: number; cases: number;
+  id: string; brief: string; passRate: number | null; cases: number;
   synthetic: boolean; iterations: number;
 }) {
   return (
@@ -94,7 +94,11 @@ export function RunCard({
       </div>
       <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{brief}</p>
       <div className="mt-4">
-        <Meter value={passRate} />
+        {passRate === null ? (
+          <span className="text-xs text-warn">not scored — no eval pass completed</span>
+        ) : (
+          <Meter value={passRate} />
+        )}
       </div>
       <div className="mt-3 flex gap-4 text-xs text-muted">
         <span>{cases} cases</span>

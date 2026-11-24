@@ -6,7 +6,9 @@ import { Pill, RunCard, Section, Stat } from "@/components/ui";
 export default async function Home() {
   const runs = await loadAllRuns();
   const live = runs.filter((r) => !r.synthetic);
-  const headline = live[0] ?? runs[0];
+  // Only runs that actually measured something can headline a number.
+  const scored = runs.filter((r) => r.report && r.report.evaluated !== false);
+  const headline = scored.find((r) => !r.synthetic) ?? scored[0];
   const totalCases = runs.reduce((n, r) => n + (r.suite?.cases.length ?? 0), 0);
 
   return (
@@ -108,7 +110,7 @@ export default async function Home() {
                 key={r.id}
                 id={r.id}
                 brief={r.manifest.brief || r.report?.brief || ""}
-                passRate={r.report?.final_pass_rate ?? 0}
+                passRate={r.report?.evaluated === false ? null : (r.report?.final_pass_rate ?? 0)}
                 cases={r.suite?.cases.length ?? 0}
                 iterations={r.report?.iterations.length ?? 0}
                 synthetic={r.synthetic}
