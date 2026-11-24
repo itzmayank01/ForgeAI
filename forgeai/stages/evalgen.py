@@ -10,6 +10,7 @@ reported rather than silently kept.
 from __future__ import annotations
 
 import random
+import re
 from concurrent.futures import ThreadPoolExecutor
 
 from pydantic import BaseModel, Field
@@ -41,6 +42,12 @@ class _Question(BaseModel):
 
 class _Questions(BaseModel):
     questions: list[str] = Field(default_factory=list)
+
+
+_STOPWORDS = {
+    "which", "there", "these", "those", "their", "other", "within", "after",
+    "before", "where", "while", "shall", "must", "every", "above", "below",
+}
 
 
 def _difficulty(v: str) -> str:
@@ -99,10 +106,19 @@ def generate_suite(
         cases += [c for c in ex.map(answerable, enumerate(harvested[:n_ans])) if c]
 
     # --- edge: multi-document ----------------------------------------------
+    # Pair facts only when they share a content word. Calibration found the
+    # unconstrained version pairing grievance-record confidentiality with
+    # per-diem rates, producing questions nobody could answer - and the agent
+    # was then marked down for correctly refusing them.
+    def _content(text: str) -> set[str]:
+        return {w for w in re.findall(r"[a-z]{5,}", text.lower())
+                if w not in _STOPWORDS}
+
     cross = [
         (a, b) for a in harvested for b in harvested
         if by_chunk.get(a.chunk_id) and by_chunk.get(b.chunk_id)
         and by_chunk[a.chunk_id].doc_id != by_chunk[b.chunk_id].doc_id
+        and _content(a.fact) & _content(b.fact)
     ]
     rng.shuffle(cross)
     for i, (a, b) in enumerate(cross[:4]):
@@ -112,7 +128,7 @@ def generate_suite(
             instruction=P.MULTI_DOC.format(
                 file_a=ca.filename, fact_a=a.fact, file_b=cb.filename, fact_b=b.fact),
         )
-        if q:
+        if q and q.question.strip().upper() != "SKIP":
             cases.append(EvalCase(
                 id=f"edge_multi_{i:02d}", question=q.question, kind="edge",
                 edge_type="multi_document", expected_facts=[a.fact, b.fact],
@@ -189,6 +205,11 @@ def quality_gate(cases: list[EvalCase], index: ChunkIndex) -> tuple[list[EvalCas
             if not c.expected_facts:
                 dropped["no_expected_facts"] += 1
                 continue
+            # A fact that bundles several claims fails an answer that correctly
+            # addresses the one actually asked about.
+            if any(_is_bundled(f) for f in c.expected_facts):
+                dropped["bundled_fact"] += 1
+                continue
             texts = " ".join(
                 ch.text.lower() for ch in index.chunks if ch.chunk_id in c.source_chunks
             )
@@ -212,6 +233,18 @@ def quality_gate(cases: list[EvalCase], index: ChunkIndex) -> tuple[list[EvalCas
     if len(kept) < MIN_CASES:
         report["warning"] = f"only {len(kept)} cases survived; brief requires >= {MIN_CASES}"
     return kept, report
+
+
+_BUNDLE_MARKERS = re.compile(r",\s*(which|and must|and is|and the)\b|;", re.I)
+
+
+def _is_bundled(fact: str) -> bool:
+    """Two claims wearing one coat.
+
+    Calibration caught "4 weeks of parental leave, which must be taken within
+    12 months" being scored against an answer that correctly said "4 weeks".
+    """
+    return bool(_BUNDLE_MARKERS.search(fact))
 
 
 def _overlap(fact: str, source: str, threshold: float = 0.5) -> bool:

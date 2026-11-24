@@ -18,6 +18,11 @@ DOCUMENT: {filename}
 CHUNK {chunk_id}:
 {text}
 
+ONE claim per fact. "The secondary caregiver is entitled to 4 weeks of fully
+paid parental leave, which must be taken within 12 months" is TWO facts and must
+be split: the entitlement, and the window. Bundling them makes a correct answer
+to one of them look like a failure.
+
 Return 2-4 facts. Each needs `fact` (the claim, verbatim where possible) and
 `chunk_id` (exactly "{chunk_id}"). If the excerpt contains no checkable facts,
 return an empty list.
@@ -46,7 +51,12 @@ FACT B (from {file_b}): {fact_b}
 
 The question must genuinely require both - a comparison, a total, a conflict, a
 sequence. If either fact alone would answer it, it is not a valid multi-document
-question. One sentence.
+question.
+
+If the two facts are about unrelated things and no sensible question joins them,
+return the single word SKIP as the question. Forcing them together produces a
+question nobody can answer, and the agent is then penalised for correctly
+refusing it. One sentence otherwise.
 
 Return `question` and `difficulty`.
 """
