@@ -163,11 +163,32 @@ defect."* Tools are model-proposed but **deterministically audited** — a bindi
 survives only if the tool exists *and* its claimed `triggering_requirement`
 resolves to a real `must_answer` topic.
 
-On live runs the HR assistant attaches **zero** tools, which is the correct
-answer. `tests/test_tool_discipline.py` asserts it against the committed
-definitions.
+Restraint is only half of it, though. Failing to attach a tool a requirement
+plainly needs is equally a defect, and for a long time this factory had exactly
+that bug: every run attached zero tools, including a spares brief whose own
+requirements list "Order Total Calculation".
 
----
+Three causes compounded, each invisible alone:
+
+- A Pydantic **class docstring becomes the JSON-schema `description`**, which the
+  model reads as instruction. `ToolBinding`'s said *"an HR agent with a weather
+  tool is a factory defect"* — so at the schema level the generator was being
+  told to attach nothing, overriding the prompt.
+- The selection call asked for a list of three-field objects. The model produced
+  malformed JSON which, because the field carried a `default_factory`,
+  **validated silently as an empty list**. A correct selection became "no tools"
+  with no error anywhere.
+- Small models emit the schema *then* the payload, so taking the first JSON
+  object found meant accepting the schema echo.
+
+Selection is now a list of plain strings with justification asked separately per
+tool — the same decomposition that fixed intake. The runtime then **actually
+executes** one tool call per question through the registry, refusing any tool
+the definition does not attach. Before this, `REGISTRY` was imported and never
+called: declared tools were decoration.
+
+`tests/test_invariants.py` covers execution, refusal of unattached tools, the
+no-tools path, and that the calculator still rejects code injection.
 
 ## Running it
 
