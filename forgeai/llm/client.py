@@ -131,6 +131,20 @@ class LLMClient:
                     time.sleep(wait)
                     continue
 
+                if r.status_code >= 500:
+                    # Provider-side and transient: "over capacity" literally
+                    # asks callers to back off exponentially. Raising here
+                    # would let a momentary server wobble end an unattended
+                    # run in front of a reviewer.
+                    if attempt < self.pool.size + 2:
+                        wait = min(20.0, 1.5 * (2 ** attempt))
+                        bucket.settle(handle, 0)
+                        last_exc = LLMError(f"{r.status_code} upstream; retrying in {wait:.0f}s")
+                        time.sleep(wait)
+                        continue
+                    bucket.settle(handle, 0)
+                    raise LLMError(f"{r.status_code} from {model_name}: {r.text[:200]}")
+
                 if r.status_code >= 400:
                     body = r.text[:400]
                     if ("json_validate_failed" in body
