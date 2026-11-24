@@ -189,9 +189,25 @@ def test_agent_refuses_a_tool_its_definition_does_not_attach(monkeypatch):
         agent_mod, "structured",
         lambda *args, **kw: (agent_mod._ToolPlan(tool="weather",
                                                  args={"latitude": "1", "longitude": "2"}), None))
-    text, calls = a._run_tool("what is the weather", "ctx")
+    # The question must pass the pre-filter so planning actually runs; the point
+    # of the test is the refusal, not the gate.
+    text, calls = a._run_tool("what is the total of 2 and 2", "ctx")
     assert text == ""
     assert calls and "refused" in calls[0]["status"]
+
+
+def test_prefilter_skips_planning_when_no_tool_could_apply():
+    """A policy lookup with only a calculator attached should never cost a
+    planning call."""
+    from forgeai.runtime import agent as agent_mod
+
+    d = AgentDefinition(name="x", system_prompt="p",
+                        tools=[ToolBinding(name="calculator", reason="r",
+                                           triggering_requirement="totals")])
+    a = agent_mod.Agent(d, ChunkIndex([]), client=None)
+    # client=None would raise if a model call were attempted.
+    text, calls = a._run_tool("What is the grievance appeal procedure?", "ctx")
+    assert text == "" and calls == []
 
 
 def test_agent_executes_an_attached_tool(monkeypatch):

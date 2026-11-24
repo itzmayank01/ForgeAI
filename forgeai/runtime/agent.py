@@ -5,6 +5,7 @@ Shares nothing with the factory but the definition schema - which is what makes
 """
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 from pydantic import BaseModel, Field
@@ -72,6 +73,26 @@ class Agent:
         self.client = client
         self.docs_dir = docs_dir
 
+    @staticmethod
+    def _might_need_tool(question: str, names: list[str]) -> bool:
+        """Cheap pre-filter: could any attached tool conceivably apply here?"""
+        q = question.lower()
+        signals = {
+            "calculator": any(w in q for w in (
+                "total", "sum", "how much", "how many", "multiply", "times",
+                "cost of", "calculate", "altogether", "combined", "per unit",
+                "discount", "percent", "%")) or bool(re.search(r"\d", q)),
+            "csv_lookup": bool(re.search(r"[A-Z]{2,}-\d+", question))
+            or any(w in q for w in ("part ", "catalogue", "catalog", "stock",
+                                    "lead time", "in stock", "row", "column")),
+            "current_date": any(w in q for w in (
+                "today", "now", "current", "this year", "this month", "expire",
+                "still valid", "up to date", "deadline")),
+            "weather": any(w in q for w in (
+                "weather", "forecast", "temperature", "wind", "sea state")),
+        }
+        return any(signals.get(n, True) for n in names)
+
     def _run_tool(self, question: str, context: str) -> tuple[str, list[dict]]:
         """One optional tool call before answering.
 
@@ -82,6 +103,13 @@ class Agent:
         """
         names = sorted(self.definition.tool_names)
         if not names:
+            return "", []
+        if not self._might_need_tool(question, names):
+            # Planning costs a model call per question, and most questions
+            # plainly need nothing - a policy lookup does not need a calculator.
+            # The gate is deliberately generous: it only skips when no attached
+            # tool could plausibly apply, so a missed tool call stays far more
+            # expensive than a wasted plan.
             return "", []
 
         plan, _ = structured(
