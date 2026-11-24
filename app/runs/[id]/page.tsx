@@ -30,21 +30,26 @@ export default async function RunPage({ params }: { params: Promise<{ id: string
   const verdicts = lastIter >= 0 ? run.verdicts[lastIter] : [];
 
   return (
-    <main className="mx-auto max-w-content px-4 py-10">
-      <Link href="/#runs" className="text-sm text-muted hover:text-ink">
-        ← all runs
-      </Link>
+    <main>
+      <section className="relative overflow-hidden">
+        <div className="wash wash-warm" aria-hidden />
+        <div className="mx-auto max-w-content px-4 pb-8 pt-10">
+          <Link href="/#runs" className="text-sm text-muted transition hover:text-ink">
+            ← all runs
+          </Link>
 
-      <div className="mt-4 flex flex-wrap items-center gap-2.5">
-        <h1 className="display text-[clamp(1.8rem,4vw,2.6rem)]">
-          {id.replace(/^_/, "").replace(/_/g, " ")}
-        </h1>
-        {run.synthetic ? <Pill tone="warn">fixture — not evidence</Pill> : <Pill tone="accent">live run</Pill>}
-      </div>
+          <div className="mt-5 flex flex-wrap items-center gap-3">
+            <h1 className="display text-[clamp(1.9rem,4vw,2.7rem)]">
+              {id.replace(/^_/, "").replace(/_/g, " ")}
+            </h1>
+            {run.synthetic
+              ? <Pill tone="warn">fixture — not evidence</Pill>
+              : <Pill tone="accent">live run</Pill>}
+          </div>
 
-      <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-muted">
-        {run.manifest.brief || report?.brief}
-      </p>
+          <p className="lede mt-4 max-w-2xl">
+            {run.manifest.brief || report?.brief}
+          </p>
 
       {report && report.evaluated === false && (
         <div className="card mt-8 border-warn/30 bg-warn/[0.06] p-5">
@@ -75,7 +80,11 @@ export default async function RunPage({ params }: { params: Promise<{ id: string
         </div>
       )}
 
-      <nav className="sticky top-[57px] z-30 -mx-4 mt-10 overflow-x-auto border-y bg-canvas/85 px-4 backdrop-blur-md">
+        </div>
+      </section>
+
+      <nav className="sticky top-[57px] z-30 overflow-x-auto border-y bg-canvas/85 px-4 backdrop-blur-md">
+        <div className="mx-auto max-w-content">
         <ul className="flex gap-1 py-2 text-sm">
           {NAV.map(([href, label]) => (
             <li key={href}>
@@ -96,9 +105,10 @@ export default async function RunPage({ params }: { params: Promise<{ id: string
             </Link>
           </li>
         </ul>
+        </div>
       </nav>
 
-      <div className="space-y-14 py-10">
+      <div className="mx-auto max-w-content space-y-16 px-4 py-14">
         <Block id="requirements" n="01" title="Requirements"
           lede="What the intake interviewer concluded the assistant is for — and, unattended, the assumptions it made rather than skipping the questions.">
           {run.requirements ? <RequirementsPanel req={run.requirements} /> : <Missing />}
@@ -166,12 +176,15 @@ function Block({
 }: { id: string; n: string; title: string; lede: string; children: React.ReactNode }) {
   return (
     <section id={id} className="scroll-mt-32">
-      <div className="flex items-baseline gap-2.5">
-        <span className="mono-nums text-xs font-bold text-accent">{n}</span>
-        <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
+      <div className="flex items-center gap-3">
+        <span className="mono-nums font-mono text-[13px] font-bold text-accent">{n}</span>
+        <span className="h-px w-10 bg-ink/20" />
+        <h2 className="text-[11px] font-semibold uppercase tracking-[0.13em] text-muted">
+          {title}
+        </h2>
       </div>
-      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">{lede}</p>
-      <div className="mt-5">{children}</div>
+      <p className="mt-4 max-w-2xl text-[15px] leading-relaxed">{lede}</p>
+      <div className="mt-6">{children}</div>
     </section>
   );
 }
