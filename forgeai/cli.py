@@ -207,8 +207,11 @@ def regress(
     definition, _ = generator.generate_agent(client, req, summary, log=console.print)
     console.print(f"  regenerated agent v{definition.version}")
 
-    responses, complete = run_eval(Agent(definition, index, client), suite,
-                                   None, None, console.print)
+    # The regenerated agent must get the CHANGED documents, or an attached tool
+    # would read the old corpus and the comparison would be meaningless.
+    responses, complete = run_eval(
+        Agent(definition, index, client, docs_dir=docs), suite,
+        None, None, console.print)
     if not complete:
         console.print("[yellow]  incomplete pass — comparison would be misleading[/yellow]")
         raise typer.Exit(1)
