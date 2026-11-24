@@ -27,6 +27,7 @@ def build(
     interactive: bool = typer.Option(False, help="Ask clarifying questions instead of self-answering."),
     max_iterations: int = typer.Option(None, help="Override the iteration cap."),
     resume: bool = typer.Option(False, help="Reuse artifacts already in the run directory."),
+    tournament: bool = typer.Option(False, help="Score 3 candidate prompts and keep the winner."),
 ) -> None:
     """Run the factory end to end."""
     from datetime import datetime
@@ -40,7 +41,7 @@ def build(
     console.rule(f"[bold]ForgeAI[/bold]  {out.name}")
     report = run_build(text, docs, out, interactive=interactive,
                        max_iterations=max_iterations, resume=resume,
-                       log=console.print)
+                       tournament=tournament, log=console.print)
 
     final = out / "03_agent_def.final.json"
     if final.exists():

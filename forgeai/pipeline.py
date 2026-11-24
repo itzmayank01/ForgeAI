@@ -145,7 +145,7 @@ def run_eval(
 def build(
     brief: str, docs_dir: Path, out_dir: Path, *,
     interactive: bool = False, max_iterations: int | None = None,
-    resume: bool = False, log=print,
+    resume: bool = False, tournament: bool = False, log=print,
 ) -> RunReport:
     budget = Budget(
         max_tokens=settings.max_tokens, max_seconds=settings.max_seconds,
@@ -209,6 +209,40 @@ def build(
         definition, rejected = generator.generate_agent(client, req, summary, log=log)
     log(f"  tools attached: {', '.join(definition.tool_names) or 'none'}")
     _write(out_dir / "03_agent_def.v0.json", definition)
+
+    # --- 3b. prompt tournament (optional) ----------------------------------
+    tourney = None
+    if tournament:
+        from .stages import tournament as T
+
+        prompts = T.propose(client, definition, req, n=3, log=log)
+        if len(prompts) > 1:
+            # Each candidate is scored independently against the same cases.
+            # Nothing is compared pairwise, so there is no ordering for position
+            # bias to act on and the judge never learns which candidate it has.
+            probe = EvalSuite(cases=suite.cases[:12], generated_by="tournament probe") \
+                if (suite := _load(out_dir / "04_eval_suite.json", EvalSuite)) else None
+            if probe:
+                results = []
+                for i, text in enumerate(prompts):
+                    cand = definition.model_copy(deep=True)
+                    cand.system_prompt = text
+                    responses, _ = run_eval(Agent(cand, index, client), probe, budget,
+                                            None, lambda *a: None)
+                    verdicts = judge.judge_all(probe.cases, responses, client)
+                    passed = sum(v.passed for v in verdicts)
+                    results.append(T.CandidateResult(
+                        index=i, label="baseline" if i == 0 else f"cand-{i}",
+                        pass_rate=round(passed / len(probe.cases), 3),
+                        passed=passed, total=len(probe.cases), prompt_chars=len(text)))
+                    log(f"    {results[-1].label}: {results[-1].pass_rate:.0%}")
+                tourney = T.decide(results)
+                if tourney.decisive:
+                    definition.system_prompt = prompts[tourney.winner]
+                    log(f"  tournament winner: {tourney.candidates[tourney.winner].label}")
+                else:
+                    log("  tournament inconclusive; keeping baseline")
+                _write(out_dir / "03_tournament.json", tourney)
 
     # --- 4. evals -----------------------------------------------------------
     log("[4/6] generating eval suite")
