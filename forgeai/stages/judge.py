@@ -20,7 +20,6 @@ from __future__ import annotations
 import re
 from concurrent.futures import ThreadPoolExecutor
 
-import numpy as np
 from pydantic import BaseModel
 
 from ..config import settings

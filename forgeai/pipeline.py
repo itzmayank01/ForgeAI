@@ -21,7 +21,7 @@ from .llm.client import LLMClient, LLMError, QuotaExhausted
 from .models.agent_def import AgentDefinition
 from .models.common import CorpusSummary
 from .models.requirements import GroundabilityReport, RequirementsDoc
-from .models.evals import CaseVerdict, EvalSuite, Scorecard
+from .models.evals import EvalSuite, Scorecard
 from .models.iteration import Budget, IterationLog, RunReport
 from .runtime.agent import Agent, AgentResponse
 from .stages import critic, evalgen, generator, groundability, intake, judge, optimizer

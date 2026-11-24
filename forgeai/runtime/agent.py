@@ -5,7 +5,6 @@ Shares nothing with the factory but the definition schema - which is what makes
 """
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 from pydantic import BaseModel, Field
@@ -89,7 +88,7 @@ class Agent:
             self.client, model_cls=_ToolPlan, temperature=0.0,
             model=self.definition.model or settings.agent_model,
             instruction=(
-                f"AVAILABLE TOOLS:\n" +
+                "AVAILABLE TOOLS:\n" +
                 "\n".join(f"- {n}: {REGISTRY[n].description}"
                            for n in names if n in REGISTRY) +
                 f"\n\nCONTEXT ALREADY RETRIEVED:\n{context[:1200]}\n\n"
