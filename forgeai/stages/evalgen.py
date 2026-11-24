@@ -61,7 +61,7 @@ def generate_suite(
     # Over-generate: the gate exists to drop weak cases, so generating exactly
     # `target` guarantees finishing under it. A live run generated 22 and kept
     # 18 against a required 20.
-    OVERSHOOT = 1.25
+    OVERSHOOT = 1.9
     want = int(target * OVERSHOOT)
     rng = random.Random(7)
     pool = rng.sample(chunks, min(len(chunks), max(10, want)))
@@ -168,6 +168,29 @@ def generate_suite(
 
     kept, gate = quality_gate(cases, index)
     log(f"  gate: kept {len(kept)}/{len(cases)} -> {gate}")
+
+    # The gate is strict by design, so a thin corpus can finish under the floor
+    # the brief sets. A cold run on an unseen three-document corpus generated 19
+    # and kept 17. Top up from the unused facts rather than shipping a suite
+    # that fails the requirement.
+    if len(kept) < MIN_CASES and len(harvested) > n_ans:
+        shortfall = MIN_CASES - len(kept)
+        log(f"  only {len(kept)} survived the gate; generating {shortfall} more")
+        with ThreadPoolExecutor(max_workers=settings.max_concurrency) as ex:
+            extra = [c for c in ex.map(
+                answerable,
+                enumerate(harvested[n_ans:n_ans + shortfall * 2], start=n_ans))
+                if c]
+        more, more_gate = quality_gate(extra, index)
+        seen_q = {c.question.strip().lower() for c in kept}
+        kept += [c for c in more if c.question.strip().lower() not in seen_q][:shortfall]
+        gate["top_up_generated"] = len(extra)
+        gate["kept"] = len(kept)
+        log(f"  after top-up: {len(kept)} cases")
+
+    if len(kept) < MIN_CASES:
+        gate["warning"] = (f"only {len(kept)} cases; the brief requires "
+                           f">= {MIN_CASES}. The corpus may be too thin.")
     return EvalSuite(
         cases=kept,
         generated_by=settings.gen_model,

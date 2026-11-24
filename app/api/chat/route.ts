@@ -4,7 +4,29 @@ import { bm25 } from "@/lib/bm25";
 
 export const maxDuration = 30;
 
-const API_KEY = process.env.FORGEAI_API_KEY ?? process.env.GROQ_API_KEY ?? "";
+/**
+ * Several keys, rotated per request and retried on a rate limit.
+ *
+ * The CLI pool does this properly; the hosted chat needs at least the same
+ * idea because a single key caps the page at 8,000 tokens/minute, and a
+ * reviewer clicking a few suggested questions in a row will hit that.
+ */
+const API_KEYS: string[] = (() => {
+  const seen = new Set<string>();
+  const push = (raw?: string) =>
+    (raw ?? "").split(",").map((s) => s.trim()).filter(Boolean).forEach((k) => seen.add(k));
+
+  push(process.env.FORGEAI_API_KEYS);
+  push(process.env.FORGEAI_API_KEY);
+  push(process.env.GROQ_API_KEY);
+  for (let i = 2; i <= 10; i++) {
+    push(process.env[`FORGEAI_API_KEY_${i}`]);
+    push(process.env[`GROQ_API_KEY_${i}`]);
+  }
+  return [...seen];
+})();
+
+const API_KEY = API_KEYS[0] ?? "";
 const BASE_URL = process.env.FORGEAI_BASE_URL ?? "https://api.groq.com/openai/v1";
 const MODEL = process.env.FORGEAI_GEN_MODEL ?? "openai/gpt-oss-20b";
 
@@ -63,15 +85,28 @@ export async function POST(req: Request) {
   };
 
   try {
-    const r = await fetch(`${BASE_URL}/chat/completions`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${API_KEY}` },
-      body: JSON.stringify(body),
-    });
+    // Start at a different key per request so concurrent readers spread across
+    // the pool instead of queueing on whichever one is listed first.
+    const offset = Math.floor(Math.random() * API_KEYS.length);
+    let r: Response | null = null;
 
+    for (let attempt = 0; attempt < API_KEYS.length; attempt++) {
+      const key = API_KEYS[(offset + attempt) % API_KEYS.length];
+      r = await fetch(`${BASE_URL}/chat/completions`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+        body: JSON.stringify(body),
+      });
+      // A rate limit is this key's problem, not the request's: try the next.
+      if (r.status !== 429) break;
+    }
+
+    if (!r) {
+      return NextResponse.json({ error: "no key available" }, { status: 503 });
+    }
     if (r.status === 429) {
       return NextResponse.json(
-        { error: "Rate limited upstream — the free tier allows 8,000 tokens/minute. Try again shortly." },
+        { error: `Rate limited on all ${API_KEYS.length} key(s). Try again in a moment.` },
         { status: 429 },
       );
     }
