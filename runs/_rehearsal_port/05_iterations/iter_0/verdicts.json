@@ -1,0 +1,498 @@
+{
+  "verdicts": [
+    {
+      "case_id": "ans_000",
+      "answer": "The pre\u2011arrival notification must be submitted no later than 72\u202fhours before the vessel\u2019s estimated time of arrival.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_00_c000",
+        "doc_02_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 116
+    },
+    {
+      "case_id": "ans_001",
+      "answer": "A revised notification must be sent whenever the vessel\u2019s ETA changes by more than 6 hours.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_02_c000",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 91
+    },
+    {
+      "case_id": "ans_002",
+      "answer": "The Master's declaration must be lodged within 2 hours of berthing.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_00_c000",
+        "doc_02_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 67
+    },
+    {
+      "case_id": "ans_004",
+      "answer": "Yes, pilotage is compulsory for all vessels exceeding 90 metres length overall.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000",
+        "doc_02_c000",
+        "doc_01_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 79
+    },
+    {
+      "case_id": "ans_005",
+      "answer": "No. A master with a valid Pilotage Exemption Certificate may navigate without a pilot only if the vessel does not exceed 120\u202fmetres; vessels longer than 120\u202fmetres must have a pilot.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000",
+        "doc_01_c000",
+        "doc_02_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 182
+    },
+    {
+      "case_id": "ans_006",
+      "answer": "A pilot must be booked at least 12 hours in advance.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000",
+        "doc_01_c000",
+        "doc_02_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 52
+    },
+    {
+      "case_id": "ans_007",
+      "answer": "Cancellation within four hours of the booked time incurs a penalty of 50% of the pilotage fee.",
+      "refused": false,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000",
+        "doc_02_c000",
+        "doc_01_c000"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "fact recall 0.0",
+      "answer_length": 94
+    },
+    {
+      "case_id": "ans_008",
+      "answer": "EUR 0.42 per gross tonne",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_01_c000",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 24
+    },
+    {
+      "case_id": "ans_009",
+      "answer": "EUR 0.31 per gross tonne",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_01_c000",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 24
+    },
+    {
+      "case_id": "ans_010",
+      "answer": "The pilotage fee is EUR\u202f1,850 for vessels up to 180\u202fmetres LOA.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_00_c000",
+        "doc_01_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 63
+    },
+    {
+      "case_id": "ans_011",
+      "answer": "The pilotage fee for vessels exceeding 180 metres is EUR\u202f2,640.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_00_c000",
+        "doc_01_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 63
+    },
+    {
+      "case_id": "edge_multi_00",
+      "answer": "The exemption permits vessels up to 120\u202fmetres LOA to sail without a pilot, and the EUR\u202f1,850 pilotage fee applies to vessels up to 180\u202fmetres. Therefore the maximum length that meets both conditions is 120\u202fmetres.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000",
+        "doc_02_c000",
+        "doc_01_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 214
+    },
+    {
+      "case_id": "edge_multi_01",
+      "answer": "The pilot must be booked at least 12\u202fhours before the vessel\u2019s berthing time, i.e., by 22:00 on the preceding day for a 10:00 berth. The Master\u2019s declaration must be lodged within 2\u202fhours of berthing, i.e., by 12:00 on the day of arrival.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_00_c000",
+        "doc_02_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 238
+    },
+    {
+      "case_id": "edge_multi_02",
+      "answer": "The pilotage fee for a vessel 200 metres long is EUR\u202f2,640.",
+      "refused": false,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_00_c000",
+        "doc_01_c000"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "fact recall 0.0",
+      "answer_length": 59
+    },
+    {
+      "case_id": "edge_multi_03",
+      "answer": "The agent must submit the pre\u2011arrival notification at least 72\u202fhours before the vessel\u2019s estimated time of arrival.",
+      "refused": false,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.5,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_00_c000",
+        "doc_02_c000"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "fact recall 0.5",
+      "answer_length": 115
+    },
+    {
+      "case_id": "edge_amb_00",
+      "answer": "The pre\u2011arrival notification must be submitted no later than 72\u202fhours before the vessel\u2019s estimated time of arrival.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_00_c000",
+        "doc_02_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 116
+    },
+    {
+      "case_id": "edge_amb_01",
+      "answer": "You should send an updated ETA notification whenever the vessel\u2019s estimated arrival time changes by more than 6\u202fhours.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_02_c000",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 118
+    },
+    {
+      "case_id": "oos_00",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000",
+        "doc_01_c000",
+        "doc_02_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_01",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_02_c000",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_02",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_01_c000",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_03",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_00_c000",
+        "doc_02_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_04",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_01_c000",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_05",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_02_c000",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_06",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_02_c000",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_07",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000",
+        "doc_01_c000",
+        "doc_02_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_08",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c000",
+        "doc_02_c000",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    }
+  ]
+}

@@ -9,8 +9,8 @@ from pydantic import BaseModel, Field
 RetrievalStrategy = Literal["dense", "bm25", "hybrid"]
 
 
+# Every field here is a lever the optimizer can pull on a `retrieval_miss`.
 class RetrievalConfig(BaseModel):
-    """Every field here is a lever the optimizer can pull on a `retrieval_miss`."""
 
     chunk_size: int = 800
     chunk_overlap: int = 120
@@ -21,21 +21,23 @@ class RetrievalConfig(BaseModel):
     min_score: float = 0.25
 
 
+# NOTE: a class docstring becomes the JSON-schema "description" and the model
+# reads it as instruction. This one used to say "an HR agent with a weather tool
+# is a factory defect", which taught the generator to attach NOTHING - even to a
+# spares brief whose own requirements include "Order Total Calculation". The
+# rationale lives here, out of the schema, where only maintainers see it:
+# triggering_requirement is what makes the tool audit deterministic rather than
+# hopeful, because it must resolve against a real must-answer topic.
 class ToolBinding(BaseModel):
-    """`triggering_requirement` must resolve against the requirements doc.
-
-    This is what makes the "HR agent with a weather tool is a factory defect"
-    check deterministic instead of hopeful.
-    """
-
-    name: str
-    reason: str
-    triggering_requirement: str
+    name: str = Field(description="Tool name, exactly as listed in the registry.")
+    reason: str = Field(description="Why this assistant needs it, in one line.")
+    triggering_requirement: str = Field(
+        description="The exact must-answer topic name that requires this tool.")
 
 
+# Forcing structured output buys free, reliable refusal detection: the judge
+# reads a boolean instead of guessing from prose.
 class OutputContract(BaseModel):
-    """Forcing structured output buys free, reliable refusal detection -
-    the judge reads a boolean instead of guessing from prose."""
 
     format: Literal["json"] = "json"
     require_citations: bool = True

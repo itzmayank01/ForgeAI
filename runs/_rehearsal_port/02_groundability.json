@@ -1,0 +1,42 @@
+{
+  "topics": [
+    {
+      "name": "pilotage rules",
+      "description": "Questions answerable from pilotage_rules.md.",
+      "support_score": 0.7279,
+      "supporting_chunks": [
+        "doc_00_c000",
+        "doc_02_c000",
+        "doc_01_c000"
+      ],
+      "verdict": "weak"
+    },
+    {
+      "name": "port call procedure",
+      "description": "Questions answerable from port_call_procedure.md.",
+      "support_score": 0.7162,
+      "supporting_chunks": [
+        "doc_01_c000",
+        "doc_02_c000",
+        "doc_00_c000"
+      ],
+      "verdict": "weak"
+    },
+    {
+      "name": "tariff schedule",
+      "description": "Questions answerable from tariff_schedule.md.",
+      "support_score": 0.7347,
+      "supporting_chunks": [
+        "doc_02_c000",
+        "doc_01_c000",
+        "doc_00_c000"
+      ],
+      "verdict": "weak"
+    }
+  ],
+  "unsupported": [],
+  "moved_to_refuse": [],
+  "unsupported_ratio": 0.0,
+  "aborted": false,
+  "abort_reason": null
+}

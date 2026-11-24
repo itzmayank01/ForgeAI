@@ -1,0 +1,50 @@
+{
+  "iteration": 1,
+  "failures_by_category": {
+    "prompt_defect": 3
+  },
+  "diagnoses": [
+    {
+      "case_id": "ans_007",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_02",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_03",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.5",
+      "classified_by": "deterministic"
+    }
+  ],
+  "fix": {
+    "category": "prompt_defect",
+    "rung": "patch_scope_block",
+    "rationale": "3 failures classified prompt_defect; applying patch_scope_block",
+    "targets_case_ids": [
+      "ans_007",
+      "edge_multi_02",
+      "edge_multi_03"
+    ],
+    "diff": {
+      "before": {
+        "system_prompt": "<949 chars>"
+      },
+      "after": {
+        "system_prompt": "<983 chars, SCOPE revised>"
+      }
+    }
+  },
+  "score_before": 0.885,
+  "score_after": 0.0,
+  "kept": true,
+  "revert_reason": null,
+  "seconds": 229.7,
+  "tokens": 82496
+}

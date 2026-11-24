@@ -278,7 +278,7 @@ def build(
             index = ChunkIndex(chunk_corpus(refs, texts, *shape))
             chunk_shape = shape
 
-        agent = Agent(definition, index, client)
+        agent = Agent(definition, index, client, docs_dir=docs_dir)
         cache = out_dir / "05_iterations" / f"iter_{i}" / "responses.json"
         responses, complete = run_eval(agent, suite, budget, cache, log)
         if not complete:

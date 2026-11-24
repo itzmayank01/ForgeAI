@@ -32,19 +32,12 @@ class RepairTrace:
     ok: bool = False
 
 
-def extract_json(text: str) -> str | None:
-    """Pull the first plausible JSON object out of a messy completion."""
-    if not text:
-        return None
-    m = _FENCE.search(text)
-    if m:
-        text = m.group(1)
-    text = text.strip()
-    start = text.find("{")
-    if start == -1:
-        return None
-    depth, in_str, esc = 0, False, False
-    for i, ch in enumerate(text[start:], start):
+def _balanced_objects(text: str) -> list[str]:
+    """Every top-level {...} in the text, in order."""
+    out: list[str] = []
+    depth = start = 0
+    in_str = esc = False
+    for i, ch in enumerate(text):
         if esc:
             esc = False
             continue
@@ -57,12 +50,54 @@ def extract_json(text: str) -> str | None:
         if in_str:
             continue
         if ch == "{":
+            if depth == 0:
+                start = i
             depth += 1
-        elif ch == "}":
+        elif ch == "}" and depth:
             depth -= 1
             if depth == 0:
-                return text[start : i + 1]
-    return None
+                out.append(text[start : i + 1])
+    return out
+
+
+def _looks_like_schema_echo(blob: str) -> bool:
+    """A JSON Schema repeated back instead of an instance of it.
+
+    Small models do this: they emit the schema, then the real payload. Taking
+    the first object found means silently accepting the schema - and because
+    list fields carry a default_factory, it validates as EMPTY rather than
+    failing. A correct tool selection became "no tools attached" with no error
+    anywhere.
+    """
+    return '"properties"' in blob and '"type"' in blob
+
+
+def extract_json(text: str) -> str | None:
+    """The first plausible JSON object, skipping a schema echo."""
+    if not text:
+        return None
+    m = _FENCE.search(text)
+    if m:
+        text = m.group(1)
+    objects = _balanced_objects(text.strip())
+    if not objects:
+        return None
+    for blob in objects:
+        if not _looks_like_schema_echo(blob):
+            return blob
+    return objects[0]
+
+
+def extract_json_candidates(text: str) -> list[str]:
+    """All candidates, best first, for callers willing to try several."""
+    if not text:
+        return []
+    m = _FENCE.search(text)
+    if m:
+        text = m.group(1)
+    objects = _balanced_objects(text.strip())
+    real = [b for b in objects if not _looks_like_schema_echo(b)]
+    return real + [b for b in objects if b not in real]
 
 
 def compact_schema(model_cls: type[BaseModel]) -> str:
@@ -132,22 +167,25 @@ def structured(
             if attempt >= max_repairs:
                 return None, trace
             continue
-        candidate = extract_json(raw)
-        if candidate is None:
+        candidates = extract_json_candidates(raw)
+        if not candidates:
             trace.errors.append("no JSON object found in completion")
         else:
-            if candidate.strip() != raw.strip():
-                trace.salvaged = True
-            try:
-                obj = model_cls.model_validate_json(candidate)
-                trace.ok = True
-                return obj, trace
-            except ValidationError as ve:
-                errs = "; ".join(
-                    f"{'.'.join(str(p) for p in e['loc'])}: {e['msg']}"
-                    for e in ve.errors()[:6]
-                )
-                trace.errors.append(errs)
+            last_error = None
+            for candidate in candidates:
+                if candidate.strip() != raw.strip():
+                    trace.salvaged = True
+                try:
+                    obj = model_cls.model_validate_json(candidate)
+                    trace.ok = True
+                    return obj, trace
+                except ValidationError as ve:
+                    last_error = "; ".join(
+                        f"{'.'.join(str(p) for p in e['loc'])}: {e['msg']}"
+                        for e in ve.errors()[:6]
+                    )
+            if last_error:
+                trace.errors.append(last_error)
 
         if attempt < max_repairs:  # feed the failure back and try again
             # A reasoning model can return empty content (it spent the budget

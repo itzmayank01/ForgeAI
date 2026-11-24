@@ -1,0 +1,418 @@
+{
+  "cases": [
+    {
+      "id": "ans_000",
+      "question": "When must the pre‑arrival notification be submitted before the vessel's estimated time of arrival?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "The agent must submit the pre-arrival notification no later than 72 hours before the vessel's estimated time of arrival."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
+    },
+    {
+      "id": "ans_001",
+      "question": "When do I need to send a revised ETA notification for an inbound vessel?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "A revised notification is required whenever the ETA moves by more than 6 hours."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_002",
+      "question": "How long do I have to lodge the Master's declaration after the vessel berths?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "The Master's declaration must be lodged within 2 hours of berthing."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_004",
+      "question": "Is pilotage required for vessels over 90 metres in length overall?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Pilotage is compulsory for all vessels exceeding 90 metres length overall"
+      ],
+      "source_documents": [
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_00_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
+    },
+    {
+      "id": "ans_005",
+      "question": "Can a master holding a valid Pilotage Exemption Certificate navigate a vessel longer than 120 metres without a pilot?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Masters holding a valid Pilotage Exemption Certificate may navigate without a pilot provided the vessel does not exceed 120 metres"
+      ],
+      "source_documents": [
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_00_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_006",
+      "question": "How many hours in advance must a pilot be booked?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "A pilot must be booked a minimum of 12 hours in advance"
+      ],
+      "source_documents": [
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_00_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
+    },
+    {
+      "id": "ans_007",
+      "question": "What is the penalty if we cancel a pilotage booking within four hours of the scheduled time?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Cancellation within 4 hours of the booked time incurs 50% of the pilotage fee"
+      ],
+      "source_documents": [
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_00_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_008",
+      "question": "What is the port dues charge per gross tonne for the first call in a calendar month?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Port dues are charged at EUR 0.42 per gross tonne for the first call in a calendar month"
+      ],
+      "source_documents": [
+        "doc_02"
+      ],
+      "source_chunks": [
+        "doc_02_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
+    },
+    {
+      "id": "ans_009",
+      "question": "What is the charge per gross tonne for subsequent calls within the same calendar month?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Subsequent calls within the same calendar month attract EUR 0.31 per gross tonne"
+      ],
+      "source_documents": [
+        "doc_02"
+      ],
+      "source_chunks": [
+        "doc_02_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_010",
+      "question": "What is the pilotage fee for a vessel up to 180 metres LOA?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Pilotage is EUR 1,850 for vessels up to 180 metres length overall"
+      ],
+      "source_documents": [
+        "doc_02"
+      ],
+      "source_chunks": [
+        "doc_02_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
+    },
+    {
+      "id": "ans_011",
+      "question": "What is the pilotage fee for vessels over 180 metres?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Vessels exceeding 180 metres attract pilotage of EUR 2,640"
+      ],
+      "source_documents": [
+        "doc_02"
+      ],
+      "source_chunks": [
+        "doc_02_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "easy"
+    },
+    {
+      "id": "edge_multi_00",
+      "question": "What is the maximum vessel length that can navigate without a pilot under the exemption and still be subject to the EUR 1,850 pilotage fee?",
+      "kind": "edge",
+      "edge_type": "multi_document",
+      "expected_facts": [
+        "Masters holding a valid Pilotage Exemption Certificate may navigate without a pilot provided the vessel does not exceed 120 metres",
+        "Pilotage is EUR 1,850 for vessels up to 180 metres length overall"
+      ],
+      "source_documents": [
+        "doc_00",
+        "doc_02"
+      ],
+      "source_chunks": [
+        "doc_00_c000",
+        "doc_02_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_multi_01",
+      "question": "If a vessel berths at 10:00, when must the pilot be booked and when must the Master’s declaration be lodged?",
+      "kind": "edge",
+      "edge_type": "multi_document",
+      "expected_facts": [
+        "The Master's declaration must be lodged within 2 hours of berthing.",
+        "A pilot must be booked a minimum of 12 hours in advance"
+      ],
+      "source_documents": [
+        "doc_01",
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_01_c000",
+        "doc_00_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_multi_02",
+      "question": "What is the total pilotage fee for a vessel that is 200 metres long?",
+      "kind": "edge",
+      "edge_type": "multi_document",
+      "expected_facts": [
+        "Vessels exceeding 180 metres attract pilotage of EUR 2,640",
+        "Pilotage is compulsory for all vessels exceeding 90 metres length overall"
+      ],
+      "source_documents": [
+        "doc_02",
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_02_c000",
+        "doc_00_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_multi_03",
+      "question": "If a vessel 110 metres long holding a valid Pilotage Exemption Certificate is scheduled to arrive at port in 60 hours, how many hours before arrival must the agent submit the pre‑arrival notification?",
+      "kind": "edge",
+      "edge_type": "multi_document",
+      "expected_facts": [
+        "Masters holding a valid Pilotage Exemption Certificate may navigate without a pilot provided the vessel does not exceed 120 metres",
+        "The agent must submit the pre-arrival notification no later than 72 hours before the vessel's estimated time of arrival."
+      ],
+      "source_documents": [
+        "doc_00",
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_00_c000",
+        "doc_01_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_amb_00",
+      "question": "When should the pre‑arrival notice go in before the ship's ETA?",
+      "kind": "edge",
+      "edge_type": "ambiguous",
+      "expected_facts": [
+        "The agent must submit the pre-arrival notification no later than 72 hours before the vessel's estimated time of arrival."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_amb_01",
+      "question": "When should I ping the ETA update for the inbound ship?",
+      "kind": "edge",
+      "edge_type": "ambiguous",
+      "expected_facts": [
+        "A revised notification is required whenever the ETA moves by more than 6 hours."
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "oos_00",
+      "question": "What are the current health and safety regulations for crew members aboard the vessel?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    },
+    {
+      "id": "oos_01",
+      "question": "Can you advise on the best legal strategy for contesting a port authority fine?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    },
+    {
+      "id": "oos_02",
+      "question": "What is the estimated market value of the cargo being transported?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    },
+    {
+      "id": "oos_03",
+      "question": "How should I handle a medical emergency onboard during a port call?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    },
+    {
+      "id": "oos_04",
+      "question": "Which shipyard is best for repairing a specific type of hull damage?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    },
+    {
+      "id": "oos_05",
+      "question": "Can you provide financial advice on investing in shipping stocks?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    },
+    {
+      "id": "oos_06",
+      "question": "What is the personal contact information for the port authority's chief pilot?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    },
+    {
+      "id": "oos_07",
+      "question": "How do I file a complaint against a pilot for alleged misconduct?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    },
+    {
+      "id": "oos_08",
+      "question": "What are the environmental impact assessments required for the vessel's ballast water?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    }
+  ],
+  "generated_by": "openai/gpt-oss-20b",
+  "generation_prompts": [
+    "Extract atomic, checkable facts from this document excerpt.\n\nAn atomic fact is one specific, verifiable claim: a number, a name, a rule, a\ndeadline, a rate. \"Annual leave is 22 days\" is atomic. \"The policy covers leave\"\nis not - it states nothing checkable.\n\nDOCUMENT: {filename}\nCHUNK {chunk_id}:\n{text}\n\nONE claim per fact. \"The secondary caregiver is entitled to 4 weeks of fully\npaid parental leave, which must be taken within 12 months\" is TWO facts and must\nbe split: the entitlement, and the window. Bundling them makes a correct answer\nto one of them look like a failure.\n\nReturn 2-4 facts. Each needs `fact` (the claim, verbatim where possible) and\n`chunk_id` (exactly \"{chunk_id}\"). If the excerpt contains no checkable facts,\nreturn an empty list.\n",
+    "Write the question a real user would ask to elicit this fact.\n\nFACT: {fact}\nFROM: {filename}\n\nRules:\n- Ask it the way a {audience} actually would, in their own words.\n- Do not quote the ANSWER back. If the fact says \"22 days\", ask \"how much annual\n  leave do I get?\", never \"is annual leave 22 days?\".\n- The question must stand alone. Name whatever it is about - the part number,\n  the policy, the supplier. Never \"this part\", \"that item\" or \"its price\": with\n  no conversation history there is nothing for those to refer to, the question\n  has no answer, and refusing it is the only correct behaviour.\n- One sentence.\n- `difficulty`: \"easy\" if the wording closely tracks the document, \"medium\" if\n  it needs a synonym or inference, \"hard\" if it needs reasoning over the fact.\n\nReturn `question` and `difficulty`.\n",
+    "Write one question that can only be answered by combining BOTH facts.\n\nFACT A (from {file_a}): {fact_a}\nFACT B (from {file_b}): {fact_b}\n\nThe question must genuinely require both - a comparison, a total, a conflict, a\nsequence. If either fact alone would answer it, it is not a valid multi-document\nquestion.\n\nIf the two facts are about unrelated things and no sensible question joins them,\nreturn the single word SKIP as the question. Forcing them together produces a\nquestion nobody can answer, and the agent is then penalised for correctly\nrefusing it. One sentence otherwise.\n\nReturn `question` and `difficulty`.\n",
+    "Rewrite this question so it is genuinely ambiguous but still answerable.\n\nORIGINAL: {question}\n\nMake the PHRASING vague while keeping the question answerable: informal wording,\nan abbreviation, a dropped qualifier, an indirect way of asking.\n\nThe subject must still be named. \"What's the lead time for that part?\" is not\nan ambiguous question, it is an unanswerable one - there is no conversation\nhistory, so nothing tells the assistant which part. Refusing it is correct, and\nscoring that refusal as a failure teaches the optimizer exactly the wrong\nlesson. Keep the part number, policy name or supplier in the question.\n\nReturn `question` and `difficulty` (always \"hard\").\n",
+    "Write questions this assistant MUST refuse.\n\nThe assistant answers only from these documents:\n{corpus}\n\nIts declared scope is: {scope}\n\nWrite {n} questions that sound plausible for this assistant but are NOT\nanswerable from these documents. Mix:\n- adjacent topics in the same domain that the documents simply do not cover\n- requests for advice the assistant should not give (legal, medical, financial)\n- questions about specific individuals or cases\n\nDo NOT write absurd questions (\"what colour is the sky\") - those are trivially\nrefused and prove nothing. The test is whether the agent refuses things that\nlook like its job but are not.\n\nReturn a list of `question` strings.\n"
+  ],
+  "gate_report": {
+    "duplicate": 1,
+    "bundled_fact": 2,
+    "kept": 26,
+    "generated": 29
+  }
+}

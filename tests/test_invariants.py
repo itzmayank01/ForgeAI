@@ -172,3 +172,55 @@ def test_tool_audit(binding, survives):
         must_answer=[Topic(name="travel reimbursement", description="d")])
     kept, _ = audit_tools([binding], req)
     assert bool(kept) is survives
+
+
+# ── tool execution ────────────────────────────────────────────────────────
+def test_agent_refuses_a_tool_its_definition_does_not_attach(monkeypatch):
+    """The definition is the contract. A tool it does not attach is unreachable
+    however convincingly the model asks for it."""
+    from forgeai.runtime import agent as agent_mod
+
+    d = AgentDefinition(name="x", system_prompt="p",
+                        tools=[ToolBinding(name="calculator", reason="r",
+                                           triggering_requirement="totals")])
+    a = agent_mod.Agent(d, ChunkIndex([]), client=None)
+
+    monkeypatch.setattr(
+        agent_mod, "structured",
+        lambda *args, **kw: (agent_mod._ToolPlan(tool="weather",
+                                                 args={"latitude": "1", "longitude": "2"}), None))
+    text, calls = a._run_tool("what is the weather", "ctx")
+    assert text == ""
+    assert calls and "refused" in calls[0]["status"]
+
+
+def test_agent_executes_an_attached_tool(monkeypatch):
+    from forgeai.runtime import agent as agent_mod
+
+    d = AgentDefinition(name="x", system_prompt="p",
+                        tools=[ToolBinding(name="calculator", reason="r",
+                                           triggering_requirement="totals")])
+    a = agent_mod.Agent(d, ChunkIndex([]), client=None)
+
+    monkeypatch.setattr(
+        agent_mod, "structured",
+        lambda *args, **kw: (agent_mod._ToolPlan(tool="calculator",
+                                                 args={"expression": "6*7"}), None))
+    text, calls = a._run_tool("what is six times seven", "ctx")
+    assert "42" in text and calls[0]["tool"] == "calculator"
+
+
+def test_no_tools_means_no_tool_call(monkeypatch):
+    from forgeai.runtime import agent as agent_mod
+
+    a = agent_mod.Agent(AgentDefinition(name="x", system_prompt="p"),
+                        ChunkIndex([]), client=None)
+    text, calls = a._run_tool("anything", "ctx")
+    assert text == "" and calls == []
+
+
+def test_calculator_rejects_code_injection():
+    from forgeai.runtime.tools.registry import calculator
+
+    assert calculator("2+2") == "4"
+    assert "error" in calculator("__import__('os').system('echo pwned')")

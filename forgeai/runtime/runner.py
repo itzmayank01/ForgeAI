@@ -18,9 +18,11 @@ def load_index(chunks_path: Path) -> ChunkIndex:
     return ChunkIndex([Chunk(**c) for c in data["chunks"]])
 
 
-def chat(definition_path: Path, chunks_path: Path) -> None:
+def chat(definition_path: Path, chunks_path: Path,
+         docs_dir: Path | None = None) -> None:
     console = Console()
-    agent = Agent.from_file(definition_path, load_index(chunks_path), LLMClient())
+    agent = Agent.from_file(definition_path, load_index(chunks_path),
+                            LLMClient(), docs_dir=docs_dir)
     d = agent.definition
 
     console.print(Panel(

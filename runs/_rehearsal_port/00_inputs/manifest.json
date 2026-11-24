@@ -1,0 +1,28 @@
+{
+  "brief": "We need an assistant for our port agency desk. It should answer questions about\nport call procedures, documentation deadlines, tariff charges and pilotage\nrequirements from our operations manuals. Agents use it while a vessel is\ninbound, so answers must be exact and cite the clause. It must not give customs\nor immigration rulings, and must not estimate charges for ports we have no\ntariff for.",
+  "documents": [
+    {
+      "doc_id": "doc_00",
+      "filename": "pilotage_rules.md",
+      "kind": "md",
+      "n_chars": 672,
+      "sha256": "adcced99e21c2cba"
+    },
+    {
+      "doc_id": "doc_01",
+      "filename": "port_call_procedure.md",
+      "kind": "md",
+      "n_chars": 709,
+      "sha256": "3380bad7d94ed114"
+    },
+    {
+      "doc_id": "doc_02",
+      "filename": "tariff_schedule.md",
+      "kind": "md",
+      "n_chars": 705,
+      "sha256": "10a38d874242fa72"
+    }
+  ],
+  "skipped": [],
+  "corpus_hash": "7f27b83e52942a65"
+}

@@ -27,8 +27,14 @@ class _PromptOut(BaseModel):
     system_prompt: str
 
 
-class _ToolsOut(BaseModel):
-    tools: list[ToolBinding] = Field(default_factory=list)
+class _ToolNames(BaseModel):
+    # A list of plain strings: the one shape a small model reliably produces.
+    tools: list[str] = Field(default_factory=list)
+
+
+class _ToolJustification(BaseModel):
+    requirement: str = ""
+    reason: str = ""
 
 
 def _normalise(s: str) -> str:
@@ -94,14 +100,31 @@ def generate_agent(
     if prompt_out is None:
         log("  generator: prompt call failed; using deterministic template")
 
-    tools_out, _ = structured(
-        client, model_cls=_ToolsOut, temperature=0.0,
+    names_out, _ = structured(
+        client, model_cls=_ToolNames, temperature=0.0,
         instruction=P.TOOLS.format(
             registry=describe_registry(), scope=req.scope, must_answer=must_answer,
             kinds=", ".join(sorted({d.kind for d in summary.documents})) or "none",
         ),
     )
-    proposed = tools_out.tools if tools_out else []
+
+    # Ask for the justification separately, one tool at a time. Bundling it into
+    # the selection call produced malformed JSON that validated as an empty
+    # list, so a correct selection silently became "no tools".
+    topics = "\n".join(f"- {t.name}" for t in req.must_answer) or "(none)"
+    proposed_bindings: list[ToolBinding] = []
+    for name in (names_out.tools if names_out else [])[:4]:
+        just, _ = structured(
+            client, model_cls=_ToolJustification, temperature=0.0,
+            instruction=P.TOOL_JUSTIFY.format(tool=name, topics=topics),
+        )
+        proposed_bindings.append(ToolBinding(
+            name=name.strip(),
+            reason=(just.reason if just else "") or "no reason given",
+            triggering_requirement=(just.requirement if just else "").strip(),
+        ))
+
+    proposed = proposed_bindings
     tools, rejected = audit_tools(proposed, req)
     for r in rejected:
         log(f"  tool rejected -> {r}")

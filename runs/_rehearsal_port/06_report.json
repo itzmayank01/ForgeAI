@@ -1,0 +1,192 @@
+{
+  "run_id": "_rehearsal_port",
+  "brief": "We need an assistant for our port agency desk. It should answer questions about\nport call procedures, documentation deadlines, tariff charges and pilotage\nrequirements from our operations manuals. Agents use it while a vessel is\ninbound, so answers must be exact and cite the clause. It must not give customs\nor immigration rulings, and must not estimate charges for ports we have no\ntariff for.",
+  "corpus_hash": "7f27b83e52942a65",
+  "final_pass_rate": 0.885,
+  "scorecards": [
+    {
+      "iteration": 0,
+      "total": 26,
+      "passed": 23,
+      "pass_rate": 0.885,
+      "by_kind": {
+        "answerable": 0.909,
+        "edge": 0.667,
+        "out_of_scope": 1.0
+      },
+      "by_difficulty": {
+        "easy": 1.0,
+        "medium": 0.929,
+        "hard": 0.667
+      },
+      "mean_answer_length": 65,
+      "llm_escalation_rate": 0.0
+    },
+    {
+      "iteration": 1,
+      "total": 26,
+      "passed": 23,
+      "pass_rate": 0.885,
+      "by_kind": {
+        "answerable": 0.909,
+        "edge": 0.667,
+        "out_of_scope": 1.0
+      },
+      "by_difficulty": {
+        "easy": 1.0,
+        "medium": 0.929,
+        "hard": 0.667
+      },
+      "mean_answer_length": 62,
+      "llm_escalation_rate": 0.0
+    },
+    {
+      "iteration": 2,
+      "total": 26,
+      "passed": 23,
+      "pass_rate": 0.885,
+      "by_kind": {
+        "answerable": 0.909,
+        "edge": 0.667,
+        "out_of_scope": 1.0
+      },
+      "by_difficulty": {
+        "easy": 1.0,
+        "medium": 0.929,
+        "hard": 0.667
+      },
+      "mean_answer_length": 66,
+      "llm_escalation_rate": 0.0
+    }
+  ],
+  "iterations": [
+    {
+      "iteration": 0,
+      "failures_by_category": {
+        "prompt_defect": 3
+      },
+      "diagnoses": [
+        {
+          "case_id": "ans_007",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.0",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_02",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.0",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_03",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.5",
+          "classified_by": "deterministic"
+        }
+      ],
+      "fix": {
+        "category": "prompt_defect",
+        "rung": "patch_format_block",
+        "rationale": "3 failures classified prompt_defect; applying patch_format_block",
+        "targets_case_ids": [
+          "ans_007",
+          "edge_multi_02",
+          "edge_multi_03"
+        ],
+        "diff": {
+          "before": {
+            "system_prompt": "<949 chars>"
+          },
+          "after": {
+            "system_prompt": "<1267 chars, FORMAT revised>"
+          }
+        }
+      },
+      "score_before": 0.885,
+      "score_after": 0.885,
+      "kept": false,
+      "revert_reason": "scored 88% against best 88%; reverted to v0",
+      "seconds": 173.6,
+      "tokens": 51592
+    },
+    {
+      "iteration": 1,
+      "failures_by_category": {
+        "prompt_defect": 3
+      },
+      "diagnoses": [
+        {
+          "case_id": "ans_007",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.0",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_02",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.0",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_03",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.5",
+          "classified_by": "deterministic"
+        }
+      ],
+      "fix": {
+        "category": "prompt_defect",
+        "rung": "patch_scope_block",
+        "rationale": "3 failures classified prompt_defect; applying patch_scope_block",
+        "targets_case_ids": [
+          "ans_007",
+          "edge_multi_02",
+          "edge_multi_03"
+        ],
+        "diff": {
+          "before": {
+            "system_prompt": "<949 chars>"
+          },
+          "after": {
+            "system_prompt": "<983 chars, SCOPE revised>"
+          }
+        }
+      },
+      "score_before": 0.885,
+      "score_after": 0.885,
+      "kept": false,
+      "revert_reason": "scored 88% against best 88%; reverted to v0",
+      "seconds": 229.7,
+      "tokens": 82496
+    }
+  ],
+  "residual_failures": [
+    {
+      "case_id": "ans_007",
+      "question": "What is the penalty if we cancel a pilotage booking within four hours of the scheduled time?",
+      "why": "fact recall 0.0"
+    },
+    {
+      "case_id": "edge_multi_02",
+      "question": "What is the total pilotage fee for a vessel that is 200 metres long?",
+      "why": "fact recall 0.0"
+    },
+    {
+      "case_id": "edge_multi_03",
+      "question": "If a vessel 110 metres long holding a valid Pilotage Exemption Certificate is scheduled to arrive at port in 60 hours, how many hours before arrival must the agent submit the pre‑arrival notification?",
+      "why": "fact recall 0.5"
+    }
+  ],
+  "calibration": null,
+  "stop_reason": "iteration cap (2) reached",
+  "budget": {
+    "max_tokens": 500000,
+    "max_seconds": 2400,
+    "max_iterations": 2,
+    "tokens_used": 110858,
+    "started_at": 1795550657.00881
+  },
+  "best_version": 0,
+  "evaluated": true
+}

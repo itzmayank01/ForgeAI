@@ -1,0 +1,818 @@
+{
+ "ans_000": {
+  "answer": "The pre\u2011arrival notification must be submitted no later than 72\u202fhours before the vessel\u2019s estimated time of arrival.",
+  "citations": [
+   "doc_01_c000"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.8331
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.6789
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.6439
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_001": {
+  "answer": "A revised notification must be sent whenever the vessel\u2019s estimated time of arrival changes by more than 6 hours.",
+  "citations": [
+   "doc_01_c000"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.7912
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.6274
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.6025
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_002": {
+  "answer": "The Master's declaration must be lodged within 2 hours of berthing.",
+  "citations": [
+   "doc_01_c000"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.7759
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.6647
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.6076
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_004": {
+  "answer": "Yes, pilotage is compulsory for all vessels exceeding 90 metres length overall.",
+  "citations": [
+   "doc_00_c000"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.7897
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.7077
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.6453
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_006": {
+  "answer": "A pilot must be booked at least 12 hours in advance.",
+  "citations": [
+   "doc_00_c000"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.7992
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.7261
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.6029
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_008": {
+  "answer": "EUR 0.42 per gross tonne",
+  "citations": [
+   "doc_02_c000"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.8104
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.6611
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.5757
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_007": {
+  "answer": "Cancellation within four hours of the booked time incurs a penalty of 50% of the pilotage fee.",
+  "citations": [
+   "doc_00_c000"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.6912
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.6522
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.6324
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_005": {
+  "answer": "No. A master with a valid Pilotage Exemption Certificate may navigate without a pilot only if the vessel does not exceed 120 metres length overall.",
+  "citations": [
+   "doc_00_c000"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.781
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.6524
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.632
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_009": {
+  "answer": "EUR 0.31 per gross tonne",
+  "citations": [
+   "doc_02_c000"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.7254
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.5818
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.5227
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_010": {
+  "answer": "The pilotage fee is EUR\u202f1,850 for vessels up to 180\u202fmetres LOA.",
+  "citations": [
+   "doc_02_c000"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.7324
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.711
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.6375
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_011": {
+  "answer": "The pilotage fee for vessels exceeding 180 metres is EUR 2,640.",
+  "citations": [
+   "doc_02_c000"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.7783
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.7329
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.6523
+   }
+  ],
+  "tool_calls": []
+ },
+ "edge_multi_02": {
+  "answer": "The pilotage fee for a vessel 200 metres long is EUR\u202f2,640.",
+  "citations": [
+   "doc_02_c000"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.7501
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.7162
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.6502
+   }
+  ],
+  "tool_calls": []
+ },
+ "edge_multi_00": {
+  "answer": "The exemption allows vessels up to 120\u202fmetres LOA to navigate without a pilot, and the EUR\u202f1,850 pilotage fee applies to vessels up to 180\u202fmetres. Therefore, the maximum vessel length that can be exempt and still fall within the EUR\u202f1,850 fee bracket is 120\u202fmetres.",
+  "citations": [
+   "doc_00_c000",
+   "doc_02_c000"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.7673
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.7478
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.6553
+   }
+  ],
+  "tool_calls": []
+ },
+ "edge_multi_03": {
+  "answer": "The agent must submit the pre\u2011arrival notification at least 72\u202fhours before the vessel\u2019s estimated time of arrival.",
+  "citations": [
+   "doc_01_c000"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.7875
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.7321
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.6585
+   }
+  ],
+  "tool_calls": []
+ },
+ "edge_amb_00": {
+  "answer": "The pre\u2011arrival notification must be submitted no later than 72\u202fhours before the vessel\u2019s estimated time of arrival.",
+  "citations": [
+   "doc_01_c000"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.8083
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.6308
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.6184
+   }
+  ],
+  "tool_calls": []
+ },
+ "edge_amb_01": {
+  "answer": "You should send an updated ETA notification whenever the vessel\u2019s estimated time of arrival changes by more than 6 hours.",
+  "citations": [
+   "doc_01_c000"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.7278
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.5796
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.5514
+   }
+  ],
+  "tool_calls": []
+ },
+ "edge_multi_01": {
+  "answer": "The pilot must be booked at least 12\u202fhours before the 10:00 berthing, i.e., by 22:00 the previous day, and the Master\u2019s declaration must be lodged within 2\u202fhours of berthing, i.e., by 12:00 on the day of arrival.",
+  "citations": [
+   "doc_00_c000",
+   "doc_01_c000"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.7605
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.733
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.6243
+   }
+  ],
+  "tool_calls": []
+ },
+ "oos_01": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.609
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.5947
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.5174
+   }
+  ],
+  "tool_calls": []
+ },
+ "oos_02": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.6873
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.5775
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.5578
+   }
+  ],
+  "tool_calls": []
+ },
+ "oos_04": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.5031
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.4709
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.4313
+   }
+  ],
+  "tool_calls": []
+ },
+ "oos_03": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.6708
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.5989
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.5608
+   }
+  ],
+  "tool_calls": []
+ },
+ "oos_05": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.529
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.5237
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.5163
+   }
+  ],
+  "tool_calls": []
+ },
+ "oos_00": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.6372
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.629
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.5765
+   }
+  ],
+  "tool_calls": []
+ },
+ "oos_08": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.6009
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.6002
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.5463
+   }
+  ],
+  "tool_calls": []
+ },
+ "oos_06": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.6393
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.5719
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.5689
+   }
+  ],
+  "tool_calls": []
+ },
+ "oos_07": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "pilotage_rules.md",
+    "text": "# Pilotage Requirements \u2014 Operations Manual Section 6\n6.1 Pilotage is compulsory for all vessels exceeding **90 metres** length overall.\n6.2 Masters holding a valid Pilotage Exemption Certificate may navigate without a\npilot provided the vessel does not exceed **120 metres**.\n6.3 A pilot must be booked a minimum of **12 hours** in advance.\n6.4 Cancellation within **4 hours** of the booked time incurs **50%** of the\npilotage fee.\n6.5 Pilot boarding takes place at the outer station in weather up to Beaufort\nforce **6**; above that the inner station is used.\n6.6 A second pilot is required for vessels exceeding **250 metres** or carrying\ndangerous goods in bulk.",
+    "score": 0.6113
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "port_call_procedure.md",
+    "text": "# Port Call Procedure \u2014 Operations Manual Section 3\n3.1 The agent must submit the pre-arrival notification no later than **72 hours**\nbefore the vessel's estimated time of arrival.\n3.2 A revised notification is required whenever the ETA moves by more than\n**6 hours**.\n3.3 The Master's declaration must be lodged within **2 hours** of berthing.\n3.4 Crew lists are submitted in duplicate; one copy is retained by the agency for\n**7 years**.\n3.5 Where a vessel arrives outside office hours, an out-of-hours attendance fee\nof **EUR 340** applies.\n3.6 Shifting a vessel between berths requires **4 hours** notice to the harbour\nmaster.\n3.7 The agency retains port call files for **5 years** from departure.",
+    "score": 0.5844
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "tariff_schedule.md",
+    "text": "# Tariff Schedule 2026 \u2014 Rotterdam and Antwerp only\n4.1 Port dues are charged at **EUR 0.42 per gross tonne** for the first call in a\ncalendar month.\n4.2 Subsequent calls within the same calendar month attract **EUR 0.31 per gross\ntonne**.\n4.3 Pilotage is **EUR 1,850** for vessels up to 180 metres length overall.\n4.4 Vessels exceeding 180 metres attract pilotage of **EUR 2,640**.\n4.5 Towage is quoted per job and is **not** included in the tariff.\n4.6 Mooring gangs are charged at **EUR 580** per operation, doubled between\n22:00 and 06:00.\n4.7 Waste reception is **EUR 95** per cubic metre, minimum **3** cubic metres.\n4.8 All tariffs exclude VAT and are payable within **21 days** of invoice.",
+    "score": 0.565
+   }
+  ],
+  "tool_calls": []
+ }
+}
