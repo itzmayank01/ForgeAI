@@ -35,8 +35,12 @@ FROM: {filename}
 
 Rules:
 - Ask it the way a {audience} actually would, in their own words.
-- Do not quote the fact back. If the fact says "22 days", ask "how much annual
+- Do not quote the ANSWER back. If the fact says "22 days", ask "how much annual
   leave do I get?", never "is annual leave 22 days?".
+- The question must stand alone. Name whatever it is about - the part number,
+  the policy, the supplier. Never "this part", "that item" or "its price": with
+  no conversation history there is nothing for those to refer to, the question
+  has no answer, and refusing it is the only correct behaviour.
 - One sentence.
 - `difficulty`: "easy" if the wording closely tracks the document, "medium" if
   it needs a synonym or inference, "hard" if it needs reasoning over the fact.
@@ -65,9 +69,14 @@ AMBIGUOUS = """Rewrite this question so it is genuinely ambiguous but still answ
 
 ORIGINAL: {question}
 
-Introduce vagueness a real user would produce: a pronoun with no clear referent,
-a dropped qualifier, an informal abbreviation. Keep it answerable from the same
-source. Do not make it unanswerable - that is a different test class.
+Make the PHRASING vague while keeping the question answerable: informal wording,
+an abbreviation, a dropped qualifier, an indirect way of asking.
+
+The subject must still be named. "What\'s the lead time for that part?" is not
+an ambiguous question, it is an unanswerable one - there is no conversation
+history, so nothing tells the assistant which part. Refusing it is correct, and
+scoring that refusal as a failure teaches the optimizer exactly the wrong
+lesson. Keep the part number, policy name or supplier in the question.
 
 Return `question` and `difficulty` (always "hard").
 """

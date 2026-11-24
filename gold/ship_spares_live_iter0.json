@@ -1,0 +1,101 @@
+{
+  "_README": "Set `human` to true if the agent's answer is genuinely acceptable, false otherwise. Then: forgeai calibrate --run <run> --gold <this file>",
+  "labels": {
+    "edge_amb_03": {
+      "question": "Which supplier provides that part, SEA-1224?",
+      "answer": "The supplier for part SEA-1224 is Kowloon Diesel Parts.",
+      "judge": true,
+      "judge_notes": "",
+      "human": true,
+      "rationale": "SEA-1224 named; supplier correct"
+    },
+    "ans_010": {
+      "question": "What is the lead time for parts listed in the catalogue?",
+      "answer": "The catalogue shows lead times ranging from 2 days to 60 days, depending on the part. For example, the Centrifugal ballast pump (standard) PUM-1007 has a lead time of 45 days [doc_00_c000]; the Heavy\u2011duty ballast pump PUM-1014 is 60 days [doc_00_c000]; the Fuel transfer pump PUM-1021 is 30 days [doc_00_c000]. Hydraulic return filters have a 21\u2011day lead time [doc_00_c009]; the Stern tube seal ring ",
+      "judge": true,
+      "judge_notes": "",
+      "human": true,
+      "rationale": "reasonable range answer to a vague catalogue-wide question"
+    },
+    "oos_01": {
+      "question": "Can you provide a detailed cost-benefit analysis comparing leasing versus purchasing ship spare parts for our fleet?",
+      "answer": "",
+      "judge": true,
+      "judge_notes": "",
+      "human": true,
+      "rationale": "lease-vs-buy analysis absent from corpus; refused"
+    },
+    "oos_04": {
+      "question": "How should I structure a financing agreement to purchase high-value spares while minimizing tax liabilities?",
+      "answer": "",
+      "judge": true,
+      "judge_notes": "",
+      "human": true,
+      "rationale": "financing structure absent from corpus; refused"
+    },
+    "ans_003": {
+      "question": "Which supplier supplies part number SEA-1224?",
+      "answer": "Kowloon Diesel Parts",
+      "judge": true,
+      "judge_notes": "",
+      "human": true,
+      "rationale": "SEA-1224 named; supplier correct"
+    },
+    "oos_03": {
+      "question": "What is the current market value of a specific individual\u2019s ownership stake in Supplier Kowloon Ltd.?",
+      "answer": "",
+      "judge": true,
+      "judge_notes": "",
+      "human": true,
+      "rationale": "ownership stake absent from corpus; refused"
+    },
+    "ans_009": {
+      "question": "What is the unit price in euros for this part?",
+      "answer": "",
+      "judge": false,
+      "judge_notes": "refused an answerable question",
+      "human": true,
+      "rationale": "'this part' - no part named anywhere; unanswerable"
+    },
+    "edge_amb_01": {
+      "question": "What's the lead time in days for that part?",
+      "answer": "",
+      "judge": false,
+      "judge_notes": "refused an answerable question",
+      "human": true,
+      "rationale": "'that part' - no referent; unanswerable"
+    },
+    "edge_amb_00": {
+      "question": "What's its price in euros according to the catalogue?",
+      "answer": "",
+      "judge": false,
+      "judge_notes": "refused an answerable question",
+      "human": true,
+      "rationale": "'its price' - no referent; unanswerable"
+    },
+    "ans_011": {
+      "question": "How many units of this part are currently in stock?",
+      "answer": "",
+      "judge": false,
+      "judge_notes": "refused an answerable question",
+      "human": true,
+      "rationale": "'this part' - no referent; unanswerable"
+    },
+    "ans_000": {
+      "question": "What is the unit price in euros for the part listed in the parts catalogue?",
+      "answer": "The parts catalogue lists the following unit prices in euros: VAL-1084: 1420.4; VAL-1091: 2201.7; VAL-1098: 4779.37; VAL-1105: 3641.26; PUM-1007: 2177.99; PUM-1014: 2443.54; PUM-1021: 3861.07; VAL-1126: 4068.92; VAL-1133: 4450.68; VAL-1140: 4705.96; FIL-1147: 2723.17; FIL-1168: 3397.19; FIL-1175: 3828.14; FIL-1182: 913.99; FIL-1189: 3696.47; VAL-1112: 348.23; VAL-1119: 4065.44.",
+      "judge": false,
+      "judge_notes": "fact recall 0.0",
+      "human": true,
+      "rationale": "'the part' is ill-posed; listing the catalogue is responsive"
+    },
+    "edge_multi_02": {
+      "question": "What must be obtained before shipping the out-of-stock part SEA-1231?",
+      "answer": "",
+      "judge": false,
+      "judge_notes": "refused an answerable question",
+      "human": true,
+      "rationale": "RMA governs returns, not dispatch; refusing is right"
+    }
+  }
+}

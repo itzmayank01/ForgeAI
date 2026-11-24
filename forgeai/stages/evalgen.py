@@ -188,13 +188,17 @@ def quality_gate(cases: list[EvalCase], index: ChunkIndex) -> tuple[list[EvalCas
     """
     kept: list[EvalCase] = []
     dropped = {"empty": 0, "no_expected_facts": 0, "oos_is_answerable": 0,
-               "fact_not_in_source": 0, "duplicate": 0, "bundled_fact": 0}
+               "fact_not_in_source": 0, "duplicate": 0, "bundled_fact": 0,
+               "dangling_referent": 0}
     seen: list[str] = []
 
     for c in cases:
         q = c.question.strip()
         if len(q) < 10:
             dropped["empty"] += 1
+            continue
+        if _has_dangling_referent(q):
+            dropped["dangling_referent"] += 1
             continue
         norm = " ".join(q.lower().split())
         if any(norm == s or (len(norm) > 25 and norm in s) for s in seen):
@@ -236,6 +240,21 @@ def quality_gate(cases: list[EvalCase], index: ChunkIndex) -> tuple[list[EvalCas
 
 
 _BUNDLE_MARKERS = re.compile(r",\s*(which|and must|and is|and the)\b|;", re.I)
+
+_DANGLING = re.compile(
+    r"\b(this|that|the|its|their)\s+(part|item|product|policy|supplier|clause|"
+    r"document|agreement|component)\b", re.I)
+_NAMED = re.compile(r"[A-Z]{2,}-\d+|\b[A-Z][a-z]+\s+[A-Z][a-z]+\b|\.(md|csv|pdf)\b")
+
+
+def _has_dangling_referent(question: str) -> bool:
+    """A question about "this part" with no part named has no answer.
+
+    Calibration found the agent correctly refusing five such questions and the
+    judge marking every one a failure - kappa 0.00 on that corpus. The subject
+    must be named for the question to be gradeable at all.
+    """
+    return bool(_DANGLING.search(question)) and not _NAMED.search(question)
 
 
 def _is_bundled(fact: str) -> bool:
