@@ -54,6 +54,7 @@ class CaseVerdict(BaseModel):
     judge_path: Literal["deterministic", "llm_escalation"] = "deterministic"
     notes: str = ""
     answer_length: int = 0  # reported, NEVER scored - verbosity-bias defense
+    tool_calls: list[dict] = Field(default_factory=list)
 
 
 class Scorecard(BaseModel):

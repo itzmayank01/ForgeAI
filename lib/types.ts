@@ -71,6 +71,14 @@ export interface CaseVerdict {
   unsupported_claim_rate: number; retrieved_chunks: string[]; passed: boolean;
   judge_path: "deterministic" | "llm_escalation"; notes: string;
   answer_length: number;
+  /** Tools the runtime actually invoked for this case. An attached tool that
+   *  never fires and one that does look identical without this. */
+  tool_calls?: {
+    tool: string;
+    args?: Record<string, string>;
+    result?: string;
+    status?: string;
+  }[];
 }
 
 export interface Scorecard {

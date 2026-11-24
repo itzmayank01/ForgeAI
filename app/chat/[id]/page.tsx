@@ -47,12 +47,15 @@ export default async function ChatPage({ params }: { params: Promise<{ id: strin
         </div>
 
         <p className="mt-6 rounded-xl border border-warn/30 bg-warn/[0.06] p-4 text-[12.5px] leading-relaxed text-muted">
-        <strong className="text-warn">Retrieval differs here.</strong> The CLI runtime retrieves
-        with dense <code className="font-mono">bge-small</code> embeddings, which cannot run
-        inside a Vercel function. This hosted chat uses BM25 over the same committed chunks and
-        the same agent definition. Every score on the run page was measured with the CLI, which
-        is the reference implementation.
-      </p>
+        <strong className="text-warn">This runtime is reduced.</strong> Two
+          differences from the CLI, both stated rather than hidden. Retrieval
+          here is BM25 over the same committed chunks, because dense{" "}
+          <code className="font-mono">bge-small</code> embeddings cannot run
+          inside a Vercel function. And attached tools are not executed here —
+          the CLI runs one tool call per question through the registry, which
+          this route does not. The agent definition and corpus are identical,
+          and every score on the run page was measured with the CLI, which is
+          the reference implementation.</p>
 
         <ChatClient runId={id} suggestions={suggestions} />
       </div>

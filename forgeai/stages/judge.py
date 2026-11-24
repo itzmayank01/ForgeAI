@@ -143,6 +143,7 @@ def judge_case(case: EvalCase, response: AgentResponse, client: LLMClient) -> Ca
             fact_recall=1.0 if response.refused else 0.0,
             retrieved_chunks=retrieved_ids, passed=passed,
             judge_path="deterministic", answer_length=len(response.answer),
+            tool_calls=response.tool_calls,
             notes="" if passed else "answered a question it should have refused",
         )
 
@@ -152,6 +153,7 @@ def judge_case(case: EvalCase, response: AgentResponse, client: LLMClient) -> Ca
             correct=False, citations_valid=True, fact_recall=0.0,
             retrieved_chunks=retrieved_ids, passed=False,
             judge_path="deterministic", answer_length=len(response.answer),
+            tool_calls=response.tool_calls,
             notes="refused an answerable question",
         )
 
@@ -183,7 +185,8 @@ def judge_case(case: EvalCase, response: AgentResponse, client: LLMClient) -> Ca
         correct=correct, citations_valid=citations_valid, fact_recall=recall,
         unsupported_claim_rate=unsupported_rate, retrieved_chunks=retrieved_ids,
         passed=passed, judge_path="llm_escalation" if used_llm else "deterministic",
-        answer_length=len(response.answer), notes="; ".join(notes),
+        answer_length=len(response.answer), tool_calls=response.tool_calls,
+        notes="; ".join(notes),
     )
 
 

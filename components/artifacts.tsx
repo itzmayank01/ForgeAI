@@ -268,6 +268,20 @@ export function SuitePanel({
                           </div>
                         )}
                         <div className="mt-1 text-[11px] text-muted">{v.judge_path}</div>
+                        {v.tool_calls && v.tool_calls.length > 0 && (
+                          <div className="mt-1 flex flex-wrap gap-1">
+                            {v.tool_calls.map((tc, i) => (
+                              <code
+                                key={i}
+                                className="rounded bg-accent/10 px-1.5 py-0.5 font-mono text-[10px] text-accent"
+                                title={tc.status ?? tc.result ?? ""}
+                              >
+                                {tc.tool}
+                                {tc.status ? " (refused)" : ""}
+                              </code>
+                            ))}
+                          </div>
+                        )}
                       </>
                     ) : (
                       <span className="text-xs text-muted">—</span>
