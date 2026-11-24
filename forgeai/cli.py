@@ -127,6 +127,71 @@ def chat(
 
 
 @app.command()
+def regress(
+    run: Path = typer.Option(..., help="Baseline run whose eval suite to replay."),
+    docs: Path = typer.Option(..., help="Changed document folder."),
+    out: Path = typer.Option(None, help="Where to write the regression report."),
+) -> None:
+    """Replay a baseline eval set against an agent regenerated from changed docs.
+
+    The question is not whether the new agent scores well but what this change
+    BROKE: a case that passed before and fails now is a regression even if the
+    headline rate improves.
+    """
+    from .ingest.chunker import chunk_corpus
+    from .ingest.index import ChunkIndex
+    from .ingest.loaders import load_folder
+    from .llm.client import LLMClient
+    from .models.evals import CaseVerdict, EvalSuite
+    from .pipeline import build_corpus_summary, run_eval
+    from .runtime.agent import Agent
+    from .stages import generator, judge, intake
+    from .stages.regression import compare, render
+
+    suite = EvalSuite.model_validate_json((run / "04_eval_suite.json").read_text())
+    baseline = json.loads(
+        (run / "05_iterations" / "iter_0" / "verdicts.json").read_text())["verdicts"]
+    before = [CaseVerdict.model_validate(v) for v in baseline]
+    old_manifest = json.loads((run / "00_inputs" / "manifest.json").read_text())
+
+    console.rule(f"[bold]regression[/bold] {run.name} vs {docs}")
+    refs, texts, _ = load_folder(docs)
+    chunks = chunk_corpus(refs, texts, 800, 120)
+    index = ChunkIndex(chunks)
+    summary = build_corpus_summary(refs, texts, chunks)
+    console.print(f"  {len(refs)} documents, {len(chunks)} chunks")
+
+    client = LLMClient()
+    req = intake.run_intake(client, old_manifest["brief"], summary,
+                            index=index, log=console.print)
+    definition, _ = generator.generate_agent(client, req, summary, log=console.print)
+    console.print(f"  regenerated agent v{definition.version}")
+
+    responses, complete = run_eval(Agent(definition, index, client), suite,
+                                   None, None, console.print)
+    if not complete:
+        console.print("[yellow]  incomplete pass — comparison would be misleading[/yellow]")
+        raise typer.Exit(1)
+
+    after = judge.judge_all(suite.cases, responses, client)
+    report = compare(suite.cases, before, after, baseline_run=run.name,
+                     corpus_before=old_manifest.get("corpus_hash", "?"),
+                     corpus_after=summary.corpus_hash)
+
+    out = out or run / "07_regression.md"
+    out.write_text(render(report))
+    (out.with_suffix(".json")).write_text(report.model_dump_json(indent=2))
+
+    console.print(f"\n  {report.pass_rate_before:.0%} -> {report.pass_rate_after:.0%}  "
+                  f"broke {len(report.broke)} · fixed {len(report.fixed)} · "
+                  f"unchanged {report.unchanged}")
+    for d in report.broke:
+        console.print(f"  [red]broke[/red] {d.case_id}: {d.question[:70]}")
+    console.print(f"  report -> {out}")
+    raise typer.Exit(1 if report.regressed else 0)
+
+
+@app.command()
 def gold(
     run: Path = typer.Option(..., help="Run directory holding judged verdicts."),
     out: Path = typer.Option(None, help="Where to write the template."),

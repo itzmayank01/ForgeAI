@@ -72,7 +72,12 @@ def run_eval(
     if cache_path and cache_path.exists():
         try:
             raw = json.loads(cache_path.read_text())
-            done = {k: AgentResponse.model_validate(v) for k, v in raw.items()}
+            # Drop answers for cases the suite no longer contains. Regenerating
+            # a suite leaves orphans behind, and a cache reporting "24 of 22"
+            # invites the reader to doubt the count that matters.
+            valid = {c.id for c in suite.cases}
+            done = {k: AgentResponse.model_validate(v)
+                    for k, v in raw.items() if k in valid}
         except Exception:  # noqa: BLE001 - a corrupt cache just means redo it
             done = {}
 
