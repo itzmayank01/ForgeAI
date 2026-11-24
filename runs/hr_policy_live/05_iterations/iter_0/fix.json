@@ -1,0 +1,83 @@
+{
+  "iteration": 0,
+  "failures_by_category": {
+    "hallucination": 1,
+    "prompt_defect": 4,
+    "wrong_refusal": 3
+  },
+  "diagnoses": [
+    {
+      "case_id": "ans_000",
+      "category": "hallucination",
+      "evidence": "cited chunk ids it never retrieved",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_001",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_003",
+      "category": "wrong_refusal",
+      "evidence": "refused despite retrieving ['doc_01_c002']",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_007",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_013",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_014",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_00",
+      "category": "wrong_refusal",
+      "evidence": "refused despite retrieving ['doc_00_c002', 'doc_01_c002']",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_02",
+      "category": "wrong_refusal",
+      "evidence": "refused despite retrieving ['doc_00_c002', 'doc_02_c000']",
+      "classified_by": "deterministic"
+    }
+  ],
+  "fix": {
+    "category": "prompt_defect",
+    "rung": "patch_format_block",
+    "rationale": "8 failures classified prompt_defect; applying patch_format_block",
+    "targets_case_ids": [
+      "ans_001",
+      "ans_007",
+      "ans_013",
+      "ans_014"
+    ],
+    "diff": {
+      "before": {
+        "system_prompt": "<995 chars>"
+      },
+      "after": {
+        "system_prompt": "<1415 chars, FORMAT revised>"
+      }
+    }
+  },
+  "score_before": 0.714,
+  "score_after": 0.0,
+  "kept": true,
+  "revert_reason": null,
+  "seconds": 304.6,
+  "tokens": 34506
+}

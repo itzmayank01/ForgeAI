@@ -1,0 +1,28 @@
+{
+  "brief": "Build me a procurement assistant for our ship spares desk. It should answer\nquestions about part availability, prices and lead times from the parts\ncatalogue, and about supplier terms, minimum order quantities and warranty\nconditions from the supplier agreements. It needs to work out order totals.\nPurchasing officers use it. It must not recommend one supplier over another or\ncommit to a delivery date it cannot evidence.",
+  "documents": [
+    {
+      "doc_id": "doc_00",
+      "filename": "parts_catalogue.csv",
+      "kind": "csv",
+      "n_chars": 6987,
+      "sha256": "8bb69dff254c03ed"
+    },
+    {
+      "doc_id": "doc_01",
+      "filename": "supplier_kowloon.md",
+      "kind": "md",
+      "n_chars": 1710,
+      "sha256": "0677e4cd07eb4e86"
+    },
+    {
+      "doc_id": "doc_02",
+      "filename": "supplier_nordhavn.md",
+      "kind": "md",
+      "n_chars": 1746,
+      "sha256": "db73d3b3446b0e02"
+    }
+  ],
+  "skipped": [],
+  "corpus_hash": "326f533b14003c35"
+}

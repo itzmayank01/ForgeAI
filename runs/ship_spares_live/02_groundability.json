@@ -1,0 +1,79 @@
+{
+  "topics": [
+    {
+      "name": "Part Availability",
+      "description": "Ask whether a specific part is in stock and how many units are available.",
+      "support_score": 0.7082,
+      "supporting_chunks": [
+        "doc_00_c000",
+        "doc_00_c009",
+        "doc_00_c008"
+      ],
+      "verdict": "weak"
+    },
+    {
+      "name": "Unit Price and Lead Time",
+      "description": "Request the current price and expected delivery time for a particular part.",
+      "support_score": 0.6987,
+      "supporting_chunks": [
+        "doc_00_c013",
+        "doc_00_c009",
+        "doc_00_c000"
+      ],
+      "verdict": "weak"
+    },
+    {
+      "name": "Supplier Terms",
+      "description": "Inquire about minimum order quantities, payment terms, and warranty conditions for a supplier.",
+      "support_score": 0.7237,
+      "supporting_chunks": [
+        "doc_01_c000",
+        "doc_02_c000",
+        "doc_02_c001"
+      ],
+      "verdict": "weak"
+    },
+    {
+      "name": "Order Total Calculation",
+      "description": "Calculate the total cost for a given quantity of parts, including unit price and any applicable fees.",
+      "support_score": 0.6822,
+      "supporting_chunks": [
+        "doc_01_c001",
+        "doc_01_c000",
+        "doc_02_c000"
+      ],
+      "verdict": "weak"
+    },
+    {
+      "name": "Supplier Comparison",
+      "description": "Compare lead times and prices across suppliers for the same part without recommending one. NOT COVERED by the supplied documents.",
+      "support_score": 0.654,
+      "supporting_chunks": [
+        "doc_00_c009",
+        "doc_00_c004",
+        "doc_00_c005"
+      ],
+      "verdict": "unsupported"
+    },
+    {
+      "name": "Stock Replenishment",
+      "description": "Ask when a part will be restocked or how to place a reorder based on current stock levels.",
+      "support_score": 0.7249,
+      "supporting_chunks": [
+        "doc_02_c001",
+        "doc_01_c001",
+        "doc_02_c002"
+      ],
+      "verdict": "weak"
+    }
+  ],
+  "unsupported": [
+    "Supplier Comparison"
+  ],
+  "moved_to_refuse": [
+    "Supplier Comparison"
+  ],
+  "unsupported_ratio": 0.167,
+  "aborted": false,
+  "abort_reason": null
+}

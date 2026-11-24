@@ -107,31 +107,46 @@ export function RunCard({
   synthetic: boolean; iterations: number;
 }) {
   return (
-    <Link
-      href={`/runs/${id}`}
-      className="card group block p-5 transition hover:border-accent/40 hover:shadow-[0_1px_20px_-6px_rgb(var(--ink)/0.18)]"
-    >
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="font-semibold tracking-tight">{id.replace(/^_/, "").replace(/_/g, " ")}</h3>
-        {synthetic ? <Pill tone="warn">fixture</Pill> : <Pill tone="accent">live run</Pill>}
+    <div className="card group relative flex flex-col justify-between p-5 transition hover:border-emerald-500/50 hover:shadow-[0_4px_24px_-8px_rgba(5,150,105,0.18)]">
+      <div>
+        <div className="flex items-start justify-between gap-3">
+          <Link href={`/runs/${id}`} className="font-semibold tracking-tight hover:text-emerald-700 transition">
+            {id.replace(/^_/, "").replace(/_/g, " ")}
+          </Link>
+          {synthetic ? <Pill tone="warn">fixture</Pill> : <Pill tone="accent">live run</Pill>}
+        </div>
+        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{brief}</p>
+        <div className="mt-4">
+          {passRate === null ? (
+            <span className="text-xs text-warn">not scored — no eval pass completed</span>
+          ) : (
+            <Meter value={passRate} />
+          )}
+        </div>
       </div>
-      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{brief}</p>
-      <div className="mt-4">
-        {passRate === null ? (
-          <span className="text-xs text-warn">not scored — no eval pass completed</span>
-        ) : (
-          <Meter value={passRate} />
-        )}
+
+      <div className="mt-4 flex items-center justify-between border-t pt-3 text-xs text-muted">
+        <div className="flex gap-3">
+          <span>{cases} cases</span>
+          {iterations > 0 && (
+            <span>{iterations} iter{iterations === 1 ? "" : "s"}</span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/chat/${id}`}
+            className="rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 px-3 py-1 text-[11px] font-semibold hover:bg-emerald-100 transition"
+          >
+            Chat Runner →
+          </Link>
+          <Link
+            href={`/runs/${id}`}
+            className="font-medium text-ink hover:text-emerald-700 transition"
+          >
+            Inspect →
+          </Link>
+        </div>
       </div>
-      <div className="mt-3 flex gap-4 text-xs text-muted">
-        <span>{cases} cases</span>
-        {iterations > 0 && (
-          <span>{iterations} iteration{iterations === 1 ? "" : "s"}</span>
-        )}
-        <span className="ml-auto text-accent opacity-0 transition group-hover:opacity-100">
-          open →
-        </span>
-      </div>
-    </Link>
+    </div>
   );
 }

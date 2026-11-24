@@ -34,7 +34,10 @@ from ..runtime.agent import AgentResponse
 FACT_SIM = 0.74       # embedding match before falling through to the model
 CLAIM_SIM = 0.58      # claim-vs-context floor before escalating
 _SENT = re.compile(r"(?<=[.!?])\s+")
-_NUM = re.compile(r"-?\d+(?:\.\d+)?")
+# Quantities only: a number flanked by letters, digits or hyphens belongs to an
+# identifier (FIL-1210, doc_01_c000) and is not a fact to verify. Matching those
+# scored correct answers as failures on every tabular case in the spares demo.
+_NUM = re.compile(r"(?<![A-Za-z0-9_-])\d+(?:[.,]\d+)?(?![A-Za-z0-9_-])")
 
 
 class _Entailed(BaseModel):
@@ -52,24 +55,33 @@ def _norm(s: str) -> str:
 
 
 def fact_present(fact: str, answer: str, client: LLMClient) -> tuple[bool, bool]:
-    """Return (present, used_llm). Three tiers, cheapest first."""
+    """Return (present, used_llm). Three tiers, cheapest first.
+
+    Numeric agreement is treated as strong positive evidence but NOT as a final
+    negative: an expected "stock_qty 0" is genuinely satisfied by "there is no
+    stock", which carries no digits at all. So a numeric miss falls through to
+    the semantic tiers UNLESS the answer states different numbers, which is the
+    real error case ("20 days" against an expected "22 days").
+    """
     f, a = _norm(fact), _norm(answer)
 
-    # Tier 1: numbers must match exactly. "22 days" vs "20 days" is wrong, and
-    # no amount of semantic similarity should paper over that.
-    nums = _NUM.findall(fact)
-    if nums:
-        return (all(n in answer for n in nums) and
-                _token_overlap(f, a) >= 0.35), False
+    fact_nums = _NUM.findall(fact)
+    if fact_nums:
+        answer_nums = set(_NUM.findall(answer))
+        if all(n in answer_nums for n in fact_nums):
+            return True, False
+        if answer_nums:
+            # The answer commits to different figures: that is a wrong answer,
+            # not an ambiguous one, and no amount of similarity should rescue it.
+            return False, False
+
     if f and f in a:
         return True, False
 
-    # Tier 2: embeddings.
     v = embed([fact, answer])
     if float(v[0] @ v[1]) >= FACT_SIM:
         return True, False
 
-    # Tier 3: the model, only now.
     out, _ = structured(
         client, model_cls=_Entailed, model=settings.judge_model, temperature=0.0,
         instruction=P.ENTAILMENT.format(fact=fact, answer=answer),

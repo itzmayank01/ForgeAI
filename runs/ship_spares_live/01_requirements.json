@@ -1,0 +1,167 @@
+{
+  "brief": "Build me a procurement assistant for our ship spares desk. It should answer\nquestions about part availability, prices and lead times from the parts\ncatalogue, and about supplier terms, minimum order quantities and warranty\nconditions from the supplier agreements. It needs to work out order totals.\nPurchasing officers use it. It must not recommend one supplier over another or\ncommit to a delivery date it cannot evidence.",
+  "scope": "Provide accurate, non-biased procurement information for ship spares, including availability, pricing, lead times, supplier terms, and order totals.",
+  "audience": "Purchasing officers",
+  "tone": "Professional, factual, neutral",
+  "must_answer": [
+    {
+      "name": "Part Availability",
+      "description": "Ask whether a specific part is in stock and how many units are available.",
+      "support_score": 0.7082,
+      "supporting_chunks": [
+        "doc_00_c000",
+        "doc_00_c009",
+        "doc_00_c008"
+      ],
+      "verdict": "weak"
+    },
+    {
+      "name": "Unit Price and Lead Time",
+      "description": "Request the current price and expected delivery time for a particular part.",
+      "support_score": 0.6987,
+      "supporting_chunks": [
+        "doc_00_c013",
+        "doc_00_c009",
+        "doc_00_c000"
+      ],
+      "verdict": "weak"
+    },
+    {
+      "name": "Supplier Terms",
+      "description": "Inquire about minimum order quantities, payment terms, and warranty conditions for a supplier.",
+      "support_score": 0.7237,
+      "supporting_chunks": [
+        "doc_01_c000",
+        "doc_02_c000",
+        "doc_02_c001"
+      ],
+      "verdict": "weak"
+    },
+    {
+      "name": "Order Total Calculation",
+      "description": "Calculate the total cost for a given quantity of parts, including unit price and any applicable fees.",
+      "support_score": 0.6822,
+      "supporting_chunks": [
+        "doc_01_c001",
+        "doc_01_c000",
+        "doc_02_c000"
+      ],
+      "verdict": "weak"
+    },
+    {
+      "name": "Stock Replenishment",
+      "description": "Ask when a part will be restocked or how to place a reorder based on current stock levels.",
+      "support_score": 0.7249,
+      "supporting_chunks": [
+        "doc_02_c001",
+        "doc_01_c001",
+        "doc_02_c002"
+      ],
+      "verdict": "weak"
+    }
+  ],
+  "must_refuse": [
+    {
+      "name": "Supplier Recommendation",
+      "description": "The assistant must not recommend one supplier over another.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    },
+    {
+      "name": "Unverified Delivery Commitments",
+      "description": "The assistant must not commit to a delivery date it cannot evidence.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    },
+    {
+      "name": "Legal and Financial Advice",
+      "description": "The assistant must not provide legal or financial advice.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    },
+    {
+      "name": "Personal Data Handling",
+      "description": "The assistant must not provide or process personal records of named individuals.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    },
+    {
+      "name": "Supplier Comparison",
+      "description": "Compare lead times and prices across suppliers for the same part without recommending one. NOT COVERED by the supplied documents.",
+      "support_score": 0.654,
+      "supporting_chunks": [
+        "doc_00_c009",
+        "doc_00_c004",
+        "doc_00_c005"
+      ],
+      "verdict": "unsupported"
+    }
+  ],
+  "questions_asked": [
+    "What is the policy for handling parts that are listed in the catalogue but have zero stock_qty—should the assistant treat them as unavailable or suggest back‑ordering?",
+    "How should the assistant resolve discrepancies between lead_time_days values that differ between the parts_catalogue.csv and the supplier markdown files, if any?",
+    "Are there any additional supplier terms (e.g., payment terms, return policies) that are not captured in the provided markdown files but should be considered when calculating order totals?",
+    "Should the assistant provide a confidence score or disclaimer when quoting prices or lead times that are not explicitly stated in the documents?",
+    "Is there a preferred format or unit for expressing total cost (e.g., include VAT, currency conversion, or just net EUR) that the purchasing officers expect?"
+  ],
+  "assumptions": [
+    {
+      "question": "What is the policy for handling parts that are listed in the catalogue but have zero stock_qty—should the assistant treat them as unavailable or suggest back‑ordering?",
+      "assumed_answer": "The excerpts indicate that for items showing zero stock at the time of order, the supplier does not guarantee delivery dates, but they do not explicitly state whether such items should be treated as unavailable or back‑ordered. Therefore, the assistant should acknowledge that the policy is not explicitly defined in the provided documents.",
+      "confidence": "medium",
+      "basis": "doc_02_c002"
+    },
+    {
+      "question": "How should the assistant resolve discrepancies between lead_time_days values that differ between the parts_catalogue.csv and the supplier markdown files, if any?",
+      "assumed_answer": "The excerpts do not provide any guidance on resolving such discrepancies, so the assistant cannot determine a method for reconciling differing lead time values.",
+      "confidence": "low",
+      "basis": "doc_00_c000"
+    },
+    {
+      "question": "Are there any additional supplier terms (e.g., payment terms, return policies) that are not captured in the provided markdown files but should be considered when calculating order totals?",
+      "assumed_answer": "No, all relevant payment terms, return policies, and related cost implications are captured in the provided excerpts.",
+      "confidence": "high",
+      "basis": "doc_01_c000, doc_02_c002"
+    },
+    {
+      "question": "Should the assistant provide a confidence score or disclaimer when quoting prices or lead times that are not explicitly stated in the documents?",
+      "assumed_answer": "The documents do not specify any requirement for the assistant to provide a confidence score or disclaimer when quoting prices or lead times that are not explicitly stated. Therefore, the assistant is not mandated to include such a score or disclaimer based on the provided excerpts.",
+      "confidence": "low",
+      "basis": "None of the retrieved excerpts address the assistant’s need to provide confidence scores or disclaims for unexplicitly stated prices or lead times."
+    },
+    {
+      "question": "Is there a preferred format or unit for expressing total cost (e.g., include VAT, currency conversion, or just net EUR) that the purchasing officers expect?",
+      "assumed_answer": "The procurement assistant should express total cost in net EUR, as the agreement specifies prices and discounts in EUR and does not mention VAT or currency conversion.",
+      "confidence": "high",
+      "basis": "doc_02_c000"
+    }
+  ],
+  "corpus_manifest": [
+    {
+      "doc_id": "doc_00",
+      "filename": "parts_catalogue.csv",
+      "kind": "csv",
+      "n_chars": 6987,
+      "sha256": "8bb69dff254c03ed"
+    },
+    {
+      "doc_id": "doc_01",
+      "filename": "supplier_kowloon.md",
+      "kind": "md",
+      "n_chars": 1710,
+      "sha256": "0677e4cd07eb4e86"
+    },
+    {
+      "doc_id": "doc_02",
+      "filename": "supplier_nordhavn.md",
+      "kind": "md",
+      "n_chars": 1746,
+      "sha256": "db73d3b3446b0e02"
+    }
+  ],
+  "mode": "unattended"
+}

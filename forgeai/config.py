@@ -63,7 +63,7 @@ class Settings:
     agent_model: str = os.getenv("FORGEAI_AGENT_MODEL", "openai/gpt-oss-20b")
     embed_model: str = os.getenv("FORGEAI_EMBED_MODEL", "BAAI/bge-small-en-v1.5")
     max_tokens: int = int(os.getenv("FORGEAI_MAX_TOKENS", "500000"))
-    max_seconds: int = int(os.getenv("FORGEAI_MAX_SECONDS", "900"))
+    max_seconds: int = int(os.getenv("FORGEAI_MAX_SECONDS", "2400"))
     max_iterations: int = int(os.getenv("FORGEAI_MAX_ITERATIONS", "3"))
     request_timeout: float = float(os.getenv("FORGEAI_TIMEOUT", "60"))
     max_concurrency: int = int(os.getenv("FORGEAI_CONCURRENCY", "3"))
