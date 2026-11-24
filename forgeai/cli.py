@@ -47,7 +47,9 @@ def build(
         md = render(report, AgentDefinition.model_validate_json(final.read_text()))
         (out / "06_report.md").write_text(md)
         console.print(f"\n[dim]report ->[/dim] {out / '06_report.md'}")
-    console.rule(f"[bold]{report.final_pass_rate:.0%} pass[/bold]  ·  {report.stop_reason}")
+    headline = (f"[bold]{report.final_pass_rate:.0%} pass[/bold]"
+                if report.evaluated else "[bold yellow]not scored[/bold yellow]")
+    console.rule(f"{headline}  ·  {report.stop_reason}")
 
 
 @app.command()

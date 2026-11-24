@@ -17,7 +17,7 @@ from .config import settings
 from .ingest.chunker import chunk_corpus
 from .ingest.index import ChunkIndex
 from .ingest.loaders import load_folder
-from .llm.client import LLMClient, QuotaExhausted
+from .llm.client import LLMClient, LLMError, QuotaExhausted
 from .models.agent_def import AgentDefinition
 from .models.common import CorpusSummary
 from .models.requirements import GroundabilityReport, RequirementsDoc
@@ -82,6 +82,12 @@ def run_eval(
 
     lock = threading.Lock()
     stopped = False
+    consecutive_quota = 0
+    GIVE_UP_AFTER = 4
+    """A pool stall is usually momentary. Treating the FIRST one as fatal made a
+    single blip abort every remaining case - a pass would bank one answer and
+    give up on sixteen, so ten attempts gained almost nothing while every key
+    was in fact available."""
 
     def flush() -> None:
         if cache_path is None:
@@ -91,7 +97,7 @@ def run_eval(
             {k: v.model_dump() for k, v in done.items()}, indent=1))
 
     def one(case) -> None:
-        nonlocal stopped
+        nonlocal stopped, consecutive_quota
         if stopped:
             return
         if budget is not None and budget.exhausted():
@@ -100,9 +106,17 @@ def run_eval(
         try:
             response = agent.answer(case.question)
         except QuotaExhausted:
-            stopped = True
+            with lock:
+                consecutive_quota += 1
+                if consecutive_quota >= GIVE_UP_AFTER:
+                    stopped = True
+                    log(f"  {GIVE_UP_AFTER} consecutive quota failures; stopping")
+            return
+        except LLMError as exc:  # one bad case must not end the pass
+            log(f"  {case.id}: {str(exc)[:90]}")
             return
         with lock:
+            consecutive_quota = 0
             done[case.id] = response
             flush()
 
