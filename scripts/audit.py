@@ -201,7 +201,8 @@ stretch = {
     and "tournament: bool" in (ROOT / "forgeai/cli.py").read_text(),
     "Regression mode": (ROOT / "forgeai/stages/regression.py").exists()
     and "def regress(" in (ROOT / "forgeai/cli.py").read_text(),
-    "Factory vs human baseline": (ROOT / "demos/BASELINE.md").exists(),
+    "Factory vs human baseline": (ROOT / "demos/baseline/BASELINE.md").exists()
+    and (ROOT / "scripts/baseline.py").exists(),
 }
 
 # ── output ────────────────────────────────────────────────────────────────
