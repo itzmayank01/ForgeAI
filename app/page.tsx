@@ -17,8 +17,12 @@ import { AgentsHub } from "@/components/agents-hub";
 export default async function Home() {
   const runs = await loadAllRuns();
   const scored = runs.filter((r) => r.report && r.report.evaluated !== false);
-  const headline = scored.find((r) => !r.synthetic) ?? scored[0];
-  const totalCases = runs.reduce((n, r) => n + (r.suite?.cases.length ?? 0), 0);
+  // The fixture must NEVER headline. It is scaffolding with invented numbers,
+  // and falling back to it means the page presents synthetic data as measured
+  // evidence whenever a real run is mid-flight.
+  const headline = scored.find((r) => !r.synthetic);
+  const realRuns = runs.filter((r) => !r.synthetic);
+  const totalCases = realRuns.reduce((n, r) => n + (r.suite?.cases.length ?? 0), 0);
 
   return (
     <main>

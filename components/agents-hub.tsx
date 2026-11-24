@@ -267,9 +267,21 @@ export function AgentsHub({ initialRunIds = [] }: AgentsHubProps) {
                     <span className="rounded-full bg-ink/[0.04] px-2 py-0.5 text-[10px] font-medium text-muted">
                       {agent.category}
                     </span>
-                    {agent.badge && (
+                    {/* Status is driven by whether committed artifacts exist,
+                        never by a hand-set label. Only a run the factory
+                        actually produced may claim to be tested; everything
+                        else is marked a concept so the gallery cannot
+                        overstate what was built. */}
+                    {agent.runId ? (
                       <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300">
-                        {agent.badge}
+                        {agent.badge ?? "Live tested"}
+                      </span>
+                    ) : (
+                      <span
+                        className="rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-700 dark:bg-amber-950/50 dark:text-amber-300"
+                        title="No committed run artifacts. This agent has not been produced or evaluated by the factory."
+                      >
+                        Concept — not built
                       </span>
                     )}
                   </div>
@@ -287,8 +299,11 @@ export function AgentsHub({ initialRunIds = [] }: AgentsHubProps) {
                     <button
                       onClick={() => openChat(agent)}
                       className="rounded-full border border-gray-300 dark:border-gray-700 px-4 py-1 text-[11.5px] font-semibold text-ink hover:border-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300 transition"
+                      title={agent.runId
+                        ? "Chat grounded in this run's committed documents"
+                        : "Ungrounded preview — no documents, no eval suite behind this agent"}
                     >
-                      Chat
+                      {agent.runId ? "Chat" : "Preview"}
                     </button>
                   </div>
                 </div>
