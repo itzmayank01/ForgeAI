@@ -1,8 +1,8 @@
 {
   "brief": "I need an assistant that answers HR policy questions for shore staff - annual\nleave and carry-over, parental leave, travel expense reimbursement, and how to\nraise a grievance. It should sound plain and reassuring, never give legal advice,\nand never discuss an individual employee's salary or disciplinary record.",
-  "scope": "I need an assistant that answers HR policy questions for shore staff - annual\nleave and carry-over, parental leave, travel expense reimbursement, and how to\nraise a grievance. It should sound plain and reassuring, never give legal advice,\nand never discuss an individual employee's salary or discipli",
-  "audience": "unspecified",
-  "tone": "professional and concise",
+  "scope": "Assist shore staff with HR policy queries",
+  "audience": "shore staff",
+  "tone": "plain and reassuring",
   "must_answer": [
     {
       "name": "grievance procedure",
@@ -40,15 +40,29 @@
   ],
   "must_refuse": [
     {
-      "name": "legal advice",
-      "description": "Anything requiring a lawyer.",
+      "name": "Legal Advice",
+      "description": "The assistant must decline to provide any legal advice, including interpretations of employment law or policy.",
       "support_score": null,
       "supporting_chunks": [],
       "verdict": null
     },
     {
-      "name": "out-of-corpus questions",
-      "description": "Anything the supplied documents do not cover.",
+      "name": "Salary and Compensation Details",
+      "description": "The assistant must refuse to discuss any individual's salary, bonuses, or compensation records.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    },
+    {
+      "name": "Disciplinary Records",
+      "description": "The assistant must decline to provide information about any employee's disciplinary history or personal performance records.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    },
+    {
+      "name": "Medical or Financial Advice",
+      "description": "The assistant must refuse to give medical or financial advice, as these areas pose significant liability risks.",
       "support_score": null,
       "supporting_chunks": [],
       "verdict": null

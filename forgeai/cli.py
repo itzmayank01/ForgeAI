@@ -26,6 +26,7 @@ def build(
     out: Path = typer.Option(None, help="Run directory (default runs/<name>_<ts>)."),
     interactive: bool = typer.Option(False, help="Ask clarifying questions instead of self-answering."),
     max_iterations: int = typer.Option(None, help="Override the iteration cap."),
+    resume: bool = typer.Option(False, help="Reuse artifacts already in the run directory."),
 ) -> None:
     """Run the factory end to end."""
     from datetime import datetime
@@ -38,7 +39,8 @@ def build(
 
     console.rule(f"[bold]ForgeAI[/bold]  {out.name}")
     report = run_build(text, docs, out, interactive=interactive,
-                       max_iterations=max_iterations, log=console.print)
+                       max_iterations=max_iterations, resume=resume,
+                       log=console.print)
 
     final = out / "03_agent_def.final.json"
     if final.exists():

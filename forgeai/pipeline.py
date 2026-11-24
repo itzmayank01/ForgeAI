@@ -19,12 +19,23 @@ from .ingest.loaders import load_folder
 from .llm.client import LLMClient, QuotaExhausted
 from .models.agent_def import AgentDefinition
 from .models.common import CorpusSummary
+from .models.requirements import GroundabilityReport, RequirementsDoc
 from .models.evals import CaseVerdict, EvalSuite, Scorecard
 from .models.iteration import Budget, IterationLog, RunReport
 from .runtime.agent import Agent, AgentResponse
 from .stages import critic, evalgen, generator, groundability, intake, judge, optimizer
 
 PASS_TARGET = 0.9
+
+
+def _load(path: Path, model_cls):
+    """Reuse a completed stage's artifact if it is already on disk."""
+    if not path.exists():
+        return None
+    try:
+        return model_cls.model_validate_json(path.read_text())
+    except Exception:  # noqa: BLE001 - a corrupt artifact just means redo it
+        return None
 
 
 def _write(path: Path, obj) -> None:
@@ -73,7 +84,8 @@ def run_eval(agent: Agent, suite: EvalSuite,
 
 def build(
     brief: str, docs_dir: Path, out_dir: Path, *,
-    interactive: bool = False, max_iterations: int | None = None, log=print,
+    interactive: bool = False, max_iterations: int | None = None,
+    resume: bool = False, log=print,
 ) -> RunReport:
     budget = Budget(
         max_tokens=settings.max_tokens, max_seconds=settings.max_seconds,
@@ -99,14 +111,22 @@ def build(
 
     # --- 1. intake ----------------------------------------------------------
     log("[1/6] intake interview")
-    req = intake.run_intake(client, brief, summary, interactive=interactive,
-                            index=index, log=log)
+    req = _load(out_dir / "01_requirements.json", RequirementsDoc) if resume else None
+    if req is not None:
+        log("  reusing committed requirements")
+    else:
+        req = intake.run_intake(client, brief, summary, interactive=interactive,
+                                index=index, log=log)
     log(f"  {len(req.must_answer)} must-answer, {len(req.must_refuse)} must-refuse, "
         f"{len(req.questions_asked)} questions")
 
     # --- 2. groundability ---------------------------------------------------
     log("[2/6] groundability guard")
-    ground = groundability.run_groundability(req, index, log=log)
+    ground = _load(out_dir / "02_groundability.json", GroundabilityReport) if resume else None
+    if ground is not None:
+        log("  reusing committed groundability report")
+    else:
+        ground = groundability.run_groundability(req, index, log=log)
     _write(out_dir / "01_requirements.json", req)
     _write(out_dir / "02_groundability.json", ground)
     if ground.aborted:
@@ -121,13 +141,22 @@ def build(
 
     # --- 3. generate --------------------------------------------------------
     log("[3/6] generating agent definition")
-    definition, rejected = generator.generate_agent(client, req, summary, log=log)
+    definition = _load(out_dir / "03_agent_def.v0.json", AgentDefinition) if resume else None
+    if definition is not None:
+        log("  reusing committed agent definition v0")
+        rejected = definition.provenance.get("tools_rejected", [])
+    else:
+        definition, rejected = generator.generate_agent(client, req, summary, log=log)
     log(f"  tools attached: {', '.join(definition.tool_names) or 'none'}")
     _write(out_dir / "03_agent_def.v0.json", definition)
 
     # --- 4. evals -----------------------------------------------------------
     log("[4/6] generating eval suite")
-    suite = evalgen.generate_suite(client, chunks, req, index, log=log)
+    suite = _load(out_dir / "04_eval_suite.json", EvalSuite) if resume else None
+    if suite is not None:
+        log(f"  reusing committed eval suite ({len(suite.cases)} cases)")
+    else:
+        suite = evalgen.generate_suite(client, chunks, req, index, log=log)
     log(f"  {len(suite.cases)} cases: {suite.counts()}")
     _write(out_dir / "04_eval_suite.json", suite)
 

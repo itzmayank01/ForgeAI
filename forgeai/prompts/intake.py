@@ -41,7 +41,7 @@ liability areas for this domain (legal, medical or financial advice, and
 anything about a named individual's personal records).
 """
 
-QUESTIONS = """What is genuinely ambiguous about this brief?
+QUESTIONS = """What would you need to ask before building this assistant?
 
 BRIEF:
 {brief}
@@ -49,10 +49,19 @@ BRIEF:
 DOCUMENTS AVAILABLE:
 {corpus}
 
-Return at most 5 questions you would ask the requester before building. Ask
-only about real ambiguities that would change the assistant's behaviour. If the
-brief is clear, return fewer - an empty list is a valid answer. Never invent
-questions to fill the list.
+Real briefs are always underspecified. Look specifically for:
+- Boundaries: who is in and out of the audience? Are there adjacent groups the
+  brief neither includes nor excludes?
+- Detail: should it quote exact figures from the documents, or direct people
+  elsewhere?
+- Conflicts: what should it do when two documents disagree, or a document is
+  out of date?
+- Gaps: what will users obviously ask that these documents do not cover?
+
+Return 2-5 questions whose answers would genuinely change how the assistant
+behaves. Ask about THIS brief and THESE documents, never generic questions.
+Do not pad the list, and do not return an empty one - a brief this short always
+leaves something open.
 """
 
 SELF_ANSWER = """You are running UNATTENDED: the requester is not available.
