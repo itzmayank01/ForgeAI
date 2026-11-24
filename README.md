@@ -1,0 +1,172 @@
+# ForgeAI — the agent that builds agents
+
+A factory that takes a one-paragraph brief and a folder of documents, then
+autonomously produces a working, tested retrieval agent: system prompt,
+retrieval configuration, tool selection, output contract, an auto-generated
+evaluation set, and an honest report of what still fails.
+
+**Live:** https://forgeai-ashen.vercel.app
+
+```bash
+forgeai build --brief demos/hr_policy/brief.txt --docs demos/hr_policy/docs
+forgeai chat  --run runs/hr_policy_live
+```
+
+---
+
+## The problem this is actually solving
+
+Building a RAG agent is easy. Building **evals honest enough to judge an agent
+nobody hand-wrote** is not. A pipeline that writes its own tests, grades its own
+output and fixes its own failures will happily report 100% and mean nothing by
+it.
+
+So the organising principle here is **adversarial separation plus determinism**:
+
+| Guard | How |
+|---|---|
+| Eval generator never sees the agent | `stages/evalgen.py` does not import `AgentDefinition`. Tests derive from documents alone, so they cannot be tuned to the prompt just written |
+| Judge never sees the system prompt | Runs a *different* open-weight family from the generator, scores each case against a rubric in isolation |
+| No position bias | There is no pairwise comparison anywhere in the loop — nothing for order to bias |
+| No verbosity bias | Score is fact recall + unsupported-claim rate, both length-independent. Answer length is recorded and **never** scored |
+| Determinism first | Refusal is a boolean in the output contract. Citation validity is set arithmetic. Numeric facts must match exactly. Only the ambiguous residue reaches a model, and the escalation rate is reported |
+| Fixes must earn their place | Every iteration is compared against the best score so far and **reverted** if it loses ground |
+| The judge is itself checked | `forgeai calibrate` measures agreement against hand labels and publishes it with the disagreements. An uncalibrated run says so instead of showing a number |
+
+The last one is the point. A judge nobody has checked is not evidence.
+
+---
+
+## The nine core requirements
+
+| # | Requirement | Where |
+|---|---|---|
+| 1 | Intake interviewer | `stages/intake.py` |
+| 2 | Groundability guard | `stages/groundability.py` |
+| 3 | Agent generator | `stages/generator.py` |
+| 4 | Eval generator | `stages/evalgen.py`, prompts in `prompts/evalgen.py` |
+| 5 | Judge | `stages/judge.py` |
+| 6 | Critic → optimizer loop | `stages/critic.py`, `stages/optimizer.py` |
+| 7 | Honest reporting | `stages/reporter.py` |
+| 8 | Runnable product | `runtime/agent.py`, `runtime/runner.py` |
+| 9 | Two demonstrations | `demos/`, `runs/` |
+
+---
+
+## Two contradictions in the brief
+
+Spotting them matters more than resolving them neatly, so both are handled
+explicitly rather than quietly.
+
+**1. "At most 5 clarifying questions" vs "runs unattended in front of us."**
+
+Both, from one code path. `--interactive` asks. Unattended mode asks the *same*
+questions, answers them itself from retrieved document text, and records each as
+an `Assumption` carrying a confidence and the chunk that justified it. Surfacing
+assumptions beats skipping the interview.
+
+**2. Budget is listed as a stretch goal, but the overview defines the core loop
+as running "until the evals pass or a budget runs out."**
+
+Treated as core. `models/iteration.py::Budget` caps tokens, wall-clock and
+iterations; running out is a normal, reported outcome, not a crash.
+
+---
+
+## How it works
+
+```
+brief + docs
+   ├─ 0 ingest          pdf/csv/md/txt → chunk → embed → index
+   ├─ 1 intake          four small calls → RequirementsDoc
+   ├─ 2 groundability   can the documents support what was asked?
+   ├─ 3 generate        → AgentDefinition v0
+   ├─ 4 evalgen         documents only → ≥20 cases → quality gate
+   ├─ 5 loop (≤3)       run → judge → classify → ONE targeted fix → re-run
+   └─ 6 report          scorecards + what still fails
+```
+
+Every stage writes a committed artifact. **The run directory is the
+deliverable** — the code is only how it gets made.
+
+### The eval quality gate
+
+Twenty trivially-passable questions are self-deception, so generated cases are
+filtered before they ever score anything:
+
+- an *out-of-scope* question that actually retrieves strong context is **secretly
+  answerable** — keeping it would teach the optimizer to make the agent refuse
+  everything
+- an *answerable* question whose expected facts do not appear in its cited source
+- near-duplicates
+
+On a live run the gate dropped 3 of 31 cases, one of them exactly that first
+case, unprompted.
+
+### Failure taxonomy → fix ladder
+
+Classification is **diagnostic-first**: the retrieval trace says what happened,
+so most failures are categorised deterministically rather than by asking a model
+what went wrong.
+
+| Category | Fix ladder, one rung per iteration |
+|---|---|
+| `retrieval_miss` | ↑top_k → shrink chunks → hybrid → query rewrite |
+| `prompt_defect` | patch FORMAT → patch SCOPE → add worked example |
+| `hallucination` | grounding clause → force citations → ↓temperature → ↑min_score |
+| `wrong_refusal` | ↓min_score → widen scope → soften refusal |
+
+One fix per iteration, aimed at the largest cluster, so every change is
+attributable to a measured delta.
+
+---
+
+## Tool discipline
+
+The brief's test is restraint: *"an HR agent with a weather tool is a factory
+defect."* Tools are model-proposed but **deterministically audited** — a binding
+survives only if the tool exists *and* its claimed `triggering_requirement`
+resolves to a real `must_answer` topic.
+
+On live runs the HR assistant attaches **zero** tools, which is the correct
+answer. `tests/test_tool_discipline.py` asserts it against the committed
+definitions.
+
+---
+
+## Running it
+
+```bash
+uv venv --python 3.12 && uv pip install -e .
+cp .env.example .env     # add a Groq key: https://console.groq.com/keys
+./scripts/doctor.sh      # preflight: key, auth, venv, live API call
+```
+
+```bash
+forgeai build --brief <brief.txt> --docs <folder>   # add --resume to continue
+forgeai chat  --run runs/<id>
+forgeai calibrate --run runs/<id> --gold gold/<labels>.json
+```
+
+**Models.** `openai/gpt-oss-20b` generates, `qwen/qwen3.8-27b` judges — two
+different small open families, which is what the self-preference defense needs.
+Any OpenAI-compatible endpoint works; swapping provider is one env var.
+
+`reasoning_effort=low` is set for gpt-oss: left unbounded it spends its whole
+allowance thinking and returns *empty* content, which JSON mode rejects outright.
+Capping it also cut a structured call from ~2,400 tokens to ~227.
+
+---
+
+## Known limits
+
+- **Hosted chat retrieves differently.** `bge-small` cannot run inside a Vercel
+  function, so the deployed chat uses BM25 over the same chunks and the same
+  agent definition. The CLI is the reference implementation and every published
+  score was measured with it. The page says so rather than hiding it.
+- **Groundability thresholds are model-specific.** Derived from 14 topic probes
+  across both corpora, each written verbose and terse. Re-derive them if the
+  embedding model changes; `stages/groundability.py` records the measurements and
+  a contrastive alternative that was tried and rejected on the data.
+- **Free-tier quota is the binding constraint.** 200k tokens/day against roughly
+  40–80k per full run.
