@@ -22,7 +22,14 @@ function Frame({
   tone?: "plain" | "terminal";
 }) {
   return (
-    <div className="mock overflow-hidden">
+    <div className="mock relative overflow-hidden">
+      {/* These panels illustrate artifact SHAPE with representative values.
+          They sit on the same page as measured figures, so an unlabelled
+          number here would read as a second, conflicting claim about the same
+          run. The real numbers live on the run pages. */}
+      <span className="absolute right-3 top-3 z-10 rounded-full bg-ink/[0.06] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-muted">
+        illustrative
+      </span>
       <div className="flex items-center gap-2.5 border-b px-4 py-3">
         {tone === "terminal" ? (
           <>

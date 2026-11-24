@@ -107,7 +107,7 @@ export default async function Home() {
                 {
                   label: "Generated cases",
                   value: String(totalCases || 56),
-                  sub: `across ${runs.length} committed run${runs.length === 1 ? "" : "s"}`,
+                  sub: `across ${realRuns.length} committed run${realRuns.length === 1 ? "" : "s"}`,
                 },
               ]}
             />
