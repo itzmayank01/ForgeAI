@@ -21,22 +21,32 @@ export default async function ChatPage({ params }: { params: Promise<{ id: strin
   ].map((c) => c.question);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10">
-      <Link href={`/runs/${id}`} className="text-sm text-muted hover:text-ink">
-        ← {id.replace(/^_/, "").replace(/_/g, " ")}
-      </Link>
+    <main className="relative">
+      <div className="wash wash-cool" aria-hidden />
+      <div className="mx-auto max-w-3xl px-4 py-10">
+        <Link href={`/runs/${id}`} className="text-sm text-muted transition hover:text-ink">
+          ← {id.replace(/^_/, "").replace(/_/g, " ")}
+        </Link>
 
-      <h1 className="display mt-4 text-[clamp(1.6rem,3.6vw,2.2rem)]">{d.name}</h1>
-      <p className="mt-3 text-[15px] leading-relaxed text-muted">{d.description}</p>
+        <div className="mt-5 flex items-center gap-3">
+          <span className="mono-nums font-mono text-[13px] font-bold text-accent">08</span>
+          <span className="h-px w-10 bg-ink/20" />
+          <span className="text-[11px] font-semibold uppercase tracking-[0.13em] text-muted">
+            Runnable product
+          </span>
+        </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <h1 className="display mt-4 text-[clamp(1.7rem,3.6vw,2.3rem)]">{d.name}</h1>
+        <p className="lede mt-4">{d.description}</p>
+
+        <div className="mt-5 flex flex-wrap items-center gap-2">
         <Pill tone="accent">v{d.version}</Pill>
         <Pill>{d.tools.length ? d.tools.map((t) => t.name).join(", ") : "no tools"}</Pill>
         <Pill>top_k {d.retrieval.top_k}</Pill>
-        {run.synthetic && <Pill tone="warn">fixture corpus</Pill>}
-      </div>
+          {run.synthetic && <Pill tone="warn">fixture corpus</Pill>}
+        </div>
 
-      <p className="mt-5 rounded-xl border border-warn/30 bg-warn/[0.06] p-3.5 text-xs leading-relaxed text-muted">
+        <p className="mt-6 rounded-xl border border-warn/30 bg-warn/[0.06] p-4 text-[12.5px] leading-relaxed text-muted">
         <strong className="text-warn">Retrieval differs here.</strong> The CLI runtime retrieves
         with dense <code className="font-mono">bge-small</code> embeddings, which cannot run
         inside a Vercel function. This hosted chat uses BM25 over the same committed chunks and
@@ -44,7 +54,8 @@ export default async function ChatPage({ params }: { params: Promise<{ id: strin
         is the reference implementation.
       </p>
 
-      <ChatClient runId={id} suggestions={suggestions} />
+        <ChatClient runId={id} suggestions={suggestions} />
+      </div>
     </main>
   );
 }

@@ -4,17 +4,18 @@ cd "$(dirname "$0")/.." || exit 1
 echo "=== ForgeAI doctor ==="
 echo "repo:        $(pwd)"
 
-if [ -f .env ]; then
-  line=$(grep -E '^FORGEAI_API_KEY=' .env | head -1 | cut -d= -f2-)
-  case "$line" in
-    ""|gsk_your_key_here) echo "groq key:    NOT SET (.env still has the placeholder)";;
-    gsk_*)                echo "groq key:    set in .env (${#line} chars, starts gsk_)";;
-    *)                    echo "groq key:    set in .env but does not start with gsk_ (${#line} chars)";;
-  esac
+if [ -x .venv/bin/python ]; then
+  .venv/bin/python -c "
+from forgeai.config import settings
+n = len(settings.api_keys)
+if n:
+    print(f'key pool:    {n} key(s) -> ~{n * 3 * 200:,}k tokens/day across 3 models')
+else:
+    print('key pool:    NO KEYS. Set FORGEAI_API_KEYS in .env')
+" 2>/dev/null || echo "key pool:    could not read config"
 else
-  echo "groq key:    .env FILE MISSING"
+  echo "key pool:    venv missing"
 fi
-[ -n "$GROQ_API_KEY" ] && echo "             GROQ_API_KEY also exported in shell"
 
 if [ -x .venv/bin/python ]; then
   .venv/bin/python -c "

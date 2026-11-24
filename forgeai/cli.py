@@ -125,13 +125,75 @@ def chat(
 
 
 @app.command()
+def gold(
+    run: Path = typer.Option(..., help="Run directory holding judged verdicts."),
+    out: Path = typer.Option(None, help="Where to write the template."),
+    iteration: int = typer.Option(0, help="Which iteration's verdicts to label."),
+    sample: int = typer.Option(12, help="How many cases to put in the template."),
+) -> None:
+    """Emit a hand-labelling template for judge calibration.
+
+    Calibration is the difference between a score and evidence, but it only
+    happens if labelling is easy. This writes the question, the agent's answer
+    and the judge's verdict side by side, with a `human` field to correct - and
+    deliberately samples across pass AND fail so the labels cannot be trivially
+    agreeable.
+    """
+    import random
+
+    verdicts = json.loads(
+        (run / "05_iterations" / f"iter_{iteration}" / "verdicts.json").read_text()
+    )["verdicts"]
+    suite = json.loads((run / "04_eval_suite.json").read_text())
+    questions = {c["id"]: c["question"] for c in suite["cases"]}
+
+    rng = random.Random(13)
+    passed = [v for v in verdicts if v["passed"]]
+    failed = [v for v in verdicts if not v["passed"]]
+    half = max(1, sample // 2)
+    picked = rng.sample(passed, min(half, len(passed))) + \
+             rng.sample(failed, min(sample - half, len(failed)))
+
+    template = {
+        "_README": (
+            "Set `human` to true if the agent's answer is genuinely acceptable, "
+            "false otherwise. Then: forgeai calibrate --run <run> --gold <this file>"
+        ),
+        "labels": {
+            v["case_id"]: {
+                "question": questions.get(v["case_id"], ""),
+                "answer": v["answer"][:400],
+                "judge": v["passed"],
+                "judge_notes": v["notes"],
+                "human": v["passed"],
+            }
+            for v in picked
+        },
+    }
+
+    out = out or Path("gold") / f"{run.name}_iter{iteration}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(template, indent=2))
+    console.print(f"wrote {len(picked)} cases to [bold]{out}[/bold] "
+                  f"({len(passed)} passes / {len(failed)} fails available)")
+    console.print("Edit the `human` fields, then run `forgeai calibrate`.")
+
+
+@app.command()
 def calibrate(
     run: Path = typer.Option(..., help="Run directory holding judged verdicts."),
     gold: Path = typer.Option(..., help='JSON: {"case_id": true|false, ...} hand labels.'),
     iteration: int = typer.Option(0, help="Which iteration's verdicts to check."),
 ) -> None:
     """Measure judge-vs-human agreement. A judge nobody has checked is not evidence."""
-    labels: dict[str, bool] = json.loads(gold.read_text())
+    raw = json.loads(gold.read_text())
+    # Accept either a flat {case_id: bool} mapping or the richer template that
+    # `forgeai gold` emits.
+    labels: dict[str, bool] = (
+        {k: bool(v["human"]) for k, v in raw["labels"].items()}
+        if isinstance(raw.get("labels"), dict)
+        else {k: bool(v) for k, v in raw.items() if not k.startswith("_")}
+    )
     verdicts = json.loads((run / "05_iterations" / f"iter_{iteration}" / "verdicts.json").read_text())
     by_id = {v["case_id"]: v["passed"] for v in verdicts["verdicts"]}
 
