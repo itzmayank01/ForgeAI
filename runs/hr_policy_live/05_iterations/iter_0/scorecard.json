@@ -1,16 +1,16 @@
 {
   "iteration": 0,
   "total": 28,
-  "passed": 20,
-  "pass_rate": 0.714,
+  "passed": 23,
+  "pass_rate": 0.821,
   "by_kind": {
-    "answerable": 0.625,
+    "answerable": 0.812,
     "edge": 0.667,
     "out_of_scope": 1.0
   },
   "by_difficulty": {
-    "medium": 0.722,
-    "easy": 0.75,
+    "medium": 0.833,
+    "easy": 1.0,
     "hard": 0.667
   },
   "mean_answer_length": 63,

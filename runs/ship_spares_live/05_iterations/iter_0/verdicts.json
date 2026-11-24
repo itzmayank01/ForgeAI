@@ -5,9 +5,9 @@
       "answer": "1020.88",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_00_c008",
@@ -16,9 +16,9 @@
         "doc_00_c007",
         "doc_00_c006"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 7
     },
     {
@@ -26,9 +26,9 @@
       "answer": "2",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_00_c010",
@@ -37,9 +37,9 @@
         "doc_00_c011",
         "doc_00_c009"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 1
     },
     {
@@ -47,9 +47,9 @@
       "answer": "No, there is no stock of part SEA-1231.",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_00_c011",
@@ -58,9 +58,9 @@
         "doc_00_c009",
         "doc_00_c013"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 39
     },
     {
@@ -68,9 +68,9 @@
       "answer": "Price: 1420.4 EUR; Availability: 60 units in stock; Lead time: 2 days.",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_00_c004",
@@ -79,9 +79,9 @@
         "doc_00_c006",
         "doc_00_c010"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 70
     },
     {
@@ -110,9 +110,9 @@
       "answer": "Price: 3641.26\u202fEUR; Lead time: 45\u202fdays; Availability: 6 units in stock.",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_00_c005",
@@ -121,9 +121,9 @@
         "doc_00_c004",
         "doc_00_c010"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 71
     },
     {
@@ -152,9 +152,9 @@
       "answer": "Price: 661.91 EUR; Lead time: 21 days; Availability: 2 units in stock.",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_00_c012",
@@ -163,9 +163,9 @@
         "doc_00_c010",
         "doc_00_c002"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 70
     },
     {
@@ -173,9 +173,9 @@
       "answer": "Price: 750.0 EUR, Lead time: 7 days, Stock quantity: 40, Supplier: Nordhavn Marine",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_00_c010",
@@ -184,9 +184,9 @@
         "doc_00_c013",
         "doc_00_c009"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 82
     },
     {
@@ -194,9 +194,9 @@
       "answer": "Price: 3485.17 EUR; Lead time: 5 days; Available stock: 60 units.",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_00_c013",
@@ -205,9 +205,9 @@
         "doc_00_c010",
         "doc_00_c001"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 65
     },
     {
@@ -215,9 +215,9 @@
       "answer": "Price: \u20ac3861.07, Lead time: 30 days, Current stock: 60 units",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_00_c001",
@@ -226,9 +226,9 @@
         "doc_00_c011",
         "doc_00_c010"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 60
     },
     {
@@ -257,9 +257,9 @@
       "answer": "Price: 690.92 EUR, Lead time: 45 days, Stock quantity: 60, Supplier: Nordhavn Marine",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_00_c001",
@@ -268,9 +268,9 @@
         "doc_00_c009",
         "doc_00_c003"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 84
     },
     {
@@ -437,7 +437,7 @@
         "doc_00_c006"
       ],
       "passed": false,
-      "judge_path": "deterministic",
+      "judge_path": "llm_escalation",
       "notes": "fact recall 0.0",
       "answer_length": 56
     },

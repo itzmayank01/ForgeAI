@@ -2,21 +2,21 @@
   "run_id": "hr_policy_live",
   "brief": "I need an assistant that answers HR policy questions for shore staff - annual\nleave and carry-over, parental leave, travel expense reimbursement, and how to\nraise a grievance. It should sound plain and reassuring, never give legal advice,\nand never discuss an individual employee's salary or disciplinary record.",
   "corpus_hash": "b432e1734f54bb0d",
-  "final_pass_rate": 0.714,
+  "final_pass_rate": 0.821,
   "scorecards": [
     {
       "iteration": 0,
       "total": 28,
-      "passed": 20,
-      "pass_rate": 0.714,
+      "passed": 23,
+      "pass_rate": 0.821,
       "by_kind": {
-        "answerable": 0.625,
+        "answerable": 0.812,
         "edge": 0.667,
         "out_of_scope": 1.0
       },
       "by_difficulty": {
-        "medium": 0.722,
-        "easy": 0.75,
+        "medium": 0.833,
+        "easy": 1.0,
         "hard": 0.667
       },
       "mean_answer_length": 63,
@@ -25,19 +25,37 @@
     {
       "iteration": 1,
       "total": 28,
-      "passed": 19,
-      "pass_rate": 0.679,
+      "passed": 21,
+      "pass_rate": 0.75,
       "by_kind": {
-        "answerable": 0.75,
+        "answerable": 0.875,
         "edge": 0.333,
         "out_of_scope": 0.833
       },
       "by_difficulty": {
-        "medium": 0.722,
+        "medium": 0.833,
         "easy": 1.0,
         "hard": 0.333
       },
       "mean_answer_length": 79,
+      "llm_escalation_rate": 0.036
+    },
+    {
+      "iteration": 2,
+      "total": 28,
+      "passed": 23,
+      "pass_rate": 0.821,
+      "by_kind": {
+        "answerable": 0.875,
+        "edge": 0.5,
+        "out_of_scope": 1.0
+      },
+      "by_difficulty": {
+        "medium": 0.889,
+        "easy": 1.0,
+        "hard": 0.5
+      },
+      "mean_answer_length": 62,
       "llm_escalation_rate": 0.036
     }
   ],
@@ -46,7 +64,7 @@
       "iteration": 0,
       "failures_by_category": {
         "hallucination": 1,
-        "prompt_defect": 4,
+        "prompt_defect": 1,
         "wrong_refusal": 3
       },
       "diagnoses": [
@@ -69,24 +87,6 @@
           "classified_by": "deterministic"
         },
         {
-          "case_id": "ans_007",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
-          "case_id": "ans_013",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
-          "case_id": "ans_014",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
           "case_id": "edge_multi_00",
           "category": "wrong_refusal",
           "evidence": "refused despite retrieving ['doc_00_c002', 'doc_01_c002']",
@@ -100,35 +100,34 @@
         }
       ],
       "fix": {
-        "category": "prompt_defect",
-        "rung": "patch_format_block",
-        "rationale": "8 failures classified prompt_defect; applying patch_format_block",
+        "category": "wrong_refusal",
+        "rung": "lower_min_score",
+        "rationale": "5 failures classified wrong_refusal; applying lower_min_score",
         "targets_case_ids": [
-          "ans_001",
-          "ans_007",
-          "ans_013",
-          "ans_014"
+          "ans_003",
+          "edge_multi_00",
+          "edge_multi_02"
         ],
         "diff": {
           "before": {
-            "system_prompt": "<995 chars>"
+            "min_score": 0.25
           },
           "after": {
-            "system_prompt": "<1415 chars, FORMAT revised>"
+            "min_score": 0.15
           }
         }
       },
-      "score_before": 0.714,
-      "score_after": 0.679,
+      "score_before": 0.821,
+      "score_after": 0.75,
       "kept": false,
-      "revert_reason": "score fell 71% -> 68%; reverted to v0",
-      "seconds": 304.6,
-      "tokens": 34506
+      "revert_reason": "score fell 82% -> 75%; reverted to v0",
+      "seconds": 1.2,
+      "tokens": 278
     },
     {
       "iteration": 1,
       "failures_by_category": {
-        "prompt_defect": 5,
+        "prompt_defect": 3,
         "wrong_refusal": 3,
         "hallucination": 1
       },
@@ -143,18 +142,6 @@
           "case_id": "ans_003",
           "category": "wrong_refusal",
           "evidence": "refused despite retrieving ['doc_01_c002']",
-          "classified_by": "deterministic"
-        },
-        {
-          "case_id": "ans_007",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
-          "case_id": "ans_014",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
           "classified_by": "deterministic"
         },
         {
@@ -190,12 +177,10 @@
       ],
       "fix": {
         "category": "prompt_defect",
-        "rung": "patch_scope_block",
-        "rationale": "9 failures classified prompt_defect; applying patch_scope_block",
+        "rung": "patch_format_block",
+        "rationale": "7 failures classified prompt_defect; applying patch_format_block",
         "targets_case_ids": [
           "ans_001",
-          "ans_007",
-          "ans_014",
           "edge_multi_03",
           "oos_03"
         ],
@@ -204,23 +189,23 @@
             "system_prompt": "<995 chars>"
           },
           "after": {
-            "system_prompt": "<1131 chars, SCOPE revised>"
+            "system_prompt": "<1377 chars, FORMAT revised>"
           }
         }
       },
-      "score_before": 0.679,
-      "score_after": 0.0,
-      "kept": true,
-      "revert_reason": null,
-      "seconds": 481.0,
-      "tokens": 79361
+      "score_before": 0.75,
+      "score_after": 0.821,
+      "kept": false,
+      "revert_reason": "score fell 75% -> 82%; reverted to v0",
+      "seconds": 2.3,
+      "tokens": 1635
     }
   ],
   "residual_failures": [
     {
       "case_id": "ans_000",
       "question": "How many weeks of fully paid parental leave do I get as the primary caregiver?",
-      "why": "fact recall 0.0; cited chunks it never retrieved"
+      "why": "cited chunks it never retrieved"
     },
     {
       "case_id": "ans_001",
@@ -231,21 +216,6 @@
       "case_id": "ans_003",
       "question": "How many weeks notice do I need to give before starting a new shift?",
       "why": "refused an answerable question"
-    },
-    {
-      "case_id": "ans_007",
-      "question": "If I take unpaid leave, does that break my continuous service record?",
-      "why": "fact recall 0.0"
-    },
-    {
-      "case_id": "ans_013",
-      "question": "How much per diem do I get for domestic travel?",
-      "why": "fact recall 0.0"
-    },
-    {
-      "case_id": "ans_014",
-      "question": "How much per diem do I get for international travel?",
-      "why": "fact recall 0.0"
     },
     {
       "case_id": "edge_multi_00",
@@ -259,13 +229,13 @@
     }
   ],
   "calibration": null,
-  "stop_reason": "incomplete eval pass (resume to finish)",
+  "stop_reason": "iteration cap (2) reached",
   "budget": {
     "max_tokens": 500000,
-    "max_seconds": 900,
+    "max_seconds": 2400,
     "max_iterations": 2,
-    "tokens_used": 78431,
-    "started_at": 1795501363.8307898
+    "tokens_used": 31213,
+    "started_at": 1795503326.509613
   },
   "best_version": 0,
   "evaluated": true

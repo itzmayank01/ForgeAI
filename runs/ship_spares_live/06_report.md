@@ -7,45 +7,35 @@ conditions from the supplier agreements. It needs to work out order totals.
 Purchasing officers use it. It must not recommend one supplier over another or
 commit to a delivery date it cannot evidence.
 
-**Final pass rate: 21%** (agent v0, stopped because: incomplete eval pass (resume to finish))
+**Final pass rate: 57%** (agent v0, stopped because: incomplete eval pass (resume to finish))
 
-Budget: 84,074/500,000 tokens, 928.1s/900s, 1/2 iterations.
+Budget: 566/500,000 tokens, 8.2s/2400s, 1/2 iterations.
 
 ## Per-iteration scorecard
 
 | iter | pass rate | passed/total | answerable | out of scope | edge | LLM-escalated |
 |---|---|---|---|---|---|---|
-| 0 | 21% | 6/28 | 0% | 100% | 0% | 4% |
+| 0 | 57% | 16/28 | 71% | 100% | 0% | 7% |
 
 ## What changed, and whether it helped
 
 **Iteration 0: `prompt_defect` -> `patch_format_block`** (kept)
 
-- Diagnosed: {'prompt_defect': 19, 'retrieval_miss': 1, 'wrong_refusal': 2}
-- Rationale: 22 failures classified prompt_defect; applying patch_format_block
-- Changed: `{'system_prompt': '<1173 chars>'}` -> `{'system_prompt': '<1375 chars, FORMAT revised>'}`
-- Targeted: ans_000, ans_001, ans_002, ans_003, ans_004, ans_005
-- Score: 21% -> 0% (delta -21%)
+- Diagnosed: {'prompt_defect': 9, 'retrieval_miss': 1, 'wrong_refusal': 2}
+- Rationale: 12 failures classified prompt_defect; applying patch_format_block
+- Changed: `{'system_prompt': '<1173 chars>'}` -> `{'system_prompt': '<1499 chars, FORMAT revised>'}`
+- Targeted: ans_004, ans_006, ans_011, ans_013, edge_multi_01, edge_multi_02
+- Score: 57% -> 0% (delta -57%)
 
 ## What still fails
 
-22 of 28 cases still fail:
+12 of 28 cases still fail:
 
 | case | question | why |
 |---|---|---|
-| `ans_000` | What is the price in euros for part number FIL-1210? | fact recall 0.0 |
-| `ans_001` | What’s the lead time for part SEA-1217? | fact recall 0.0 |
-| `ans_002` | Do we have any stock of part SEA-1231? | fact recall 0.0 |
-| `ans_003` | Can you confirm the price, availability, and lead time for part VAL-10 | fact recall 0.0 |
 | `ans_004` | Can you tell me the price, availability and lead time for part VAL-109 | fact recall 0.0 |
-| `ans_005` | Can you confirm the price, lead time, and availability for part VAL-11 | fact recall 0.0 |
 | `ans_006` | Can you confirm the price, lead time and current stock for part SEA-12 | fact recall 0.0 |
-| `ans_007` | Can you confirm the price, lead time, and availability for part SEA-12 | fact recall 0.0 |
-| `ans_008` | Can you confirm the price, lead time, stock and supplier for part SEA- | fact recall 0.0 |
-| `ans_009` | Can you confirm the price, lead time, and available stock for part SEA | fact recall 0.0 |
-| `ans_010` | Can you confirm the price, lead time, and current stock for part PUM-1 | fact recall 0.0 |
 | `ans_011` | Can you confirm the price and availability of part PUM-1028 from Kowlo | fact recall 0.0 |
-| `ans_012` | Can you give me the price, lead time, stock quantity and supplier for  | fact recall 0.0 |
 | `ans_013` | Can you confirm the price, lead time, stock quantity and supplier for  | fact recall 0.0 |
 | `edge_multi_00` | If you place an order for part SEA-1266 today, on which date will the  | refused an answerable question |
 | `edge_multi_01` | What is the minimum number of VAL-1077 butterfly valves that must be p | fact recall 0.0 |

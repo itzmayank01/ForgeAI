@@ -1,0 +1,592 @@
+{
+  "verdicts": [
+    {
+      "case_id": "ans_000",
+      "answer": "You are entitled to 16 weeks of fully paid parental leave as the primary caregiver.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c002",
+        "doc_01_c001",
+        "doc_01_c000",
+        "doc_01_c003",
+        "doc_02_c001"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 83
+    },
+    {
+      "case_id": "ans_001",
+      "answer": "The secondary caregiver is entitled to 4 weeks of fully paid parental leave.",
+      "refused": false,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c002",
+        "doc_01_c001",
+        "doc_01_c000",
+        "doc_01_c003",
+        "doc_02_c001"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "fact recall 0.0",
+      "answer_length": 76
+    },
+    {
+      "case_id": "ans_002",
+      "answer": "Yes, you can split your parental leave into separate periods. The policy allows parental leave to be taken in up to three separate blocks, provided you have the agreement of your line manager.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c002",
+        "doc_01_c001",
+        "doc_01_c000",
+        "doc_01_c003",
+        "doc_02_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 192
+    },
+    {
+      "case_id": "ans_003",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c001",
+        "doc_01_c002",
+        "doc_00_c001",
+        "doc_01_c000",
+        "doc_00_c000"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "refused an answerable question",
+      "answer_length": 0
+    },
+    {
+      "case_id": "ans_004",
+      "answer": "Your appeal will be heard within 20 working days.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c002",
+        "doc_00_c001",
+        "doc_02_c002",
+        "doc_01_c002",
+        "doc_01_c001"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 49
+    },
+    {
+      "case_id": "ans_005",
+      "answer": "Grievance records are retained for 6 years from the date of the final outcome.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c002",
+        "doc_00_c001",
+        "doc_00_c000",
+        "doc_01_c001",
+        "doc_01_c002"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 78
+    },
+    {
+      "case_id": "ans_006",
+      "answer": "Only those directly involved in the grievance procedure may see the records.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c002",
+        "doc_00_c001",
+        "doc_00_c000",
+        "doc_01_c003",
+        "doc_01_c001"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 76
+    },
+    {
+      "case_id": "ans_007",
+      "answer": "No, taking unpaid leave does not break your continuous service record.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c003",
+        "doc_01_c002",
+        "doc_01_c001",
+        "doc_01_c000",
+        "doc_00_c002"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 70
+    },
+    {
+      "case_id": "ans_008",
+      "answer": "If you fall ill during your booked annual leave and provide a medical certificate, the affected days are reclassified as sick leave and returned to your annual leave balance.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c003",
+        "doc_01_c000",
+        "doc_01_c002",
+        "doc_01_c001",
+        "doc_02_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 174
+    },
+    {
+      "case_id": "ans_009",
+      "answer": "A line manager may approve travel claims up to EUR\u202f1,500.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c002",
+        "doc_02_c000",
+        "doc_02_c001",
+        "doc_00_c001",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 57
+    },
+    {
+      "case_id": "ans_010",
+      "answer": "A department head may approve travel claims up to EUR 7,500.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c002",
+        "doc_02_c001",
+        "doc_02_c000",
+        "doc_01_c001",
+        "doc_00_c001"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 60
+    },
+    {
+      "case_id": "ans_011",
+      "answer": "The Finance Director must approve travel claims over 7,500\u202fEUR.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c002",
+        "doc_02_c001",
+        "doc_02_c000",
+        "doc_01_c001",
+        "doc_00_c001"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 63
+    },
+    {
+      "case_id": "ans_012",
+      "answer": "You must submit your travel claim within 30 days of the final day of travel.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c002",
+        "doc_02_c001",
+        "doc_02_c000",
+        "doc_00_c001",
+        "doc_00_c002"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 76
+    },
+    {
+      "case_id": "ans_013",
+      "answer": "EUR 65 per full day",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_02_c001",
+        "doc_02_c002",
+        "doc_01_c001",
+        "doc_01_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 19
+    },
+    {
+      "case_id": "ans_014",
+      "answer": "EUR 95 per full day",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_02_c001",
+        "doc_02_c002",
+        "doc_01_c001",
+        "doc_01_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 19
+    },
+    {
+      "case_id": "ans_015",
+      "answer": "The per\u2011diem for travel to designated high\u2011cost ports such as Singapore, Oslo, Tokyo, or Zurich is EUR\u202f130 per full day.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_02_c001",
+        "doc_02_c002",
+        "doc_01_c001",
+        "doc_01_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 120
+    },
+    {
+      "case_id": "edge_multi_00",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c002",
+        "doc_00_c001",
+        "doc_00_c000",
+        "doc_01_c002",
+        "doc_01_c001"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "refused an answerable question",
+      "answer_length": 0
+    },
+    {
+      "case_id": "edge_multi_01",
+      "answer": "If a staff member falls ill during a night taxi ride between 22:00 and 06:00, the days of illness are reclassified as sick leave and the taxi fare is reimbursed because the journey falls within the reimbursable time window.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c003",
+        "doc_02_c002",
+        "doc_01_c000",
+        "doc_01_c001",
+        "doc_01_c002"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 223
+    },
+    {
+      "case_id": "edge_multi_02",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": false,
+      "citations_valid": true,
+      "fact_recall": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_02_c000",
+        "doc_02_c002",
+        "doc_02_c001",
+        "doc_00_c002",
+        "doc_01_c001"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "refused an answerable question",
+      "answer_length": 0
+    },
+    {
+      "case_id": "edge_multi_03",
+      "answer": "A maximum of 5 days of unused annual leave may be carried into the following calendar year, and grievance records are kept confidential and only disclosed to those directly involved in the procedure.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c002",
+        "doc_01_c001",
+        "doc_00_c000",
+        "doc_00_c001",
+        "doc_01_c000"
+      ],
+      "passed": true,
+      "judge_path": "llm_escalation",
+      "notes": "",
+      "answer_length": 199
+    },
+    {
+      "case_id": "edge_amb_00",
+      "answer": "16 weeks",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c002",
+        "doc_01_c001",
+        "doc_01_c000",
+        "doc_01_c003",
+        "doc_02_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 8
+    },
+    {
+      "case_id": "edge_amb_02",
+      "answer": "Yes. Parental leave may be taken in up to three separate blocks with the agreement of the line manager.",
+      "refused": false,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": false,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c001",
+        "doc_01_c002",
+        "doc_01_c000",
+        "doc_01_c003",
+        "doc_02_c000"
+      ],
+      "passed": false,
+      "judge_path": "deterministic",
+      "notes": "cited chunks it never retrieved",
+      "answer_length": 103
+    },
+    {
+      "case_id": "oos_00",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c002",
+        "doc_01_c000",
+        "doc_01_c001",
+        "doc_00_c000",
+        "doc_01_c003"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_01",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c000",
+        "doc_01_c001",
+        "doc_01_c002",
+        "doc_01_c000",
+        "doc_00_c001"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_02",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c003",
+        "doc_00_c001",
+        "doc_01_c001",
+        "doc_00_c000",
+        "doc_01_c002"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_03",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_01_c003",
+        "doc_02_c002",
+        "doc_01_c001",
+        "doc_02_c000",
+        "doc_00_c000"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_04",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c001",
+        "doc_00_c000",
+        "doc_01_c001",
+        "doc_01_c002",
+        "doc_00_c002"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    },
+    {
+      "case_id": "oos_05",
+      "answer": "",
+      "refused": true,
+      "grounded": true,
+      "correct": true,
+      "citations_valid": true,
+      "fact_recall": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "retrieved_chunks": [
+        "doc_00_c001",
+        "doc_00_c000",
+        "doc_01_c001",
+        "doc_02_c002",
+        "doc_02_c001"
+      ],
+      "passed": true,
+      "judge_path": "deterministic",
+      "notes": "",
+      "answer_length": 0
+    }
+  ]
+}

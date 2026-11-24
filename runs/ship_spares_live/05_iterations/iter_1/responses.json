@@ -875,5 +875,146 @@
    }
   ],
   "tool_calls": []
+ },
+ "edge_amb_01": {
+  "answer": "The lead time for part SEA-1273 is 5 days.",
+  "citations": [
+   "doc_00_c013",
+   "doc_00_c012"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c013",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: SEA-1273; description: Lip seal 120mm (standard); category: seal; unit_price_eur: 3485.17; lead_time_days: 5; stock_qty: 60; supplier: Adriatic Supply\npart_number: SEA-1280; description: Lip seal 120mm (heavy duty); category: seal; unit_price_eur: 953.27; lead_time_days: 21; stock_qty: 18; supplier: Adriatic Supply",
+    "score": 0.6113
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "Table parts_catalogue.csv with columns: part_number, description, category, unit_price_eur, lead_time_days, stock_qty, supplier.\npart_number: PUM-1007; description: Centrifugal ballast pump (standard); category: pump; unit_price_eur: 2177.99; lead_time_days: 45; stock_qty: 18; supplier: Kowloon Diesel Parts\npart_number: PUM-1014; description: Centrifugal ballast pump (heavy duty); category: pump; unit_price_eur: 2443.54; lead_time_days: 60; stock_qty: 4; supplier: Nordhavn Marine\npart_number: PUM-1021; description: Fuel transfer pump (standard); category: pump; unit_price_eur: 3861.07; lead_time_days: 30; stock_qty: 60; supplier: Adriatic Supply",
+    "score": 0.5868
+   },
+   {
+    "chunk_id": "doc_00_c010",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: FIL-1210; description: Separator insert (heavy duty); category: filter; unit_price_eur: 1020.88; lead_time_days: 21; stock_qty: 40; supplier: Adriatic Supply\npart_number: SEA-1217; description: Stern tube seal ring (standard); category: seal; unit_price_eur: 2774.48; lead_time_days: 2; stock_qty: 2; supplier: Nordhavn Marine\npart_number: SEA-1224; description: Stern tube seal ring (heavy duty); category: seal; unit_price_eur: 2126.1; lead_time_days: 2; stock_qty: 40; supplier: Kowloon Diesel Parts\npart_number: SEA-1231; description: Mechanical shaft seal (standard); category: seal; unit_price_eur: 3987.43; lead_time_days: 21; stock_qty: 0; supplier: Nordhavn Marine",
+    "score": 0.5846
+   },
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "supplier_kowloon.md",
+    "text": "5.1 Returns are accepted within **21 days** of delivery.\n5.2 Restocking fee is **20%**, reduced to **10%** where a replacement order of\nequal or greater value is placed simultaneously.\n5.3 Consumables are non-returnable once the packaging seal is broken.\n## 6. Delivery\n6.1 Lead times are quoted ex-works Hong Kong.\n6.2 Freight consolidation is available on a weekly sailing; consolidated\nshipments add **7 to 10 days** to the quoted lead time.",
+    "score": 0.579
+   },
+   {
+    "chunk_id": "doc_00_c012",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: SEA-1252; description: O-ring kit NBR (heavy duty); category: seal; unit_price_eur: 2181.96; lead_time_days: 60; stock_qty: 18; supplier: Adriatic Supply\npart_number: SEA-1259; description: Gasket set cylinder head (standard); category: seal; unit_price_eur: 661.91; lead_time_days: 21; stock_qty: 2; supplier: Adriatic Supply\npart_number: SEA-1266; description: Gasket set cylinder head (heavy duty); category: seal; unit_price_eur: 750.0; lead_time_days: 7; stock_qty: 40; supplier: Nordhavn Marine\npart_number: SEA-1273; description: Lip seal 120mm (standard); category: seal; unit_price_eur: 3485.17; lead_time_days: 5; stock_qty: 60; supplier: Adriatic Supply",
+    "score": 0.5784
+   }
+  ],
+  "tool_calls": []
+ },
+ "edge_amb_03": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 0.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c011",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: SEA-1231; description: Mechanical shaft seal (standard); category: seal; unit_price_eur: 3987.43; lead_time_days: 21; stock_qty: 0; supplier: Nordhavn Marine\npart_number: SEA-1238; description: Mechanical shaft seal (heavy duty); category: seal; unit_price_eur: 443.48; lead_time_days: 60; stock_qty: 60; supplier: Nordhavn Marine\npart_number: SEA-1245; description: O-ring kit NBR (standard); category: seal; unit_price_eur: 86.26; lead_time_days: 14; stock_qty: 9; supplier: Adriatic Supply\npart_number: SEA-1252; description: O-ring kit NBR (heavy duty); category: seal; unit_price_eur: 2181.96; lead_time_days: 60; stock_qty: 18; supplier: Adriatic Supply",
+    "score": 0.8109
+   },
+   {
+    "chunk_id": "doc_00_c006",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: VAL-1126; description: Ball valve DN80 (heavy duty); category: valve; unit_price_eur: 4068.92; lead_time_days: 2; stock_qty: 4; supplier: Nordhavn Marine\npart_number: VAL-1133; description: Non-return valve DN65 (standard); category: valve; unit_price_eur: 4450.68; lead_time_days: 2; stock_qty: 18; supplier: Kowloon Diesel Parts\npart_number: VAL-1140; description: Non-return valve DN65 (heavy duty); category: valve; unit_price_eur: 4705.96; lead_time_days: 21; stock_qty: 12; supplier: Nordhavn Marine\npart_number: FIL-1147; description: Fuel oil filter element (standard); category: filter; unit_price_eur: 2723.17; lead_time_days: 7; stock_qty: 60; supplier: Kowloon Diesel Parts",
+    "score": 0.8049
+   },
+   {
+    "chunk_id": "doc_00_c005",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: VAL-1105; description: Pressure relief valve (standard); category: valve; unit_price_eur: 3641.26; lead_time_days: 45; stock_qty: 6; supplier: Nordhavn Marine\npart_number: VAL-1112; description: Pressure relief valve (heavy duty); category: valve; unit_price_eur: 348.23; lead_time_days: 3; stock_qty: 12; supplier: Nordhavn Marine\npart_number: VAL-1119; description: Ball valve DN80 (standard); category: valve; unit_price_eur: 4065.44; lead_time_days: 21; stock_qty: 0; supplier: Nordhavn Marine\npart_number: VAL-1126; description: Ball valve DN80 (heavy duty); category: valve; unit_price_eur: 4068.92; lead_time_days: 2; stock_qty: 4; supplier: Nordhavn Marine",
+    "score": 0.7964
+   },
+   {
+    "chunk_id": "doc_00_c004",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: VAL-1084; description: Butterfly valve DN100 (heavy duty); category: valve; unit_price_eur: 1420.4; lead_time_days: 2; stock_qty: 60; supplier: Nordhavn Marine\npart_number: VAL-1091; description: Gate valve DN50 (standard); category: valve; unit_price_eur: 2201.7; lead_time_days: 10; stock_qty: 12; supplier: Adriatic Supply\npart_number: VAL-1098; description: Gate valve DN50 (heavy duty); category: valve; unit_price_eur: 4779.37; lead_time_days: 3; stock_qty: 6; supplier: Kowloon Diesel Parts\npart_number: VAL-1105; description: Pressure relief valve (standard); category: valve; unit_price_eur: 3641.26; lead_time_days: 45; stock_qty: 6; supplier: Nordhavn Marine",
+    "score": 0.7936
+   },
+   {
+    "chunk_id": "doc_00_c012",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: SEA-1252; description: O-ring kit NBR (heavy duty); category: seal; unit_price_eur: 2181.96; lead_time_days: 60; stock_qty: 18; supplier: Adriatic Supply\npart_number: SEA-1259; description: Gasket set cylinder head (standard); category: seal; unit_price_eur: 661.91; lead_time_days: 21; stock_qty: 2; supplier: Adriatic Supply\npart_number: SEA-1266; description: Gasket set cylinder head (heavy duty); category: seal; unit_price_eur: 750.0; lead_time_days: 7; stock_qty: 40; supplier: Nordhavn Marine\npart_number: SEA-1273; description: Lip seal 120mm (standard); category: seal; unit_price_eur: 3485.17; lead_time_days: 5; stock_qty: 60; supplier: Adriatic Supply",
+    "score": 0.7901
+   }
+  ],
+  "tool_calls": []
+ },
+ "edge_amb_02": {
+  "answer": "Yes, several of the listed parts are currently in stock.",
+  "citations": [
+   "doc_00_c010",
+   "doc_00_c008",
+   "doc_00_c009",
+   "doc_00_c007",
+   "doc_00_c006"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c010",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: FIL-1210; description: Separator insert (heavy duty); category: filter; unit_price_eur: 1020.88; lead_time_days: 21; stock_qty: 40; supplier: Adriatic Supply\npart_number: SEA-1217; description: Stern tube seal ring (standard); category: seal; unit_price_eur: 2774.48; lead_time_days: 2; stock_qty: 2; supplier: Nordhavn Marine\npart_number: SEA-1224; description: Stern tube seal ring (heavy duty); category: seal; unit_price_eur: 2126.1; lead_time_days: 2; stock_qty: 40; supplier: Kowloon Diesel Parts\npart_number: SEA-1231; description: Mechanical shaft seal (standard); category: seal; unit_price_eur: 3987.43; lead_time_days: 21; stock_qty: 0; supplier: Nordhavn Marine",
+    "score": 0.6616
+   },
+   {
+    "chunk_id": "doc_00_c008",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: FIL-1168; description: Lube oil filter cartridge (heavy duty); category: filter; unit_price_eur: 3397.19; lead_time_days: 2; stock_qty: 0; supplier: Kowloon Diesel Parts\npart_number: FIL-1175; description: Air intake filter (standard); category: filter; unit_price_eur: 3828.14; lead_time_days: 5; stock_qty: 60; supplier: Adriatic Supply\npart_number: FIL-1182; description: Air intake filter (heavy duty); category: filter; unit_price_eur: 913.99; lead_time_days: 45; stock_qty: 4; supplier: Adriatic Supply\npart_number: FIL-1189; description: Hydraulic return filter (standard); category: filter; unit_price_eur: 3696.47; lead_time_days: 21; stock_qty: 60; supplier: Kowloon Diesel Parts",
+    "score": 0.6523
+   },
+   {
+    "chunk_id": "doc_00_c009",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: FIL-1189; description: Hydraulic return filter (standard); category: filter; unit_price_eur: 3696.47; lead_time_days: 21; stock_qty: 60; supplier: Kowloon Diesel Parts\npart_number: FIL-1196; description: Hydraulic return filter (heavy duty); category: filter; unit_price_eur: 569.84; lead_time_days: 21; stock_qty: 4; supplier: Nordhavn Marine\npart_number: FIL-1203; description: Separator insert (standard); category: filter; unit_price_eur: 1303.78; lead_time_days: 60; stock_qty: 6; supplier: Nordhavn Marine\npart_number: FIL-1210; description: Separator insert (heavy duty); category: filter; unit_price_eur: 1020.88; lead_time_days: 21; stock_qty: 40; supplier: Adriatic Supply",
+    "score": 0.651
+   },
+   {
+    "chunk_id": "doc_00_c007",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: FIL-1147; description: Fuel oil filter element (standard); category: filter; unit_price_eur: 2723.17; lead_time_days: 7; stock_qty: 60; supplier: Kowloon Diesel Parts\npart_number: FIL-1154; description: Fuel oil filter element (heavy duty); category: filter; unit_price_eur: 1625.04; lead_time_days: 10; stock_qty: 9; supplier: Nordhavn Marine\npart_number: FIL-1161; description: Lube oil filter cartridge (standard); category: filter; unit_price_eur: 4628.0; lead_time_days: 3; stock_qty: 2; supplier: Nordhavn Marine\npart_number: FIL-1168; description: Lube oil filter cartridge (heavy duty); category: filter; unit_price_eur: 3397.19; lead_time_days: 2; stock_qty: 0; supplier: Kowloon Diesel Parts",
+    "score": 0.6452
+   },
+   {
+    "chunk_id": "doc_00_c006",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: VAL-1126; description: Ball valve DN80 (heavy duty); category: valve; unit_price_eur: 4068.92; lead_time_days: 2; stock_qty: 4; supplier: Nordhavn Marine\npart_number: VAL-1133; description: Non-return valve DN65 (standard); category: valve; unit_price_eur: 4450.68; lead_time_days: 2; stock_qty: 18; supplier: Kowloon Diesel Parts\npart_number: VAL-1140; description: Non-return valve DN65 (heavy duty); category: valve; unit_price_eur: 4705.96; lead_time_days: 21; stock_qty: 12; supplier: Nordhavn Marine\npart_number: FIL-1147; description: Fuel oil filter element (standard); category: filter; unit_price_eur: 2723.17; lead_time_days: 7; stock_qty: 60; supplier: Kowloon Diesel Parts",
+    "score": 0.6451
+   }
+  ],
+  "tool_calls": []
  }
 }

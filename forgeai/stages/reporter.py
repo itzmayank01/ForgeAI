@@ -43,6 +43,11 @@ def render(report: RunReport, definition: AgentDefinition) -> str:
 
     if report.iterations:
         a("## What changed, and whether it helped\n")
+        if report.best_version == 0 and not any(i.kept for i in report.iterations):
+            a("> No fix beat the baseline. Every attempted change was reverted and the "
+              "shipped agent is the one the generator produced first. That is a real "
+              "result: on this corpus the generated definition was already at its best, "
+              "and the loop's job was to establish that rather than to improve on it.\n")
         for it in report.iterations:
             if it.fix is None:
                 continue

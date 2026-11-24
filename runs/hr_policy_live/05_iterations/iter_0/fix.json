@@ -2,7 +2,7 @@
   "iteration": 0,
   "failures_by_category": {
     "hallucination": 1,
-    "prompt_defect": 4,
+    "prompt_defect": 1,
     "wrong_refusal": 3
   },
   "diagnoses": [
@@ -25,24 +25,6 @@
       "classified_by": "deterministic"
     },
     {
-      "case_id": "ans_007",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_013",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_014",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
       "case_id": "edge_multi_00",
       "category": "wrong_refusal",
       "evidence": "refused despite retrieving ['doc_00_c002', 'doc_01_c002']",
@@ -56,28 +38,27 @@
     }
   ],
   "fix": {
-    "category": "prompt_defect",
-    "rung": "patch_format_block",
-    "rationale": "8 failures classified prompt_defect; applying patch_format_block",
+    "category": "wrong_refusal",
+    "rung": "lower_min_score",
+    "rationale": "5 failures classified wrong_refusal; applying lower_min_score",
     "targets_case_ids": [
-      "ans_001",
-      "ans_007",
-      "ans_013",
-      "ans_014"
+      "ans_003",
+      "edge_multi_00",
+      "edge_multi_02"
     ],
     "diff": {
       "before": {
-        "system_prompt": "<995 chars>"
+        "min_score": 0.25
       },
       "after": {
-        "system_prompt": "<1415 chars, FORMAT revised>"
+        "min_score": 0.15
       }
     }
   },
-  "score_before": 0.714,
+  "score_before": 0.821,
   "score_after": 0.0,
   "kept": true,
   "revert_reason": null,
-  "seconds": 304.6,
-  "tokens": 34506
+  "seconds": 1.2,
+  "tokens": 278
 }

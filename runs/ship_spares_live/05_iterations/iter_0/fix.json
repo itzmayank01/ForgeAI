@@ -1,43 +1,13 @@
 {
   "iteration": 0,
   "failures_by_category": {
-    "prompt_defect": 19,
+    "prompt_defect": 9,
     "retrieval_miss": 1,
     "wrong_refusal": 2
   },
   "diagnoses": [
     {
-      "case_id": "ans_000",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_001",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_002",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_003",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
       "case_id": "ans_004",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_005",
       "category": "prompt_defect",
       "evidence": "correct context retrieved but fact recall 0.0",
       "classified_by": "deterministic"
@@ -49,37 +19,7 @@
       "classified_by": "deterministic"
     },
     {
-      "case_id": "ans_007",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_008",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_009",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_010",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
       "case_id": "ans_011",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_012",
       "category": "prompt_defect",
       "evidence": "correct context retrieved but fact recall 0.0",
       "classified_by": "deterministic"
@@ -142,21 +82,11 @@
   "fix": {
     "category": "prompt_defect",
     "rung": "patch_format_block",
-    "rationale": "22 failures classified prompt_defect; applying patch_format_block",
+    "rationale": "12 failures classified prompt_defect; applying patch_format_block",
     "targets_case_ids": [
-      "ans_000",
-      "ans_001",
-      "ans_002",
-      "ans_003",
       "ans_004",
-      "ans_005",
       "ans_006",
-      "ans_007",
-      "ans_008",
-      "ans_009",
-      "ans_010",
       "ans_011",
-      "ans_012",
       "ans_013",
       "edge_multi_01",
       "edge_multi_02",
@@ -169,14 +99,14 @@
         "system_prompt": "<1173 chars>"
       },
       "after": {
-        "system_prompt": "<1375 chars, FORMAT revised>"
+        "system_prompt": "<1499 chars, FORMAT revised>"
       }
     }
   },
-  "score_before": 0.214,
+  "score_before": 0.571,
   "score_after": 0.0,
   "kept": true,
   "revert_reason": null,
-  "seconds": 421.3,
-  "tokens": 85176
+  "seconds": 2.2,
+  "tokens": 1556
 }

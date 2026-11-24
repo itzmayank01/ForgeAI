@@ -5,9 +5,9 @@
       "answer": "16 weeks",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": false,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_01_c002",
@@ -18,7 +18,7 @@
       ],
       "passed": false,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0; cited chunks it never retrieved",
+      "notes": "cited chunks it never retrieved",
       "answer_length": 8
     },
     {
@@ -152,9 +152,9 @@
       "answer": "No, taking unpaid leave does not break your continuous service record.",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_01_c003",
@@ -163,9 +163,9 @@
         "doc_01_c000",
         "doc_00_c002"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 70
     },
     {
@@ -278,9 +278,9 @@
       "answer": "EUR 65 per full day",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_02_c000",
@@ -289,9 +289,9 @@
         "doc_01_c001",
         "doc_01_c000"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 19
     },
     {
@@ -299,9 +299,9 @@
       "answer": "EUR 95 per full day",
       "refused": false,
       "grounded": true,
-      "correct": false,
+      "correct": true,
       "citations_valid": true,
-      "fact_recall": 0.0,
+      "fact_recall": 1.0,
       "unsupported_claim_rate": 0.0,
       "retrieved_chunks": [
         "doc_02_c000",
@@ -310,9 +310,9 @@
         "doc_01_c001",
         "doc_01_c000"
       ],
-      "passed": false,
+      "passed": true,
       "judge_path": "deterministic",
-      "notes": "fact recall 0.0",
+      "notes": "",
       "answer_length": 19
     },
     {

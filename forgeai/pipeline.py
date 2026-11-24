@@ -242,12 +242,16 @@ def build(
         if card.pass_rate > best_score:
             best_def, best_score, best_verdicts = definition, card.pass_rate, verdicts
         elif iterations:
-            iterations[-1].kept = False
-            iterations[-1].revert_reason = (
-                f"score fell {iterations[-1].score_before:.0%} -> {card.pass_rate:.0%}; "
+            # Compare against the BEST so far, not the previous iteration: a fix
+            # that recovers to a tie is still not an improvement, but saying
+            # "score fell 75% -> 82%" about it is simply false.
+            last = iterations[-1]
+            last.kept = False
+            last.revert_reason = (
+                f"scored {card.pass_rate:.0%} against best {best_score:.0%}; "
                 f"reverted to v{best_def.version}"
             )
-            log(f"  reverting: {iterations[-1].revert_reason}")
+            log(f"  reverting: {last.revert_reason}")
             definition = best_def
 
         if card.pass_rate >= PASS_TARGET:

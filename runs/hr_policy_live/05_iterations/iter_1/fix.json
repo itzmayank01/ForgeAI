@@ -1,7 +1,7 @@
 {
   "iteration": 1,
   "failures_by_category": {
-    "prompt_defect": 5,
+    "prompt_defect": 3,
     "wrong_refusal": 3,
     "hallucination": 1
   },
@@ -16,18 +16,6 @@
       "case_id": "ans_003",
       "category": "wrong_refusal",
       "evidence": "refused despite retrieving ['doc_01_c002']",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_007",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_014",
-      "category": "prompt_defect",
-      "evidence": "correct context retrieved but fact recall 0.0",
       "classified_by": "deterministic"
     },
     {
@@ -63,12 +51,10 @@
   ],
   "fix": {
     "category": "prompt_defect",
-    "rung": "patch_scope_block",
-    "rationale": "9 failures classified prompt_defect; applying patch_scope_block",
+    "rung": "patch_format_block",
+    "rationale": "7 failures classified prompt_defect; applying patch_format_block",
     "targets_case_ids": [
       "ans_001",
-      "ans_007",
-      "ans_014",
       "edge_multi_03",
       "oos_03"
     ],
@@ -77,14 +63,14 @@
         "system_prompt": "<995 chars>"
       },
       "after": {
-        "system_prompt": "<1131 chars, SCOPE revised>"
+        "system_prompt": "<1377 chars, FORMAT revised>"
       }
     }
   },
-  "score_before": 0.679,
+  "score_before": 0.75,
   "score_after": 0.0,
   "kept": true,
   "revert_reason": null,
-  "seconds": 481.0,
-  "tokens": 79361
+  "seconds": 2.3,
+  "tokens": 1635
 }

@@ -2,68 +2,38 @@
   "run_id": "ship_spares_live",
   "brief": "Build me a procurement assistant for our ship spares desk. It should answer\nquestions about part availability, prices and lead times from the parts\ncatalogue, and about supplier terms, minimum order quantities and warranty\nconditions from the supplier agreements. It needs to work out order totals.\nPurchasing officers use it. It must not recommend one supplier over another or\ncommit to a delivery date it cannot evidence.",
   "corpus_hash": "326f533b14003c35",
-  "final_pass_rate": 0.214,
+  "final_pass_rate": 0.571,
   "scorecards": [
     {
       "iteration": 0,
       "total": 28,
-      "passed": 6,
-      "pass_rate": 0.214,
+      "passed": 16,
+      "pass_rate": 0.571,
       "by_kind": {
-        "answerable": 0.0,
+        "answerable": 0.714,
         "edge": 0.0,
         "out_of_scope": 1.0
       },
       "by_difficulty": {
-        "easy": 0.0,
+        "easy": 0.714,
         "hard": 0.0,
         "medium": 1.0
       },
       "mean_answer_length": 52,
-      "llm_escalation_rate": 0.036
+      "llm_escalation_rate": 0.071
     }
   ],
   "iterations": [
     {
       "iteration": 0,
       "failures_by_category": {
-        "prompt_defect": 19,
+        "prompt_defect": 9,
         "retrieval_miss": 1,
         "wrong_refusal": 2
       },
       "diagnoses": [
         {
-          "case_id": "ans_000",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
-          "case_id": "ans_001",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
-          "case_id": "ans_002",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
-          "case_id": "ans_003",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
           "case_id": "ans_004",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
-          "case_id": "ans_005",
           "category": "prompt_defect",
           "evidence": "correct context retrieved but fact recall 0.0",
           "classified_by": "deterministic"
@@ -75,37 +45,7 @@
           "classified_by": "deterministic"
         },
         {
-          "case_id": "ans_007",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
-          "case_id": "ans_008",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
-          "case_id": "ans_009",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
-          "case_id": "ans_010",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
           "case_id": "ans_011",
-          "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
-          "classified_by": "deterministic"
-        },
-        {
-          "case_id": "ans_012",
           "category": "prompt_defect",
           "evidence": "correct context retrieved but fact recall 0.0",
           "classified_by": "deterministic"
@@ -168,21 +108,11 @@
       "fix": {
         "category": "prompt_defect",
         "rung": "patch_format_block",
-        "rationale": "22 failures classified prompt_defect; applying patch_format_block",
+        "rationale": "12 failures classified prompt_defect; applying patch_format_block",
         "targets_case_ids": [
-          "ans_000",
-          "ans_001",
-          "ans_002",
-          "ans_003",
           "ans_004",
-          "ans_005",
           "ans_006",
-          "ans_007",
-          "ans_008",
-          "ans_009",
-          "ans_010",
           "ans_011",
-          "ans_012",
           "ans_013",
           "edge_multi_01",
           "edge_multi_02",
@@ -195,47 +125,22 @@
             "system_prompt": "<1173 chars>"
           },
           "after": {
-            "system_prompt": "<1375 chars, FORMAT revised>"
+            "system_prompt": "<1499 chars, FORMAT revised>"
           }
         }
       },
-      "score_before": 0.214,
+      "score_before": 0.571,
       "score_after": 0.0,
       "kept": true,
       "revert_reason": null,
-      "seconds": 421.3,
-      "tokens": 85176
+      "seconds": 2.2,
+      "tokens": 1556
     }
   ],
   "residual_failures": [
     {
-      "case_id": "ans_000",
-      "question": "What is the price in euros for part number FIL-1210?",
-      "why": "fact recall 0.0"
-    },
-    {
-      "case_id": "ans_001",
-      "question": "What’s the lead time for part SEA-1217?",
-      "why": "fact recall 0.0"
-    },
-    {
-      "case_id": "ans_002",
-      "question": "Do we have any stock of part SEA-1231?",
-      "why": "fact recall 0.0"
-    },
-    {
-      "case_id": "ans_003",
-      "question": "Can you confirm the price, availability, and lead time for part VAL-1084 from Nordhavn Marine?",
-      "why": "fact recall 0.0"
-    },
-    {
       "case_id": "ans_004",
       "question": "Can you tell me the price, availability and lead time for part VAL-1091 from Adriatic Supply?",
-      "why": "fact recall 0.0"
-    },
-    {
-      "case_id": "ans_005",
-      "question": "Can you confirm the price, lead time, and availability for part VAL-1105 from Nordhavn Marine?",
       "why": "fact recall 0.0"
     },
     {
@@ -244,33 +149,8 @@
       "why": "fact recall 0.0"
     },
     {
-      "case_id": "ans_007",
-      "question": "Can you confirm the price, lead time, and availability for part SEA-1259 from Adriatic Supply?",
-      "why": "fact recall 0.0"
-    },
-    {
-      "case_id": "ans_008",
-      "question": "Can you confirm the price, lead time, stock and supplier for part SEA-1266?",
-      "why": "fact recall 0.0"
-    },
-    {
-      "case_id": "ans_009",
-      "question": "Can you confirm the price, lead time, and available stock for part SEA-1273 from Adriatic Supply?",
-      "why": "fact recall 0.0"
-    },
-    {
-      "case_id": "ans_010",
-      "question": "Can you confirm the price, lead time, and current stock for part PUM-1021 from Adriatic Supply?",
-      "why": "fact recall 0.0"
-    },
-    {
       "case_id": "ans_011",
       "question": "Can you confirm the price and availability of part PUM-1028 from Kowloon Diesel Parts?",
-      "why": "fact recall 0.0"
-    },
-    {
-      "case_id": "ans_012",
-      "question": "Can you give me the price, lead time, stock quantity and supplier for part PUM-1035?",
       "why": "fact recall 0.0"
     },
     {
@@ -323,10 +203,10 @@
   "stop_reason": "incomplete eval pass (resume to finish)",
   "budget": {
     "max_tokens": 500000,
-    "max_seconds": 900,
+    "max_seconds": 2400,
     "max_iterations": 2,
-    "tokens_used": 84074,
-    "started_at": 1795502279.541913
+    "tokens_used": 566,
+    "started_at": 1795503580.940922
   },
   "best_version": 0,
   "evaluated": true
