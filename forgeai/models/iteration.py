@@ -97,6 +97,10 @@ class JudgeCalibration(BaseModel):
     agreement_rate: float = 0.0
     cohens_kappa: float = 0.0
     disagreements: list[dict[str, Any]] = Field(default_factory=list)
+    # Labels dropped because the answer they were written against is no longer
+    # the answer the judge scored. Recorded rather than silently discarded: a
+    # kappa over 4 surviving pairs is a much weaker claim than one over 12.
+    stale_labels_dropped: int = 0
 
 
 class RunReport(BaseModel):

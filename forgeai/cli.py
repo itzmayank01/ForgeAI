@@ -307,6 +307,36 @@ def calibrate(
     verdicts = json.loads((run / "05_iterations" / f"iter_{iteration}" / "verdicts.json").read_text())
     by_id = {v["case_id"]: v["passed"] for v in verdicts["verdicts"]}
 
+    # A gold label is a judgement about one specific answer, but calibrate joins
+    # on case_id alone. Re-answer the suite with a different model or a new
+    # prompt and the old labels still "fit": every id still matches, and the
+    # kappa that comes out describes pairs no human ever looked at. So compare
+    # the answer each label was written against with the answer the verdict was
+    # actually produced from, and drop the ones that have moved on. Matching is
+    # on a collapsed alphanumeric prefix because the template stores the answer
+    # truncated to 400 raw characters, often mid-word.
+    from .stages.calibration import stale_labels
+
+    answers = {v["case_id"]: v.get("answer", "") for v in verdicts["verdicts"]}
+    stale = (
+        stale_labels(raw["labels"], answers)
+        if isinstance(raw.get("labels"), dict) else []
+    )
+    for cid in stale:
+        labels.pop(cid, None)
+    if stale:
+        console.print(
+            f"[yellow]{len(stale)} gold label(s) were written against answers this "
+            f"run no longer produces; dropped.[/yellow]"
+        )
+        if not labels:
+            console.print(
+                "[red]Every gold label is stale, so there is nothing to calibrate "
+                "against.[/red] Re-label with: forgeai gold --run "
+                f"{run} --out {gold}"
+            )
+            raise typer.Exit(1)
+
     pairs = [(by_id[k], v) for k, v in labels.items() if k in by_id]
     if not pairs:
         console.print("[red]no overlap between gold labels and verdicts[/red]")
@@ -322,7 +352,7 @@ def calibrate(
 
     cal = JudgeCalibration(
         n_cases=n, agreements=agree, agreement_rate=round(po, 3),
-        cohens_kappa=round(kappa, 3),
+        cohens_kappa=round(kappa, 3), stale_labels_dropped=len(stale),
         disagreements=[
             {"case_id": k, "judge": by_id[k], "human": v}
             for k, v in labels.items() if k in by_id and by_id[k] != v

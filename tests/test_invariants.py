@@ -14,7 +14,7 @@ from forgeai.models.evals import EvalCase
 from forgeai.models.iteration import FailureDiagnosis
 from forgeai.models.requirements import RequirementsDoc, Topic
 from forgeai.runtime.agent import AgentResponse
-from forgeai.stages import critic, evalgen, judge, optimizer
+from forgeai.stages import calibration, critic, evalgen, judge, optimizer
 from forgeai.stages.generator import audit_tools
 
 
@@ -298,7 +298,6 @@ def test_every_committed_definition_loads():
     This caught a real break: the web export omitted `ordinal`, which Chunk
     requires, so `forgeai chat` crashed on load for every run.
     """
-    import json
     from pathlib import Path
 
     from forgeai.runtime.runner import load_index
@@ -333,3 +332,40 @@ def test_loader_tolerates_an_export_without_ordinal(tmp_path):
     ]}))
     index = load_index(p)
     assert index.chunks[0].ordinal == 0
+
+
+# --- calibration cannot rest on labels for answers that changed -------------
+# The bug this guards: calibrate joins gold labels to verdicts on case_id, so
+# re-answering a suite with a different agent model leaves every label still
+# matching by id while describing text no human ever read. That produces a
+# confident kappa over pairs nobody labelled.
+
+def test_label_for_a_changed_answer_is_stale() -> None:
+    gold = {"ans_1": {"answer": "Shore staff accrue 22 days per year.", "human": True}}
+    assert calibration.stale_labels(
+        gold, {"ans_1": "Shore staff accrue 25 days per year."}) == ["ans_1"]
+
+
+def test_label_survives_truncation_and_whitespace_drift() -> None:
+    # The template stores answers cut to 400 raw chars, often mid-word, and
+    # whitespace is not stable between runs. Neither is a real change.
+    full = "Shore staff accrue 22 days of annual leave per calendar year, " \
+           "pro-rated for joiners."
+    gold = {"ans_1": {"answer": "Shore staff accrue 22 days of annual lea"}}
+    spaced = full.replace(" ", "\n  ")
+    assert calibration.stale_labels(gold, {"ans_1": spaced}) == []
+
+
+def test_label_without_a_recorded_answer_is_trusted() -> None:
+    # Flat {case_id: bool} gold files predate the template; they carry no answer
+    # to check and must not be thrown away.
+    assert calibration.stale_labels({"ans_1": True}, {"ans_1": "anything"}) == []
+    assert calibration.stale_labels(
+        {"ans_1": {"human": True}}, {"ans_1": "anything"}) == []
+
+
+def test_label_for_a_case_absent_from_this_run_is_not_stale() -> None:
+    # Not scored here is not the same as scored against different text; the
+    # caller's own overlap check owns that case.
+    assert calibration.stale_labels(
+        {"ans_9": {"answer": "x"}}, {"ans_1": "y"}) == []
