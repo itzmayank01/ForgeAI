@@ -100,3 +100,23 @@ look like its job but are not.
 
 Return a list of `question` strings.
 """
+
+
+COMPUTATION = """Write a question that requires ARITHMETIC over values in this excerpt.
+
+DOCUMENT: {filename}
+CHUNK {chunk_id}:
+{text}
+
+The answer must not be readable straight from the text. It has to be computed -
+a total, a multiple, a difference, a percentage - from figures the excerpt
+states.
+
+Good: "What is the total for 12 units at the listed unit price?"
+Bad:  "What is the unit price?" (that is a lookup, not a computation)
+
+Return `question`, `expected` (the computed answer as a plain number, no units
+or currency symbol), and `difficulty`.
+
+If the excerpt has no figures worth combining, return SKIP as the question.
+"""

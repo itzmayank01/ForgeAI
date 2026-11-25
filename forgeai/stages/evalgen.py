@@ -44,6 +44,14 @@ class _Questions(BaseModel):
     questions: list[str] = Field(default_factory=list)
 
 
+class _Computation(BaseModel):
+    question: str
+    expected: str = ""
+    difficulty: str = "hard"
+
+
+_NUM_IN_TEXT = re.compile(r"(?<![A-Za-z0-9_-])\d+(?:[.,]\d+)?(?![A-Za-z0-9_-])")
+
 _STOPWORDS = {
     "which", "there", "these", "those", "their", "other", "within", "after",
     "before", "where", "while", "shall", "must", "every", "above", "below",
@@ -149,6 +157,28 @@ def generate_suite(
                 edge_type="ambiguous", expected_facts=base.expected_facts,
                 source_documents=base.source_documents,
                 source_chunks=base.source_chunks,
+                should_refuse=False, difficulty="hard",
+            ))
+
+    # --- edge: arithmetic over document figures ------------------------------
+    # Derived from the documents like everything else - this module still never
+    # sees the agent definition. But a suite that only ever asks for lookups
+    # cannot tell whether an agent can actually compute, and an attached
+    # calculator stays untested however many cases there are.
+    numeric = [c for c in pool if len(_NUM_IN_TEXT.findall(c.text)) >= 3]
+    for i, chunk in enumerate(numeric[:3]):
+        comp, _ = structured(
+            client, model_cls=_Computation, temperature=0.3,
+            model=settings.evalgen_model,
+            instruction=P.COMPUTATION.format(
+                filename=chunk.filename, chunk_id=chunk.chunk_id,
+                text=chunk.text[:1500]),
+        )
+        if comp and comp.question.strip().upper() != "SKIP" and comp.expected.strip():
+            cases.append(EvalCase(
+                id=f"edge_calc_{i:02d}", question=comp.question, kind="edge",
+                edge_type="ambiguous", expected_facts=[comp.expected.strip()],
+                source_documents=[chunk.doc_id], source_chunks=[chunk.chunk_id],
                 should_refuse=False, difficulty="hard",
             ))
 
