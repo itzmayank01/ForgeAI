@@ -19,7 +19,10 @@ def _all_keys() -> list[str]:
     FORGEAI_API_KEYS takes a comma-separated list; the singular names are kept
     so an existing single-key setup keeps working untouched. Numbered variants
     (FORGEAI_API_KEY_2, GROQ_API_KEY_3, …) are picked up too, because pasting
-    one per line is easier than editing a long comma list.
+    one per line is easier than editing a long comma list. The range runs well
+    past any plausible key count: it was 2-10 and silently ignored keys numbered
+    11 and above, so adding more keys made no difference and the pool quietly
+    stayed small.
     """
     found: list[str] = []
 
@@ -32,7 +35,7 @@ def _all_keys() -> list[str]:
     add(os.getenv("FORGEAI_API_KEYS"))
     for name in ("FORGEAI_API_KEY", "GROQ_API_KEY", "OPENAI_API_KEY"):
         add(os.getenv(name))
-        for i in range(2, 11):
+        for i in range(2, 31):
             add(os.getenv(f"{name}_{i}"))
     return found
 
