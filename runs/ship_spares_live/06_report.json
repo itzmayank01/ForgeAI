@@ -2,19 +2,317 @@
   "run_id": "ship_spares_live",
   "brief": "Build me a procurement assistant for our ship spares desk. It should answer\nquestions about part availability, prices and lead times from the parts\ncatalogue, and about supplier terms, minimum order quantities and warranty\nconditions from the supplier agreements. It needs to work out order totals.\nPurchasing officers use it. It must not recommend one supplier over another or\ncommit to a delivery date it cannot evidence.",
   "corpus_hash": "326f533b14003c35",
-  "final_pass_rate": 0.0,
-  "scorecards": [],
-  "iterations": [],
-  "residual_failures": [],
+  "final_pass_rate": 0.655,
+  "scorecards": [
+    {
+      "iteration": 0,
+      "total": 29,
+      "passed": 19,
+      "pass_rate": 0.655,
+      "by_kind": {
+        "answerable": 0.786,
+        "edge": 0.364,
+        "out_of_scope": 1.0
+      },
+      "by_difficulty": {
+        "easy": 0.909,
+        "medium": 0.714,
+        "hard": 0.364
+      },
+      "mean_answer_length": 188,
+      "llm_escalation_rate": 0.0
+    },
+    {
+      "iteration": 1,
+      "total": 29,
+      "passed": 19,
+      "pass_rate": 0.655,
+      "by_kind": {
+        "answerable": 0.786,
+        "edge": 0.364,
+        "out_of_scope": 1.0
+      },
+      "by_difficulty": {
+        "easy": 0.909,
+        "medium": 0.714,
+        "hard": 0.364
+      },
+      "mean_answer_length": 134,
+      "llm_escalation_rate": 0.0
+    },
+    {
+      "iteration": 2,
+      "total": 29,
+      "passed": 19,
+      "pass_rate": 0.655,
+      "by_kind": {
+        "answerable": 0.786,
+        "edge": 0.364,
+        "out_of_scope": 1.0
+      },
+      "by_difficulty": {
+        "easy": 0.909,
+        "medium": 0.714,
+        "hard": 0.364
+      },
+      "mean_answer_length": 186,
+      "llm_escalation_rate": 0.0
+    }
+  ],
+  "iterations": [
+    {
+      "iteration": 0,
+      "failures_by_category": {
+        "retrieval_miss": 2,
+        "prompt_defect": 4,
+        "wrong_refusal": 4
+      },
+      "diagnoses": [
+        {
+          "case_id": "ans_009",
+          "category": "retrieval_miss",
+          "evidence": "expected ['doc_00_c013'], retrieved ['doc_00_c000', 'doc_00_c004', 'doc_00_c005', 'doc_00_c006', 'doc_00_c009']",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "ans_011",
+          "category": "retrieval_miss",
+          "evidence": "refused; expected ['doc_00_c013'] never retrieved",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "ans_013",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.0",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_00",
+          "category": "wrong_refusal",
+          "evidence": "refused despite retrieving ['doc_01_c002', 'doc_02_c001']",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_01",
+          "category": "wrong_refusal",
+          "evidence": "refused despite retrieving ['doc_01_c000', 'doc_02_c001']",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_02",
+          "category": "wrong_refusal",
+          "evidence": "refused despite retrieving ['doc_02_c001']",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_03",
+          "category": "wrong_refusal",
+          "evidence": "refused despite retrieving ['doc_01_c001', 'doc_02_c001']",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_calc_00",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.0",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_calc_01",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.0",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_calc_02",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.0",
+          "classified_by": "deterministic"
+        }
+      ],
+      "fix": {
+        "category": "prompt_defect",
+        "rung": "patch_format_block",
+        "rationale": "10 failures classified prompt_defect; applying patch_format_block",
+        "targets_case_ids": [
+          "ans_013",
+          "edge_calc_00",
+          "edge_calc_01",
+          "edge_calc_02"
+        ],
+        "diff": {
+          "before": {
+            "system_prompt": "<1183 chars>"
+          },
+          "after": {
+            "system_prompt": "<1733 chars, FORMAT revised>"
+          }
+        }
+      },
+      "score_before": 0.655,
+      "score_after": 0.655,
+      "kept": false,
+      "revert_reason": "scored 66% against best 66%; reverted to v0",
+      "seconds": 184.5,
+      "tokens": 69260
+    },
+    {
+      "iteration": 1,
+      "failures_by_category": {
+        "retrieval_miss": 2,
+        "prompt_defect": 5,
+        "wrong_refusal": 3
+      },
+      "diagnoses": [
+        {
+          "case_id": "ans_009",
+          "category": "retrieval_miss",
+          "evidence": "expected ['doc_00_c013'], retrieved ['doc_00_c000', 'doc_00_c004', 'doc_00_c005', 'doc_00_c006', 'doc_00_c009']",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "ans_011",
+          "category": "retrieval_miss",
+          "evidence": "refused; expected ['doc_00_c013'] never retrieved",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "ans_013",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.0",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_00",
+          "category": "wrong_refusal",
+          "evidence": "refused despite retrieving ['doc_01_c002', 'doc_02_c001']",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_01",
+          "category": "wrong_refusal",
+          "evidence": "refused despite retrieving ['doc_01_c000', 'doc_02_c001']",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_02",
+          "category": "wrong_refusal",
+          "evidence": "refused despite retrieving ['doc_02_c001']",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_multi_03",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.5",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_calc_00",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.0",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_calc_01",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.0",
+          "classified_by": "deterministic"
+        },
+        {
+          "case_id": "edge_calc_02",
+          "category": "prompt_defect",
+          "evidence": "correct context retrieved but fact recall 0.0",
+          "classified_by": "deterministic"
+        }
+      ],
+      "fix": {
+        "category": "prompt_defect",
+        "rung": "patch_scope_block",
+        "rationale": "10 failures classified prompt_defect; applying patch_scope_block",
+        "targets_case_ids": [
+          "ans_013",
+          "edge_multi_03",
+          "edge_calc_00",
+          "edge_calc_01",
+          "edge_calc_02"
+        ],
+        "diff": {
+          "before": {
+            "system_prompt": "<1183 chars>"
+          },
+          "after": {
+            "system_prompt": "<1217 chars, SCOPE revised>"
+          }
+        }
+      },
+      "score_before": 0.655,
+      "score_after": 0.655,
+      "kept": false,
+      "revert_reason": "scored 66% against best 66%; reverted to v0",
+      "seconds": 185.2,
+      "tokens": 143421
+    }
+  ],
+  "residual_failures": [
+    {
+      "case_id": "ans_009",
+      "question": "What is the unit price in euros for the component listed in parts_catalogue.csv?",
+      "why": "fact recall 0.0"
+    },
+    {
+      "case_id": "ans_011",
+      "question": "What is the current stock quantity for part PN-9876?",
+      "why": "refused an answerable question"
+    },
+    {
+      "case_id": "ans_013",
+      "question": "What is the restocking fee if I place a replacement order of equal or greater value?",
+      "why": "fact recall 0.0"
+    },
+    {
+      "case_id": "edge_multi_00",
+      "question": "If I return a mechanical part within 21 days of delivery, how many months of warranty coverage will I still have left?",
+      "why": "refused an answerable question"
+    },
+    {
+      "case_id": "edge_multi_01",
+      "question": "If a shipment arrives on March 1 and the invoice is issued on March 5, what is the latest date by which payment must be made?",
+      "why": "refused an answerable question"
+    },
+    {
+      "case_id": "edge_multi_02",
+      "question": "If a customer returns all 60 unused stock items within 30 days of delivery, how many items will remain in inventory?",
+      "why": "refused an answerable question"
+    },
+    {
+      "case_id": "edge_multi_03",
+      "question": "If you place an order 50 days in advance and later return unused stock items within 30 days of delivery, what is the combined financial impact in terms of surcharge and potential refund?",
+      "why": "refused an answerable question"
+    },
+    {
+      "case_id": "edge_calc_00",
+      "question": "What is the total value of all parts currently in stock?",
+      "why": "fact recall 0.0"
+    },
+    {
+      "case_id": "edge_calc_01",
+      "question": "What is the total inventory value of all parts listed?",
+      "why": "fact recall 0.0"
+    },
+    {
+      "case_id": "edge_calc_02",
+      "question": "What is the total value of the stock for parts SEA-1252 and SEA-1259 combined?",
+      "why": "fact recall 0.0"
+    }
+  ],
   "calibration": null,
-  "stop_reason": "incomplete eval pass (resume to finish)",
+  "stop_reason": "iteration cap (2) reached",
   "budget": {
     "max_tokens": 500000,
     "max_seconds": 2400,
     "max_iterations": 2,
-    "tokens_used": 0,
-    "started_at": 1795621083.218752
+    "tokens_used": 211025,
+    "started_at": 1795631709.57371
   },
   "best_version": 0,
-  "evaluated": false
+  "evaluated": true
 }

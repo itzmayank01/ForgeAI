@@ -35,7 +35,7 @@
       "confidence": "float 0-1"
     }
   },
-  "model": "openai/gpt-oss-20b",
+  "model": "qwen/qwen3.8-27b",
   "temperature": 0.1,
   "provenance": {
     "corpus_hash": "326f533b14003c35",

@@ -1,0 +1,96 @@
+{
+  "iteration": 1,
+  "failures_by_category": {
+    "retrieval_miss": 2,
+    "prompt_defect": 5,
+    "wrong_refusal": 3
+  },
+  "diagnoses": [
+    {
+      "case_id": "ans_009",
+      "category": "retrieval_miss",
+      "evidence": "expected ['doc_00_c013'], retrieved ['doc_00_c000', 'doc_00_c004', 'doc_00_c005', 'doc_00_c006', 'doc_00_c009']",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_011",
+      "category": "retrieval_miss",
+      "evidence": "refused; expected ['doc_00_c013'] never retrieved",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "ans_013",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_00",
+      "category": "wrong_refusal",
+      "evidence": "refused despite retrieving ['doc_01_c002', 'doc_02_c001']",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_01",
+      "category": "wrong_refusal",
+      "evidence": "refused despite retrieving ['doc_01_c000', 'doc_02_c001']",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_02",
+      "category": "wrong_refusal",
+      "evidence": "refused despite retrieving ['doc_02_c001']",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_multi_03",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.5",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_calc_00",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_calc_01",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
+      "classified_by": "deterministic"
+    },
+    {
+      "case_id": "edge_calc_02",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
+      "classified_by": "deterministic"
+    }
+  ],
+  "fix": {
+    "category": "prompt_defect",
+    "rung": "patch_scope_block",
+    "rationale": "10 failures classified prompt_defect; applying patch_scope_block",
+    "targets_case_ids": [
+      "ans_013",
+      "edge_multi_03",
+      "edge_calc_00",
+      "edge_calc_01",
+      "edge_calc_02"
+    ],
+    "diff": {
+      "before": {
+        "system_prompt": "<1183 chars>"
+      },
+      "after": {
+        "system_prompt": "<1217 chars, SCOPE revised>"
+      }
+    }
+  },
+  "score_before": 0.655,
+  "score_after": 0.0,
+  "kept": true,
+  "revert_reason": null,
+  "seconds": 185.2,
+  "tokens": 143421
+}
