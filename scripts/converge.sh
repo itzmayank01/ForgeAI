@@ -23,7 +23,14 @@ except Exception: sys.exit(1)" 2>/dev/null
 
 for i in $(seq 1 "$PASSES"); do
   for demo in hr_policy ship_spares; do
-    before=$(scored "$demo" && echo yes || echo no)
+    # Skip a demo that already has a scored report. Without this the loop
+    # re-ran a finished run every pass, spending the daily budget the UNscored
+    # demo needed - and overwriting the finished run's artifacts while doing it.
+    if scored "$demo"; then
+      echo "[pass $i] $demo already scored; skipping"
+      continue
+    fi
+    before=no
     PYTHONUNBUFFERED=1 .venv/bin/python -u -m forgeai.cli build \
       --brief "demos/$demo/brief.txt" --docs "demos/$demo/docs" \
       --out "runs/${demo}_live" --resume --max-iterations 2 \
