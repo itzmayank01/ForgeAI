@@ -126,7 +126,12 @@ def run_eval(
             return
         cache_path.parent.mkdir(parents=True, exist_ok=True)
         payload: dict = {"_signature": signature}
-        payload.update({k: v.model_dump() for k, v in done.items()})
+        # mode="json" coerces Path, datetime and friends to JSON scalars. A
+        # plain model_dump() leaves them as Python objects, so one unexpected
+        # type in a tool record takes down a pass that had already banked most
+        # of its answers. Belt as well as braces: the injected Path that caused
+        # that is gone, but an answer cache is not where a run should die.
+        payload.update({k: v.model_dump(mode="json") for k, v in done.items()})
         cache_path.write_text(json.dumps(payload, indent=1))
 
     def one(case) -> None:

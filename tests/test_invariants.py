@@ -8,6 +8,7 @@ from __future__ import annotations
 import pytest
 
 from forgeai.ingest.index import ChunkIndex
+from forgeai.llm import client
 from forgeai.models.agent_def import AgentDefinition, ToolBinding
 from forgeai.models.common import Chunk, RetrievedChunk
 from forgeai.models.evals import EvalCase
@@ -369,3 +370,34 @@ def test_label_for_a_case_absent_from_this_run_is_not_stale() -> None:
     # caller's own overlap check owns that case.
     assert calibration.stale_labels(
         {"ans_9": {"answer": "x"}}, {"ans_1": "y"}) == []
+
+
+# --- rate-limit durations are compound, and the parser must read them -------
+# Groq answers a 429 with `2m59.56s` as often as `7.66s`. The old parser tried
+# float() on the whole string, raised, and skipped the header -- so the one
+# piece of information saying how long to wait was read as no information, and
+# the client fell back to a blind exponential guess.
+
+@pytest.mark.parametrize("raw,want", [
+    ("7.66s", 7.66),
+    ("2m59.56s", 179.56),
+    ("1h2m3s", 3723.0),
+    ("120ms", 0.12),
+    ("30", 30.0),          # bare seconds, as HTTP Retry-After sends them
+    ("", None),
+    ("garbage", None),
+    (None, None),
+])
+def test_rate_limit_durations_parse(raw, want) -> None:
+    got = client.parse_duration(raw)
+    if want is None:
+        assert got is None
+    else:
+        assert got == pytest.approx(want)
+
+
+def test_minutes_are_not_read_as_milliseconds() -> None:
+    """`m` and `ms` share a prefix; reading `2m` as 2ms would turn a two-minute
+    reset into an instant retry that 429s again."""
+    assert client.parse_duration("2m") == pytest.approx(120.0)
+    assert client.parse_duration("2ms") == pytest.approx(0.002)

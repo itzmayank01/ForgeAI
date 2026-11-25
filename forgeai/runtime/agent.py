@@ -144,8 +144,13 @@ class Agent:
         except Exception as exc:  # noqa: BLE001 - a bad call must not kill the answer
             result = f"error: {type(exc).__name__}: {exc}"
 
+        # Record what the MODEL chose, not the plumbing injected around it.
+        # `_root` is a Path, and putting it in the provenance record made the
+        # answer cache unserializable: json.dumps died in flush(), losing a
+        # whole pass. The bug was latent for as long as no tool ever fired, so
+        # it surfaced the moment tool calls started working.
         return (f"\n\nTOOL RESULT ({name}): {result}",
-                [{"tool": name, "args": kwargs, "result": result[:300]}])
+                [{"tool": name, "args": dict(plan.args), "result": result[:300]}])
 
     @classmethod
     def from_file(cls, path: str | Path, index: ChunkIndex, client: LLMClient,

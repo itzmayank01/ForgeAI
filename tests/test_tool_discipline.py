@@ -39,3 +39,44 @@ def test_every_tool_cites_a_requirement():
             assert tool.get("triggering_requirement"), (
                 f"{name}: tool {tool['name']} attached with no triggering requirement"
             )
+
+
+# --- a tool call's provenance record must survive json.dumps ----------------
+# The answer cache flushes after every answer, so an unserializable value in a
+# tool record does not fail one case - it kills the pass and loses every answer
+# banked so far. `_root` is a Path the agent injects into csv_lookup; recording
+# it alongside the model's own arguments crashed ship_spares at 9/29. Latent
+# until tool calls actually started firing.
+
+def test_tool_record_is_json_serializable(tmp_path, monkeypatch):
+    from forgeai.models.agent_def import AgentDefinition, ToolBinding
+    from forgeai.models.common import Chunk
+    from forgeai.ingest.index import ChunkIndex
+    from forgeai.runtime import agent as agent_mod
+
+    csv = tmp_path / "parts.csv"
+    csv.write_text("part,qty\nFIL-1210,4\n")
+
+    definition = AgentDefinition(
+        name="spares", system_prompt="Answer from context.",
+        tools=[ToolBinding(name="csv_lookup", reason="tabular corpus",
+                           triggering_requirement="stock levels")],
+    )
+    index = ChunkIndex([Chunk(chunk_id="c0", doc_id="d0", filename="parts.csv",
+                              ordinal=0, text="FIL-1210 has 4 in stock.")])
+
+    plan = agent_mod._ToolPlan(tool="csv_lookup",
+                               args={"file": "parts.csv", "column": "part",
+                                     "value": "FIL-1210"})
+    monkeypatch.setattr(agent_mod, "structured", lambda *a, **k: (plan, None))
+
+    a = agent_mod.Agent(definition, index, client=None, docs_dir=tmp_path)
+    text, records = a._run_tool("How many FIL-1210 are in stock?", "context")
+
+    assert records, "the tool was attached and planned, so it must be recorded"
+    json.dumps(records)          # the actual regression: this used to raise
+    for rec in records:
+        assert "_root" not in rec.get("args", {}), (
+            "injected plumbing leaked into the provenance record"
+        )
+    assert "FIL-1210" in text, "tool result should reach the prompt"

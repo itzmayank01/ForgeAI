@@ -2,6 +2,7 @@
 OpenAI - anything speaking /chat/completions. Swapping provider is one env var."""
 from __future__ import annotations
 
+import re
 import threading
 import time
 from dataclasses import dataclass, field
@@ -127,6 +128,20 @@ class LLMClient:
                     wait = _retry_after(r) or min(30.0, 2.0 ** attempt * 4)
                     bucket.penalise(wait)
                     bucket.settle(handle, estimate)
+                    # Holding a worker thread through a long reset wastes the
+                    # one asset the pool has: seven other keys with full
+                    # windows. Park this (key, model) for as long as the server
+                    # says and switch immediately; only a wait short enough
+                    # that switching cannot pay is slept through. Teaching
+                    # _retry_after to read `2m59.56s` made this essential --
+                    # the figure it returns is now sometimes minutes, and
+                    # sleeping on it would stall the run far worse than the
+                    # blind 30s guess it replaced.
+                    if wait > SWITCH_RATHER_THAN_SLEEP:
+                        self.pool.mark_exhausted(state, model_name, wait)
+                        last_exc = LLMError(
+                            f"{state.label} rate limited for {wait:.0f}s; switching key")
+                        continue
                     last_exc = LLMError(f"rate limited, waited {wait:.0f}s")
                     time.sleep(wait)
                     continue
@@ -183,20 +198,47 @@ class LLMClient:
             c.close()
 
 
+_DURATION = re.compile(r"(\d+(?:\.\d+)?)\s*(ms|h|m|s)")
+_UNIT_SECONDS = {"ms": 0.001, "s": 1.0, "m": 60.0, "h": 3600.0}
+
+
+def parse_duration(raw: str | None) -> float | None:
+    """Seconds from a Groq rate-limit duration.
+
+    These arrive in compound form - `2m59.56s`, `1h2m3s`, `7.66s`, `120ms` -
+    and the previous parser only understood a bare float or a plain trailing
+    `s`. `2m59.56s` fell into `float("2m59.56")`, raised, and was skipped, so
+    the one header that said how long to wait was read as *no information* and
+    the caller fell back to a blind exponential guess.
+    """
+    if not raw:
+        return None
+    text = raw.strip().lower()
+    parts = _DURATION.findall(text)
+    if parts:
+        # `m` is ambiguous between minutes and the `ms` already matched; findall
+        # consumes `ms` first, so a surviving bare `m` is genuinely minutes.
+        return sum(float(v) * _UNIT_SECONDS[u] for v, u in parts)
+    try:
+        return float(text)  # bare seconds, as HTTP Retry-After sends them
+    except ValueError:
+        return None
+
+
+SWITCH_RATHER_THAN_SLEEP = 20.0
+"""Above this many seconds, change keys instead of waiting.
+
+Below it, switching costs more than it saves: another key's bucket may also be
+near its ceiling, and a few seconds of backoff is cheaper than a round trip
+that 429s again."""
+
+
 def _retry_after(response: httpx.Response) -> float | None:
     """Groq reports both a Retry-After and a token-bucket reset; take the larger."""
-    candidates: list[float] = []
-    for header in ("retry-after", "x-ratelimit-reset-tokens"):
-        raw = response.headers.get(header)
-        if not raw:
-            continue
-        try:
-            if raw.endswith("ms"):
-                candidates.append(float(raw[:-2]) / 1000)
-            elif raw.endswith("s"):
-                candidates.append(float(raw[:-1]))
-            else:
-                candidates.append(float(raw))
-        except ValueError:
-            continue
+    candidates = [
+        d for d in (
+            parse_duration(response.headers.get(h))
+            for h in ("retry-after", "x-ratelimit-reset-tokens")
+        ) if d is not None
+    ]
     return max(candidates) + 1.0 if candidates else None
