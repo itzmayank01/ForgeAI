@@ -63,8 +63,15 @@ export async function POST(req: Request) {
     });
   }
 
+  // Number the sources rather than labelling them with chunk ids. Asked to
+  // cite `doc_01_c003`, the model reproduces the SHAPE of an id and not the id:
+  // on the CLI that accounted for five of hr_policy's ten residual failures,
+  // every one a correct answer carrying a citation to a chunk it had never been
+  // shown. Here the fabricated id was merely filtered out below, so a correct
+  // answer arrived with no citations at all. Copying `2` is a far easier task,
+  // and the number is resolved back to a chunk id in code.
   const context = hits
-    .map((h) => `[${h.item.chunk_id}] ${h.item.text}`)
+    .map((h, i) => `[${i + 1}] ${h.item.text}`)
     .join("\n\n");
 
   const body = {
@@ -78,9 +85,10 @@ export async function POST(req: Request) {
         role: "user" as const,
         content:
           `CONTEXT:\n${context}\n\nQUESTION: ${question}\n\n` +
-          `Answer only from the context above. Cite the chunk_id in square ` +
-          `brackets for every claim. If the context does not support an answer, ` +
-          `set refused to true.\n\n` +
+          `Answer only from the context above. Every claim must cite the ` +
+          `source number it came from: put those numbers in "citations", for ` +
+          `example ["2"] or ["1","3"]. Use only numbers shown above. If the ` +
+          `context does not support an answer, set refused to true.\n\n` +
           `Reply with JSON: {"answer": string, "citations": string[], ` +
           `"refused": boolean, "confidence": number}`,
       },
@@ -147,15 +155,38 @@ export async function POST(req: Request) {
       });
     }
 
+    // Resolve a source number to the chunk it was given; still honour a raw
+    // chunk id when the model copies one correctly. Anything else -- an
+    // out-of-range number, an invented id -- stays out of `citations` and is
+    // reported as fabricated, so the page can show that it happened rather
+    // than quietly presenting an answer as uncited.
     const retrievedIds = new Set(hits.map((h) => h.item.chunk_id));
-    const citations = (parsed.citations ?? []).filter((c) => retrievedIds.has(c));
+    const rawCitations = parsed.citations ?? [];
+    const citations: string[] = [];
+    const fabricated: string[] = [];
+    for (const item of rawCitations) {
+      const text = String(item).trim().replace(/^\[|\]$/g, "");
+      const n = /^\d+$/.test(text) ? Number(text) : NaN;
+      if (!Number.isNaN(n)) {
+        if (n >= 1 && n <= hits.length) {
+          const id = hits[n - 1].item.chunk_id;
+          if (!citations.includes(id)) citations.push(id);
+        } else {
+          fabricated.push(String(item));
+        }
+      } else if (retrievedIds.has(text)) {
+        if (!citations.includes(text)) citations.push(text);
+      } else {
+        fabricated.push(String(item));
+      }
+    }
 
     return NextResponse.json({
       answer: parsed.answer ?? "",
       refused: Boolean(parsed.refused),
       confidence: parsed.confidence ?? 0.5,
       citations,
-      fabricated: (parsed.citations ?? []).filter((c) => !retrievedIds.has(c)),
+      fabricated,
       retrieved: hits.map((h) => ({
         chunk_id: h.item.chunk_id, filename: h.item.filename,
         score: Number(h.score.toFixed(3)), text: h.item.text,
