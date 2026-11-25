@@ -190,6 +190,22 @@ called: declared tools were decoration.
 `tests/test_invariants.py` covers execution, refusal of unattached tools, the
 no-tools path, and that the calculator still rejects code injection.
 
+### And then the artifacts lied about it anyway
+
+With tools working, both demos still finished with tools attached and **zero
+tool calls recorded**. The runs had started before tool execution landed, so the
+cached answers came from a runtime that could not call tools — and the cache had
+no record of what produced it, so the new runtime reused them happily.
+
+Nothing in the evidence flagged it. A definition attaching `calculator` with no
+tool calls reads exactly like a model that chose not to use one. The response
+cache now stores a signature (runtime version, model, attached tools, retrieval
+config) and discards anything produced by a different agent, and the audit has a
+check — `F3b` — that compares attached tools against tools that actually fire.
+
+That check is the useful artifact here. The bug was invisible precisely because
+both states produce identical-looking evidence.
+
 ## Running it
 
 ```bash
