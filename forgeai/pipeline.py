@@ -28,6 +28,13 @@ from .stages import critic, evalgen, generator, groundability, intake, judge, op
 
 PASS_TARGET = 0.9
 
+RUNTIME_VERSION = 2
+"""Bumped when the runtime changes what an answer can contain.
+
+v2 added tool execution. Answers cached by v1 carry no tool calls, and reusing
+them silently produced runs whose definitions attached tools that never fired.
+"""
+
 
 def _load(path: Path, model_cls):
     """Reuse a completed stage's artifact if it is already on disk."""
@@ -68,10 +75,25 @@ def run_eval(
     resumed run re-answers only what is genuinely missing and progress is
     monotonic even when the provider only drips capacity.
     """
+    # A cached answer is only reusable if the thing that produced it has not
+    # changed. Without this, answers from a runtime that could not call tools
+    # were reused by one that could, so definitions shipped with tools attached
+    # and zero tool calls recorded - and nothing in the artifacts said why.
+    signature = {
+        "runtime": RUNTIME_VERSION,
+        "model": agent.definition.model or settings.agent_model,
+        "tools": sorted(agent.definition.tool_names),
+        "retrieval": agent.definition.retrieval.model_dump(),
+    }
+
     done: dict[str, AgentResponse] = {}
     if cache_path and cache_path.exists():
         try:
             raw = json.loads(cache_path.read_text())
+            if raw.get("_signature") != signature:
+                log("  cached answers were produced by a different agent; discarding")
+                raw = {}
+            raw = {k: v for k, v in raw.items() if not k.startswith("_")}
             # Drop answers for cases the suite no longer contains. Regenerating
             # a suite leaves orphans behind, and a cache reporting "24 of 22"
             # invites the reader to doubt the count that matters.
@@ -98,8 +120,9 @@ def run_eval(
         if cache_path is None:
             return
         cache_path.parent.mkdir(parents=True, exist_ok=True)
-        cache_path.write_text(json.dumps(
-            {k: v.model_dump() for k, v in done.items()}, indent=1))
+        payload: dict = {"_signature": signature}
+        payload.update({k: v.model_dump() for k, v in done.items()})
+        cache_path.write_text(json.dumps(payload, indent=1))
 
     def one(case) -> None:
         nonlocal stopped, consecutive_quota

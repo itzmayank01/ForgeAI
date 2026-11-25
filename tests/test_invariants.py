@@ -240,3 +240,51 @@ def test_calculator_rejects_code_injection():
 
     assert calculator("2+2") == "4"
     assert "error" in calculator("__import__('os').system('echo pwned')")
+
+
+# ── response cache staleness ──────────────────────────────────────────────
+def test_cache_is_discarded_when_the_agent_changes(tmp_path):
+    """Answers cached by one agent must not be reused by a different one.
+
+    Without this, answers from a runtime that could not call tools were reused
+    by one that could, so runs shipped with tools attached and zero tool calls
+    recorded - and nothing in the artifacts explained the contradiction.
+    """
+    import json
+
+    from forgeai import pipeline
+    from forgeai.models.evals import EvalSuite
+    from forgeai.runtime.agent import AgentResponse
+
+    cases = [EvalCase(id=f"c{i}", question=f"q{i}", kind="answerable",
+                      expected_facts=["f"]) for i in range(3)]
+    suite = EvalSuite(cases=cases, generated_by="stub")
+
+    class Stub:
+        def __init__(self, d):
+            self.definition = d
+            self.calls = 0
+
+        def answer(self, q):
+            self.calls += 1
+            return AgentResponse(answer="a", refused=False, confidence=1.0, retrieved=[])
+
+    cache = tmp_path / "responses.json"
+    plain = AgentDefinition(name="x", system_prompt="p")
+
+    first = Stub(plain)
+    pipeline.run_eval(first, suite, None, cache, log=lambda *a: None)
+    assert first.calls == 3
+
+    same = Stub(plain)
+    pipeline.run_eval(same, suite, None, cache, log=lambda *a: None)
+    assert same.calls == 0, "an unchanged agent should reuse every cached answer"
+
+    with_tools = Stub(AgentDefinition(
+        name="x", system_prompt="p",
+        tools=[ToolBinding(name="calculator", reason="r", triggering_requirement="t")]))
+    pipeline.run_eval(with_tools, suite, None, cache, log=lambda *a: None)
+    assert with_tools.calls == 3, "a changed agent must re-answer, not inherit"
+
+    stored = json.loads(cache.read_text())
+    assert "_signature" in stored and stored["_signature"]["tools"] == ["calculator"]
