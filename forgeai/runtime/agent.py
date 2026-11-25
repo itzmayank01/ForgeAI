@@ -164,10 +164,27 @@ class Agent:
                            for n in names if n in REGISTRY) +
                 f"\n\nCONTEXT ALREADY RETRIEVED:\n{context[:1200]}\n\n"
                 f"QUESTION: {question}\n\n"
-                f"Does answering this need one of those tools? Most questions do "
-                f"not - the retrieved context usually suffices. Return `tool` as "
-                f"the tool name ONLY if it is genuinely needed, otherwise an "
-                f"empty string. Put its arguments in `args` as plain strings."
+                # This prompt used to read "Most questions do not - the
+                # retrieved context usually suffices. Return the tool name ONLY
+                # if it is genuinely needed", and the planner duly returned an
+                # empty string for every question in every run: 90 answers,
+                # zero tool calls, including an arithmetic case the model did in
+                # its head and got right by luck. Stating a prior that strongly
+                # decides the question before the model looks at it - the same
+                # way a docstring saying "a weather tool is a factory defect"
+                # once taught the generator to attach no tools at all.
+                #
+                # So: a concrete criterion per tool, and no thumb on the scale.
+                f"Decide whether answering this requires one of those tools.\n"
+                f"- calculator: the answer needs arithmetic over values. Use it "
+                f"rather than computing in your head, even for simple sums - a "
+                f"figure you assert without computing it is a guess.\n"
+                f"- current_date: the answer depends on what today's date is.\n"
+                f"- csv_lookup: the question asks for a row or field from "
+                f"tabular data, such as a part number or a stock level.\n"
+                f"Set `tool` to the name of the one that applies, or an empty "
+                f"string if none does. Put its arguments in `args` as plain "
+                f"strings."
             ),
         )
         if plan is None or not plan.tool.strip():
