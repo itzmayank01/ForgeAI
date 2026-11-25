@@ -11,7 +11,7 @@ commit to a delivery date it cannot evidence.
 
 > Reporting 0% here would be a fabricated number. Re-run with `--resume` to finish the suite.
 
-Budget: 0/500,000 tokens, 5435.3s/2400s, 0/2 iterations.
+Budget: 0/500,000 tokens, 4969.4s/2400s, 0/2 iterations.
 
 ## Per-iteration scorecard
 
@@ -28,6 +28,6 @@ Not calibrated. Every number above is unverified - run `forgeai calibrate` again
 
 ## Final agent definition
 
-- Tools: calculator, csv_lookup
+- Tools: csv_lookup, calculator
 - Retrieval: dense, chunk 800/120, top_k 5, min_score 0.25
 - Temperature: 0.1

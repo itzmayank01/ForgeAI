@@ -1,29 +1,10 @@
 {
   "iteration": 0,
   "failures_by_category": {
-    "hallucination": 5,
-    "prompt_defect": 3,
-    "wrong_refusal": 2
+    "prompt_defect": 5,
+    "wrong_refusal": 1
   },
   "diagnoses": [
-    {
-      "case_id": "ans_003",
-      "category": "hallucination",
-      "evidence": "cited chunk ids it never retrieved",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_007",
-      "category": "hallucination",
-      "evidence": "cited chunk ids it never retrieved",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "ans_009",
-      "category": "hallucination",
-      "evidence": "cited chunk ids it never retrieved",
-      "classified_by": "deterministic"
-    },
     {
       "case_id": "ans_014",
       "category": "prompt_defect",
@@ -32,8 +13,8 @@
     },
     {
       "case_id": "edge_multi_00",
-      "category": "hallucination",
-      "evidence": "cited chunk ids it never retrieved",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.5",
       "classified_by": "deterministic"
     },
     {
@@ -44,20 +25,14 @@
     },
     {
       "case_id": "edge_multi_02",
-      "category": "wrong_refusal",
-      "evidence": "refused despite retrieving ['doc_00_c000', 'doc_01_c001']",
+      "category": "prompt_defect",
+      "evidence": "correct context retrieved but fact recall 0.0",
       "classified_by": "deterministic"
     },
     {
       "case_id": "edge_multi_03",
       "category": "wrong_refusal",
       "evidence": "refused despite retrieving ['doc_00_c002']",
-      "classified_by": "deterministic"
-    },
-    {
-      "case_id": "edge_calc_01",
-      "category": "hallucination",
-      "evidence": "cited chunk ids it never retrieved",
       "classified_by": "deterministic"
     },
     {
@@ -68,29 +43,29 @@
     }
   ],
   "fix": {
-    "category": "hallucination",
-    "rung": "add_grounding_clause",
-    "rationale": "10 failures classified hallucination; applying add_grounding_clause",
+    "category": "prompt_defect",
+    "rung": "patch_format_block",
+    "rationale": "6 failures classified prompt_defect; applying patch_format_block",
     "targets_case_ids": [
-      "ans_003",
-      "ans_007",
-      "ans_009",
+      "ans_014",
       "edge_multi_00",
-      "edge_calc_01"
+      "edge_multi_01",
+      "edge_multi_02",
+      "oos_01"
     ],
     "diff": {
       "before": {
         "system_prompt": "<1242 chars>"
       },
       "after": {
-        "system_prompt": "<1374 chars, GROUNDING revised>"
+        "system_prompt": "<1751 chars, FORMAT revised>"
       }
     }
   },
-  "score_before": 0.655,
+  "score_before": 0.793,
   "score_after": 0.0,
   "kept": true,
   "revert_reason": null,
-  "seconds": 0.8,
-  "tokens": 903
+  "seconds": 66.6,
+  "tokens": 37458
 }
