@@ -18,15 +18,33 @@ forgeai chat  --run runs/hr_policy_live
 
 Measured, not claimed: every figure below is read from a committed artifact.
 
-| run | pass rate | cases | iterations | residual | judge agreement |
+| run | pass rate | cases | fix iterations | residual | judge agreement |
 |---|---|---|---|---|---|
-| `hr_policy_live` | **86%** | 28 | 2 | 4 | 80% (kappa 0.545) |
-| `ship_spares_live` | **73%** | 22 | 2 | 6 | 50% (kappa 0.0) |
+| `hr_policy_live` | **66%** (19/29) | 29 | 0 | 10 | 92% (kappa 0.83) |
+| `ship_spares_live` | not scored | 29 | — | — | — |
 
-Both runs reverted every fix they tried: neither beat the definition the
-generator produced first. That is a real outcome rather than a missing one -
-the loop's job on these corpora was to establish that the baseline was already
-at its best, and the iteration logs show the scores that settled it.
+**Both figures are mid-work, and the gap is quota rather than capability.** The
+free tier's daily token budget is spent (see *Known limits*), so `hr_policy_live`
+was finalised from its completed baseline iteration with `--max-iterations 0` -
+scored, calibrated, and honest, but with no fix iteration attempted - and
+`ship_spares_live` stands at 9 of 29 answers with no scorecard. A run with no
+scorecard reports none; nothing here is inferred from a partial pass.
+
+Two defects found after that baseline was measured are fixed in the code but not
+yet reflected in any score, because re-measuring needs the budget that is gone:
+
+- **Five of the ten residual failures were one defect.** Each was a correct
+  answer whose supporting clause *was* in the retrieved context, carrying a
+  citation to a chunk the agent had never been shown - asked to cite
+  `doc_01_c003`, the model reproduced the shape of an id rather than the id.
+  Sources are numbered now and resolved to chunk ids in code, so the figure
+  should rise materially on the next full run.
+- **Tools never fired.** 90 answers across three runs, zero tool calls, because
+  the planner prompt asserted "most questions do not" need a tool and so decided
+  before looking. Both are verified working by live smoke test, not by argument.
+
+`RUNTIME_VERSION` is 3 as a result, so the runtime-2 answers above will be
+discarded rather than blended into the next run's scorecard.
 
 ### What calibration found
 
@@ -38,10 +56,21 @@ correctly refused them and the judge marked every refusal a failure.
 My own prompt caused it. `AMBIGUOUS` asked for "a pronoun with no clear
 referent" and then demanded the result stay answerable - two instructions that
 cannot both hold. Both prompts were rewritten and the gate now drops such
-questions. HR, which had already had its own faults fixed, moved from 64% /
-kappa 0.21 to **80% / kappa 0.55**.
+questions.
 
 Publishing kappa 0.00 is the point. It is the number that found the bug.
+
+The current HR calibration (92%, kappa 0.83 over 12 cases) did the same job
+again. Its single judge/human disagreement was not a judge error but a
+**generator** defect: a case whose only expected fact was `Policy reference:
+HR-09`, a document header. Since the judge requires *every* expected fact, one
+unanswerable fact sinks a case no answer could pass. The gate now rejects
+expected facts that are front matter.
+
+One limitation stated plainly: these gold labels are **author-adjudicated**, not
+independent. That bounds what the kappa proves, which is why every label in
+`gold/` carries the clause it rests on - a reviewer can check the labelling
+instead of trusting it.
 
 ### Rehearsal on an unseen corpus
 
