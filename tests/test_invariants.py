@@ -542,3 +542,36 @@ def test_a_correctly_copied_chunk_id_is_still_honoured() -> None:
 def test_duplicate_citations_collapse() -> None:
     from forgeai.runtime.agent import resolve_citations
     assert resolve_citations(["1", "[1]", "doc_01_c000"], _chunks()) == ["doc_01_c000"]
+
+
+# --- front matter is not a fact -------------------------------------------
+# Calibration's one judge/human disagreement was a generator defect: the case
+# "What does policy HR-09 say about how to file a grievance?" carried exactly
+# one expected fact, "Policy reference: HR-09". The answer correctly described
+# form HR-09a, cited validly, asserted nothing unsupported -- and failed, because
+# the judge requires EVERY expected fact and this one was a document header.
+
+@pytest.mark.parametrize("fact", [
+    "Policy reference: HR-09",
+    "**Policy reference:** HR-04",
+    "Effective: 1 January 2026",
+    "Review: annually",
+    "Document ID: FIN-11",
+    "Last updated: March 2026",
+    "Approved by: the Board",
+])
+def test_metadata_is_not_accepted_as_an_expected_fact(fact) -> None:
+    assert evalgen._is_document_metadata(fact)
+
+
+@pytest.mark.parametrize("fact", [
+    "Shore staff accrue 22 days of annual leave per calendar year.",
+    "Domestic travel attracts a per-diem of EUR 65 per full day.",
+    "A formal grievance must be submitted in writing to HR using form HR-09a.",
+    "Grievance records are retained for 6 years.",
+    "Line managers may approve claims up to EUR 1,500.",
+])
+def test_real_facts_are_not_mistaken_for_metadata(fact) -> None:
+    # The filter must not reach substantive clauses that merely mention a
+    # reference or a date - those are the cases worth keeping.
+    assert not evalgen._is_document_metadata(fact)

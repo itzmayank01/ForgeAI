@@ -77,18 +77,18 @@
     }
   ],
   "calibration": {
-    "n_cases": 2,
-    "agreements": 1,
-    "agreement_rate": 0.5,
-    "cohens_kappa": 0.0,
+    "n_cases": 12,
+    "agreements": 11,
+    "agreement_rate": 0.917,
+    "cohens_kappa": 0.833,
     "disagreements": [
       {
-        "case_id": "edge_multi_01",
+        "case_id": "ans_014",
         "judge": false,
         "human": true
       }
     ],
-    "stale_labels_dropped": 8
+    "stale_labels_dropped": 0
   },
   "stop_reason": "iteration cap (0) reached",
   "budget": {

@@ -245,7 +245,7 @@ def quality_gate(cases: list[EvalCase], index: ChunkIndex) -> tuple[list[EvalCas
     kept: list[EvalCase] = []
     dropped = {"empty": 0, "no_expected_facts": 0, "oos_is_answerable": 0,
                "fact_not_in_source": 0, "duplicate": 0, "bundled_fact": 0,
-               "dangling_referent": 0}
+               "dangling_referent": 0, "metadata_fact": 0}
     seen: list[str] = []
 
     for c in cases:
@@ -269,6 +269,15 @@ def quality_gate(cases: list[EvalCase], index: ChunkIndex) -> tuple[list[EvalCas
             # addresses the one actually asked about.
             if any(_is_bundled(f) for f in c.expected_facts):
                 dropped["bundled_fact"] += 1
+                continue
+            # Front matter is not a fact about the policy. Calibration found
+            # "What does HR-09 say about how to file a grievance?" with a single
+            # expected fact of "Policy reference: HR-09" - so a correct, validly
+            # cited answer describing form HR-09a failed for not echoing a
+            # header. The judge requires every expected fact, which makes one
+            # unanswerable fact enough to sink an otherwise good case.
+            if all(_is_document_metadata(f) for f in c.expected_facts):
+                dropped["metadata_fact"] += 1
                 continue
             # A computed answer is derived from the source, not quoted from it:
             # "48977.98" is the correct total for two stock lines and appears
@@ -328,6 +337,25 @@ def _is_bundled(fact: str) -> bool:
     12 months" being scored against an answer that correctly said "4 weeks".
     """
     return bool(_BUNDLE_MARKERS.search(fact))
+
+
+_METADATA_FIELD = re.compile(
+    r"^[*_\s#]*(policy\s+reference|policy\s+no|reference|ref|effective|"
+    r"review(?:ed)?|version|revision|document(?:\s+(?:id|number))?|issued|"
+    r"supersedes|approved\s+by|owner|author|page|last\s+updated)\b[*_\s]*[:\-]",
+    re.IGNORECASE)
+
+
+def _is_document_metadata(fact: str) -> bool:
+    """A front-matter field masquerading as a fact.
+
+    Policy documents open with "Policy reference: HR-09 - Effective: 1 January
+    2026", and the extractor happily harvests those lines. They are not claims a
+    user asks about, and an answer is not wrong for omitting them - but the
+    judge requires EVERY expected fact, so one of these fails a case no answer
+    could pass.
+    """
+    return bool(_METADATA_FIELD.match(fact.strip()))
 
 
 def _overlap(fact: str, source: str, threshold: float = 0.5) -> bool:
