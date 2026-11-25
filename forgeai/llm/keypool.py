@@ -49,9 +49,14 @@ class KeyPool:
     def size(self) -> int:
         return len(self._states)
 
-    SHORT_WAIT = 90.0
-    """Below this, waiting for a key beats failing the run: Groq's daily window
-    drips, so a stall is usually seconds rather than hours."""
+    SHORT_WAIT = 240.0
+    """How long to wait for a key before giving up.
+
+    This has to exceed the cooldowns the client sets, or the pool gives up just
+    before recovery. It was 90s while a daily-cap 429 benched keys for up to
+    120s, so a run would stall, abandon the pass, and the retry loop would hit
+    the same wall - progress crawled while every key was moments from being
+    usable again."""
 
     def acquire(self, model: str, *, allow_wait: bool = True,
                 reserve: int = 0) -> KeyState:

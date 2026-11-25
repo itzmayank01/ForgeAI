@@ -110,11 +110,15 @@ def run_eval(
     lock = threading.Lock()
     stopped = False
     consecutive_quota = 0
-    GIVE_UP_AFTER = 4
+    GIVE_UP_AFTER = 12
     """A pool stall is usually momentary. Treating the FIRST one as fatal made a
     single blip abort every remaining case - a pass would bank one answer and
     give up on sixteen, so ten attempts gained almost nothing while every key
-    was in fact available."""
+    was in fact available.
+
+    Four proved too few as well: with three worker threads, one cooldown window
+    produces three failures almost at once, so the margin before stopping was a
+    single extra blip."""
 
     def flush() -> None:
         if cache_path is None:
