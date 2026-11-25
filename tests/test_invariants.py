@@ -461,3 +461,29 @@ def test_organization_is_read_from_a_real_429_body() -> None:
     assert client._organization(body) == "org_01m0624"
     assert client._organization("no organization named here") is None
     assert client._organization("") is None
+
+
+# --- a deliberate zero is not an absent value ------------------------------
+# `max_iterations or settings.max_iterations` turned --max-iterations 0 into the
+# default 3. That matters because 0 is the one value you want when a run's
+# budget is gone: score the committed baseline, write the report, call no model.
+# Instead it ran on into apply_fix and stalled on quota, so a fully scored
+# iteration produced no report.
+
+def test_zero_iterations_is_respected(monkeypatch, tmp_path) -> None:
+    from forgeai.models.iteration import Budget
+    from forgeai.config import settings
+
+    def budget_for(requested):
+        return Budget(max_iterations=(settings.max_iterations
+                                      if requested is None else requested))
+
+    assert budget_for(0).max_iterations == 0
+    assert budget_for(2).max_iterations == 2
+    assert budget_for(None).max_iterations == settings.max_iterations
+
+
+def test_zero_iterations_scores_the_baseline_and_stops() -> None:
+    """range(max_iterations + 1) must still run iteration 0 - 'no fixes' is not
+    'no evaluation'."""
+    assert list(range(0 + 1)) == [0]

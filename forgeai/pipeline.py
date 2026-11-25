@@ -7,6 +7,7 @@ loses ground.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import threading
@@ -22,12 +23,42 @@ from .llm.client import LLMClient, LLMError, QuotaExhausted
 from .models.agent_def import AgentDefinition
 from .models.common import CorpusSummary
 from .models.requirements import GroundabilityReport, RequirementsDoc
-from .models.evals import EvalSuite, Scorecard
+from .models.evals import CaseVerdict, EvalSuite, Scorecard
 from .models.iteration import Budget, IterationLog, RunReport
 from .runtime.agent import Agent, AgentResponse
 from .stages import critic, evalgen, generator, groundability, intake, judge, optimizer
 
 PASS_TARGET = 0.9
+
+def verdict_signature(responses: dict) -> dict:
+    """What a set of verdicts was produced from.
+
+    Keyed on the judge and on the answers themselves rather than on a run id:
+    the point is to reuse a verdict only when the text it judged is unchanged.
+    A digest keeps the file small and makes the comparison exact.
+    """
+    h = hashlib.sha256()
+    for cid in sorted(responses):
+        h.update(cid.encode())
+        h.update((responses[cid].answer or "").encode())
+    return {"judge": settings.judge_model, "answers": h.hexdigest()[:32]}
+
+
+def _load_verdicts(path: Path, signature: dict) -> list[CaseVerdict] | None:
+    """Committed verdicts, but only if they judged exactly these answers."""
+    if not path.exists():
+        return None
+    try:
+        raw = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return None
+    if raw.get("_signature") != signature:
+        return None
+    try:
+        return [CaseVerdict.model_validate(v) for v in raw.get("verdicts", [])]
+    except Exception:  # noqa: BLE001 - a malformed cache must not end a run
+        return None
+
 
 RUNTIME_VERSION = 2
 """Bumped when the runtime changes what an answer can contain.
@@ -182,7 +213,13 @@ def build(
 ) -> RunReport:
     budget = Budget(
         max_tokens=settings.max_tokens, max_seconds=settings.max_seconds,
-        max_iterations=max_iterations or settings.max_iterations,
+        # `or` would discard a deliberate 0: --max-iterations 0 means score
+        # the baseline and stop, which is exactly what finalising a run whose
+        # budget is gone requires. It silently became the default 3 instead,
+        # and the run then stalled in apply_fix waiting on quota it could never
+        # get - so a finished, scored iteration produced no report at all.
+        max_iterations=(settings.max_iterations if max_iterations is None
+                        else max_iterations),
     )
     client = LLMClient()
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -331,15 +368,27 @@ def build(
             stop_reason = "incomplete eval pass (resume to finish)"
             log(f"  stopping: {stop_reason}")
             break
-        verdicts = judge.judge_all(suite.cases, responses, client)
+        # Judging costs about as much as answering, and resume only ever
+        # cached the answers - so every resumed run re-judged an iteration it
+        # had already scored. On a free tier that is the difference between
+        # finalising a finished iteration for nothing and not finalising it at
+        # all. Verdicts are reused only when they were produced from these
+        # exact answers by this judge; anything else re-judges.
+        vpath = out_dir / "05_iterations" / f"iter_{i}" / "verdicts.json"
+        vsig = verdict_signature(responses)
+        verdicts = _load_verdicts(vpath, vsig) if resume else None
+        if verdicts is not None:
+            log(f"  reusing {len(verdicts)} committed verdict(s)")
+        else:
+            verdicts = judge.judge_all(suite.cases, responses, client)
+            _write(vpath, {"_signature": vsig,
+                           "verdicts": [v.model_dump(mode="json") for v in verdicts]})
         card = Scorecard.from_verdicts(i, verdicts, suite.cases)
         scorecards.append(card)
         budget.tokens_used = client.usage.total
         log(f"  iteration {i}: pass {card.pass_rate:.0%} ({card.passed}/{card.total})"
             f"  escalated {card.llm_escalation_rate:.0%}")
         _write(out_dir / "05_iterations" / f"iter_{i}" / "scorecard.json", card)
-        _write(out_dir / "05_iterations" / f"iter_{i}" / "verdicts.json",
-               {"verdicts": [v.model_dump() for v in verdicts]})
 
         if card.pass_rate > best_score:
             best_def, best_score, best_verdicts = definition, card.pass_rate, verdicts

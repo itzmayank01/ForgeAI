@@ -1,0 +1,65 @@
+{
+ "_signature": {
+  "runtime": 2,
+  "model": "openai/gpt-oss-20b",
+  "tools": [
+   "calculator",
+   "current_date"
+  ],
+  "retrieval": {
+   "chunk_size": 800,
+   "chunk_overlap": 120,
+   "top_k": 5,
+   "strategy": "dense",
+   "hybrid_alpha": 0.5,
+   "query_rewrite": false,
+   "min_score": 0.25
+  }
+ },
+ "ans_000": {
+  "answer": "You are entitled to 16 weeks of fully paid parental leave as a primary caregiver.",
+  "citations": [
+   "doc_01_c002"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.893
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.8008
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
+    "score": 0.7219
+   },
+   {
+    "chunk_id": "doc_01_c003",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
+    "score": 0.6413
+   },
+   {
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
+    "score": 0.5998
+   }
+  ],
+  "tool_calls": []
+ }
+}
