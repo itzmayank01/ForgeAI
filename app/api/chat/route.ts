@@ -19,7 +19,10 @@ const API_KEYS: string[] = (() => {
   push(process.env.FORGEAI_API_KEYS);
   push(process.env.FORGEAI_API_KEY);
   push(process.env.GROQ_API_KEY);
-  for (let i = 2; i <= 10; i++) {
+  // Scan well past any plausible count. The Python loader had the same 2..10
+  // limit and silently ignored keys numbered 11 and up, so adding keys made no
+  // difference and the pool quietly stayed small.
+  for (let i = 2; i <= 30; i++) {
     push(process.env[`FORGEAI_API_KEY_${i}`]);
     push(process.env[`GROQ_API_KEY_${i}`]);
   }
