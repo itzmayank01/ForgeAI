@@ -5,6 +5,8 @@ asserted rather than assumed. None of them touches the network.
 """
 from __future__ import annotations
 
+import time
+
 import pytest
 
 from forgeai.ingest.index import ChunkIndex
@@ -401,3 +403,61 @@ def test_minutes_are_not_read_as_milliseconds() -> None:
     reset into an instant retry that 429s again."""
     assert client.parse_duration("2m") == pytest.approx(120.0)
     assert client.parse_duration("2ms") == pytest.approx(0.002)
+
+
+# --- keys from one account share a daily pot -------------------------------
+# Measured, not assumed: four of the eight keys reported byte-identical usage
+# (199872/200000) against gpt-oss-120b, which is only possible if they draw on
+# the same budget. The pool's own docstring used to claim N keys multiply the
+# free tier by N; for keys minted from one account that is false.
+
+def _pool(n=4):
+    from forgeai.llm.keypool import KeyPool
+    return KeyPool([f"gsk_test_key_{i}" for i in range(n)])
+
+
+def test_exhausting_a_key_sidelines_its_account_siblings() -> None:
+    pool = _pool()
+    a, b, c, d = pool._states
+    for s in (a, b, c):
+        s.org = "org_shared"
+    d.org = "org_other"
+
+    n = pool.mark_exhausted(a, "m", 60, org="org_shared")
+    assert n == 3, "all three keys on the account should be sidelined together"
+
+    now = time.time()
+    assert not a.available_for("m", now)
+    assert not b.available_for("m", now)
+    assert not c.available_for("m", now)
+    assert d.available_for("m", now), "a different account keeps its budget"
+
+
+def test_a_key_of_unknown_account_is_sidelined_alone() -> None:
+    # Groq names the organization only when refusing, so the mapping fills in
+    # lazily. Until a key's account is known, guessing would bench keys that
+    # may well have budget.
+    pool = _pool(3)
+    a, b, _ = pool._states
+    assert pool.mark_exhausted(a, "m", 60) == 1
+    assert b.available_for("m", time.time())
+
+
+def test_exhaustion_is_per_model_not_per_key() -> None:
+    # Burning gpt-oss-20b on an account says nothing about qwen on it.
+    pool = _pool(2)
+    a, _ = pool._states
+    a.org = "org_shared"
+    pool.mark_exhausted(a, "gpt-oss-20b", 60, org="org_shared")
+    assert not a.available_for("gpt-oss-20b", time.time())
+    assert a.available_for("qwen", time.time())
+
+
+def test_organization_is_read_from_a_real_429_body() -> None:
+    body = ('{"error":{"message":"Rate limit reached for model '
+            '`openai/gpt-oss-120b` in organization `org_01m0624` service tier '
+            '`on_demand` on tokens per day (TPD): Limit 200000, Used 199496, '
+            'Requested 997. Please try again in 3m32.976s."}}')
+    assert client._organization(body) == "org_01m0624"
+    assert client._organization("no organization named here") is None
+    assert client._organization("") is None

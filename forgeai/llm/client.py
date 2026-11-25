@@ -114,6 +114,7 @@ class LLMClient:
 
                 if r.status_code == 429:
                     body = r.text
+                    org = _organization(body)
                     if "per day" in body.lower() or "tpd" in body.lower():
                         # Sideline this (key, model) for exactly as long as the
                         # server asks. A fixed hour benches keys that Groq says
@@ -121,9 +122,12 @@ class LLMClient:
                         # rather than resetting at midnight, and retry-after on
                         # these 429s is routinely single digits.
                         cooldown = _retry_after(r) or 120.0
-                        self.pool.mark_exhausted(state, model_name, cooldown)
+                        n = self.pool.mark_exhausted(
+                            state, model_name, cooldown, org=org)
                         bucket.settle(handle, 0)
-                        last_exc = LLMError(f"{state.label} daily cap reached")
+                        last_exc = LLMError(
+                            f"{state.label} daily cap reached"
+                            + (f" (+{n - 1} key(s) on the same account)" if n > 1 else ""))
                         continue
                     wait = _retry_after(r) or min(30.0, 2.0 ** attempt * 4)
                     bucket.penalise(wait)
@@ -223,6 +227,20 @@ def parse_duration(raw: str | None) -> float | None:
         return float(text)  # bare seconds, as HTTP Retry-After sends them
     except ValueError:
         return None
+
+
+_ORG = re.compile(r"organization `([^`]+)`")
+
+
+def _organization(body: str) -> str | None:
+    """Owning account from a 429 body.
+
+    Groq names it only when refusing, which is the one moment it matters: keys
+    from one account share a daily pot, so a sibling cannot serve what this key
+    just could not.
+    """
+    m = _ORG.search(body or "")
+    return m.group(1) if m else None
 
 
 SWITCH_RATHER_THAN_SLEEP = 20.0

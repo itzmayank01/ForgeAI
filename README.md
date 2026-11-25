@@ -254,5 +254,14 @@ Capping it also cut a structured call from ~2,400 tokens to ~227.
   across both corpora, each written verbose and terse. Re-derive them if the
   embedding model changes; `stages/groundability.py` records the measurements and
   a contrastive alternative that was tried and rejected on the data.
-- **Free-tier quota is the binding constraint.** 200k tokens/day against roughly
-  40–80k per full run.
+- **Free-tier quota is the binding constraint, and keys do not multiply it.**
+  200k tokens/day *per organization, per model*, against roughly 40–80k per full
+  run. The daily cap is the one limit no header reports: a request that fits in
+  the per-minute window returns `x-ratelimit-remaining-tokens: 8000` and a cheap
+  probe returns `200` while the day's budget is gone, because the probe is small
+  enough to fit in what little remains. The figure appears only in a 429 body —
+  `in organization org_abc … (TPD): Limit 200000, Used 199496`. Reading those
+  bodies is also how the key arithmetic got corrected: eight keys reporting
+  identical usage turned out to be 3 accounts, not 8 budgets, so `KeyPool`
+  sidelines an account's keys together instead of spending attempts on siblings
+  drawing from the same empty pot. Budget scales with accounts, not keys.
