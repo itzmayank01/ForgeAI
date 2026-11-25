@@ -14,8 +14,21 @@ from .agent import Agent
 
 
 def load_index(chunks_path: Path) -> ChunkIndex:
+    """Rebuild an index from a committed web export.
+
+    Only the fields Chunk needs are taken: the export also carries the
+    embedding vector, and an export written before `ordinal` was included must
+    still open rather than making an older run unloadable.
+    """
     data = json.loads(chunks_path.read_text())
-    return ChunkIndex([Chunk(**c) for c in data["chunks"]])
+    chunks = [
+        Chunk(
+            chunk_id=c["chunk_id"], doc_id=c["doc_id"], filename=c["filename"],
+            text=c["text"], ordinal=c.get("ordinal", i),
+        )
+        for i, c in enumerate(data["chunks"])
+    ]
+    return ChunkIndex(chunks)
 
 
 def chat(definition_path: Path, chunks_path: Path,

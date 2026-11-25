@@ -288,3 +288,48 @@ def test_cache_is_discarded_when_the_agent_changes(tmp_path):
 
     stored = json.loads(cache.read_text())
     assert "_signature" in stored and stored["_signature"]["tools"] == ["calculator"]
+
+
+# ── F8: the runner loads ANY produced definition ──────────────────────────
+def test_every_committed_definition_loads():
+    """F8 is "loads any produced definition", so it is checked against every
+    run in the repository rather than one.
+
+    This caught a real break: the web export omitted `ordinal`, which Chunk
+    requires, so `forgeai chat` crashed on load for every run.
+    """
+    import json
+    from pathlib import Path
+
+    from forgeai.runtime.runner import load_index
+
+    runs = Path(__file__).resolve().parents[1] / "runs"
+    checked = 0
+    for run in sorted(runs.glob("*")):
+        definition = run / "03_agent_def.final.json"
+        chunks = run / "web" / "chunks.json"
+        if not (definition.exists() and chunks.exists()):
+            continue
+        d = AgentDefinition.model_validate_json(definition.read_text())
+        index = load_index(chunks)
+        assert d.system_prompt, f"{run.name}: definition has no system prompt"
+        assert index.chunks, f"{run.name}: web export has no chunks"
+        checked += 1
+
+    if checked == 0:
+        pytest.skip("no committed runs with a final definition yet")
+
+
+def test_loader_tolerates_an_export_without_ordinal(tmp_path):
+    """Older exports predate the ordinal field and must still open."""
+    import json
+
+    from forgeai.runtime.runner import load_index
+
+    p = tmp_path / "chunks.json"
+    p.write_text(json.dumps({"dim": 2, "chunks": [
+        {"chunk_id": "c0", "doc_id": "d0", "filename": "f.md",
+         "text": "some text", "vector": [0.1, 0.2]},
+    ]}))
+    index = load_index(p)
+    assert index.chunks[0].ordinal == 0

@@ -110,7 +110,7 @@ class ChunkIndex:
             "chunks": [
                 {
                     "chunk_id": c.chunk_id, "doc_id": c.doc_id, "filename": c.filename,
-                    "text": c.text,
+                    "text": c.text, "ordinal": c.ordinal,
                     "vector": [round(float(x), 5) for x in self.vectors[i]],
                 }
                 for i, c in enumerate(self.chunks)
