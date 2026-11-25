@@ -220,8 +220,22 @@ forgeai chat  --run runs/<id>
 forgeai calibrate --run runs/<id> --gold gold/<labels>.json
 ```
 
-**Models.** `openai/gpt-oss-20b` generates, `qwen/qwen3.8-27b` judges — two
-different small open families, which is what the self-preference defense needs.
+**Models.** The free tier exposes exactly two usable instruct families —
+`openai/gpt-oss-{20b,120b}` and `qwen/qwen3.8-27b` — so the three roles cannot
+each hold a family of their own. The judge gets first claim on the scarce one: it
+always runs `qwen/qwen3.8-27b`, a different family from whichever gpt-oss the
+agent uses, because judge-versus-agent is the separation the self-preference
+defense actually rests on. Eval generation shares the agent's family and is kept
+apart structurally instead — it never imports `AgentDefinition`, so it cannot
+shape cases around the prompt it is testing.
+
+The agent's route is `FORGEAI_AGENT_MODEL`, and it moves between 20b and 120b as
+per-key daily caps land. The chosen model is stamped into `03_agent_def.json` and
+folded into the answer-cache signature, so a re-route *discards* answers produced
+by the previous model instead of blending two agents into one scorecard. An
+explicit route also outranks the one recorded in a resumed definition, which is
+what makes the switch a flag rather than a hand-edit of committed JSON.
+
 Any OpenAI-compatible endpoint works; swapping provider is one env var.
 
 `reasoning_effort=low` is set for gpt-oss: left unbounded it spends its whole

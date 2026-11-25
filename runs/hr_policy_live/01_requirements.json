@@ -1,7 +1,7 @@
 {
   "brief": "I need an assistant that answers HR policy questions for shore staff - annual\nleave and carry-over, parental leave, travel expense reimbursement, and how to\nraise a grievance. It should sound plain and reassuring, never give legal advice,\nand never discuss an individual employee's salary or disciplinary record.",
-  "scope": "Assist shore staff with HR policy queries",
-  "audience": "shore staff",
+  "scope": "Answer HR policy questions for shore staff",
+  "audience": "shore staff employees",
   "tone": "plain and reassuring",
   "must_answer": [
     {
@@ -47,29 +47,66 @@
       "verdict": null
     },
     {
-      "name": "Salary and Compensation Details",
-      "description": "The assistant must refuse to discuss any individual's salary, bonuses, or compensation records.",
-      "support_score": null,
-      "supporting_chunks": [],
-      "verdict": null
-    },
-    {
-      "name": "Disciplinary Records",
-      "description": "The assistant must decline to provide information about any employee's disciplinary history or personal performance records.",
+      "name": "Individual Salary or Disciplinary Records",
+      "description": "The assistant must refuse to discuss any employee's salary, wage, or disciplinary history.",
       "support_score": null,
       "supporting_chunks": [],
       "verdict": null
     },
     {
       "name": "Medical or Financial Advice",
-      "description": "The assistant must refuse to give medical or financial advice, as these areas pose significant liability risks.",
+      "description": "The assistant must decline to give medical or financial advice related to employee benefits or compensation.",
+      "support_score": null,
+      "supporting_chunks": [],
+      "verdict": null
+    },
+    {
+      "name": "Personal Records of Employees",
+      "description": "The assistant must not provide or discuss any personal records of individual employees, such as performance reviews or personal data.",
       "support_score": null,
       "supporting_chunks": [],
       "verdict": null
     }
   ],
-  "questions_asked": [],
-  "assumptions": [],
+  "questions_asked": [
+    "What is the intended tone and level of formality for the assistant’s responses, beyond being plain and reassuring?",
+    "Should the assistant provide direct policy excerpts or only paraphrased summaries, and if excerpts, how many characters or lines per response?",
+    "How should the assistant handle potential conflicts between the leave policy and the grievance procedure, or between these documents and any newer policy updates not included?",
+    "Are there any additional internal resources (e.g., FAQ pages, HR portal links) that the assistant should reference when a question falls outside the three provided documents?",
+    "What is the expected maximum response length or word count for each answer to ensure brevity while covering key points?"
+  ],
+  "assumptions": [
+    {
+      "question": "What is the intended tone and level of formality for the assistant’s responses, beyond being plain and reassuring?",
+      "assumed_answer": "The brief specifies that responses should be plain and reassuring, but does not provide additional details on tone or formality beyond that.",
+      "confidence": "low",
+      "basis": "None of the retrieved excerpts address tone or formality beyond the brief’s plain and reassuring requirement."
+    },
+    {
+      "question": "Should the assistant provide direct policy excerpts or only paraphrased summaries, and if excerpts, how many characters or lines per response?",
+      "assumed_answer": "The assistant should provide direct policy excerpts, quoting the specific figure or rule. The policy does not specify a character or line limit for excerpts.",
+      "confidence": "low",
+      "basis": "The excerpts do not mention any character or line limits for responses."
+    },
+    {
+      "question": "How should the assistant handle potential conflicts between the leave policy and the grievance procedure, or between these documents and any newer policy updates not included?",
+      "assumed_answer": "The excerpts do not provide any guidance on how to resolve conflicts between the leave policy and the grievance procedure, nor do they address how to handle newer policy updates that are not included. Therefore, the assistant should note that there is no specific instruction in the provided documents and that any conflict resolution would need to refer to higher-level company policy or seek clarification from HR.",
+      "confidence": "low",
+      "basis": "None of the provided excerpts discuss conflict resolution or newer policy updates."
+    },
+    {
+      "question": "Are there any additional internal resources (e.g., FAQ pages, HR portal links) that the assistant should reference when a question falls outside the three provided documents?",
+      "assumed_answer": "The provided excerpts do not mention any additional internal resources such as FAQ pages or HR portal links.",
+      "confidence": "low",
+      "basis": "None of the excerpts reference additional resources."
+    },
+    {
+      "question": "What is the expected maximum response length or word count for each answer to ensure brevity while covering key points?",
+      "assumed_answer": "The policy does not specify a maximum response length or word count for answers.",
+      "confidence": "low",
+      "basis": "None of the retrieved excerpts mention a maximum response length or word count."
+    }
+  ],
   "corpus_manifest": [
     {
       "doc_id": "doc_00",

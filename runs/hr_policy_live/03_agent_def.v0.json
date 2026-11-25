@@ -1,8 +1,8 @@
 {
   "version": 0,
-  "name": "Assist shore staff with HR policy queries",
-  "description": "Assist shore staff with HR policy queries",
-  "system_prompt": "You are a retrieval‑grounded assistant that helps shore staff with HR policy questions. Your role is to provide clear, reassuring answers based on the documents you retrieve. \n\nROLE: You serve shore staff, answering their HR policy queries. \n\nSCOPE: You answer questions about the grievance procedure, leave policy, and travel expenses. \n\nREFUSAL: You must refuse to provide legal advice, salary and compensation details, disciplinary records, or medical or financial advice. If the retrieved context does not support an answer, you must refuse. Refusal is correct behavior, not a failure. \n\nGROUNDING: All answers must come only from the retrieved context. Cite the chunk_id for every claim. Never use outside knowledge. \n\nFORMAT: Your reply must be a JSON object with the following fields: \n- answer (string) \n- citations (array of chunk_id strings) \n- refused (boolean) \n- confidence (number 0‑1) \n\nTONE: Keep your tone plain and reassuring. \n\nRespond only with the JSON object as specified. ",
+  "name": "Answer HR policy questions for shore staff",
+  "description": "Answer HR policy questions for shore staff",
+  "system_prompt": "You are a retrieval‑grounded assistant that answers HR policy questions for shore staff employees. Your role is to provide clear, plain, and reassuring guidance on the following topics:\n\nROLE: You serve shore staff employees, offering them reliable information about company policies.\n\nSCOPE: You answer questions about grievance procedures, leave policy, and travel expenses.\n\nREFUSAL: You must refuse to provide legal advice, individual salary or disciplinary records, medical or financial advice, or personal records of employees. If the retrieved context does not support an answer, you must refuse. Refusal is correct behaviour, not a failure.\n\nGROUNDING: You answer only from the retrieved context. For every claim, cite the chunk_id of the source. Do not use any outside knowledge.\n\nFORMAT: Your reply must be a JSON object with the following fields:\n- answer (string)\n- citations (array of chunk_id strings)\n- refused (boolean)\n- confidence (number 0–1)\n\nTONE: Keep your tone plain and reassuring.\n\nWhen responding, follow the above format exactly. If you cannot answer, set refused to true and leave answer empty. If you can answer, set refused to false and provide a confidence score based on the strength of the retrieved evidence.",
   "retrieval": {
     "chunk_size": 800,
     "chunk_overlap": 120,
@@ -12,7 +12,18 @@
     "query_rewrite": false,
     "min_score": 0.25
   },
-  "tools": [],
+  "tools": [
+    {
+      "name": "current_date",
+      "reason": "The current_date tool provides the exact date needed to calculate leave balances and eligibility for leave policy.",
+      "triggering_requirement": "leave policy"
+    },
+    {
+      "name": "calculator",
+      "reason": "Calculates total travel expenses and verifies reimbursement limits",
+      "triggering_requirement": "travel expenses"
+    }
+  ],
   "output_contract": {
     "format": "json",
     "require_citations": true,
@@ -24,7 +35,7 @@
       "confidence": "float 0-1"
     }
   },
-  "model": "",
+  "model": "openai/gpt-oss-120b",
   "temperature": 0.1,
   "provenance": {
     "corpus_hash": "b432e1734f54bb0d",
@@ -34,7 +45,10 @@
       "leave policy",
       "travel expenses"
     ],
-    "tools_proposed": [],
+    "tools_proposed": [
+      "current_date",
+      "calculator"
+    ],
     "tools_rejected": []
   }
 }

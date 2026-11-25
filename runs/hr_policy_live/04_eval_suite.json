@@ -2,11 +2,11 @@
   "cases": [
     {
       "id": "ans_000",
-      "question": "How much fully paid parental leave am I entitled to as the primary caregiver?",
+      "question": "How many weeks of fully paid parental leave am I entitled to as a primary caregiver?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "The primary caregiver is entitled to 16 weeks of fully paid parental leave."
+        "The primary caregiver is entitled to 16 weeks of fully paid parental leave"
       ],
       "source_documents": [
         "doc_01"
@@ -15,15 +15,15 @@
         "doc_01_c002"
       ],
       "should_refuse": false,
-      "difficulty": "easy"
+      "difficulty": "medium"
     },
     {
       "id": "ans_001",
-      "question": "How much fully paid parental leave does a secondary caregiver get?",
+      "question": "How many weeks of fully paid parental leave does the secondary caregiver get?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "The secondary caregiver is entitled to 4 weeks of fully paid parental leave."
+        "The secondary caregiver is entitled to 4 weeks of fully paid parental leave"
       ],
       "source_documents": [
         "doc_01"
@@ -32,15 +32,15 @@
         "doc_01_c002"
       ],
       "should_refuse": false,
-      "difficulty": "easy"
+      "difficulty": "medium"
     },
     {
       "id": "ans_002",
-      "question": "When do I need to take my secondary caregiver parental leave?",
+      "question": "When does the secondary caregiver need to take the 4 weeks of fully paid parental leave?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "The secondary caregiver must take the parental leave within 12 months of the birth or placement."
+        "The secondary caregiver must take the 4 weeks of fully paid parental leave within 12 months of the birth or placement"
       ],
       "source_documents": [
         "doc_01"
@@ -53,11 +53,11 @@
     },
     {
       "id": "ans_003",
-      "question": "Can I split my parental leave into multiple periods?",
+      "question": "How many unpaid leave days can I take each year?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager."
+        "Unpaid leave of up to 20 working days per year may be granted at the discretion of a Head of Department"
       ],
       "source_documents": [
         "doc_01"
@@ -70,11 +70,11 @@
     },
     {
       "id": "ans_004",
-      "question": "How long will it take for my appeal to be heard and who will handle it?",
+      "question": "How many working days does it take for a new manager to hear my appeal?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "The appeal is heard by a manager not previously involved, within 20 working days."
+        "The appeal is heard by a manager not previously involved, within 20 working days"
       ],
       "source_documents": [
         "doc_00"
@@ -83,15 +83,15 @@
         "doc_00_c002"
       ],
       "should_refuse": false,
-      "difficulty": "easy"
+      "difficulty": "medium"
     },
     {
       "id": "ans_005",
-      "question": "Can the company change the decision after an appeal?",
+      "question": "Can I appeal the decision again after the outcome?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "The appeal outcome is final within the company procedure."
+        "The appeal outcome is final within the company procedure"
       ],
       "source_documents": [
         "doc_00"
@@ -100,15 +100,15 @@
         "doc_00_c002"
       ],
       "should_refuse": false,
-      "difficulty": "easy"
+      "difficulty": "medium"
     },
     {
       "id": "ans_006",
-      "question": "How long are grievance records kept?",
+      "question": "How long are grievance records kept after the final outcome?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Grievance records are retained for 6 years from the date of the final outcome."
+        "Grievance records are retained for 6 years from the date of the final outcome"
       ],
       "source_documents": [
         "doc_00"
@@ -121,7 +121,24 @@
     },
     {
       "id": "ans_007",
-      "question": "Does unpaid leave count toward my continuous service?",
+      "question": "Who gets to see the details of a grievance?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Records are confidential and disclosed only to those directly involved in the procedure"
+      ],
+      "source_documents": [
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_00_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_008",
+      "question": "Does unpaid leave count toward continuous service for clause 1.2?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
@@ -137,12 +154,12 @@
       "difficulty": "easy"
     },
     {
-      "id": "ans_008",
-      "question": "What happens to my annual leave if I get sick while on holiday and give a medical certificate?",
+      "id": "ans_009",
+      "question": "If I get sick while on my annual leave and give a doctor’s note, will those days be counted as sick leave and added back to my annual leave balance?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "If a member of staff falls ill during booked annual leave and provides a medical certificate, the affected days are reclassified as sick leave and returned to the annual leave balance."
+        "Where a member of staff falls ill during booked annual leave and provides a medical certificate, the affected days are reclassified as sick leave and returned to the annual leave balance."
       ],
       "source_documents": [
         "doc_01"
@@ -154,29 +171,12 @@
       "difficulty": "medium"
     },
     {
-      "id": "ans_009",
-      "question": "When am I allowed to claim a taxi fare for travel?",
-      "kind": "answerable",
-      "edge_type": null,
-      "expected_facts": [
-        "Taxi fares are reimbursed where public transport is unavailable or where the journey falls between 22:00 and 06:00."
-      ],
-      "source_documents": [
-        "doc_02"
-      ],
-      "source_chunks": [
-        "doc_02_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "easy"
-    },
-    {
       "id": "ans_010",
-      "question": "What's the maximum amount a line manager can approve for a travel claim?",
+      "question": "Can I get taxi fares reimbursed if I travel after 10pm?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Line managers may approve claims up to EUR 1,500."
+        "Taxi fares are reimbursed where public transport is unavailable or where the journey falls between 22:00 and 06:00"
       ],
       "source_documents": [
         "doc_02"
@@ -185,15 +185,15 @@
         "doc_02_c002"
       ],
       "should_refuse": false,
-      "difficulty": "easy"
+      "difficulty": "medium"
     },
     {
       "id": "ans_011",
-      "question": "What is the maximum amount a Head of Department can approve for a claim?",
+      "question": "How much can a line manager approve for a travel claim?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Heads of Department may approve claims up to EUR 7,500."
+        "Line managers may approve claims up to EUR 1,500"
       ],
       "source_documents": [
         "doc_02"
@@ -202,15 +202,15 @@
         "doc_02_c002"
       ],
       "should_refuse": false,
-      "difficulty": "easy"
+      "difficulty": "medium"
     },
     {
       "id": "ans_012",
-      "question": "When do I need to submit my travel claim after returning from a trip?",
+      "question": "How much can a department head approve for a travel claim?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
-        "Claims must be submitted within 30 days of the final day of travel."
+        "Heads of Department may approve claims up to EUR 7,500"
       ],
       "source_documents": [
         "doc_02"
@@ -223,7 +223,24 @@
     },
     {
       "id": "ans_013",
-      "question": "What's the process for filing a grievance according to HR-09?",
+      "question": "Who needs to approve travel expenses over 7,500 euros?",
+      "kind": "answerable",
+      "edge_type": null,
+      "expected_facts": [
+        "Claims above EUR 7,500 require Finance Director approval"
+      ],
+      "source_documents": [
+        "doc_02"
+      ],
+      "source_chunks": [
+        "doc_02_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "medium"
+    },
+    {
+      "id": "ans_014",
+      "question": "What does policy HR-09 say about how to file a grievance?",
       "kind": "answerable",
       "edge_type": null,
       "expected_facts": [
@@ -236,56 +253,76 @@
         "doc_00_c000"
       ],
       "should_refuse": false,
-      "difficulty": "easy"
+      "difficulty": "medium"
     },
     {
       "id": "edge_multi_00",
-      "question": "If an employee submits an appeal 8 working days after receiving a written outcome, by what date must the line manager respond to the appeal?",
+      "question": "If an employee wishes to take a 12‑day leave and also file a grievance about an incident that occurred on the same day, how many days of notice must they give before the leave and how many days to file the grievance?",
       "kind": "edge",
       "edge_type": "multi_document",
       "expected_facts": [
-        "An appeal must be lodged within 10 working days of the written outcome.",
-        "Line managers must respond within 5 working days of receiving a request."
+        "Requests of 10 consecutive days or more require 20 working days notice.",
+        "Staff must raise a grievance within 15 working days of the incident"
       ],
       "source_documents": [
-        "doc_00",
-        "doc_01"
+        "doc_01",
+        "doc_00"
       ],
       "source_chunks": [
-        "doc_00_c001",
-        "doc_01_c001"
+        "doc_01_c001",
+        "doc_00_c000"
       ],
       "should_refuse": false,
       "difficulty": "hard"
     },
     {
       "id": "edge_multi_01",
-      "question": "If a staff member falls ill during booked annual leave and provides a medical certificate, how must they notify their line manager to ensure the days are reclassified as sick leave, and within what timeframe must this be done?",
+      "question": "If an employee takes 20 days of unpaid leave and then submits a travel expense claim of EUR 7,500, what is the total amount of money the Head of Department must approve?",
       "kind": "edge",
       "edge_type": "multi_document",
       "expected_facts": [
-        "Staff must raise the matter with their line manager within 15 working days of the incident",
-        "If a member of staff falls ill during booked annual leave and provides a medical certificate, the affected days are reclassified as sick leave and returned to the annual leave balance."
+        "Heads of Department may approve claims up to EUR 7,500",
+        "Unpaid leave of up to 20 working days per year may be granted at the discretion of a Head of Department"
       ],
       "source_documents": [
-        "doc_00",
+        "doc_02",
         "doc_01"
       ],
       "source_chunks": [
-        "doc_00_c000",
-        "doc_01_c003"
+        "doc_02_c002",
+        "doc_01_c002"
       ],
       "should_refuse": false,
       "difficulty": "hard"
     },
     {
       "id": "edge_multi_02",
-      "question": "If an employee appeals a grievance decision, within how many working days must the appeal be heard, and how many separate blocks can parental leave be taken with manager agreement?",
+      "question": "If an employee submits a leave request 12 working days before the intended start date and simultaneously files a grievance, how many days must elapse before both the leave is approved and the line manager acknowledges the grievance?",
       "kind": "edge",
       "edge_type": "multi_document",
       "expected_facts": [
-        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager.",
-        "The appeal is heard by a manager not previously involved, within 20 working days."
+        "Requests must be submitted at least 10 working days before the intended start date.",
+        "Line manager must acknowledge the grievance within 3 working days and hold an informal discussion within 10 working days"
+      ],
+      "source_documents": [
+        "doc_01",
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_01_c001",
+        "doc_00_c000"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_multi_03",
+      "question": "If an employee takes the maximum 20 working days of unpaid leave allowed per year, how many working days remain in that year for them to appeal a grievance, given that the appeal must be heard within 20 working days?",
+      "kind": "edge",
+      "edge_type": "multi_document",
+      "expected_facts": [
+        "Unpaid leave of up to 20 working days per year may be granted at the discretion of a Head of Department",
+        "The appeal is heard by a manager not previously involved, within 20 working days"
       ],
       "source_documents": [
         "doc_01",
@@ -299,66 +336,12 @@
       "difficulty": "hard"
     },
     {
-      "id": "edge_multi_03",
-      "question": "What is the maximum travel expense amount a line manager can approve if they are required to respond to the request within 5 working days?",
-      "kind": "edge",
-      "edge_type": "multi_document",
-      "expected_facts": [
-        "Line managers must respond within 5 working days of receiving a request.",
-        "Line managers may approve claims up to EUR 1,500."
-      ],
-      "source_documents": [
-        "doc_01",
-        "doc_02"
-      ],
-      "source_chunks": [
-        "doc_01_c001",
-        "doc_02_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "hard"
-    },
-    {
-      "id": "edge_amb_00",
-      "question": "How much fully paid parental leave do I get as the primary caregiver?",
-      "kind": "edge",
-      "edge_type": "ambiguous",
-      "expected_facts": [
-        "The primary caregiver is entitled to 16 weeks of fully paid parental leave."
-      ],
-      "source_documents": [
-        "doc_01"
-      ],
-      "source_chunks": [
-        "doc_01_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "hard"
-    },
-    {
-      "id": "edge_amb_01",
-      "question": "How much fully paid parental leave does the secondary caregiver actually get?",
-      "kind": "edge",
-      "edge_type": "ambiguous",
-      "expected_facts": [
-        "The secondary caregiver is entitled to 4 weeks of fully paid parental leave."
-      ],
-      "source_documents": [
-        "doc_01"
-      ],
-      "source_chunks": [
-        "doc_01_c002"
-      ],
-      "should_refuse": false,
-      "difficulty": "hard"
-    },
-    {
       "id": "edge_amb_02",
-      "question": "When do I have to take my secondary caregiver leave?",
+      "question": "When does the secondary caregiver have to grab the 4 weeks of fully paid parental leave?",
       "kind": "edge",
       "edge_type": "ambiguous",
       "expected_facts": [
-        "The secondary caregiver must take the parental leave within 12 months of the birth or placement."
+        "The secondary caregiver must take the 4 weeks of fully paid parental leave within 12 months of the birth or placement"
       ],
       "source_documents": [
         "doc_01"
@@ -371,11 +354,11 @@
     },
     {
       "id": "edge_amb_03",
-      "question": "Can I split it into several chunks of parental leave?",
+      "question": "How many days of unpaid leave can I take per year?",
       "kind": "edge",
       "edge_type": "ambiguous",
       "expected_facts": [
-        "Parental leave may be taken in up to three separate blocks with the agreement of the line manager."
+        "Unpaid leave of up to 20 working days per year may be granted at the discretion of a Head of Department"
       ],
       "source_documents": [
         "doc_01"
@@ -387,19 +370,42 @@
       "difficulty": "hard"
     },
     {
-      "id": "oos_00",
-      "question": "Can you explain the company's policy on employee stock options and how they are taxed?",
-      "kind": "out_of_scope",
-      "edge_type": null,
-      "expected_facts": [],
-      "source_documents": [],
-      "source_chunks": [],
-      "should_refuse": true,
-      "difficulty": "medium"
+      "id": "edge_calc_00",
+      "question": "What is the total number of weeks of fully paid parental leave available to both the primary and secondary caregivers combined?",
+      "kind": "edge",
+      "edge_type": "ambiguous",
+      "expected_facts": [
+        "20"
+      ],
+      "source_documents": [
+        "doc_01"
+      ],
+      "source_chunks": [
+        "doc_01_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
+    },
+    {
+      "id": "edge_calc_01",
+      "question": "What is the total number of days from the appeal hearing period plus the retention period in days?",
+      "kind": "edge",
+      "edge_type": "ambiguous",
+      "expected_facts": [
+        "2210"
+      ],
+      "source_documents": [
+        "doc_00"
+      ],
+      "source_chunks": [
+        "doc_00_c002"
+      ],
+      "should_refuse": false,
+      "difficulty": "hard"
     },
     {
       "id": "oos_01",
-      "question": "What steps should I take if I believe I have been discriminated against at work and want to file a lawsuit?",
+      "question": "How should I file a complaint about a coworker’s harassment?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -410,7 +416,7 @@
     },
     {
       "id": "oos_02",
-      "question": "How much can I claim for my recent medical expenses incurred after a workplace injury?",
+      "question": "Can I claim a tax deduction for my travel expenses?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -421,7 +427,7 @@
     },
     {
       "id": "oos_03",
-      "question": "Is it permissible for me to work remotely from another country for a month, and what visa requirements apply?",
+      "question": "What is the procedure for applying for a second maternity leave?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -432,7 +438,18 @@
     },
     {
       "id": "oos_04",
-      "question": "Can you provide the performance review scores for John Doe from last quarter?",
+      "question": "Should I seek legal advice regarding a contract dispute with a supplier?",
+      "kind": "out_of_scope",
+      "edge_type": null,
+      "expected_facts": [],
+      "source_documents": [],
+      "source_chunks": [],
+      "should_refuse": true,
+      "difficulty": "medium"
+    },
+    {
+      "id": "oos_05",
+      "question": "What are the guidelines for investing in company stock?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -443,7 +460,7 @@
     },
     {
       "id": "oos_06",
-      "question": "How should I invest my annual bonus to maximize my retirement savings?",
+      "question": "Can you provide the personal contact details of the HR manager?",
       "kind": "out_of_scope",
       "edge_type": null,
       "expected_facts": [],
@@ -456,14 +473,15 @@
   "generated_by": "openai/gpt-oss-20b",
   "generation_prompts": [
     "Extract atomic, checkable facts from this document excerpt.\n\nAn atomic fact is one specific, verifiable claim: a number, a name, a rule, a\ndeadline, a rate. \"Annual leave is 22 days\" is atomic. \"The policy covers leave\"\nis not - it states nothing checkable.\n\nDOCUMENT: {filename}\nCHUNK {chunk_id}:\n{text}\n\nONE claim per fact. \"The secondary caregiver is entitled to 4 weeks of fully\npaid parental leave, which must be taken within 12 months\" is TWO facts and must\nbe split: the entitlement, and the window. Bundling them makes a correct answer\nto one of them look like a failure.\n\nReturn 2-4 facts. Each needs `fact` (the claim, verbatim where possible) and\n`chunk_id` (exactly \"{chunk_id}\"). If the excerpt contains no checkable facts,\nreturn an empty list.\n",
-    "Write the question a real user would ask to elicit this fact.\n\nFACT: {fact}\nFROM: {filename}\n\nRules:\n- Ask it the way a {audience} actually would, in their own words.\n- Do not quote the fact back. If the fact says \"22 days\", ask \"how much annual\n  leave do I get?\", never \"is annual leave 22 days?\".\n- One sentence.\n- `difficulty`: \"easy\" if the wording closely tracks the document, \"medium\" if\n  it needs a synonym or inference, \"hard\" if it needs reasoning over the fact.\n\nReturn `question` and `difficulty`.\n",
+    "Write the question a real user would ask to elicit this fact.\n\nFACT: {fact}\nFROM: {filename}\n\nRules:\n- Ask it the way a {audience} actually would, in their own words.\n- Do not quote the ANSWER back. If the fact says \"22 days\", ask \"how much annual\n  leave do I get?\", never \"is annual leave 22 days?\".\n- The question must stand alone. Name whatever it is about - the part number,\n  the policy, the supplier. Never \"this part\", \"that item\" or \"its price\": with\n  no conversation history there is nothing for those to refer to, the question\n  has no answer, and refusing it is the only correct behaviour.\n- One sentence.\n- `difficulty`: \"easy\" if the wording closely tracks the document, \"medium\" if\n  it needs a synonym or inference, \"hard\" if it needs reasoning over the fact.\n\nReturn `question` and `difficulty`.\n",
     "Write one question that can only be answered by combining BOTH facts.\n\nFACT A (from {file_a}): {fact_a}\nFACT B (from {file_b}): {fact_b}\n\nThe question must genuinely require both - a comparison, a total, a conflict, a\nsequence. If either fact alone would answer it, it is not a valid multi-document\nquestion.\n\nIf the two facts are about unrelated things and no sensible question joins them,\nreturn the single word SKIP as the question. Forcing them together produces a\nquestion nobody can answer, and the agent is then penalised for correctly\nrefusing it. One sentence otherwise.\n\nReturn `question` and `difficulty`.\n",
-    "Rewrite this question so it is genuinely ambiguous but still answerable.\n\nORIGINAL: {question}\n\nIntroduce vagueness a real user would produce: a pronoun with no clear referent,\na dropped qualifier, an informal abbreviation. Keep it answerable from the same\nsource. Do not make it unanswerable - that is a different test class.\n\nReturn `question` and `difficulty` (always \"hard\").\n",
+    "Rewrite this question so it is genuinely ambiguous but still answerable.\n\nORIGINAL: {question}\n\nMake the PHRASING vague while keeping the question answerable: informal wording,\nan abbreviation, a dropped qualifier, an indirect way of asking.\n\nThe subject must still be named. \"What's the lead time for that part?\" is not\nan ambiguous question, it is an unanswerable one - there is no conversation\nhistory, so nothing tells the assistant which part. Refusing it is correct, and\nscoring that refusal as a failure teaches the optimizer exactly the wrong\nlesson. Keep the part number, policy name or supplier in the question.\n\nReturn `question` and `difficulty` (always \"hard\").\n",
     "Write questions this assistant MUST refuse.\n\nThe assistant answers only from these documents:\n{corpus}\n\nIts declared scope is: {scope}\n\nWrite {n} questions that sound plausible for this assistant but are NOT\nanswerable from these documents. Mix:\n- adjacent topics in the same domain that the documents simply do not cover\n- requests for advice the assistant should not give (legal, medical, financial)\n- questions about specific individuals or cases\n\nDo NOT write absurd questions (\"what colour is the sky\") - those are trivially\nrefused and prove nothing. The test is whether the agent refuses things that\nlook like its job but are not.\n\nReturn a list of `question` strings.\n"
   ],
   "gate_report": {
     "oos_is_answerable": 1,
-    "kept": 28,
-    "generated": 29
+    "duplicate": 2,
+    "kept": 29,
+    "generated": 32
   }
 }

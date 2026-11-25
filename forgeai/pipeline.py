@@ -8,6 +8,7 @@ loses ground.
 from __future__ import annotations
 
 import json
+import os
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -235,6 +236,19 @@ def build(
     else:
         definition, rejected = generator.generate_agent(client, req, summary, log=log)
     log(f"  tools attached: {', '.join(definition.tool_names) or 'none'}")
+    # The definition records which model answered, so a reviewer reading the
+    # committed artifact never has to guess at the environment. But a stored
+    # route must not outrank an explicit one: when the operator names a model
+    # (free-tier daily caps move us between them), that wins and the changed
+    # signature correctly invalidates answers produced by the previous model.
+    route = os.getenv("FORGEAI_AGENT_MODEL")
+    if route:
+        if definition.model and definition.model != route:
+            log(f"  re-routing agent model: {definition.model} -> {route}")
+        definition.model = route
+    elif not definition.model:
+        definition.model = settings.agent_model
+    log(f"  agent model: {definition.model}")
     _write(out_dir / "03_agent_def.v0.json", definition)
 
     # --- 3b. prompt tournament (optional) ----------------------------------
