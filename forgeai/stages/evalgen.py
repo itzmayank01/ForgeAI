@@ -270,14 +270,22 @@ def quality_gate(cases: list[EvalCase], index: ChunkIndex) -> tuple[list[EvalCas
             if any(_is_bundled(f) for f in c.expected_facts):
                 dropped["bundled_fact"] += 1
                 continue
-            texts = " ".join(
-                ch.text.lower() for ch in index.chunks if ch.chunk_id in c.source_chunks
-            )
-            if texts and not any(
-                _overlap(f.lower(), texts) for f in c.expected_facts
-            ):
-                dropped["fact_not_in_source"] += 1
-                continue
+            # A computed answer is derived from the source, not quoted from it:
+            # "48977.98" is the correct total for two stock lines and appears
+            # nowhere in the text. Checking it the same way dropped every
+            # arithmetic case the generator produced - three of them on the
+            # spares corpus - which is why an attached calculator stayed
+            # untested.
+            if not c.id.startswith("edge_calc"):
+                texts = " ".join(
+                    ch.text.lower() for ch in index.chunks
+                    if ch.chunk_id in c.source_chunks
+                )
+                if texts and not any(
+                    _overlap(f.lower(), texts) for f in c.expected_facts
+                ):
+                    dropped["fact_not_in_source"] += 1
+                    continue
         else:
             hits = index.search(q, RetrievalConfig(top_k=1, min_score=0.0))
             if hits and hits[0].score >= 0.72:
