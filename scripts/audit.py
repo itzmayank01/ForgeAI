@@ -165,6 +165,31 @@ for r in runs:
 record("F7", "Honest reporting",
        PASS if ok and all(ok) else PART if any(ok) else FAIL, "; ".join(notes))
 
+# ── F3b tools are actually exercised ──────────────────────────────────────
+# A definition that attaches tools which never fire is decoration, and the
+# committed evidence looks identical either way. This check exists because
+# exactly that slipped through: HR shipped with calculator and current_date
+# attached and zero tool calls across 28 cases.
+ok, notes = [], []
+for r in runs:
+    d = load(r / "03_agent_def.final.json") or {}
+    attached = [t["name"] for t in d.get("tools", [])]
+    if not attached:
+        notes.append(f"{r.name}: no tools attached")
+        ok.append(True)  # restraint is a valid outcome
+        continue
+    fired = set()
+    for it in sorted((r / "05_iterations").glob("iter_*/verdicts.json")):
+        for v in (load(it) or {}).get("verdicts", []):
+            for tc in v.get("tool_calls", []) or []:
+                fired.add(tc.get("tool"))
+    unused = [t for t in attached if t not in fired]
+    ok.append(not unused)
+    notes.append(f"{r.name}: attached {attached}, fired {sorted(fired) or 'none'}"
+                 + (f", UNUSED {unused}" if unused else ""))
+record("F3b", "Attached tools actually fire",
+       PASS if ok and all(ok) else PART, "; ".join(notes))
+
 # ── F8 runnable product ───────────────────────────────────────────────────
 runner = (ROOT / "forgeai/runtime/runner.py").exists()
 web_chat = (ROOT / "app/chat/[id]/page.tsx").exists()
