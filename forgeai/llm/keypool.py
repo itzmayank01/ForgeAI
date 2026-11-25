@@ -53,15 +53,27 @@ class KeyPool:
     """Below this, waiting for a key beats failing the run: Groq's daily window
     drips, so a stall is usually seconds rather than hours."""
 
-    def acquire(self, model: str, *, allow_wait: bool = True) -> KeyState:
-        """Least-used available key for this model, waiting out a brief stall."""
+    def acquire(self, model: str, *, allow_wait: bool = True,
+                reserve: int = 0) -> KeyState:
+        """Least-used available key for this model, waiting out a brief stall.
+
+        The reservation matters under concurrency. Choosing purely on recorded
+        usage meant three threads calling acquire before any of them had
+        recorded anything all received the SAME key, piling onto one key's
+        per-minute limit while seven sat idle - every request then 429'd and
+        retried, so six answers took sixty seconds where one took one.
+        Reserving on the way out makes the next caller see this one.
+        """
         deadline = time.time() + self.SHORT_WAIT
         while True:
             now = time.time()
             with self._lock:
                 live = [s for s in self._states if s.available_for(model, now)]
                 if live:
-                    return min(live, key=lambda s: s.tokens_for(model))
+                    chosen = min(live, key=lambda s: s.tokens_for(model))
+                    if reserve:
+                        chosen.used[model] = chosen.tokens_for(model) + reserve
+                    return chosen
                 soonest = min(
                     (s.exhausted_until.get(model, 0) for s in self._states), default=0)
 
@@ -74,9 +86,12 @@ class KeyPool:
                     else f"all {len(self._states)} key(s) exhausted for {model}")
             time.sleep(min(5.0, max(0.5, wait)))
 
-    def record(self, state: KeyState, model: str, tokens: int) -> None:
+    def record(self, state: KeyState, model: str, tokens: int,
+               reserved: int = 0) -> None:
+        """Replace the reservation with what the call actually cost."""
         with self._lock:
-            state.used[model] = state.used.get(model, 0) + tokens
+            current = state.used.get(model, 0)
+            state.used[model] = max(0, current - reserved) + tokens
 
     def mark_exhausted(self, state: KeyState, model: str, seconds: float = 3600) -> None:
         with self._lock:

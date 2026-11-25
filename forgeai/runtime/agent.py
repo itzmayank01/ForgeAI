@@ -113,7 +113,7 @@ class Agent:
             return "", []
 
         plan, _ = structured(
-            self.client, model_cls=_ToolPlan, temperature=0.0,
+            self.client, model_cls=_ToolPlan, temperature=0.0, max_tokens=500,
             model=self.definition.model or settings.agent_model,
             instruction=(
                 "AVAILABLE TOOLS:\n" +

@@ -100,7 +100,7 @@ class LLMClient:
         # to fail.
         for attempt in range(self.pool.size + 3):
             try:
-                state = self.pool.acquire(model_name)
+                state = self.pool.acquire(model_name, reserve=estimate)
             except NoKeyAvailable as exc:
                 raise QuotaExhausted(str(exc)) from exc
 
@@ -162,7 +162,8 @@ class LLMClient:
                 total = u.get("total_tokens") or (
                     u.get("prompt_tokens", 0) + u.get("completion_tokens", 0))
                 bucket.settle(handle, total or estimate)
-                self.pool.record(state, model_name, total or estimate)
+                self.pool.record(state, model_name, total or estimate,
+                                 reserved=estimate)
                 self.usage.add(u.get("prompt_tokens", 0), u.get("completion_tokens", 0),
                                model_name)
                 return data["choices"][0]["message"].get("content") or ""

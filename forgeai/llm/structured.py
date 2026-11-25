@@ -131,6 +131,7 @@ def structured(
     model: str | None = None,
     temperature: float = 0.0,
     max_repairs: int = 2,
+    max_tokens: int = 1100,
 ) -> tuple[T | None, RepairTrace]:
     """Return a validated instance, or (None, trace) after exhausting repairs.
 
@@ -155,7 +156,8 @@ def structured(
         trace.attempts = attempt + 1
         try:
             raw = client.complete(
-                messages, model=model, temperature=temperature, json_mode=True
+                messages, model=model, temperature=temperature,
+                json_mode=True, max_tokens=max_tokens,
             )
         except QuotaExhausted:
             raise  # a daily cap must stop the run, not degrade it silently
