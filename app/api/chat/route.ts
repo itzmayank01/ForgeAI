@@ -90,15 +90,23 @@ export async function POST(req: Request) {
     const offset = Math.floor(Math.random() * API_KEYS.length);
     let r: Response | null = null;
 
-    for (let attempt = 0; attempt < API_KEYS.length; attempt++) {
-      const key = API_KEYS[(offset + attempt) % API_KEYS.length];
-      r = await fetch(`${BASE_URL}/chat/completions`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
-        body: JSON.stringify(body),
-      });
-      // A rate limit is this key's problem, not the request's: try the next.
-      if (r.status !== 429) break;
+    // Two sweeps of the pool with a short pause between them. One sweep gives
+    // up the instant every key is momentarily busy, which is what a reader sees
+    // as "rate limited" even though Groq's per-minute window refills in
+    // seconds. A person who clicked once will happily wait two.
+    const sweeps = 2;
+    outer: for (let sweep = 0; sweep < sweeps; sweep++) {
+      if (sweep > 0) await new Promise((res) => setTimeout(res, 1800));
+      for (let attempt = 0; attempt < API_KEYS.length; attempt++) {
+        const key = API_KEYS[(offset + attempt) % API_KEYS.length];
+        r = await fetch(`${BASE_URL}/chat/completions`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+          body: JSON.stringify(body),
+        });
+        // A rate limit is this key's problem, not the request's: try the next.
+        if (r.status !== 429) break outer;
+      }
     }
 
     if (!r) {
@@ -106,7 +114,11 @@ export async function POST(req: Request) {
     }
     if (r.status === 429) {
       return NextResponse.json(
-        { error: `Rate limited on all ${API_KEYS.length} key(s). Try again in a moment.` },
+        {
+          error:
+            `Every one of the ${API_KEYS.length} configured key(s) is rate limited ` +
+            `right now. Groq's free-tier window refills within a minute — try again shortly.`,
+        },
         { status: 429 },
       );
     }
