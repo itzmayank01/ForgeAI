@@ -1,7 +1,7 @@
 {
  "_signature": {
   "runtime": 3,
-  "model": "openai/gpt-oss-20b",
+  "model": "openai/gpt-oss-120b",
   "tools": [
    "calculator",
    "current_date"
@@ -16,105 +16,13 @@
    "min_score": 0.25
   }
  },
- "ans_002": {
-  "answer": "The secondary caregiver must take the 4 weeks of fully paid parental leave within 12 months of the birth or placement.",
-  "citations": [
-   "doc_01_c002"
-  ],
-  "refused": false,
-  "confidence": 0.95,
-  "retrieved": [
-   {
-    "chunk_id": "doc_01_c002",
-    "doc_id": "doc_01",
-    "filename": "leave_policy.md",
-    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
-    "score": 0.8907
-   },
-   {
-    "chunk_id": "doc_01_c001",
-    "doc_id": "doc_01",
-    "filename": "leave_policy.md",
-    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
-    "score": 0.7893
-   },
-   {
-    "chunk_id": "doc_01_c000",
-    "doc_id": "doc_01",
-    "filename": "leave_policy.md",
-    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
-    "score": 0.7038
-   },
-   {
-    "chunk_id": "doc_02_c001",
-    "doc_id": "doc_02",
-    "filename": "travel_expenses.md",
-    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
-    "score": 0.6019
-   },
-   {
-    "chunk_id": "doc_01_c003",
-    "doc_id": "doc_01",
-    "filename": "leave_policy.md",
-    "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
-    "score": 0.6013
-   }
-  ],
-  "tool_calls": []
- },
- "ans_001": {
-  "answer": "The secondary caregiver is entitled to 4 weeks of fully paid parental leave.",
+ "ans_000": {
+  "answer": "You are entitled to 16 weeks of fully paid parental leave as the primary caregiver.",
   "citations": [
    "doc_01_c002"
   ],
   "refused": false,
   "confidence": 0.99,
-  "retrieved": [
-   {
-    "chunk_id": "doc_01_c002",
-    "doc_id": "doc_01",
-    "filename": "leave_policy.md",
-    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
-    "score": 0.8658
-   },
-   {
-    "chunk_id": "doc_01_c001",
-    "doc_id": "doc_01",
-    "filename": "leave_policy.md",
-    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
-    "score": 0.7497
-   },
-   {
-    "chunk_id": "doc_01_c000",
-    "doc_id": "doc_01",
-    "filename": "leave_policy.md",
-    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
-    "score": 0.6899
-   },
-   {
-    "chunk_id": "doc_01_c003",
-    "doc_id": "doc_01",
-    "filename": "leave_policy.md",
-    "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
-    "score": 0.6097
-   },
-   {
-    "chunk_id": "doc_00_c002",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
-    "score": 0.5858
-   }
-  ],
-  "tool_calls": []
- },
- "ans_000": {
-  "answer": "You are entitled to 16 weeks of fully paid parental leave as a primary caregiver.",
-  "citations": [
-   "doc_01_c002"
-  ],
-  "refused": false,
-  "confidence": 0.95,
   "retrieved": [
    {
     "chunk_id": "doc_01_c002",
@@ -154,105 +62,105 @@
   ],
   "tool_calls": []
  },
- "ans_005": {
-  "answer": "No, once the appeal outcome is issued it is final and no further appeal can be made.",
+ "ans_001": {
+  "answer": "The secondary caregiver is entitled to 4 weeks of fully paid parental leave.",
   "citations": [
-   "doc_00_c002"
+   "doc_01_c002"
   ],
   "refused": false,
-  "confidence": 0.95,
+  "confidence": 1.0,
   "retrieved": [
    {
-    "chunk_id": "doc_00_c002",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
-    "score": 0.6807
-   },
-   {
-    "chunk_id": "doc_00_c001",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
-    "score": 0.6351
-   },
-   {
-    "chunk_id": "doc_02_c002",
-    "doc_id": "doc_02",
-    "filename": "travel_expenses.md",
-    "text": "4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits\n5.1 Line managers may approve claims up to **EUR 1,500**.\n5.2 Heads of Department may approve claims up to **EUR 7,500**.\n5.3 Claims above EUR 7,500 require Finance Director approval.\n## 6. Submission deadline\n6.1 Claims must be submitted within **30 days** of the final day of travel.\n6.2 Claims submitted between 31 and 60 days require written justification.\n6.3 Claims submitted after **60 days** are not reimbursed.",
-    "score": 0.5812
-   },
-   {
-    "chunk_id": "doc_00_c000",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
-    "score": 0.5454
-   },
-   {
-    "chunk_id": "doc_02_c001",
-    "doc_id": "doc_02",
-    "filename": "travel_expenses.md",
-    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
-    "score": 0.5334
-   }
-  ],
-  "tool_calls": []
- },
- "ans_006": {
-  "answer": "Grievance records are retained for 6 years from the date of the final outcome.",
-  "citations": [
-   "doc_00_c002"
-  ],
-  "refused": false,
-  "confidence": 0.95,
-  "retrieved": [
-   {
-    "chunk_id": "doc_00_c002",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
-    "score": 0.8961
-   },
-   {
-    "chunk_id": "doc_00_c001",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
-    "score": 0.7955
-   },
-   {
-    "chunk_id": "doc_00_c000",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
-    "score": 0.7355
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.8658
    },
    {
     "chunk_id": "doc_01_c001",
     "doc_id": "doc_01",
     "filename": "leave_policy.md",
     "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
-    "score": 0.6061
+    "score": 0.7497
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
+    "score": 0.6899
    },
    {
     "chunk_id": "doc_01_c003",
     "doc_id": "doc_01",
     "filename": "leave_policy.md",
     "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
-    "score": 0.6003
+    "score": 0.6097
+   },
+   {
+    "chunk_id": "doc_00_c002",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
+    "score": 0.5858
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_002": {
+  "answer": "The secondary caregiver must take the 4 weeks of fully paid parental leave within 12 months of the birth or placement of the child.",
+  "citations": [
+   "doc_01_c002"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.8907
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.7893
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
+    "score": 0.7038
+   },
+   {
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
+    "score": 0.6019
+   },
+   {
+    "chunk_id": "doc_01_c003",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
+    "score": 0.6013
    }
   ],
   "tool_calls": []
  },
  "ans_003": {
-  "answer": "You can take up to 20 working days of unpaid leave per year.",
+  "answer": "You may be granted up to 20 working days of unpaid leave per year.",
   "citations": [
-   "doc_01_c002"
+   "doc_01_c001"
   ],
   "refused": false,
-  "confidence": 0.95,
+  "confidence": 0.99,
   "retrieved": [
    {
     "chunk_id": "doc_01_c001",
@@ -292,60 +200,59 @@
   ],
   "tool_calls": []
  },
- "ans_007": {
-  "answer": "Only those directly involved in the grievance procedure may see the details of a grievance.",
+ "ans_005": {
+  "answer": "No, the appeal decision is final and cannot be appealed again within the company procedure.",
   "citations": [
-   "doc_01_c002"
+   "doc_00_c002"
   ],
   "refused": false,
-  "confidence": 0.95,
+  "confidence": 0.98,
   "retrieved": [
-   {
-    "chunk_id": "doc_00_c001",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
-    "score": 0.7457
-   },
    {
     "chunk_id": "doc_00_c002",
     "doc_id": "doc_00",
     "filename": "grievance_procedure.md",
     "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
-    "score": 0.7285
+    "score": 0.6807
+   },
+   {
+    "chunk_id": "doc_00_c001",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
+    "score": 0.6351
+   },
+   {
+    "chunk_id": "doc_02_c002",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits\n5.1 Line managers may approve claims up to **EUR 1,500**.\n5.2 Heads of Department may approve claims up to **EUR 7,500**.\n5.3 Claims above EUR 7,500 require Finance Director approval.\n## 6. Submission deadline\n6.1 Claims must be submitted within **30 days** of the final day of travel.\n6.2 Claims submitted between 31 and 60 days require written justification.\n6.3 Claims submitted after **60 days** are not reimbursed.",
+    "score": 0.5812
    },
    {
     "chunk_id": "doc_00_c000",
     "doc_id": "doc_00",
     "filename": "grievance_procedure.md",
     "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
-    "score": 0.7095
+    "score": 0.5454
    },
    {
-    "chunk_id": "doc_01_c003",
-    "doc_id": "doc_01",
-    "filename": "leave_policy.md",
-    "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
-    "score": 0.5773
-   },
-   {
-    "chunk_id": "doc_01_c002",
-    "doc_id": "doc_01",
-    "filename": "leave_policy.md",
-    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
-    "score": 0.5503
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
+    "score": 0.5334
    }
   ],
   "tool_calls": []
  },
  "ans_004": {
-  "answer": "20 working days",
+  "answer": "It takes up to 20 working days for a manager who was not previously involved to hear your appeal.",
   "citations": [
-   "doc_00_c002",
-   "doc_00_c001"
+   "doc_00_c002"
   ],
   "refused": false,
-  "confidence": 0.9,
+  "confidence": 0.99,
   "retrieved": [
    {
     "chunk_id": "doc_00_c002",
@@ -385,13 +292,59 @@
   ],
   "tool_calls": []
  },
+ "ans_007": {
+  "answer": "Only the people directly involved in the grievance procedure can see its details \u2013 for example the employee raising the grievance, the line manager or next\u2011level manager handling it, HR staff, and any manager or representative who participates in the hearing or appeal. Records are kept confidential and disclosed only to those directly involved in the procedure.",
+  "citations": [
+   "doc_00_c001"
+  ],
+  "refused": false,
+  "confidence": 0.97,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c001",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
+    "score": 0.7457
+   },
+   {
+    "chunk_id": "doc_00_c002",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
+    "score": 0.7285
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
+    "score": 0.7095
+   },
+   {
+    "chunk_id": "doc_01_c003",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
+    "score": 0.5773
+   },
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.5503
+   }
+  ],
+  "tool_calls": []
+ },
  "ans_009": {
-  "answer": "Yes. If you fall ill during your booked annual leave and provide a medical certificate, the affected days are reclassified as sick leave and returned to your annual leave balance.",
+  "answer": "Yes. If you fall ill during booked annual leave and provide a medical certificate, the affected days are re\u2011classified as sick leave and returned to your annual leave balance.",
   "citations": [
    "doc_01_c003"
   ],
   "refused": false,
-  "confidence": 0.9,
+  "confidence": 0.99,
   "retrieved": [
    {
     "chunk_id": "doc_01_c003",
@@ -431,13 +384,151 @@
   ],
   "tool_calls": []
  },
+ "ans_006": {
+  "answer": "Grievance records are retained for 6 years from the date of the final outcome.",
+  "citations": [
+   "doc_00_c002"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c002",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
+    "score": 0.8961
+   },
+   {
+    "chunk_id": "doc_00_c001",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
+    "score": 0.7955
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
+    "score": 0.7355
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.6061
+   },
+   {
+    "chunk_id": "doc_01_c003",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
+    "score": 0.6003
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_011": {
+  "answer": "A line manager may approve travel claims up to EUR\u202f1,500.",
+  "citations": [
+   "doc_02_c002"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_02_c002",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits\n5.1 Line managers may approve claims up to **EUR 1,500**.\n5.2 Heads of Department may approve claims up to **EUR 7,500**.\n5.3 Claims above EUR 7,500 require Finance Director approval.\n## 6. Submission deadline\n6.1 Claims must be submitted within **30 days** of the final day of travel.\n6.2 Claims submitted between 31 and 60 days require written justification.\n6.3 Claims submitted after **60 days** are not reimbursed.",
+    "score": 0.8103
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "# Travel and Expense Reimbursement Policy\n**Policy reference:** FIN-11 \u00b7 **Effective:** 1 January 2026\n## 1. Per-diem allowances\n1.1 Domestic travel attracts a per-diem of **EUR 65** per full day.\n1.2 International travel attracts a per-diem of **EUR 95** per full day.\n1.3 Travel to designated high-cost ports (Singapore, Oslo, Tokyo, Zurich)\nattracts a per-diem of **EUR 130** per full day.\n1.4 A part day of **6 hours or more** is claimed at 50% of the applicable rate.\nA part day under 6 hours is not claimable.\n## 2. Receipts\n2.1 Receipts are required for any single item of **EUR 40 or more**.\n2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation",
+    "score": 0.7476
+   },
+   {
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
+    "score": 0.7265
+   },
+   {
+    "chunk_id": "doc_00_c001",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
+    "score": 0.6912
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
+    "score": 0.6749
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_010": {
+  "answer": "Yes, taxi fares can be reimbursed for journeys that start after 22:00 (10\u202fpm).",
+  "citations": [
+   "doc_02_c002"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_02_c002",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits\n5.1 Line managers may approve claims up to **EUR 1,500**.\n5.2 Heads of Department may approve claims up to **EUR 7,500**.\n5.3 Claims above EUR 7,500 require Finance Director approval.\n## 6. Submission deadline\n6.1 Claims must be submitted within **30 days** of the final day of travel.\n6.2 Claims submitted between 31 and 60 days require written justification.\n6.3 Claims submitted after **60 days** are not reimbursed.",
+    "score": 0.7761
+   },
+   {
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
+    "score": 0.7418
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "# Travel and Expense Reimbursement Policy\n**Policy reference:** FIN-11 \u00b7 **Effective:** 1 January 2026\n## 1. Per-diem allowances\n1.1 Domestic travel attracts a per-diem of **EUR 65** per full day.\n1.2 International travel attracts a per-diem of **EUR 95** per full day.\n1.3 Travel to designated high-cost ports (Singapore, Oslo, Tokyo, Zurich)\nattracts a per-diem of **EUR 130** per full day.\n1.4 A part day of **6 hours or more** is claimed at 50% of the applicable rate.\nA part day under 6 hours is not claimable.\n## 2. Receipts\n2.1 Receipts are required for any single item of **EUR 40 or more**.\n2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation",
+    "score": 0.6961
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.579
+   },
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.5647
+   }
+  ],
+  "tool_calls": []
+ },
  "ans_008": {
-  "answer": "No, unpaid leave does not count toward continuous service for the purposes of clause 1.2.",
+  "answer": "Unpaid leave does not count toward continuous service for clause 1.2.",
   "citations": [
    "doc_01_c003"
   ],
   "refused": false,
-  "confidence": 0.95,
+  "confidence": 0.99,
   "retrieved": [
    {
     "chunk_id": "doc_01_c003",
@@ -478,12 +569,12 @@
   "tool_calls": []
  },
  "ans_012": {
-  "answer": "A department head may approve travel claims up to EUR 7,500.",
+  "answer": "A department head may approve travel claims up to EUR\u202f7,500.",
   "citations": [
    "doc_02_c002"
   ],
   "refused": false,
-  "confidence": 0.95,
+  "confidence": 0.99,
   "retrieved": [
    {
     "chunk_id": "doc_02_c002",
@@ -523,59 +614,14 @@
   ],
   "tool_calls": []
  },
- "ans_011": {
-  "answer": "A line manager may approve travel claims up to EUR 1,500.",
-  "citations": [
-   "doc_02_c002"
-  ],
-  "refused": false,
-  "confidence": 0.9,
-  "retrieved": [
-   {
-    "chunk_id": "doc_02_c002",
-    "doc_id": "doc_02",
-    "filename": "travel_expenses.md",
-    "text": "4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits\n5.1 Line managers may approve claims up to **EUR 1,500**.\n5.2 Heads of Department may approve claims up to **EUR 7,500**.\n5.3 Claims above EUR 7,500 require Finance Director approval.\n## 6. Submission deadline\n6.1 Claims must be submitted within **30 days** of the final day of travel.\n6.2 Claims submitted between 31 and 60 days require written justification.\n6.3 Claims submitted after **60 days** are not reimbursed.",
-    "score": 0.8103
-   },
-   {
-    "chunk_id": "doc_02_c000",
-    "doc_id": "doc_02",
-    "filename": "travel_expenses.md",
-    "text": "# Travel and Expense Reimbursement Policy\n**Policy reference:** FIN-11 \u00b7 **Effective:** 1 January 2026\n## 1. Per-diem allowances\n1.1 Domestic travel attracts a per-diem of **EUR 65** per full day.\n1.2 International travel attracts a per-diem of **EUR 95** per full day.\n1.3 Travel to designated high-cost ports (Singapore, Oslo, Tokyo, Zurich)\nattracts a per-diem of **EUR 130** per full day.\n1.4 A part day of **6 hours or more** is claimed at 50% of the applicable rate.\nA part day under 6 hours is not claimable.\n## 2. Receipts\n2.1 Receipts are required for any single item of **EUR 40 or more**.\n2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation",
-    "score": 0.7476
-   },
-   {
-    "chunk_id": "doc_02_c001",
-    "doc_id": "doc_02",
-    "filename": "travel_expenses.md",
-    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
-    "score": 0.7265
-   },
-   {
-    "chunk_id": "doc_00_c001",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
-    "score": 0.6912
-   },
-   {
-    "chunk_id": "doc_00_c000",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
-    "score": 0.6749
-   }
-  ],
-  "tool_calls": []
- },
  "ans_014": {
-  "answer": "To file a formal grievance, you must submit it in writing to HR using the form HR-09a. HR will acknowledge receipt within 5 working days and a hearing will be convened within 20 working days of receipt.",
+  "answer": "To file a grievance under policy HR\u201109 you can start with an informal approach by raising the issue directly with your line manager within 15 working days of the incident (the manager must acknowledge within 3 days and discuss within 10 days)\u30101\u3011. If a formal grievance is needed, you must submit it in writing to HR using form HR\u201109a. HR will acknowledge receipt within 5 working days, and a grievance hearing will be arranged within 20 working days of receipt\u30102\u3011.",
   "citations": [
-   "doc_00_c002"
+   "doc_00_c000",
+   "doc_00_c001"
   ],
   "refused": false,
-  "confidence": 0.95,
+  "confidence": 0.97,
   "retrieved": [
    {
     "chunk_id": "doc_00_c000",
@@ -615,57 +661,13 @@
   ],
   "tool_calls": []
  },
- "edge_multi_03": {
-  "answer": "",
-  "citations": [],
-  "refused": true,
-  "confidence": 0.0,
-  "retrieved": [
-   {
-    "chunk_id": "doc_00_c002",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
-    "score": 0.8009
-   },
-   {
-    "chunk_id": "doc_00_c001",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
-    "score": 0.7704
-   },
-   {
-    "chunk_id": "doc_00_c000",
-    "doc_id": "doc_00",
-    "filename": "grievance_procedure.md",
-    "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
-    "score": 0.7015
-   },
-   {
-    "chunk_id": "doc_01_c001",
-    "doc_id": "doc_01",
-    "filename": "leave_policy.md",
-    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
-    "score": 0.6929
-   },
-   {
-    "chunk_id": "doc_01_c000",
-    "doc_id": "doc_01",
-    "filename": "leave_policy.md",
-    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
-    "score": 0.6614
-   }
-  ],
-  "tool_calls": []
- },
  "edge_multi_01": {
-  "answer": "EUR 7,500",
+  "answer": "The Head of Department must approve EUR\u202f7,500 for the travel expense claim.",
   "citations": [
    "doc_02_c002"
   ],
   "refused": false,
-  "confidence": 0.95,
+  "confidence": 0.99,
   "retrieved": [
    {
     "chunk_id": "doc_02_c002",
@@ -706,13 +708,13 @@
   "tool_calls": []
  },
  "edge_multi_02": {
-  "answer": "The line manager must respond to the leave request within 5 working days, and must acknowledge the grievance within 3 working days. Therefore, the leave can be approved after 5 working days, and the grievance acknowledged after 3 working days.",
+  "answer": "Both actions will be completed within five working days, as the line manager must acknowledge the grievance within 3 working days and must respond to the leave request within 5 working days, so the longer period governs.",
   "citations": [
-   "doc_01_c001",
-   "doc_00_c001"
+   "doc_00_c000",
+   "doc_00_c002"
   ],
   "refused": false,
-  "confidence": 0.9,
+  "confidence": 0.97,
   "retrieved": [
    {
     "chunk_id": "doc_00_c000",
@@ -748,6 +750,145 @@
     "filename": "leave_policy.md",
     "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
     "score": 0.6995
+   }
+  ],
+  "tool_calls": []
+ },
+ "edge_multi_00": {
+  "answer": "The employee must give 20 working days\u2019 notice for the 12\u2011day leave and must raise the grievance within 15 working days of the incident.",
+  "citations": [
+   "doc_01_c001",
+   "doc_00_c000"
+  ],
+  "refused": false,
+  "confidence": 0.97,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c002",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
+    "score": 0.7416
+   },
+   {
+    "chunk_id": "doc_00_c001",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
+    "score": 0.738
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
+    "score": 0.7316
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.6914
+   },
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.6572
+   }
+  ],
+  "tool_calls": []
+ },
+ "edge_amb_02": {
+  "answer": "The secondary caregiver must take the 4 weeks of fully paid parental leave within 12 months of the birth or placement of the child.",
+  "citations": [
+   "doc_01_c002"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.8766
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.767
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
+    "score": 0.6939
+   },
+   {
+    "chunk_id": "doc_01_c003",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
+    "score": 0.6066
+   },
+   {
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
+    "score": 0.5877
+   }
+  ],
+  "tool_calls": []
+ },
+ "edge_amb_03": {
+  "answer": "You may be granted up to 20 working days of unpaid leave per year.",
+  "citations": [
+   "doc_01_c001"
+  ],
+  "refused": false,
+  "confidence": 0.97,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.7833
+   },
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.7697
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
+    "score": 0.7579
+   },
+   {
+    "chunk_id": "doc_01_c003",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
+    "score": 0.7178
+   },
+   {
+    "chunk_id": "doc_00_c002",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
+    "score": 0.6367
    }
   ],
   "tool_calls": []
@@ -800,20 +941,155 @@
    {
     "tool": "calculator",
     "args": {
-     "expression": "16+4"
+     "expression": "16 + 4"
     },
     "result": "20"
    }
   ]
  },
+ "edge_multi_03": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 0.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c002",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
+    "score": 0.8009
+   },
+   {
+    "chunk_id": "doc_00_c001",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
+    "score": 0.7704
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
+    "score": 0.7015
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.6929
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
+    "score": 0.6614
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_013": {
+  "answer": "Travel expenses over EUR\u202f7,500 must be approved by the Finance Director.",
+  "citations": [
+   "doc_02_c002"
+  ],
+  "refused": false,
+  "confidence": 0.99,
+  "retrieved": [
+   {
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
+    "score": 0.7819
+   },
+   {
+    "chunk_id": "doc_02_c002",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits\n5.1 Line managers may approve claims up to **EUR 1,500**.\n5.2 Heads of Department may approve claims up to **EUR 7,500**.\n5.3 Claims above EUR 7,500 require Finance Director approval.\n## 6. Submission deadline\n6.1 Claims must be submitted within **30 days** of the final day of travel.\n6.2 Claims submitted between 31 and 60 days require written justification.\n6.3 Claims submitted after **60 days** are not reimbursed.",
+    "score": 0.7745
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "# Travel and Expense Reimbursement Policy\n**Policy reference:** FIN-11 \u00b7 **Effective:** 1 January 2026\n## 1. Per-diem allowances\n1.1 Domestic travel attracts a per-diem of **EUR 65** per full day.\n1.2 International travel attracts a per-diem of **EUR 95** per full day.\n1.3 Travel to designated high-cost ports (Singapore, Oslo, Tokyo, Zurich)\nattracts a per-diem of **EUR 130** per full day.\n1.4 A part day of **6 hours or more** is claimed at 50% of the applicable rate.\nA part day under 6 hours is not claimable.\n## 2. Receipts\n2.1 Receipts are required for any single item of **EUR 40 or more**.\n2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation",
+    "score": 0.7525
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.6189
+   },
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.5721
+   }
+  ],
+  "tool_calls": []
+ },
+ "oos_02": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 0.9,
+  "retrieved": [
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "# Travel and Expense Reimbursement Policy\n**Policy reference:** FIN-11 \u00b7 **Effective:** 1 January 2026\n## 1. Per-diem allowances\n1.1 Domestic travel attracts a per-diem of **EUR 65** per full day.\n1.2 International travel attracts a per-diem of **EUR 95** per full day.\n1.3 Travel to designated high-cost ports (Singapore, Oslo, Tokyo, Zurich)\nattracts a per-diem of **EUR 130** per full day.\n1.4 A part day of **6 hours or more** is claimed at 50% of the applicable rate.\nA part day under 6 hours is not claimable.\n## 2. Receipts\n2.1 Receipts are required for any single item of **EUR 40 or more**.\n2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation",
+    "score": 0.7103
+   },
+   {
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
+    "score": 0.7043
+   },
+   {
+    "chunk_id": "doc_02_c002",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits\n5.1 Line managers may approve claims up to **EUR 1,500**.\n5.2 Heads of Department may approve claims up to **EUR 7,500**.\n5.3 Claims above EUR 7,500 require Finance Director approval.\n## 6. Submission deadline\n6.1 Claims must be submitted within **30 days** of the final day of travel.\n6.2 Claims submitted between 31 and 60 days require written justification.\n6.3 Claims submitted after **60 days** are not reimbursed.",
+    "score": 0.6704
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.5412
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "# Annual and Parental Leave Policy \u2014 Shore Staff\n**Policy reference:** HR-04 \u00b7 **Effective:** 1 January 2026 \u00b7 **Review:** annually\n## 1. Annual leave entitlement\n1.1 Shore-based staff accrue **22 days** of paid annual leave per calendar year,\naccruing at 1.83 days per completed month of service.\n1.2 Staff with more than **five years** of continuous service accrue **26 days**\nper calendar year.\n1.3 Part-time staff accrue leave pro rata, rounded up to the nearest half day.\n1.4 Public holidays are additional and are not deducted from annual leave.\n## 2. Carry-over\n2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.",
+    "score": 0.5303
+   }
+  ],
+  "tool_calls": []
+ },
  "oos_01": {
-  "answer": "To file a complaint about a coworker\u2019s harassment, you should submit a formal grievance in writing to HR using the form HR\u201109a. HR will acknowledge receipt within 5 working days and will convene a grievance hearing within 20 working days of receipt. The hearing will be conducted by a manager not previously involved, and you may be accompanied by a colleague or a trade union representative. A written outcome will be issued within 10 working days of the hearing.",
+  "answer": "You should start by raising the matter directly with your line manager as soon as possible, ideally within 15 working days of the incident. The line manager must acknowledge your complaint within 3 working days and hold an informal discussion within 10 working days. If the grievance involves your line manager, you can raise it with the next manager in the reporting line. If the issue is not resolved informally, you can submit a formal grievance in writing to HR using form HR\u201109a. HR will acknowledge receipt within 5 working days, arrange a hearing within 20 working days, and provide a written outcome within 10 working days after the hearing.",
   "citations": [
    "doc_00_c000",
+   "doc_00_c001",
    "doc_00_c002"
   ],
   "refused": false,
-  "confidence": 0.95,
+  "confidence": 0.97,
   "retrieved": [
    {
     "chunk_id": "doc_00_c000",
@@ -853,11 +1129,109 @@
   ],
   "tool_calls": []
  },
+ "edge_calc_01": {
+  "answer": "2210 days",
+  "citations": [
+   "doc_00_c002"
+  ],
+  "refused": false,
+  "confidence": 0.97,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c002",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
+    "score": 0.7399
+   },
+   {
+    "chunk_id": "doc_00_c001",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
+    "score": 0.7133
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.6475
+   },
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.6094
+   },
+   {
+    "chunk_id": "doc_02_c002",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits\n5.1 Line managers may approve claims up to **EUR 1,500**.\n5.2 Heads of Department may approve claims up to **EUR 7,500**.\n5.3 Claims above EUR 7,500 require Finance Director approval.\n## 6. Submission deadline\n6.1 Claims must be submitted within **30 days** of the final day of travel.\n6.2 Claims submitted between 31 and 60 days require written justification.\n6.3 Claims submitted after **60 days** are not reimbursed.",
+    "score": 0.606
+   }
+  ],
+  "tool_calls": [
+   {
+    "tool": "calculator",
+    "args": {
+     "expression": "20+6*365"
+    },
+    "result": "2210"
+   }
+  ]
+ },
+ "oos_05": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.5641
+   },
+   {
+    "chunk_id": "doc_02_c002",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits\n5.1 Line managers may approve claims up to **EUR 1,500**.\n5.2 Heads of Department may approve claims up to **EUR 7,500**.\n5.3 Claims above EUR 7,500 require Finance Director approval.\n## 6. Submission deadline\n6.1 Claims must be submitted within **30 days** of the final day of travel.\n6.2 Claims submitted between 31 and 60 days require written justification.\n6.3 Claims submitted after **60 days** are not reimbursed.",
+    "score": 0.5334
+   },
+   {
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation\n3.1 Accommodation is reimbursed at cost up to **EUR 180** per night domestic and\n**EUR 260** per night international.\n3.2 Bookings above these caps require advance written approval from the budget\nholder.\n## 4. Transport\n4.1 Economy class is the standard for all flights under **6 hours**.\n4.2 Premium economy may be booked for flights of 6 hours or more with budget\nholder approval.\n4.3 Private car use is reimbursed at **EUR 0.38 per kilometre**.\n4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits",
+    "score": 0.5286
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "# Travel and Expense Reimbursement Policy\n**Policy reference:** FIN-11 \u00b7 **Effective:** 1 January 2026\n## 1. Per-diem allowances\n1.1 Domestic travel attracts a per-diem of **EUR 65** per full day.\n1.2 International travel attracts a per-diem of **EUR 95** per full day.\n1.3 Travel to designated high-cost ports (Singapore, Oslo, Tokyo, Zurich)\nattracts a per-diem of **EUR 130** per full day.\n1.4 A part day of **6 hours or more** is claimed at 50% of the applicable rate.\nA part day under 6 hours is not claimable.\n## 2. Receipts\n2.1 Receipts are required for any single item of **EUR 40 or more**.\n2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation",
+    "score": 0.5248
+   },
+   {
+    "chunk_id": "doc_00_c001",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
+    "score": 0.5197
+   }
+  ],
+  "tool_calls": []
+ },
  "oos_03": {
   "answer": "",
   "citations": [],
   "refused": true,
-  "confidence": 0.0,
+  "confidence": 1.0,
   "retrieved": [
    {
     "chunk_id": "doc_01_c002",
@@ -893,6 +1267,50 @@
     "filename": "leave_policy.md",
     "text": "discretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave\n6.1 Where a member of staff falls ill during booked annual leave and provides a\nmedical certificate, the affected days are reclassified as sick leave and\nreturned to the annual leave balance.",
     "score": 0.5989
+   }
+  ],
+  "tool_calls": []
+ },
+ "oos_06": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c001",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
+    "score": 0.6054
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
+    "score": 0.5862
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "2.1 A maximum of **5 days** of unused annual leave may be carried into the\nfollowing calendar year.\n2.2 Carried-over leave must be taken by **31 March** or it is forfeited.\n2.3 Carry-over above 5 days requires written approval from a Head of Department\nand is granted only where operational demands prevented leave being taken.\n## 3. Requesting leave\n3.1 Requests must be submitted at least **10 working days** before the intended\nstart date. Requests of 10 consecutive days or more require **20 working days**\nnotice.\n3.2 Line managers must respond within **5 working days** of receiving a request.\n3.3 Where two staff in the same team request overlapping dates, the earlier\nsubmitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental",
+    "score": 0.5572
+   },
+   {
+    "chunk_id": "doc_00_c002",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
+    "score": 0.5452
+   },
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "leave_policy.md",
+    "text": "submitted request takes precedence.\n## 4. Parental leave\n4.1 The primary caregiver is entitled to **16 weeks** of fully paid parental\nleave.\n4.2 The secondary caregiver is entitled to **4 weeks** of fully paid parental\nleave, which must be taken within **12 months** of the birth or placement.\n4.3 Parental leave may be taken in up to **three** separate blocks with the\nagreement of the line manager.\n4.4 Annual leave continues to accrue during parental leave.\n4.5 Staff must give **8 weeks** notice of their intended start date where\npracticable.\n## 5. Unpaid leave\n5.1 Unpaid leave of up to **20 working days** per year may be granted at the\ndiscretion of a Head of Department.\n5.2 Unpaid leave does not count toward continuous service for the purposes of\nclause 1.2.\n## 6. Sickness during leave",
+    "score": 0.5349
    }
   ],
   "tool_calls": []

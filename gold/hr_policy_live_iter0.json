@@ -1,101 +1,101 @@
 {
- "_README": "Author-adjudicated gold labels, not independent human labels: read against demos/hr_policy/docs by the same author as the pipeline. That is a real limitation on what the kappa below proves, and is why each label carries a rationale citing the clause it rests on, so a reviewer can check the labelling rather than trust it. Labels judge the delivered answer against the system's contract - grounded AND verifiably cited - not content alone.",
+ "_README": "Author-adjudicated gold labels, not independent human labels: read against demos/hr_policy/docs by the same author as the pipeline. That bounds what the kappa proves, which is why every label cites the clause it rests on so a reviewer can check the labelling rather than trust it. Labels judge the delivered answer against this system's contract - grounded AND verifiably cited - not content alone.",
  "labels": {
-  "ans_011": {
-   "question": "How much can a line manager approve for a travel claim?",
-   "answer": "A line manager may approve travel claims up to EUR\u202f1,500.",
+  "ans_008": {
+   "question": "Does unpaid leave count toward continuous service for clause 1.2?",
+   "answer": "Unpaid leave does not count toward continuous service for clause 1.2.",
    "judge": true,
    "judge_notes": "",
    "human": true,
-   "rationale": "FIN-11 5.1: line managers approve up to EUR 1,500. Exact."
-  },
-  "ans_012": {
-   "question": "How much can a department head approve for a travel claim?",
-   "answer": "EUR 7,500",
-   "judge": true,
-   "judge_notes": "",
-   "human": true,
-   "rationale": "FIN-11 5.2: Heads of Department up to EUR 7,500. Exact."
-  },
-  "ans_006": {
-   "question": "How long are grievance records kept after the final outcome?",
-   "answer": "Grievance records are retained for 6 years from the date of the final outcome.",
-   "judge": true,
-   "judge_notes": "",
-   "human": true,
-   "rationale": "HR-09 5.1: records retained 6 years from the final outcome. Exact."
-  },
-  "ans_010": {
-   "question": "Can I get taxi fares reimbursed if I travel after 10pm?",
-   "answer": "Yes, taxi fares are reimbursed for journeys that fall between 22:00 and 06:00, which includes travel after 10\u202fpm.",
-   "judge": true,
-   "judge_notes": "",
-   "human": true,
-   "rationale": "FIN-11 4.4: taxis reimbursed between 22:00 and 06:00; 10pm is 22:00."
-  },
-  "ans_013": {
-   "question": "Who needs to approve travel expenses over 7,500 euros?",
-   "answer": "Finance Director",
-   "judge": true,
-   "judge_notes": "",
-   "human": true,
-   "rationale": "FIN-11 5.3: above EUR 7,500 requires Finance Director approval."
-  },
-  "ans_002": {
-   "question": "When does the secondary caregiver need to take the 4 weeks of fully paid parental leave?",
-   "answer": "The secondary caregiver must take the 4 weeks of fully paid parental leave within 12 months of the birth or placement.",
-   "judge": true,
-   "judge_notes": "",
-   "human": true,
-   "rationale": "HR-04 4.2: secondary caregiver's 4 weeks within 12 months of birth or placement. Exact."
-  },
-  "ans_014": {
-   "question": "What does policy HR-09 say about how to file a grievance?",
-   "answer": "To file a grievance, you must submit a formal grievance in writing to HR using the form HR-09a.",
-   "judge": false,
-   "judge_notes": "fact recall 0.0",
-   "human": true,
-   "rationale": "DISAGREES WITH JUDGE, and the case is at fault. The only expected fact is the string 'Policy reference: HR-09' - a document header, not a fact about filing. The answer correctly gives the mechanism (in writing to HR on form HR-09a), cites validly and asserts nothing unsupported. It fails only for not echoing boilerplate, so the generator should not have written this case."
+   "rationale": "HR-04 5.2 verbatim. Cites validly."
   },
   "ans_009": {
    "question": "If I get sick while on my annual leave and give a doctor\u2019s note, will those days be counted as sick leave and added back to my annual leave balance?",
-   "answer": "Yes. If you fall ill while on annual leave and provide a medical certificate, the days you were sick are reclassified as sick leave and added back to your annual leave balance.",
-   "judge": false,
-   "judge_notes": "cited chunks it never retrieved",
-   "human": false,
-   "rationale": "Content is right (HR-04 6.1) but it cites doc_01_c006, a chunk it never retrieved. In a document-grounded assistant a reference nobody can follow is a real defect, so not acceptable as delivered."
+   "answer": "Yes. If you fall ill during booked annual leave and provide a medical certificate, the days are re\u2011classified as sick leave and returned to your annual leave balance.",
+   "judge": true,
+   "judge_notes": "",
+   "human": true,
+   "rationale": "HR-04 6.1: reclassified as sick leave and returned to the balance. Exact, and the citation now resolves."
   },
-  "edge_calc_01": {
-   "question": "What is the total number of days from the appeal hearing period plus the retention period in days?",
-   "answer": "2210",
-   "judge": false,
-   "judge_notes": "cited chunks it never retrieved",
-   "human": false,
-   "rationale": "Arithmetic is right (20 working days + 6*365 = 2210) but the citation is fabricated. A computed answer still has to point at the clauses it computed from."
-  },
-  "ans_003": {
-   "question": "How many unpaid leave days can I take each year?",
-   "answer": "You can take up to 20 working days of unpaid leave per year.",
-   "judge": false,
-   "judge_notes": "cited chunks it never retrieved",
-   "human": false,
-   "rationale": "Correct on HR-04 5.1 (20 working days) but cites doc_01_c005, never retrieved. Same fabricated-citation defect."
-  },
-  "edge_multi_00": {
-   "question": "If an employee wishes to take a 12\u2011day leave and also file a grievance about an incident that occurred on the same day, how many days of notice must they give before the leave and how many days to file the grievance?",
-   "answer": "For a 12\u2011day leave you must give 20 working days\u2019 notice before the start date. To file a grievance you simply submit the written grievance to HR; no notice period is required.",
-   "judge": false,
-   "judge_notes": "fact recall 0.0; cited chunks it never retrieved",
-   "human": false,
-   "rationale": "Half wrong on substance, not just citations: 20 working days' notice is right, but 'no notice period is required' for a grievance contradicts HR-09 2.1, which sets 15 working days from the incident."
+  "ans_005": {
+   "question": "Can I appeal the decision again after the outcome?",
+   "answer": "No, the appeal decision is final and cannot be appealed again within the company procedure.",
+   "judge": true,
+   "judge_notes": "",
+   "human": true,
+   "rationale": "HR-09 4.3: the appeal outcome is final within the company procedure."
   },
   "ans_007": {
    "question": "Who gets to see the details of a grievance?",
-   "answer": "Only those directly involved in the grievance procedure may see the details of a grievance.",
+   "answer": "The details of a grievance are kept confidential and are disclosed only to people directly involved in the procedure \u2013 for example the employee raising the grievance, HR staff handling it, the manager(s) conducting the hearing and any colleague or trade\u2011union representative who may accompany the employee at the hearing.",
+   "judge": true,
+   "judge_notes": "",
+   "human": true,
+   "rationale": "HR-09 5.2. The examples it adds (HR, hearing managers, union rep) are supported by 3.4; the judge found nothing unsupported."
+  },
+  "ans_004": {
+   "question": "How many working days does it take for a new manager to hear my appeal?",
+   "answer": "It takes up to 20 working days for a manager who was not previously involved to hear your appeal.",
+   "judge": true,
+   "judge_notes": "",
+   "human": true,
+   "rationale": "HR-09 4.2: a manager not previously involved, within 20 working days."
+  },
+  "oos_03": {
+   "question": "What is the procedure for applying for a second maternity leave?",
+   "answer": "",
+   "judge": true,
+   "judge_notes": "",
+   "human": true,
+   "rationale": "Correctly refused. HR-04 covers parental leave; there is no 'second maternity leave' procedure in the corpus to answer from."
+  },
+  "oos_01": {
+   "question": "How should I file a complaint about a coworker\u2019s harassment?",
+   "answer": "Harassment complaints are covered by the grievance procedure. While all grievances can start with an informal discussion, harassment matters are escalated directly to a formal grievance. To file it, you should submit a written grievance to HR using form HR\u201109a. HR will acknowledge receipt within five working days and arrange a hearing within twenty working days.",
    "judge": false,
-   "judge_notes": "cited chunks it never retrieved",
+   "judge_notes": "answered a question it should have refused",
+   "human": true,
+   "rationale": "DISAGREES WITH JUDGE, and the case is mislabelled. It is marked out_of_scope, but HR-09 1.2 says harassment complaints follow this procedure and escalate directly to Stage 2. The corpus covers the question, so answering was right and refusing would have been wrong. The out-of-scope classifier contradicted the documents."
+  },
+  "edge_multi_00": {
+   "question": "If an employee wishes to take a 12\u2011day leave and also file a grievance about an incident that occurred on the same day, how many days of notice must they give before the leave and how many days to file the grievance?",
+   "answer": "The employee must give 20\u202fworking days\u2019 notice for the 12\u2011day leave and must raise the grievance within 15\u202fworking days of the incident.",
+   "judge": false,
+   "judge_notes": "fact recall 0.5",
+   "human": true,
+   "rationale": "DISAGREES WITH JUDGE. Both figures are right -- 20 working days' notice (HR-04 3.1) and 15 working days to raise the grievance (HR-09 2.1). Recall scored 0.5 because the expected fact carries the rule's *threshold* ('requests of 10 consecutive days or more') and the answer applies the rule to a 12-day request without restating the threshold. Nothing was asked about it."
+  },
+  "edge_multi_03": {
+   "question": "If an employee takes the maximum 20 working days of unpaid leave allowed per year, how many working days remain in that year for them to appeal a grievance, given that the appeal must be heard within 20 working days?",
+   "answer": "",
+   "judge": false,
+   "judge_notes": "refused an answerable question",
+   "human": true,
+   "rationale": "DISAGREES WITH JUDGE. The question is incoherent: unpaid-leave days and an appeal hearing window are unrelated quantities, so 'how many working days remain to appeal' does not follow from its premises. Refusing is the correct behaviour; the generator should not have written it."
+  },
+  "ans_010": {
+   "question": "Can I get taxi fares reimbursed if I travel after 10pm?",
+   "answer": "Yes, taxi fares can be reimbursed for journeys that take place after 22:00 (10\u202fpm).",
+   "judge": false,
+   "judge_notes": "fact recall 0.0",
    "human": false,
-   "rationale": "Correct on HR-09 5.2 but cites doc_00_c005, never retrieved. Same fabricated-citation defect."
+   "rationale": "AGREES WITH JUDGE. 'Reimbursed for journeys after 22:00' drops the 06:00 end of the window in FIN-11 4.4, and the 'public transport unavailable' limb entirely. As stated it would licence an 07:00 taxi. A reimbursement rule quoted without its bound is a defect in a compliance assistant, not a harmless omission."
+  },
+  "edge_multi_01": {
+   "question": "If an employee takes 20 days of unpaid leave and then submits a travel expense claim of EUR 7,500, what is the total amount of money the Head of Department must approve?",
+   "answer": "The Head of Department would need to approve \u20ac7,500 for the travel expense claim.",
+   "judge": false,
+   "judge_notes": "fact recall 0.5",
+   "human": true,
+   "rationale": "DISAGREES WITH JUDGE. EUR 7,500 is exactly a Head of Department's limit (FIN-11 5.2), so the answer is correct. The case pairs it with the unpaid-leave clause, which carries no monetary approval -- the question conflates days with money."
+  },
+  "edge_multi_02": {
+   "question": "If an employee submits a leave request 12 working days before the intended start date and simultaneously files a grievance, how many days must elapse before both the leave is approved and the line manager acknowledges the grievance?",
+   "answer": "Both actions will be completed within 5 working days, as the line manager must respond to the leave request within 5 working days and must acknowledge the grievance within 3 working days, so the longer period is 5 days.",
+   "judge": false,
+   "judge_notes": "fact recall 0.0",
+   "human": true,
+   "rationale": "DISAGREES WITH JUDGE. The reasoning is sound and checkable: 5 working days to respond to a leave request (HR-04 3.2), 3 to acknowledge a grievance (HR-09 2.2), so both are done within 5. Recall scored 0 because it used 3.2 rather than the submission notice in 3.1 that the case expected."
   }
  }
 }

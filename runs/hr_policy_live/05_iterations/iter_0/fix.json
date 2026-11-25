@@ -6,7 +6,7 @@
   },
   "diagnoses": [
     {
-      "case_id": "ans_014",
+      "case_id": "ans_010",
       "category": "prompt_defect",
       "evidence": "correct context retrieved but fact recall 0.0",
       "classified_by": "deterministic"
@@ -47,7 +47,7 @@
     "rung": "patch_format_block",
     "rationale": "6 failures classified prompt_defect; applying patch_format_block",
     "targets_case_ids": [
-      "ans_014",
+      "ans_010",
       "edge_multi_00",
       "edge_multi_01",
       "edge_multi_02",
@@ -58,7 +58,7 @@
         "system_prompt": "<1242 chars>"
       },
       "after": {
-        "system_prompt": "<1751 chars, FORMAT revised>"
+        "system_prompt": "<1242 chars, FORMAT revised>"
       }
     }
   },
@@ -66,6 +66,6 @@
   "score_after": 0.0,
   "kept": true,
   "revert_reason": null,
-  "seconds": 66.6,
-  "tokens": 37458
+  "seconds": 131.7,
+  "tokens": 60215
 }

@@ -13,6 +13,6 @@
     "easy": 1.0,
     "hard": 0.5
   },
-  "mean_answer_length": 71,
-  "llm_escalation_rate": 0.069
+  "mean_answer_length": 112,
+  "llm_escalation_rate": 0.034
 }

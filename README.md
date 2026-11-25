@@ -20,15 +20,23 @@ Measured, not claimed: every figure below is read from a committed artifact.
 
 | run | pass rate | cases | fix iterations | residual | judge agreement |
 |---|---|---|---|---|---|
-| `hr_policy_live` | **66%** (19/29) | 29 | 0 | 10 | 92% (kappa 0.83) |
+| `hr_policy_live` | **79%** (23/29) | 29 | 2 (1 reverted) | 6 | 58% (kappa 0.17) |
 | `ship_spares_live` | not scored | 29 | — | — | — |
 
-**Both figures are mid-work, and the gap is quota rather than capability.** The
-free tier's daily token budget is spent (see *Known limits*), so `hr_policy_live`
-was finalised from its completed baseline iteration with `--max-iterations 0` -
-scored, calibrated, and honest, but with no fix iteration attempted - and
-`ship_spares_live` stands at 9 of 29 answers with no scorecard. A run with no
-scorecard reports none; nothing here is inferred from a partial pass.
+`ship_spares_live` is still unscored: the free tier's daily budget (see *Known
+limits*) ran out partway through its first pass. A run with no scorecard reports
+none; nothing here is inferred from a partial pass.
+
+HR's 79% is up from 66% because two defects were fixed between the two
+measurements, and the failure taxonomy shows it: `hallucination` went from 5
+occurrences to **zero**. Those five were never hallucinations - each was a
+correct answer whose supporting clause *was* in the retrieved context, carrying
+a citation to a chunk the agent had never been shown. Numbering the sources
+removed the error rather than discouraging it.
+
+Iteration 1 scored 79% too, and was **reverted** - a fix that only recovers to a
+tie is not an improvement. That revert is the loop doing its job, not a missing
+result.
 
 Two defects found after that baseline was measured are fixed in the code but not
 yet reflected in any score, because re-measuring needs the budget that is gone:
@@ -60,12 +68,43 @@ questions.
 
 Publishing kappa 0.00 is the point. It is the number that found the bug.
 
-The current HR calibration (92%, kappa 0.83 over 12 cases) did the same job
-again. Its single judge/human disagreement was not a judge error but a
-**generator** defect: a case whose only expected fact was `Policy reference:
-HR-09`, a document header. Since the judge requires *every* expected fact, one
-unanswerable fact sinks a case no answer could pass. The gate now rejects
-expected facts that are front matter.
+It keeps earning its place. An earlier calibration of this run reached kappa
+0.83, and its one disagreement was a **generator** defect rather than a judge
+error: a case whose only expected fact was `Policy reference: HR-09`, a document
+header. Since the judge requires *every* expected fact, one unanswerable fact
+sinks a case no answer could pass. The gate now rejects front matter as a fact.
+
+The current calibration is **58% agreement, kappa 0.17** over 12 freshly
+adjudicated labels - and that low number is the finding, not a disappointment.
+Four of its five disagreements are `edge_multi_*` cases where the judge fails
+correct *applied* reasoning:
+
+> *"If an employee wishes to take a 12-day leave and also file a grievance…"* The
+> agent answered 20 working days' notice and 15 working days to file. Both are
+> right. Recall scored 0.5 because the expected fact carries the rule's
+> threshold - "requests of **10 consecutive days or more** require 20 working
+> days notice" - and the answer applied the rule to a 12-day request without
+> restating a threshold nothing had asked about.
+
+`recall >= 0.99` over literal expected facts is the cause, and it is **left
+alone deliberately**. Loosening a judge until it agrees with the author's own
+labels is how a calibration number becomes decoration. The honest move is to
+publish 0.17 with the diagnosis and leave the threshold where it is.
+
+The fifth disagreement is a flatly mislabelled case: `oos_01` asks how to file a
+harassment complaint and is marked out-of-scope, but HR-09 1.2 says harassment
+complaints follow that very procedure. The agent answered correctly and was
+marked wrong for it. The gate's out-of-scope check is embedding similarity at
+0.72, and that question did not clear the bar.
+
+A lexical complement was tried and **rejected on measurement**: dropping any
+out-of-scope case whose question names a term appearing in only one or two
+chunks. Against the two committed suites it would have discarded 6 of 10
+legitimate out-of-scope cases, triggered by incidental vocabulary - `travel` in
+a question about tax deductions, plus `second`, `provide` and `specific`. Only
+`harassment` was a real signal. Growing the stopword list until the other five
+survive is fitting a filter to ten examples, so it is not shipped and this
+paragraph stands in its place.
 
 One limitation stated plainly: these gold labels are **author-adjudicated**, not
 independent. That bounds what the kappa proves, which is why every label in

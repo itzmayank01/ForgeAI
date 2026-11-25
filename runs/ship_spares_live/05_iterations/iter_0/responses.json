@@ -601,5 +601,97 @@
     "result": "error: TypeError: csv_lookup() got an unexpected keyword argument 'filename'"
    }
   ]
+ },
+ "ans_014": {
+  "answer": "No, consumables are non\u2011returnable once the packaging seal is broken.",
+  "citations": [
+   "doc_01_c002"
+  ],
+  "refused": false,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "supplier_kowloon.md",
+    "text": "5.1 Returns are accepted within **21 days** of delivery.\n5.2 Restocking fee is **20%**, reduced to **10%** where a replacement order of\nequal or greater value is placed simultaneously.\n5.3 Consumables are non-returnable once the packaging seal is broken.\n## 6. Delivery\n6.1 Lead times are quoted ex-works Hong Kong.\n6.2 Freight consolidation is available on a weekly sailing; consolidated\nshipments add **7 to 10 days** to the quoted lead time.",
+    "score": 0.7384
+   },
+   {
+    "chunk_id": "doc_02_c002",
+    "doc_id": "doc_02",
+    "filename": "supplier_nordhavn.md",
+    "text": "5.2 Returns attract a restocking fee of **15%** of the invoice value.\n5.3 Special-order and non-catalogue items are non-returnable.\n5.4 A return material authorisation number must be obtained before shipment.\n## 6. Delivery\n6.1 Quoted lead times run from receipt of a confirmed purchase order.\n6.2 Nordhavn Marine does not guarantee delivery dates for items showing zero\nstock at time of order.",
+    "score": 0.6196
+   },
+   {
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "supplier_nordhavn.md",
+    "text": "3.1 Payment is due **30 days** from invoice date.\n3.2 A settlement discount of **2%** applies to invoices paid within **10 days**.\n3.3 Overdue amounts accrue interest at **0.8% per month**.\n## 4. Warranty\n4.1 All mechanical parts carry a **24 month** warranty from date of delivery.\n4.2 Electrical components carry a **12 month** warranty.\n4.3 Seals, gaskets and filter elements are consumables and carry a **6 month**\nwarranty against manufacturing defect only.\n4.4 Warranty is void where parts have been installed outside manufacturer\ntorque specifications.\n## 5. Returns\n5.1 Unused stock items may be returned within **30 days** of delivery.\n5.2 Returns attract a restocking fee of **15%** of the invoice value.\n5.3 Special-order and non-catalogue items are non-returnable.",
+    "score": 0.6141
+   },
+   {
+    "chunk_id": "doc_00_c013",
+    "doc_id": "doc_00",
+    "filename": "parts_catalogue.csv",
+    "text": "part_number: SEA-1273; description: Lip seal 120mm (standard); category: seal; unit_price_eur: 3485.17; lead_time_days: 5; stock_qty: 60; supplier: Adriatic Supply\npart_number: SEA-1280; description: Lip seal 120mm (heavy duty); category: seal; unit_price_eur: 953.27; lead_time_days: 21; stock_qty: 18; supplier: Adriatic Supply",
+    "score": 0.5902
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "supplier_kowloon.md",
+    "text": "2.2 An additional **1.5%** applies to orders placed more than 45 days ahead of\nrequired delivery.\n## 3. Payment terms\n3.1 Payment is due **45 days** from bill of lading date.\n3.2 New accounts operate on prepayment for the first **three** orders.\n3.3 Overdue amounts accrue interest at **1.2% per month**.\n## 4. Warranty\n4.1 Diesel engine components carry an **18 month** warranty from date of\ndelivery or **3,000 running hours**, whichever occurs first.\n4.2 Electrical components carry a **12 month** warranty.\n4.3 Warranty claims require the original part to be returned for inspection\nwithin **45 days** of the claim being raised.\n## 5. Returns\n5.1 Returns are accepted within **21 days** of delivery.\n5.2 Restocking fee is **20%**, reduced to **10%** where a replacement order of",
+    "score": 0.5813
+   }
+  ],
+  "tool_calls": []
+ },
+ "ans_013": {
+  "answer": "10%",
+  "citations": [
+   "doc_01_c002"
+  ],
+  "refused": false,
+  "confidence": 0.95,
+  "retrieved": [
+   {
+    "chunk_id": "doc_01_c002",
+    "doc_id": "doc_01",
+    "filename": "supplier_kowloon.md",
+    "text": "5.1 Returns are accepted within **21 days** of delivery.\n5.2 Restocking fee is **20%**, reduced to **10%** where a replacement order of\nequal or greater value is placed simultaneously.\n5.3 Consumables are non-returnable once the packaging seal is broken.\n## 6. Delivery\n6.1 Lead times are quoted ex-works Hong Kong.\n6.2 Freight consolidation is available on a weekly sailing; consolidated\nshipments add **7 to 10 days** to the quoted lead time.",
+    "score": 0.7347
+   },
+   {
+    "chunk_id": "doc_02_c002",
+    "doc_id": "doc_02",
+    "filename": "supplier_nordhavn.md",
+    "text": "5.2 Returns attract a restocking fee of **15%** of the invoice value.\n5.3 Special-order and non-catalogue items are non-returnable.\n5.4 A return material authorisation number must be obtained before shipment.\n## 6. Delivery\n6.1 Quoted lead times run from receipt of a confirmed purchase order.\n6.2 Nordhavn Marine does not guarantee delivery dates for items showing zero\nstock at time of order.",
+    "score": 0.7336
+   },
+   {
+    "chunk_id": "doc_01_c001",
+    "doc_id": "doc_01",
+    "filename": "supplier_kowloon.md",
+    "text": "2.2 An additional **1.5%** applies to orders placed more than 45 days ahead of\nrequired delivery.\n## 3. Payment terms\n3.1 Payment is due **45 days** from bill of lading date.\n3.2 New accounts operate on prepayment for the first **three** orders.\n3.3 Overdue amounts accrue interest at **1.2% per month**.\n## 4. Warranty\n4.1 Diesel engine components carry an **18 month** warranty from date of\ndelivery or **3,000 running hours**, whichever occurs first.\n4.2 Electrical components carry a **12 month** warranty.\n4.3 Warranty claims require the original part to be returned for inspection\nwithin **45 days** of the claim being raised.\n## 5. Returns\n5.1 Returns are accepted within **21 days** of delivery.\n5.2 Restocking fee is **20%**, reduced to **10%** where a replacement order of",
+    "score": 0.7104
+   },
+   {
+    "chunk_id": "doc_02_c001",
+    "doc_id": "doc_02",
+    "filename": "supplier_nordhavn.md",
+    "text": "3.1 Payment is due **30 days** from invoice date.\n3.2 A settlement discount of **2%** applies to invoices paid within **10 days**.\n3.3 Overdue amounts accrue interest at **0.8% per month**.\n## 4. Warranty\n4.1 All mechanical parts carry a **24 month** warranty from date of delivery.\n4.2 Electrical components carry a **12 month** warranty.\n4.3 Seals, gaskets and filter elements are consumables and carry a **6 month**\nwarranty against manufacturing defect only.\n4.4 Warranty is void where parts have been installed outside manufacturer\ntorque specifications.\n## 5. Returns\n5.1 Unused stock items may be returned within **30 days** of delivery.\n5.2 Returns attract a restocking fee of **15%** of the invoice value.\n5.3 Special-order and non-catalogue items are non-returnable.",
+    "score": 0.6732
+   },
+   {
+    "chunk_id": "doc_01_c000",
+    "doc_id": "doc_01",
+    "filename": "supplier_kowloon.md",
+    "text": "# Supply Agreement \u2014 Kowloon Diesel Parts Ltd\n**Agreement reference:** SUP-KDP-2026 \u00b7 **Effective:** 15 January 2026 \u00b7\n**Term:** 12 months, auto-renewing\n## 1. Minimum order\n1.1 The minimum order quantity is **5 units** per line item.\n1.2 The minimum order value is **EUR 1,200** excluding freight.\n1.3 Mixed-category orders count toward the value minimum but not the unit\nminimum.\n## 2. Volume discount tiers\n2.1 Discounts apply per order, not cumulatively:\n| Order value | Discount |\n|---|---|\n| EUR 1,200 \u2013 14,999 | **2%** |\n| EUR 15,000 \u2013 59,999 | **6%** |\n| EUR 60,000 and above | **9%** |\n2.2 An additional **1.5%** applies to orders placed more than 45 days ahead of\nrequired delivery.\n## 3. Payment terms\n3.1 Payment is due **45 days** from bill of lading date.",
+    "score": 0.633
+   }
+  ],
+  "tool_calls": []
  }
 }

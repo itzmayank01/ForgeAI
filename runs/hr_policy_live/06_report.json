@@ -217,7 +217,40 @@
       "why": "answered a question it should have refused"
     }
   ],
-  "calibration": null,
+  "calibration": {
+    "n_cases": 12,
+    "agreements": 7,
+    "agreement_rate": 0.583,
+    "cohens_kappa": 0.167,
+    "disagreements": [
+      {
+        "case_id": "oos_01",
+        "judge": false,
+        "human": true
+      },
+      {
+        "case_id": "edge_multi_00",
+        "judge": false,
+        "human": true
+      },
+      {
+        "case_id": "edge_multi_03",
+        "judge": false,
+        "human": true
+      },
+      {
+        "case_id": "edge_multi_01",
+        "judge": false,
+        "human": true
+      },
+      {
+        "case_id": "edge_multi_02",
+        "judge": false,
+        "human": true
+      }
+    ],
+    "stale_labels_dropped": 0
+  },
   "stop_reason": "incomplete eval pass (resume to finish)",
   "budget": {
     "max_tokens": 500000,
