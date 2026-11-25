@@ -66,10 +66,13 @@ def generate_suite(
     client: LLMClient, chunks: list[Chunk], req: RequirementsDoc,
     index: ChunkIndex, *, target: int = MIN_CASES, log=print,
 ) -> EvalSuite:
-    # Over-generate: the gate exists to drop weak cases, so generating exactly
-    # `target` guarantees finishing under it. A live run generated 22 and kept
-    # 18 against a required 20.
-    OVERSHOOT = 1.9
+    # Over-generate, because the gate exists to drop weak cases and generating
+    # exactly `target` guarantees finishing under it. 1.9x was set before the
+    # top-up pass existed and produced 34- and 31-case suites against a floor of
+    # 20 - every extra case costs a model call per iteration, which on an
+    # unattended demo is time the reviewer spends watching. The top-up now
+    # covers any shortfall, so this only needs to cover the usual gate loss.
+    OVERSHOOT = 1.4
     want = int(target * OVERSHOOT)
     rng = random.Random(7)
     pool = rng.sample(chunks, min(len(chunks), max(10, want)))
