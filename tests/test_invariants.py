@@ -487,3 +487,58 @@ def test_zero_iterations_scores_the_baseline_and_stops() -> None:
     """range(max_iterations + 1) must still run iteration 0 - 'no fixes' is not
     'no evaluation'."""
     assert list(range(0 + 1)) == [0]
+
+
+# --- citations name a source that was actually offered ---------------------
+# hr_policy iteration 0: five of ten failures were correct, grounded answers
+# carrying a fabricated chunk id. Asked to cite `doc_01_c003`, the model
+# reproduced the shape of an id rather than the id. Numbering the sources makes
+# the citation a single digit to copy and resolves it in code.
+
+def _chunks():
+    from forgeai.models.common import RetrievedChunk
+    return [
+        RetrievedChunk(chunk_id="doc_01_c000", doc_id="d1", filename="leave.md",
+                       ordinal=0, text="22 days of annual leave.", score=0.9),
+        RetrievedChunk(chunk_id="doc_01_c003", doc_id="d1", filename="leave.md",
+                       ordinal=3, text="20 working days of unpaid leave.", score=0.8),
+    ]
+
+
+def test_context_numbers_sources_instead_of_naming_ids() -> None:
+    from forgeai.runtime.agent import format_context
+    ctx = format_context(_chunks())
+    assert "[1]" in ctx and "[2]" in ctx
+    assert "doc_01_c000" not in ctx, (
+        "showing the id invites the model to invent one of the same shape"
+    )
+
+
+def test_source_number_resolves_to_the_chunk_it_was_given() -> None:
+    from forgeai.runtime.agent import resolve_citations
+    chunks = _chunks()
+    assert resolve_citations(["2"], chunks) == ["doc_01_c003"]
+    assert resolve_citations(["[1]"], chunks) == ["doc_01_c000"]
+    assert resolve_citations(["1", "2"], chunks) == ["doc_01_c000", "doc_01_c003"]
+
+
+def test_out_of_range_and_invented_citations_are_dropped() -> None:
+    # Dropped, not repaired: the judge's set arithmetic should still be able to
+    # record a fabricated citation rather than have one laundered into a
+    # valid-looking reference.
+    from forgeai.runtime.agent import resolve_citations
+    chunks = _chunks()
+    assert resolve_citations(["9"], chunks) == []
+    assert resolve_citations(["doc_01_c005"], chunks) == []
+    assert resolve_citations([], chunks) == []
+
+
+def test_a_correctly_copied_chunk_id_is_still_honoured() -> None:
+    # A model that ignores the numbering but copies a real id is not wrong.
+    from forgeai.runtime.agent import resolve_citations
+    assert resolve_citations(["doc_01_c003"], _chunks()) == ["doc_01_c003"]
+
+
+def test_duplicate_citations_collapse() -> None:
+    from forgeai.runtime.agent import resolve_citations
+    assert resolve_citations(["1", "[1]", "doc_01_c000"], _chunks()) == ["doc_01_c000"]

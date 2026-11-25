@@ -60,7 +60,7 @@ def _load_verdicts(path: Path, signature: dict) -> list[CaseVerdict] | None:
         return None
 
 
-RUNTIME_VERSION = 2
+RUNTIME_VERSION = 3
 """Bumped when the runtime changes what an answer can contain.
 
 v2 added tool execution. Answers cached by v1 carry no tool calls, and reusing

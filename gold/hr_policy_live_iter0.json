@@ -1,85 +1,89 @@
 {
   "_README": "Set `human` to true if the agent's answer is genuinely acceptable, false otherwise. Then: forgeai calibrate --run <run> --gold <this file>",
   "labels": {
-    "ans_008": {
-      "question": "What happens to my annual leave if I get sick while on holiday and give a medical certificate?",
-      "answer": "If you fall ill while on booked annual leave and provide a medical certificate, the days you were on leave are reclassified as sick leave and the days are returned to your annual leave balance.",
+    "ans_011": {
+      "question": "How much can a line manager approve for a travel claim?",
+      "answer": "A line manager may approve travel claims up to EUR\u202f1,500.",
       "judge": true,
       "judge_notes": "",
-      "human": true,
-      "rationale": "clause 6.1: reclassified as sick leave, days returned"
+      "human": true
     },
-    "ans_009": {
-      "question": "When am I allowed to claim a taxi fare for travel?",
-      "answer": "Taxi fares are reimbursed when public transport is unavailable or when the journey takes place between 22:00 and 06:00.",
+    "ans_012": {
+      "question": "How much can a department head approve for a travel claim?",
+      "answer": "EUR 7,500",
       "judge": true,
       "judge_notes": "",
-      "human": true,
-      "rationale": "clause 4.4: unavailable public transport or 22:00-06:00"
+      "human": true
     },
-    "oos_03": {
-      "question": "Is it permissible for me to work remotely from another country for a month, and what visa requirements apply?",
-      "answer": "",
+    "ans_006": {
+      "question": "How long are grievance records kept after the final outcome?",
+      "answer": "Grievance records are retained for 6 years from the date of the final outcome.",
       "judge": true,
       "judge_notes": "",
-      "human": true,
-      "rationale": "remote work and visas are absent from the corpus; refusing is right"
+      "human": true
     },
-    "ans_005": {
-      "question": "Can the company change the decision after an appeal?",
-      "answer": "No, the decision reached after an appeal is final within the company procedure.",
+    "ans_010": {
+      "question": "Can I get taxi fares reimbursed if I travel after 10pm?",
+      "answer": "Yes, taxi fares are reimbursed for journeys that fall between 22:00 and 06:00, which includes travel after 10\u202fpm.",
       "judge": true,
       "judge_notes": "",
-      "human": true,
-      "rationale": "clause 4.3: appeal outcome final within the procedure"
+      "human": true
     },
-    "ans_007": {
-      "question": "Does unpaid leave count toward my continuous service?",
-      "answer": "No, unpaid leave does not count toward continuous service.",
+    "ans_013": {
+      "question": "Who needs to approve travel expenses over 7,500 euros?",
+      "answer": "Finance Director",
       "judge": true,
       "judge_notes": "",
-      "human": true,
-      "rationale": "clause 5.2: does not count toward continuous service"
+      "human": true
     },
-    "ans_004": {
-      "question": "How long will it take for my appeal to be heard and who will handle it?",
-      "answer": "Your appeal will be heard within 20 working days by a manager who was not previously involved in the case.",
+    "ans_002": {
+      "question": "When does the secondary caregiver need to take the 4 weeks of fully paid parental leave?",
+      "answer": "The secondary caregiver must take the 4 weeks of fully paid parental leave within 12 months of the birth or placement.",
       "judge": true,
       "judge_notes": "",
-      "human": true,
-      "rationale": "clause 4.2: 20 working days, manager not previously involved"
+      "human": true
     },
-    "edge_multi_01": {
-      "question": "If a staff member falls ill during booked annual leave and provides a medical certificate, how must they notify their line manager to ensure the days are reclassified as sick leave, and within what timeframe must this be done?",
-      "answer": "",
-      "judge": false,
-      "judge_notes": "refused an answerable question",
-      "human": true,
-      "rationale": "no such timeframe exists for sickness; refusing is correct"
-    },
-    "edge_multi_02": {
-      "question": "If an employee appeals a grievance decision, within how many working days must the appeal be heard, and how many separate blocks can parental leave be taken with manager agreement?",
-      "answer": "An appeal must be heard within 20 working days, and parental leave may be taken in up to three separate blocks with the agreement of the line manager.",
-      "judge": false,
-      "judge_notes": "cited chunks it never retrieved",
-      "human": false,
-      "rationale": "content correct but the citation was fabricated"
-    },
-    "edge_multi_00": {
-      "question": "If an employee submits an appeal 8 working days after receiving a written outcome, by what date must the line manager respond to the appeal?",
-      "answer": "The line manager must respond within 20 working days of the appeal being lodged.",
+    "ans_014": {
+      "question": "What does policy HR-09 say about how to file a grievance?",
+      "answer": "To file a grievance, you must submit a formal grievance in writing to HR using the form HR-09a.",
       "judge": false,
       "judge_notes": "fact recall 0.0",
-      "human": false,
-      "rationale": "subtly wrong - 4.2 is a hearing window, not a manager response"
+      "human": false
     },
-    "edge_multi_03": {
-      "question": "What is the maximum travel expense amount a line manager can approve if they are required to respond to the request within 5 working days?",
-      "answer": "A line manager can approve travel expense claims up to EUR\u202f1,500.",
+    "ans_009": {
+      "question": "If I get sick while on my annual leave and give a doctor\u2019s note, will those days be counted as sick leave and added back to my annual leave balance?",
+      "answer": "Yes. If you fall ill while on annual leave and provide a medical certificate, the days you were sick are reclassified as sick leave and added back to your annual leave balance.",
       "judge": false,
-      "judge_notes": "fact recall 0.5",
-      "human": true,
-      "rationale": "EUR 1,500 is the correct and responsive answer"
+      "judge_notes": "cited chunks it never retrieved",
+      "human": false
+    },
+    "edge_calc_01": {
+      "question": "What is the total number of days from the appeal hearing period plus the retention period in days?",
+      "answer": "2210",
+      "judge": false,
+      "judge_notes": "cited chunks it never retrieved",
+      "human": false
+    },
+    "ans_003": {
+      "question": "How many unpaid leave days can I take each year?",
+      "answer": "You can take up to 20 working days of unpaid leave per year.",
+      "judge": false,
+      "judge_notes": "cited chunks it never retrieved",
+      "human": false
+    },
+    "edge_multi_00": {
+      "question": "If an employee wishes to take a 12\u2011day leave and also file a grievance about an incident that occurred on the same day, how many days of notice must they give before the leave and how many days to file the grievance?",
+      "answer": "For a 12\u2011day leave you must give 20 working days\u2019 notice before the start date. To file a grievance you simply submit the written grievance to HR; no notice period is required.",
+      "judge": false,
+      "judge_notes": "fact recall 0.0; cited chunks it never retrieved",
+      "human": false
+    },
+    "ans_007": {
+      "question": "Who gets to see the details of a grievance?",
+      "answer": "Only those directly involved in the grievance procedure may see the details of a grievance.",
+      "judge": false,
+      "judge_notes": "cited chunks it never retrieved",
+      "human": false
     }
   }
 }

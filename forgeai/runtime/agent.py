@@ -56,13 +56,56 @@ clauses intact while cutting a top_k=8 context roughly in half."""
 
 
 def format_context(chunks: list[RetrievedChunk], limit: int = CHUNK_CHARS) -> str:
+    """Number the sources, rather than labelling them with their chunk ids.
+
+    Asked to cite `doc_01_c003`, gpt-oss reproduces the *shape* of an id and
+    not the id: on hr_policy it answered correctly from retrieved text and then
+    cited doc_01_c005 and doc_01_c006, chunks it had never been shown. Five of
+    that run's ten failures were this and nothing else - the supporting clause
+    was in context every time.
+
+    Copying `2` is a far easier task than copying `doc_01_c005`, and the index
+    is resolved back to a chunk id in code, so a citation is either a source
+    that was offered or an out-of-range number we can name. That removes the
+    opportunity for the error instead of instructing harder against it.
+    """
     if not chunks:
         return "(no context retrieved)"
     parts = []
-    for c in chunks:
+    for n, c in enumerate(chunks, 1):
         text = c.text if len(c.text) <= limit else c.text[:limit].rsplit(" ", 1)[0] + " …"
-        parts.append(f"[{c.chunk_id}] {text}")
+        parts.append(f"[{n}] {text}")
     return "\n\n".join(parts)
+
+
+_CITE_NUM = re.compile(r"^\s*\[?(\d+)\]?\s*$")
+
+
+def resolve_citations(raw: list[str], chunks: list[RetrievedChunk]) -> list[str]:
+    """Map the model's citations onto the chunks it was actually given.
+
+    Accepts a source number (`2`, `[2]`) and resolves it positionally. A raw
+    chunk id is still honoured when it names a retrieved chunk, so a model that
+    ignores the numbering and copies an id correctly is not punished for it.
+    Anything else - an out-of-range number, an invented id - is dropped, which
+    leaves the judge's set arithmetic to record a fabricated citation rather
+    than quietly laundering one into a valid-looking reference.
+    """
+    valid = {c.chunk_id for c in chunks}
+    out: list[str] = []
+    for item in raw or []:
+        m = _CITE_NUM.match(str(item))
+        if m:
+            idx = int(m.group(1))
+            if 1 <= idx <= len(chunks):
+                cid = chunks[idx - 1].chunk_id
+                if cid not in out:
+                    out.append(cid)
+            continue
+        text = str(item).strip().strip("[]")
+        if text in valid and text not in out:
+            out.append(text)
+    return out
 
 
 class Agent:
@@ -179,9 +222,11 @@ class Agent:
                 f"CONTEXT:\n{context}{tool_text}\n\n"
                 f"AVAILABLE TOOLS: {tools}\n\n"
                 f"QUESTION: {question}\n\n"
-                f"Answer only from the context above. Cite the chunk_id in "
-                f"square brackets for every claim. If the context does not "
-                f"support an answer, set refused to true."
+                f"Answer only from the context above. Every claim must cite "
+                f"the source number it came from: put those numbers in "
+                f"`citations`, for example [\"2\"] or [\"1\", \"3\"]. Use only "
+                f"numbers shown above. If the context does not support an "
+                f"answer, set refused to true."
             ),
             model_cls=AgentAnswer,
             model=self.definition.model or settings.agent_model,
@@ -193,6 +238,7 @@ class Agent:
                 refused=True, confidence=0.0, retrieved=chunks,
             )
         return AgentResponse(
-            answer=out.answer, citations=out.citations, refused=out.refused,
+            answer=out.answer, citations=resolve_citations(out.citations, chunks),
+            refused=out.refused,
             confidence=out.confidence, retrieved=chunks, tool_calls=tool_calls,
         )
