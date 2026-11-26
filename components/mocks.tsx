@@ -537,7 +537,7 @@ export function RouterMock() {
         {!busy && data?.scores.map((s) => (
           <div key={s.agentId} className="flex items-center gap-2 text-[11px]">
             <span className="w-[170px] shrink-0 truncate text-muted flex items-center gap-1.5">
-              <AgentIcon name={s.agentId} className="w-3.5 h-3.5 shrink-0 text-muted" />
+              <AgentIcon name={s.agentId} className="w-4 h-4 shrink-0 rounded-xs" />
               <span className="truncate">{NAME[s.agentId] ?? s.agentId}</span>
             </span>
             <span className="h-2 flex-1 overflow-hidden rounded-full bg-ink/[0.07]">

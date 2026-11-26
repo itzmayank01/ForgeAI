@@ -328,8 +328,8 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
               <div className="flex min-w-0 flex-wrap items-center gap-2">
                 {chip && (
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold text-accent-text dark:text-accent-text border border-accent-line">
-                    <span className="grid h-4 w-4 place-items-center rounded-md bg-accent/15 text-accent-text">
-                      <AgentIcon name={chip.id} className="w-3 h-3" />
+                    <span className="grid h-4 w-4 place-items-center">
+                      <AgentIcon name={chip.id} className="w-4 h-4" />
                     </span>
                     <span>{chip.name}</span>
                     <button
@@ -426,8 +426,8 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                 <div>
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex min-w-0 items-start gap-3.5">
-                      <div className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl border shadow-sm transition-transform duration-300 group-hover:scale-105 ${agent.avatarBg}`}>
-                        <AgentIcon name={agent.id} className="w-6 h-6 text-current" />
+                      <div className="shrink-0 transition-transform duration-300 group-hover:scale-105 drop-shadow-md">
+                        <AgentIcon name={agent.id} className="w-12 h-12" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <h3 className="truncate text-[14.5px] font-bold tracking-tight text-ink group-hover:text-accent-text transition-colors">
@@ -669,12 +669,13 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
           <div className="relative flex h-full w-full max-w-lg flex-col border-l bg-surface shadow-2xl">
             <div className="flex items-center justify-between border-b bg-canvas/80 px-5 py-3.5 backdrop-blur">
               <div className="flex min-w-0 items-center gap-3">
-                <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border shadow-xs ${
-                  chatAgent?.avatarBg ?? "bg-accent-soft text-accent-text border-accent-line"}`}>
+                <div className="shrink-0 drop-shadow-md">
                   {chatAgent ? (
-                    <AgentIcon name={chatAgent.id} className="w-5 h-5 text-current" />
+                    <AgentIcon name={chatAgent.id} className="w-10 h-10" />
                   ) : (
-                    <IconUsers className="w-5 h-5 text-current" />
+                    <div className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white shadow-sm">
+                      <IconUsers className="w-5 h-5 text-white" />
+                    </div>
                   )}
                 </div>
                 <div className="min-w-0">
@@ -734,7 +735,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                           return (
                             <div key={s.agentId} className="flex items-center gap-2 text-[10.5px]">
                               <span className="w-36 shrink-0 truncate text-muted flex items-center gap-1.5">
-                                <AgentIcon name={s.agentId} className="w-3.5 h-3.5 shrink-0 text-muted" />
+                                <AgentIcon name={s.agentId} className="w-4 h-4 shrink-0 rounded-xs" />
                                 <span className="truncate">{a?.name ?? s.agentId}</span>
                               </span>
                               <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-ink/[0.07]">

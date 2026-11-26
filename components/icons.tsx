@@ -1,5 +1,26 @@
 import type { SVGProps } from "react";
 import {
+  LogoHRPolicy,
+  LogoShipSpares,
+  LogoContentCreator,
+  LogoImagePrompt,
+  LogoVisualStory,
+  LogoVideoCoach,
+  LogoFrontendDev,
+  LogoTrainingDesigner,
+  LogoPitchDeck,
+  LogoStudyAbroad,
+  LogoGrowthAds,
+  LogoBugAnalysis,
+  LogoDataEngineer,
+  LogoAIEngineer,
+  LogoPromptEngineer,
+  LogoModelQA,
+  LogoTreasuryAnalyst,
+  LogoGrowthMentor,
+  LogoLegalCompliance,
+} from "./agent-logos";
+import {
   FileText,
   Anchor,
   PenTool,
@@ -403,97 +424,81 @@ export function IconRouter(props: IconProps) {
 }
 
 /**
- * Maps an agent ID or icon key to a premium Lucide icon.
- * Each icon is semantically matched to the agent's domain.
+ * Maps an agent ID or icon key to its rich, colorful illustrated vector logo.
  */
 export function AgentIcon({
   name,
-  className = "w-5 h-5",
+  className = "w-8 h-8",
 }: {
   name: string;
   className?: string;
 }) {
-  const props = { className, strokeWidth: 1.75 };
   switch (name) {
     case "hr_policy_live":
     case "policy":
-      return <FileText {...props} />;
+      return <LogoHRPolicy className={className} />;
     case "ship_spares_live":
     case "marine":
-      return <Anchor {...props} />;
+      return <LogoShipSpares className={className} />;
     case "brief-content-creator":
     case "content":
-      return <PenTool {...props} />;
+      return <LogoContentCreator className={className} />;
     case "brief-image-prompt-engineer":
     case "camera":
-      return <Camera {...props} />;
+      return <LogoImagePrompt className={className} />;
     case "brief-visual-storyteller":
     case "story":
-      return <BookOpen {...props} />;
+      return <LogoVisualStory className={className} />;
     case "brief-short-video-editing-coach":
+    case "brief-video-editing-coach":
     case "video":
-      return <Film {...props} />;
+      return <LogoVideoCoach className={className} />;
     case "brief-frontend-developer":
     case "code":
-      return <Code2 {...props} />;
+      return <LogoFrontendDev className={className} />;
     case "brief-corporate-training-designer":
+    case "brief-training-designer":
     case "education":
-      return <GraduationCap {...props} />;
+      return <LogoTrainingDesigner className={className} />;
     case "brief-pitch-deck-builder":
     case "chart":
-      return <BarChart2 {...props} />;
+      return <LogoPitchDeck className={className} />;
     case "brief-study-abroad-advisor":
     case "globe":
-      return <Globe {...props} />;
+      return <LogoStudyAbroad className={className} />;
     case "brief-growth-ads-operator":
     case "growth":
-      return <TrendingUp {...props} />;
+      return <LogoGrowthAds className={className} />;
     case "brief-bug-analysis-agent":
+    case "brief-bug-analysis":
     case "bug":
-      return <Bug {...props} />;
+      return <LogoBugAnalysis className={className} />;
     case "brief-data-engineer":
     case "database":
-      return <Database {...props} />;
+      return <LogoDataEngineer className={className} />;
     case "brief-ai-engineer":
     case "cpu":
-      return <Cpu {...props} />;
+      return <LogoAIEngineer className={className} />;
     case "brief-prompt-engineer":
     case "bolt":
-      return <Zap {...props} />;
+      return <LogoPromptEngineer className={className} />;
     case "brief-model-qa-specialist":
+    case "brief-model-qa":
     case "audit":
-      return <ClipboardCheck {...props} />;
+      return <LogoModelQA className={className} />;
     case "brief-tax-strategy-advisor":
+    case "brief-treasury-analyst":
     case "tax":
-      return <Landmark {...props} />;
+      return <LogoTreasuryAnalyst className={className} />;
     case "brief-personal-growth-mentor":
+    case "brief-growth-mentor":
     case "sparkles":
-      return <Sparkles {...props} />;
+      return <LogoGrowthMentor className={className} />;
     case "brief-legal-compliance-advisor":
+    case "brief-compliance-advisor":
     case "legal":
-      return <Scale {...props} />;
-    case "brief-cybersecurity-analyst":
-    case "security":
-      return <ShieldCheck {...props} />;
-    case "brief-health-wellness-coach":
-    case "health":
-      return <HeartPulse {...props} />;
-    case "brief-startup-launch-strategist":
-    case "rocket":
-      return <Rocket {...props} />;
-    case "brief-seo-research-analyst":
-    case "seo":
-      return <Search {...props} />;
-    case "brief-ux-research-analyst":
-    case "ux":
-      return <Layers {...props} />;
-    case "brief-executive-coach":
-    case "coach":
-      return <UserCheck {...props} />;
-    case "brief-financial-planner":
-    case "finance":
-      return <PiggyBank {...props} />;
+      return <LogoLegalCompliance className={className} />;
     default:
-      return <Cpu {...props} />;
+      return <LogoAIEngineer className={className} />;
   }
 }

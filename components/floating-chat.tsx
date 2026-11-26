@@ -187,8 +187,8 @@ export function FloatingChatCard({
             {liveMessages.map((msg) =>
               msg.role === "agent" ? (
                 <div key={msg.id} className="flex items-start gap-2.5">
-                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-ink text-white shadow-xs">
-                    <IconSparkles className="h-4 w-4 text-accent-text" />
+                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-tr from-violet-600 via-indigo-600 to-pink-500 text-white shadow-md shadow-indigo-500/25 ring-2 ring-white/20">
+                    <IconSparkles className="h-4 w-4 text-white drop-shadow-sm" />
                   </div>
                   <div className="max-w-[82%] rounded-2xl rounded-tl-xs border border-accent-line bg-accent-soft p-3 text-xs leading-relaxed text-ink ">
                     <p>{msg.text}</p>
@@ -224,8 +224,8 @@ export function FloatingChatCard({
             {[...FORGE_EXCHANGES, ...FORGE_EXCHANGES].map((msg, idx) =>
               msg.role === "agent" ? (
                 <div key={`${msg.id}-${idx}`} className="flex items-start gap-2.5">
-                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-ink text-white shadow-xs">
-                    <IconSparkles className="h-4 w-4 text-accent-text" />
+                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-tr from-violet-600 via-indigo-600 to-pink-500 text-white shadow-md shadow-indigo-500/25 ring-2 ring-white/20">
+                    <IconSparkles className="h-4 w-4 text-white drop-shadow-sm" />
                   </div>
                   <div className="max-w-[82%] rounded-2xl rounded-tl-xs border border-accent-line bg-accent-soft p-3 text-xs leading-relaxed text-ink ">
                     <p>{msg.text}</p>
