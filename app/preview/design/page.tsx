@@ -1,11 +1,7 @@
 import { loadAllRuns } from "@/lib/runs";
 import { Integrations } from "@/components/integrations";
 import { Landscape } from "@/components/landscape";
-import {
-  MarkBox, MarkChat, MarkDoc, MarkFlask, MarkIntake, MarkLoop, MarkPen,
-  MarkRoute, MarkScale, MarkShield, MarkSpark, MarkUsers, MegaNav,
-  type MegaSection,
-} from "@/components/mega-nav";
+import { MegaNav, type MegaSection } from "@/components/mega-nav";
 
 /**
  * A preview route for the new section components, so they can be reviewed
@@ -110,27 +106,27 @@ export default async function DesignPreview() {
         {
           heading: "The factory",
           items: [
-            { label: "Intake interviewer", href: "/#pipeline", blurb: "Asks ≤5 questions, or answers them itself", icon: MarkIntake },
-            { label: "Groundability guard", href: "/#pipeline", blurb: "Refuses briefs the documents cannot support", icon: MarkShield },
-            { label: "Agent generator", href: "/#pipeline", blurb: "Tools must earn their place", icon: MarkSpark },
-            { label: "Eval generator", href: "/#pipeline", blurb: "Never imports the agent definition", icon: MarkFlask },
+            { label: "Intake interviewer", href: "/#pipeline", blurb: "Asks ≤5 questions, or answers them itself", icon: "intake" },
+            { label: "Groundability guard", href: "/#pipeline", blurb: "Refuses briefs the documents cannot support", icon: "shield" },
+            { label: "Agent generator", href: "/#pipeline", blurb: "Tools must earn their place", icon: "spark" },
+            { label: "Eval generator", href: "/#pipeline", blurb: "Never imports the agent definition", icon: "flask" },
           ],
         },
         {
           heading: "Scoring",
           items: [
-            { label: "Evidentiary judge", href: "/#pipeline", blurb: "Deterministic first, another model family", icon: MarkScale },
-            { label: "Critic-optimizer", href: "/#pipeline", blurb: "Reverts a fix that did not help", icon: MarkLoop },
-            { label: "Honest report", href: "/#pipeline", blurb: "Leads with what still fails", icon: MarkDoc },
+            { label: "Evidentiary judge", href: "/#pipeline", blurb: "Deterministic first, another model family", icon: "scale" },
+            { label: "Critic-optimizer", href: "/#pipeline", blurb: "Reverts a fix that did not help", icon: "loop" },
+            { label: "Honest report", href: "/#pipeline", blurb: "Leads with what still fails", icon: "doc" },
           ],
         },
         {
           heading: "Use it",
           items: [
-            { label: "Agent gallery", href: "/#agents-hub", blurb: "Two built, seventeen briefs", icon: MarkBox, chip: "19" },
-            { label: "Agent teams", href: "/#agents-hub", blurb: "Routes by measurement, shows the table", icon: MarkRoute },
-            { label: "Brief studio", href: "/#agents-hub", blurb: "Pre-flight a brief before you build it", icon: MarkPen },
-            { label: "Live chat runner", href: "/chat/hr_policy_live", blurb: "Talk to a built agent, with citations", icon: MarkChat },
+            { label: "Agent gallery", href: "/#agents-hub", blurb: "Two built, seventeen briefs", icon: "box", chip: "19" },
+            { label: "Agent teams", href: "/#agents-hub", blurb: "Routes by measurement, shows the table", icon: "route" },
+            { label: "Brief studio", href: "/#agents-hub", blurb: "Pre-flight a brief before you build it", icon: "pen" },
+            { label: "Live chat runner", href: "/chat/hr_policy_live", blurb: "Talk to a built agent, with citations", icon: "chat" },
           ],
         },
       ],
@@ -145,16 +141,16 @@ export default async function DesignPreview() {
             label: r.id,
             href: `/runs/${r.id}`,
             blurb: `${r.cases} cases, every residual failure named`,
-            icon: MarkDoc,
+            icon: "doc",
             chip: `${Math.round(r.rate * 100)}%`,
           })),
         },
         {
           heading: "How it was checked",
           items: [
-            { label: "Judge calibration", href: "/#pipeline", blurb: "Cohen's κ against hand labels, reported either way", icon: MarkScale },
-            { label: "Run artifacts", href: "/#agents-hub", blurb: "Every file the factory wrote, with real sizes", icon: MarkBox },
-            { label: "Team routing", href: "/#agents-hub", blurb: "Pooled IDF, so corpora are comparable", icon: MarkUsers },
+            { label: "Judge calibration", href: "/#pipeline", blurb: "Cohen's κ against hand labels, reported either way", icon: "scale" },
+            { label: "Run artifacts", href: "/#agents-hub", blurb: "Every file the factory wrote, with real sizes", icon: "box" },
+            { label: "Team routing", href: "/#agents-hub", blurb: "Pooled IDF, so corpora are comparable", icon: "users" },
           ],
         },
       ],

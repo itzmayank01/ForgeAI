@@ -31,7 +31,17 @@ export interface MegaItem {
   label: string;
   href: string;
   blurb: string;
-  icon: React.ReactNode;
+  /**
+   * A key, never a React element.
+   *
+   * Passing a prebuilt element from a server component across the RSC
+   * boundary -- and reusing the same instance for several items, as any
+   * shared icon is -- makes the client deserializer try to redefine
+   * `_debugInfo` on an object it has already seen, and the page dies with
+   * "Cannot redefine property". Keys serialize as strings and the client
+   * builds a fresh element per use site.
+   */
+  icon: MarkKey;
   /** Shown as a small trailing chip, e.g. "2 built". Omit when there is none. */
   chip?: string;
 }
@@ -49,24 +59,32 @@ export interface MegaSection {
 
 /* ── tiny inline marks, so this file has no cross-file dependency while the
       shared icon set is being edited ─────────────────────────────────────── */
-const S = (d: string) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7}
-       strokeLinecap="round" strokeLinejoin="round" className="h-[18px] w-[18px]">
-    <path d={d} />
-  </svg>
-);
-export const MarkIntake = S("M8 6h8M8 11h8M8 16h5M5 3h14v18H5z");
-export const MarkShield = S("M12 3l7 3v6c0 4-3 7.5-7 9-4-1.5-7-5-7-9V6z");
-export const MarkSpark = S("M12 4v16M4 12h16M7 7l10 10M17 7L7 17");
-export const MarkFlask = S("M9 3v6l-5 9a2 2 0 002 3h12a2 2 0 002-3l-5-9V3M9 3h6");
-export const MarkScale = S("M12 4v16M6 8h12M4 14h4l-2-6zM16 14h4l-2-6z");
-export const MarkLoop = S("M4 12a8 8 0 0114-5m2 5a8 8 0 01-14 5M18 4v3h-3M6 20v-3h3");
-export const MarkDoc = S("M7 3h7l5 5v13H7zM14 3v5h5M10 13h7M10 17h5");
-export const MarkRoute = S("M6 4v6a4 4 0 004 4h8M18 10l3 4-3 4M6 4a2 2 0 100 4 2 2 0 000-4z");
-export const MarkChat = S("M4 5h16v10H9l-5 4z");
-export const MarkUsers = S("M3 20a5 5 0 0110 0M8 11a3 3 0 100-6 3 3 0 000 6M15 20a5 5 0 016-4.9M17 11a3 3 0 100-6");
-export const MarkBox = S("M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9");
-export const MarkPen = S("M4 20l4-1 10-10-3-3L5 16zM14 6l3 3");
+const PATHS = {
+  intake: "M8 6h8M8 11h8M8 16h5M5 3h14v18H5z",
+  shield: "M12 3l7 3v6c0 4-3 7.5-7 9-4-1.5-7-5-7-9V6z",
+  spark: "M12 4v16M4 12h16M7 7l10 10M17 7L7 17",
+  flask: "M9 3v6l-5 9a2 2 0 002 3h12a2 2 0 002-3l-5-9V3M9 3h6",
+  scale: "M12 4v16M6 8h12M4 14h4l-2-6zM16 14h4l-2-6z",
+  loop: "M4 12a8 8 0 0114-5m2 5a8 8 0 01-14 5M18 4v3h-3M6 20v-3h3",
+  doc: "M7 3h7l5 5v13H7zM14 3v5h5M10 13h7M10 17h5",
+  route: "M6 4v6a4 4 0 004 4h8M18 10l3 4-3 4M6 4a2 2 0 100 4 2 2 0 000-4z",
+  chat: "M4 5h16v10H9l-5 4z",
+  users: "M3 20a5 5 0 0110 0M8 11a3 3 0 100-6 3 3 0 000 6M15 20a5 5 0 016-4.9M17 11a3 3 0 100-6",
+  box: "M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9",
+  pen: "M4 20l4-1 10-10-3-3L5 16zM14 6l3 3",
+} as const;
+
+export type MarkKey = keyof typeof PATHS;
+
+/** A fresh element per call. Never hoist these into shared constants. */
+function Mark({ name }: { name: MarkKey }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7}
+         strokeLinecap="round" strokeLinejoin="round" className="h-[18px] w-[18px]">
+      <path d={PATHS[name]} />
+    </svg>
+  );
+}
 
 export function MegaNav({ sections }: { sections: MegaSection[] }) {
   const [open, setOpen] = useState<string | null>(null);
@@ -164,7 +182,7 @@ export function MegaNav({ sections }: { sections: MegaSection[] }) {
                             className="group flex items-start gap-2.5 rounded-xl p-2 transition hover:bg-ink/[0.04]"
                           >
                             <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-accent-soft text-accent">
-                              {item.icon}
+                              <Mark name={item.icon} />
                             </span>
                             <span className="min-w-0">
                               <span className="flex items-center gap-1.5">
