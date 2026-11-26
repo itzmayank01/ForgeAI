@@ -9,6 +9,7 @@
 
 import { loadChunks, loadRun } from "./runs";
 import { bm25 } from "./bm25";
+import { TTLCache, answerKey } from "./cache";
 
 /**
  * Several keys, rotated per request and retried on a rate limit.
@@ -56,6 +57,29 @@ export const API_KEYS: string[] = (() => {
 const BASE_URL = process.env.FORGEAI_BASE_URL ?? "https://api.groq.com/openai/v1";
 const MODEL = process.env.FORGEAI_GEN_MODEL ?? "openai/gpt-oss-20b";
 
+/**
+ * How long one upstream call may take, and how long the whole request may
+ * spend sweeping the key pool.
+ *
+ * `fetch` has no default timeout. A provider that accepts the connection and
+ * then stalls held this function until Vercel killed it at maxDuration, and
+ * the caller saw a blank 504 rather than a refusal. Per-attempt is well under
+ * the function budget so a stall costs one attempt, not the request.
+ */
+const ATTEMPT_TIMEOUT_MS = 11_000;
+const TOTAL_BUDGET_MS = 24_000;
+
+/**
+ * Answers already paid for.
+ *
+ * Keyed on run, model and the normalised question — everything that decides
+ * the result — so a hit returns what a miss would have produced. Ten minutes
+ * is long enough to cover a reviewer working through the suggested questions
+ * and short enough that a redeploy with a new definition is not shadowed by
+ * stale text.
+ */
+const ANSWERS = new TTLCache<AnswerResult>(200, 10 * 60 * 1000);
+
 export interface Retrieved {
   chunk_id: string;
   filename: string;
@@ -65,6 +89,8 @@ export interface Retrieved {
 
 export interface AnswerResult {
   ok: true;
+  /** True when this was served from the in-instance answer cache. */
+  cached?: boolean;
   answer: string;
   refused: boolean;
   confidence: number;
@@ -98,17 +124,27 @@ export async function answerWithRun(
     return { ok: false, status: 404, error: `no agent definition for ${runId}` };
   }
 
+  // The model is part of the key: a re-route must not be served an answer the
+  // previous model produced, which is the same rule the CLI's answer cache
+  // follows when FORGEAI_AGENT_MODEL changes mid-run.
+  const model = (definition as { model?: string }).model ?? MODEL;
+  const key = answerKey(runId, question, model);
+  const cached = ANSWERS.get(key);
+  if (cached) return { ...cached, cached: true };
+
   const chunks = await loadChunks(runId);
   const hits = bm25(question, chunks, definition.retrieval.top_k);
 
   // Nothing cleared the floor: refuse deterministically rather than inviting
   // the model to fill the gap from memory. Same rule as the CLI runtime.
   if (hits.length === 0) {
-    return {
+    const refusal: AnswerResult = {
       ok: true,
       answer: definition.output_contract.refusal_message,
       refused: true, confidence: 0, citations: [], fabricated: [], retrieved: [],
     };
+    ANSWERS.set(key, refusal);
+    return refusal;
   }
 
   // Number the sources rather than labelling them with chunk ids. Asked to
@@ -163,15 +199,33 @@ export async function answerWithRun(
     // one request in fourteen outright, which reads as an unreliable site
     // rather than as one stale entry in the pool.
     let rejected = 0;
+    const deadline = Date.now() + TOTAL_BUDGET_MS;
+    let timedOut = false;
+
     outer: for (let sweep = 0; sweep < 2; sweep++) {
-      if (sweep > 0) await new Promise((res) => setTimeout(res, 1800));
+      if (sweep > 0) {
+        if (Date.now() > deadline) break;
+        await new Promise((res) => setTimeout(res, 1800));
+      }
       for (let attempt = 0; attempt < API_KEYS.length; attempt++) {
+        if (Date.now() > deadline) { timedOut = true; break outer; }
         const key = API_KEYS[(offset + attempt) % API_KEYS.length];
-        r = await fetch(`${BASE_URL}/chat/completions`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
-          body: JSON.stringify(body),
-        });
+        const ac = new AbortController();
+        const timer = setTimeout(() => ac.abort(), ATTEMPT_TIMEOUT_MS);
+        try {
+          r = await fetch(`${BASE_URL}/chat/completions`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+            body: JSON.stringify(body),
+            signal: ac.signal,
+          });
+        } catch (err) {
+          // An aborted or failed attempt is this key's problem, like a 429.
+          if ((err as Error)?.name === "AbortError") timedOut = true;
+          continue;
+        } finally {
+          clearTimeout(timer);
+        }
         if (r.status === 401 || r.status === 403) {
           if (sweep === 0) rejected++;
           continue;
@@ -180,7 +234,12 @@ export async function answerWithRun(
       }
     }
 
-    if (!r) return { ok: false, status: 503, error: "no key available" };
+    if (!r) {
+      return timedOut
+        ? { ok: false, status: 504,
+            error: "The model provider did not respond in time. Retrieval and routing ran locally and are unaffected." }
+        : { ok: false, status: 503, error: "no key available" };
+    }
     if (r.status === 429) {
       return {
         ok: false, status: 429,
@@ -229,7 +288,7 @@ export async function answerWithRun(
     const text = (parsed.answer ?? "").trim();
     const refused = Boolean(parsed.refused);
 
-    return {
+    const result: AnswerResult = {
       ok: true,
       answer: text || definition.output_contract.refusal_message,
       refused: refused || text === "",
@@ -237,6 +296,8 @@ export async function answerWithRun(
       ...resolveCitations(parsed.citations ?? [], hits.map((h) => h.item.chunk_id)),
       retrieved,
     };
+    ANSWERS.set(key, result);
+    return result;
   } catch (err) {
     return {
       ok: false, status: 500,

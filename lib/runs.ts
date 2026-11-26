@@ -2,6 +2,7 @@ import { readFile, readdir, stat } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import type { Run, CaseVerdict, WebChunk } from "./types";
+import { TTLCache } from "./cache";
 
 const ROOT = join(process.cwd(), "data", "runs");
 
@@ -124,8 +125,19 @@ export async function listArtifacts(id: string): Promise<ArtifactFile[]> {
   return out.sort((a, b) => a.name.localeCompare(b.name));
 }
 
+/**
+ * Committed chunks never change between deploys, so re-reading and re-parsing
+ * the file on every request was pure cost — and the team router does it once
+ * per member, so a two-member room paid it twice per question.
+ */
+const CHUNKS = new TTLCache<WebChunk[]>(16, 60 * 60 * 1000);
+
 export async function loadChunks(id: string): Promise<WebChunk[]> {
+  const hit = CHUNKS.get(id);
+  if (hit) return hit;
   const data = await json<{ chunks: WebChunk[] }>(
     join(ROOT, id, "web", "chunks.json"));
-  return data?.chunks ?? [];
+  const chunks = data?.chunks ?? [];
+  if (chunks.length > 0) CHUNKS.set(id, chunks);
+  return chunks;
 }
