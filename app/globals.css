@@ -197,3 +197,31 @@ body {
   .stage-row, .stage-bar, .blink, .animate-spin-slow, .animate-float-upward { animation: none; opacity: 1; }
   .stage-bar { transform: scaleX(1); }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Moving stacks: a seamless marquee for the integrations rows.
+
+   The track holds the list twice and translates by exactly -50%, so the
+   second copy is under the cursor at the instant the first finishes and the
+   loop has no seam. Hovering pauses it, because a row you cannot read is
+   decoration, and anyone who wants to read a tile will instinctively stop
+   there. Rows run in opposite directions so the strip reads as motion rather
+   than as drift.
+
+   It respects prefers-reduced-motion: the animation is only attached inside
+   the no-preference query, so a reader who asked for stillness gets a static
+   row rather than one that merely moves more slowly.
+   ───────────────────────────────────────────────────────────────────────── */
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+           mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.marquee-track { display: flex; width: max-content; gap: 0.625rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track { animation: marquee-left 38s linear infinite; }
+  .marquee-track[data-dir="right"] { animation-name: marquee-right; }
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track { animation-play-state: paused; }
+}
+
+@keyframes marquee-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
+@keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }

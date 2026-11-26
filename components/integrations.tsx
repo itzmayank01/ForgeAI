@@ -53,26 +53,38 @@ const RUNS_ON: Tile[] = [
   { name: "GitHub", note: "every run artifact is committed here", mark: <Mark d="M9 20c-4 1-4-2-6-3m12 3v-3.5a3 3 0 00-.9-2.4c2.9-.3 6-1.4 6-6.4a4.7 4.7 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.3S17.5 1 14.5 3a12 12 0 00-6 0C5.5 1 4.4 1.2 4.4 1.2a4.3 4.3 0 00-.1 3.3A4.7 4.7 0 003 7.7c0 5 3.1 6.1 6 6.4a3 3 0 00-.9 2.3V20" /> },
 ];
 
-function Row({ tiles }: { tiles: Tile[] }) {
+function Tile({ t, dup = false }: { t: Tile; dup?: boolean }) {
   return (
-    <ul className="mt-5 flex flex-wrap justify-center gap-2.5">
-      {tiles.map((t) => (
-        <li
-          key={t.name}
-          className="group flex min-w-[9.5rem] flex-1 basis-[9.5rem] items-center gap-3 rounded-2xl border bg-surface px-3.5 py-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:max-w-[15rem]"
-        >
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent">
-            {t.mark}
-          </span>
-          <span className="min-w-0">
-            <span className="block truncate text-[12.5px] font-bold tracking-tight text-ink">
-              {t.name}
-            </span>
-            <span className="mt-0.5 block text-[11px] leading-snug text-muted">{t.note}</span>
-          </span>
-        </li>
-      ))}
-    </ul>
+    <li aria-hidden={dup || undefined} className="flex w-[15rem] shrink-0 items-center gap-3 rounded-2xl border bg-surface px-3.5 py-3 shadow-sm transition hover:-translate-y-0.5 hover:border-accent-line hover:shadow-md">
+      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent-text">
+        {t.mark}
+      </span>
+      <span className="min-w-0">
+        <span className="block truncate text-[12.5px] font-bold tracking-tight text-ink">
+          {t.name}
+        </span>
+        <span className="mt-0.5 block text-[11px] leading-snug text-muted">{t.note}</span>
+      </span>
+    </li>
+  );
+}
+
+/**
+ * A moving stack. The list is rendered twice and the track translates by
+ * exactly -50%, which is what makes the loop seamless; the duplicate is
+ * aria-hidden so a screen reader is not read the same four tiles twice.
+ */
+function Row({ tiles, dir = "left" }: { tiles: Tile[]; dir?: "left" | "right" }) {
+  return (
+    <div className="marquee mt-5">
+      <ul className="marquee-track" data-dir={dir}>
+        {tiles.map((t) => <Tile key={t.name} t={t} />)}
+        {/* duplicate for the seamless loop; hidden from assistive tech */}
+        {tiles.map((t) => (
+          <Tile key={`${t.name}-dup`} t={t} dup />
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -96,7 +108,7 @@ export function Integrations() {
           <div className="text-center text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">
             Where it runs
           </div>
-          <Row tiles={RUNS_ON} />
+          <Row tiles={RUNS_ON} dir="right" />
         </div>
 
         <p className="mx-auto mt-9 max-w-2xl text-center text-[12.5px] leading-relaxed text-muted">
