@@ -13,54 +13,43 @@
  * which is a stronger thing to be able to say than a long logo row.
  */
 
-const Mark = ({ d, box = "0 0 24 24" }: { d: string; box?: string }) => (
-  <svg viewBox={box} fill="none" stroke="currentColor" strokeWidth={1.6}
-       strokeLinecap="round" strokeLinejoin="round" className="h-[22px] w-[22px]">
-    <path d={d} />
-  </svg>
-);
+import { BRAND_MARKS, BrandLogo, Wordmark } from "./brand-marks";
 
 interface Tile {
   name: string;
   note: string;
-  mark: React.ReactNode;
+  /** A real brand mark where one exists, a wordmark where none does. */
+  markKey?: keyof typeof BRAND_MARKS;
 }
 
 /** Hosts the code actually issues requests to. */
 const CALLS: Tile[] = [
-  {
-    name: "Groq",
-    note: "inference for the agent, eval generator and judge",
-    mark: <Mark d="M12 3a9 9 0 109 9h-9z" />,
-  },
-  {
-    name: "OpenAI-compatible",
-    note: "any endpoint — provider is one environment variable",
-    mark: <Mark d="M4 12h6m4 0h6M7 7l5 5-5 5M17 7l-5 5 5 5" />,
-  },
-  {
-    name: "Open-Meteo",
-    note: "the weather tool in the audited registry",
-    mark: <Mark d="M7 18h9a4 4 0 000-8 6 6 0 00-11.3 2A3.5 3.5 0 005 18z" />,
-  },
+  { name: "Groq", note: "inference for the agent, eval generator and judge" },
+  { name: "OpenAI-compatible", note: "any endpoint — provider is one env var" },
+  { name: "Open-Meteo", note: "the weather tool in the audited registry" },
 ];
 
 /** Where it runs. Not integrations, and not dressed up as any. */
 const RUNS_ON: Tile[] = [
-  { name: "Vercel", note: "hosts the site and its API routes", mark: <Mark d="M12 4l9 16H3z" /> },
-  { name: "Next.js", note: "App Router, React server components", mark: <Mark d="M12 3a9 9 0 109 9 9 9 0 00-9-9zM9 15V9l6 8" /> },
-  { name: "Python", note: "the factory CLI and its test suite", mark: <Mark d="M9 7h6M8 4h8v7H8a4 4 0 00-4 4v2M16 20H8v-7h8a4 4 0 004-4V7" /> },
-  { name: "GitHub", note: "every run artifact is committed here", mark: <Mark d="M9 20c-4 1-4-2-6-3m12 3v-3.5a3 3 0 00-.9-2.4c2.9-.3 6-1.4 6-6.4a4.7 4.7 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.3S17.5 1 14.5 3a12 12 0 00-6 0C5.5 1 4.4 1.2 4.4 1.2a4.3 4.3 0 00-.1 3.3A4.7 4.7 0 003 7.7c0 5 3.1 6.1 6 6.4a3 3 0 00-.9 2.3V20" /> },
+  { name: "Vercel", note: "hosts the site and its API routes", markKey: "vercel" },
+  { name: "Next.js", note: "App Router, React server components", markKey: "nextjs" },
+  { name: "Python", note: "the factory CLI and its test suite", markKey: "python" },
+  { name: "GitHub", note: "every run artifact is committed here", markKey: "github" },
 ];
 
 function Tile({ t, dup = false }: { t: Tile; dup?: boolean }) {
+  const mark = t.markKey ? BRAND_MARKS[t.markKey] : null;
   return (
-    <li aria-hidden={dup || undefined} className="flex w-[15rem] shrink-0 items-center gap-3 rounded-2xl border bg-surface px-3.5 py-3 shadow-sm transition hover:-translate-y-0.5 hover:border-accent-line hover:shadow-md">
-      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent-text">
-        {t.mark}
+    <li
+      aria-hidden={dup || undefined}
+      style={mark ? ({ "--brand": mark.brand } as React.CSSProperties) : undefined}
+      className="group flex w-[16rem] shrink-0 items-center gap-3.5 rounded-2xl border bg-surface px-4 py-3.5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-accent-line hover:shadow-lg"
+    >
+      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[rgb(var(--tint))] text-ink transition-colors duration-200 group-hover:text-[color:var(--brand,rgb(var(--accent)))]">
+        {mark ? <BrandLogo mark={mark} /> : <Wordmark label={t.name} />}
       </span>
       <span className="min-w-0">
-        <span className="block truncate text-[12.5px] font-bold tracking-tight text-ink">
+        <span className="block truncate text-[13px] font-bold tracking-tight text-ink">
           {t.name}
         </span>
         <span className="mt-0.5 block text-[11px] leading-snug text-muted">{t.note}</span>

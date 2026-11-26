@@ -17,7 +17,12 @@ export function Feature({
       {wash !== "none" && (
         <div className={`wash ${wash ==="warm" ? "wash-warm" : "wash-cool"}`} aria-hidden />
       )}
-      <div className="mx-auto grid max-w-content items-center gap-10 px-4 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
+      {/* grid-cols-[minmax(0,1fr)] on the base: below lg this is a single
+          implicit `auto` track, which floors at min-content, so a wide mock in
+          the visual column pushed the row to 456px inside a 390px viewport and
+          the whole page scrolled sideways. Tailwind's lg:grid-cols-2 already
+          expands to minmax(0,1fr), which is why only mobile was affected. */}
+      <div className="mx-auto grid max-w-content grid-cols-[minmax(0,1fr)] items-center gap-10 px-4 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
         <div className={flip ?"lg:order-2" : ""}>
           <div className="flex items-center gap-3">
             <span className="mono-nums font-mono text-[13px] font-bold text-accent">{n}</span>
