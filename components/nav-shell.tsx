@@ -33,12 +33,12 @@ export function NavShell({
 
   useEffect(() => {
     const stored = localStorage.getItem("forgeai-theme") as "light" | "dark" | null;
-    if (stored) {
-      setTheme(stored);
-      document.documentElement.setAttribute("data-theme", stored);
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    if (stored === "dark") {
       setTheme("dark");
       document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      setTheme("light");
+      document.documentElement.setAttribute("data-theme", "light");
     }
   }, []);
 

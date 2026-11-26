@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const navSections = await buildNavSections();
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <body className="min-h-screen font-sans antialiased text-ink bg-canvas">
         <NavShell navSections={navSections}>{children}</NavShell>
       </body>

@@ -3,6 +3,7 @@ import type { Config } from "tailwindcss";
 const rgb = (v: string) => `rgb(var(--${v}) / <alpha-value>)`;
 
 export default {
+  darkMode: ["selector", '[data-theme="dark"]'],
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {

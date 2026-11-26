@@ -125,12 +125,12 @@ export function StatStrip({
             <div className="flex items-center justify-between">
               <span className={`grid h-10 w-10 place-items-center rounded-xl shadow-xs transition-transform duration-300 group-hover:scale-110 ${
                 isPassRate
-                  ? "bg-emerald-50 text-emerald-600 border border-emerald-200/80 dark:bg-emerald-950/60 dark:text-emerald-400 dark:border-emerald-800/40"
+                  ? "bg-emerald-100 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/70 dark:text-emerald-300 dark:border-emerald-800/50"
                   : isFailing
-                  ? "bg-amber-50 text-amber-600 border border-amber-200/80 dark:bg-amber-950/60 dark:text-amber-400 dark:border-amber-800/40"
+                  ? "bg-amber-100 text-amber-800 border border-amber-200 dark:bg-amber-950/70 dark:text-amber-300 dark:border-amber-800/50"
                   : isJudge
-                  ? "bg-indigo-50 text-indigo-600 border border-indigo-200/80 dark:bg-indigo-950/60 dark:text-indigo-400 dark:border-indigo-800/40"
-                  : "bg-purple-50 text-purple-600 border border-purple-200/80 dark:bg-purple-950/60 dark:text-purple-400 dark:border-purple-800/40"
+                  ? "bg-indigo-100 text-indigo-700 border border-indigo-200 dark:bg-indigo-950/70 dark:text-indigo-300 dark:border-indigo-800/50"
+                  : "bg-purple-100 text-purple-700 border border-purple-200 dark:bg-purple-950/70 dark:text-purple-300 dark:border-purple-800/50"
               }`}>
                 {isPassRate && <TrendingUp className="h-5 w-5 stroke-[2.2]" />}
                 {isFailing && <AlertTriangle className="h-5 w-5 stroke-[2.2]" />}
@@ -143,12 +143,12 @@ export function StatStrip({
 
               <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${
                 isPassRate
-                  ? "bg-emerald-50 text-emerald-800 border border-emerald-200/80 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/40"
+                  ? "bg-emerald-50 text-emerald-800 border border-emerald-200/90 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800/40"
                   : isFailing
-                  ? "bg-amber-50 text-amber-800 border border-amber-200/80 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800/40"
+                  ? "bg-amber-50 text-amber-800 border border-amber-200/90 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800/40"
                   : isJudge
-                  ? "bg-indigo-50 text-indigo-800 border border-indigo-200/80 dark:bg-indigo-950/60 dark:text-indigo-300 dark:border-indigo-800/40"
-                  : "bg-purple-50 text-purple-800 border border-purple-200/80 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800/40"
+                  ? "bg-indigo-50 text-indigo-800 border border-indigo-200/90 dark:bg-indigo-950/50 dark:text-indigo-300 dark:border-indigo-800/40"
+                  : "bg-purple-50 text-purple-800 border border-purple-200/90 dark:bg-purple-950/50 dark:text-purple-300 dark:border-purple-800/40"
               }`}>
                 {isPassRate ? "Honest Metric" : isFailing ? "Reported" : isJudge ? "Defended" : "Unseen"}
               </span>
