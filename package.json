@@ -13,6 +13,7 @@
     "calibrate:preflight": "node scripts/calibrate-preflight.mjs"
   },
   "dependencies": {
+    "framer-motion": "^14.14.0",
     "lucide-react": "^1.81.0",
     "next": "^15.5.29",
     "react": "^19.0.0",

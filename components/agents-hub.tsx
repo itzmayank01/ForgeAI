@@ -421,19 +421,19 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
             {filteredAgents.map((agent) => (
               <div
                 key={agent.id}
-                className="group flex flex-col justify-between rounded-2xl border bg-surface p-4 shadow-xs transition hover:border-accent-line hover:shadow-md"
+                className="group flex flex-col justify-between rounded-2xl border bg-surface p-4.5 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-accent-line hover:shadow-xl hover:shadow-accent/5 cursor-default"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3">
-                    <div className="flex min-w-0 items-start gap-3">
-                      <div className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-accent-line/60 shadow-sm ${agent.avatarBg}`}>
-                        <AgentIcon name={agent.id} className="w-[22px] h-[22px] text-accent-text" />
+                    <div className="flex min-w-0 items-start gap-3.5">
+                      <div className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl border shadow-sm transition-transform duration-300 group-hover:scale-105 ${agent.avatarBg}`}>
+                        <AgentIcon name={agent.id} className="w-6 h-6 text-current" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <h3 className="truncate text-[14px] font-bold tracking-tight text-ink">
+                        <h3 className="truncate text-[14.5px] font-bold tracking-tight text-ink group-hover:text-accent-text transition-colors">
                           {agent.name}
                         </h3>
-                        <p className="mt-0.5 line-clamp-2 text-[12px] leading-relaxed text-muted">
+                        <p className="mt-1 line-clamp-2 text-[12px] leading-relaxed text-muted">
                           {agent.description}
                         </p>
                       </div>
@@ -512,7 +512,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
               return (
                 <div
                   key={team.id}
-                  className="flex flex-col justify-between rounded-2xl border bg-surface p-5 shadow-xs transition hover:border-accent-line hover:shadow-md"
+                  className="flex flex-col justify-between rounded-2xl border bg-surface p-5 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-accent-line hover:shadow-xl hover:shadow-accent/5 cursor-default"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2">
@@ -669,12 +669,12 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
           <div className="relative flex h-full w-full max-w-lg flex-col border-l bg-surface shadow-2xl">
             <div className="flex items-center justify-between border-b bg-canvas/80 px-5 py-3.5 backdrop-blur">
               <div className="flex min-w-0 items-center gap-3">
-                <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-accent-line ${
-                  chatAgent?.avatarBg ??"bg-accent-soft text-accent-text  dark:text-accent-text"}`}>
+                <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border shadow-xs ${
+                  chatAgent?.avatarBg ?? "bg-accent-soft text-accent-text border-accent-line"}`}>
                   {chatAgent ? (
-                    <AgentIcon name={chatAgent.id} className="w-5 h-5 text-accent-text" />
+                    <AgentIcon name={chatAgent.id} className="w-5 h-5 text-current" />
                   ) : (
-                    <IconUsers className="w-5 h-5 text-accent-text" />
+                    <IconUsers className="w-5 h-5 text-current" />
                   )}
                 </div>
                 <div className="min-w-0">
