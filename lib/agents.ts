@@ -68,6 +68,17 @@ export interface AgentTeamItem {
   outputArtifact: string;
 }
 
+/**
+ * One avatar treatment for every entry.
+ *
+ * This was nineteen agents in seventeen hue families — sky, teal, fuchsia,
+ * stone, orange — which reads as decoration rather than a system, and fought
+ * the brand colour on every card. A gallery says what an item IS through its
+ * label and its badge; the icon chip is chrome, so it is uniform.
+ */
+export const AVATAR_SURFACE =
+  "bg-accent-soft text-accent-text border border-accent-line/40";
+
 export const AGENTS: AgentItem[] = [
   // ── built by the factory ────────────────────────────────────────────────
   {
@@ -76,7 +87,7 @@ export const AGENTS: AgentItem[] = [
     category: "Customer Support",
     avatar: "HR",
     iconKey: "policy",
-    avatarBg: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Shore-staff policy advisor built from three HR documents. Answers with numbered citations and refuses legal, medical and individual-record questions by construction.",
     runId: "hr_policy_live",
@@ -98,7 +109,7 @@ export const AGENTS: AgentItem[] = [
     category: "Engineering",
     avatar: "SS",
     iconKey: "marine",
-    avatarBg: "bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Procurement desk assistant over a parts catalogue and two supplier agreements. Quotes price and lead time, works out order totals, refuses to rank suppliers.",
     runId: "ship_spares_live",
@@ -122,7 +133,7 @@ export const AGENTS: AgentItem[] = [
     category: "Content Creation",
     avatar: "CC",
     iconKey: "content",
-    avatarBg: "bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Multi-platform content strategist working from a brand guidelines folder and a library of past campaigns.",
     version: "draft",
@@ -138,7 +149,7 @@ export const AGENTS: AgentItem[] = [
     category: "Design",
     avatar: "IP",
     iconKey: "camera",
-    avatarBg: "bg-sky-500/10 text-sky-700 dark:text-sky-300 border border-sky-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Generative-image prompt specialist grounded in a house style guide and a catalogue of approved reference shots.",
     version: "draft",
@@ -154,7 +165,7 @@ export const AGENTS: AgentItem[] = [
     category: "Design",
     avatar: "VS",
     iconKey: "story",
-    avatarBg: "bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Turns technical material into storyboards and explanatory diagrams, working from a diagram component library.",
     version: "draft",
@@ -170,7 +181,7 @@ export const AGENTS: AgentItem[] = [
     category: "Content Creation",
     avatar: "VC",
     iconKey: "video",
-    avatarBg: "bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Post-production coach over an internal editing handbook and retention analytics exports.",
     version: "draft",
@@ -186,7 +197,7 @@ export const AGENTS: AgentItem[] = [
     category: "Engineering",
     avatar: "FE",
     iconKey: "code",
-    avatarBg: "bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Front-end assistant grounded in a design-system reference and the repository's component conventions.",
     version: "draft",
@@ -202,7 +213,7 @@ export const AGENTS: AgentItem[] = [
     category: "Education",
     avatar: "CT",
     iconKey: "education",
-    avatarBg: "bg-pink-500/10 text-pink-700 dark:text-pink-300 border border-pink-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Curriculum designer working from a competency framework and existing course outlines.",
     version: "draft",
@@ -218,7 +229,7 @@ export const AGENTS: AgentItem[] = [
     category: "Finance",
     avatar: "PD",
     iconKey: "chart",
-    avatarBg: "bg-violet-500/10 text-violet-700 dark:text-violet-300 border border-violet-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Fundraising assistant over an internal metrics pack, past decks and a market research folder.",
     version: "draft",
@@ -234,7 +245,7 @@ export const AGENTS: AgentItem[] = [
     category: "Education",
     avatar: "SA",
     iconKey: "globe",
-    avatarBg: "bg-yellow-500/10 text-yellow-800 dark:text-yellow-300 border border-yellow-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Admissions assistant over university prospectuses and published visa guidance.",
     version: "draft",
@@ -250,7 +261,7 @@ export const AGENTS: AgentItem[] = [
     category: "Content Creation",
     avatar: "GA",
     iconKey: "growth",
-    avatarBg: "bg-orange-500/10 text-orange-700 dark:text-orange-300 border border-orange-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Paid-acquisition assistant over campaign exports and the channel playbook.",
     version: "draft",
@@ -266,7 +277,7 @@ export const AGENTS: AgentItem[] = [
     category: "Engineering",
     avatar: "BA",
     iconKey: "bug",
-    avatarBg: "bg-teal-500/10 text-teal-700 dark:text-teal-300 border border-teal-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Triage assistant over runbooks, past incident write-ups and the service catalogue.",
     version: "draft",
@@ -282,7 +293,7 @@ export const AGENTS: AgentItem[] = [
     category: "Data Analysis",
     avatar: "DE",
     iconKey: "database",
-    avatarBg: "bg-green-500/10 text-green-700 dark:text-green-300 border border-green-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Warehouse assistant over schema documentation, dbt model descriptions and data contracts.",
     version: "draft",
@@ -298,7 +309,7 @@ export const AGENTS: AgentItem[] = [
     category: "Engineering",
     avatar: "AI",
     iconKey: "cpu",
-    avatarBg: "bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Model-platform assistant over evaluation reports, model cards and deployment runbooks.",
     version: "draft",
@@ -314,7 +325,7 @@ export const AGENTS: AgentItem[] = [
     category: "Engineering",
     avatar: "PE",
     iconKey: "bolt",
-    avatarBg: "bg-fuchsia-500/10 text-fuchsia-700 dark:text-fuchsia-300 border border-fuchsia-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Prompt-library assistant over versioned prompts and their recorded eval deltas.",
     version: "draft",
@@ -330,7 +341,7 @@ export const AGENTS: AgentItem[] = [
     category: "IT & Security",
     avatar: "QA",
     iconKey: "audit",
-    avatarBg: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Assurance assistant over test plans, release gates and the risk register.",
     version: "draft",
@@ -346,7 +357,7 @@ export const AGENTS: AgentItem[] = [
     category: "Investment",
     avatar: "TA",
     iconKey: "tax",
-    avatarBg: "bg-slate-500/10 text-slate-700 dark:text-slate-300 border border-slate-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Policy assistant over the treasury mandate, counterparty limits and approved instrument lists.",
     version: "draft",
@@ -362,7 +373,7 @@ export const AGENTS: AgentItem[] = [
     category: "Life",
     avatar: "GM",
     iconKey: "sparkles",
-    avatarBg: "bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Development assistant over a career framework and the internal coaching handbook.",
     version: "draft",
@@ -378,7 +389,7 @@ export const AGENTS: AgentItem[] = [
     category: "Legal",
     avatar: "CA",
     iconKey: "policy",
-    avatarBg: "bg-stone-500/10 text-stone-700 dark:text-stone-300 border border-stone-500/20",
+    avatarBg: AVATAR_SURFACE,
     description:
       "Contract assistant over standard templates, the clause library and the vendor risk matrix.",
     version: "draft",

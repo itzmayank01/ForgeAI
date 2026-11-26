@@ -83,7 +83,7 @@ export default async function Home() {
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <Pill tone="accent">The Agent That Builds Agents</Pill>
-              <span className="rounded-full bg-indigo-100 dark:bg-emerald-950/60 text-indigo-800 dark:text-emerald-300 px-2.5 py-0.5 text-xs font-semibold">
+              <span className="rounded-full bg-accent-soft text-accent-text px-2.5 py-0.5 text-xs font-semibold">
                 Autonomous AI Factory
               </span>
             </div>
@@ -106,7 +106,7 @@ export default async function Home() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
                 href="#agents-hub"
-                className="rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_-10px_rgba(99,102,241,0.6)] transition hover:bg-indigo-700 hover:scale-[1.02] active:scale-[0.98]"
+                className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_-10px_rgba(99,102,241,0.6)] transition hover:bg-accent hover:scale-[1.02] active:scale-[0.98]"
               >
                 Browse agents &amp; teams ↓
               </a>
@@ -120,7 +120,7 @@ export default async function Home() {
               )}
               <Link
                 href="/chat/hr_policy_live"
-                className="rounded-full border border-indigo-500/30 bg-indigo-50/60 dark:bg-emerald-950/30 px-5 py-3 text-sm font-semibold text-indigo-700 dark:text-emerald-300 transition hover:bg-indigo-100/80 dark:hover:bg-emerald-900/40"
+                className="rounded-full border border-accent-line bg-accent-soft px-5 py-3 text-sm font-semibold text-accent-text transition hover:bg-accent-soft "
               >
                 Chat Runner →
               </Link>
@@ -198,7 +198,7 @@ export default async function Home() {
       {/* ── The 7 Stages & Architecture ─────────────────────────────── */}
       <div id="pipeline" className="scroll-mt-20 pt-10">
         <div className="mx-auto max-w-content px-4 text-center">
-          <span className="rounded-full bg-indigo-100 dark:bg-emerald-950/60 text-indigo-800 dark:text-emerald-300 px-3 py-1 text-xs font-semibold">
+          <span className="rounded-full bg-accent-soft text-accent-text px-3 py-1 text-xs font-semibold">
             Orchestration Under Uncertainty
           </span>
           <h2 className="display mt-4 text-[clamp(1.8rem,3.6vw,2.7rem)]">

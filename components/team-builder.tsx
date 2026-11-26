@@ -95,7 +95,7 @@ export function TeamBuilder({ isOpen, agents, onClose, onTeamCreated }: TeamBuil
               placeholder="Procurement desk"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-1.5 w-full rounded-xl border bg-ink/[0.02] px-3.5 py-2 text-xs text-ink placeholder:text-muted focus:border-indigo-600 focus:outline-none"
+              className="mt-1.5 w-full rounded-xl border bg-ink/[0.02] px-3.5 py-2 text-xs text-ink placeholder:text-muted focus:border-accent-line focus:outline-none"
             />
           </div>
 
@@ -116,8 +116,8 @@ export function TeamBuilder({ isOpen, agents, onClose, onTeamCreated }: TeamBuil
                     onClick={() => toggle(a.id)}
                     className={`flex items-center gap-2.5 rounded-xl border p-2.5 text-left transition ${
                       on
-                        ? "border-indigo-500 bg-indigo-50/60 dark:bg-emerald-950/30"
-                        : "bg-ink/[0.02] hover:border-indigo-400"
+                        ?"border-accent-line bg-accent-soft"
+                        : "bg-ink/[0.02] hover:border-accent-line"
                     }`}
                   >
                     <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-xl text-sm ${a.avatarBg}`}>
@@ -129,7 +129,7 @@ export function TeamBuilder({ isOpen, agents, onClose, onTeamCreated }: TeamBuil
                         {a.runId ? "built · can answer" : "brief · routes only"}
                       </span>
                     </span>
-                    {on && <span className="text-xs text-indigo-600">✓</span>}
+                    {on && <span className="text-xs text-accent-text">✓</span>}
                   </button>
                 );
               })}
@@ -137,7 +137,7 @@ export function TeamBuilder({ isOpen, agents, onClose, onTeamCreated }: TeamBuil
           </div>
 
           {picked.length > 0 && builtCount === 0 && (
-            <p className="rounded-xl border border-amber-500/40 bg-amber-50/60 p-3 text-[11.5px] leading-relaxed text-amber-900 dark:bg-amber-950/30 dark:text-amber-200">
+            <p className="rounded-xl border border-warn bg-warn-soft p-3 text-[11.5px] leading-relaxed text-warn-text dark:text-warn-text">
               None of these members was built, so this room will route a question and then tell you
               there is nothing behind it to answer from. That is allowed — it is just worth knowing
               before you open it.
@@ -157,7 +157,7 @@ export function TeamBuilder({ isOpen, agents, onClose, onTeamCreated }: TeamBuil
             type="button"
             onClick={create}
             disabled={picked.length === 0}
-            className="flex-1 rounded-full bg-indigo-600 py-2.5 text-xs font-semibold text-white shadow-md transition hover:bg-indigo-700 disabled:opacity-50"
+            className="flex-1 rounded-full bg-accent py-2.5 text-xs font-semibold text-white shadow-md transition hover:bg-accent disabled:opacity-50"
           >
             Create room
           </button>

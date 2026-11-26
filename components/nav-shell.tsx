@@ -61,12 +61,12 @@ export function NavShell({
               className="group flex items-center gap-2.5 font-bold tracking-tight text-ink"
               title="ForgeAI Home"
             >
-              <span className="grid h-8 w-8 place-items-center rounded-xl bg-indigo-600 text-sm font-black text-white shadow-sm shadow-indigo-500/25 transition group-hover:scale-105">
+              <span className="grid h-8 w-8 place-items-center rounded-xl bg-accent text-sm font-black text-white shadow-sm shadow-accent/25 transition group-hover:scale-105">
                 F
               </span>
               <span className="text-base font-bold tracking-tight">ForgeAI</span>
             </Link>
-            <span className="hidden sm:inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-0.5 text-[11px] font-semibold text-indigo-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-indigo-500/20">
+            <span className="hidden sm:inline-flex items-center rounded-full bg-accent-soft px-2.5 py-0.5 text-[11px] font-semibold text-accent-text dark:text-accent-text border border-accent-line">
               Autonomous Factory
             </span>
           </div>
@@ -79,7 +79,7 @@ export function NavShell({
               href="/chat/hr_policy_live"
               className={`rounded-lg px-3 py-1.5 transition ${
                 pathname.startsWith("/chat")
-                  ? "bg-emerald-50/60 font-bold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300"
+                  ? "bg-accent-soft font-bold text-accent-text  dark:text-accent-text"
                   : "text-muted hover:bg-ink/[0.04] hover:text-ink"
               }`}
             >
@@ -126,7 +126,7 @@ export function NavShell({
             {/* Primary Action Button */}
             <Link
               href="/chat/hr_policy_live"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-indigo-600 px-4 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:bg-indigo-700 active:scale-[0.98]"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:bg-accent active:scale-[0.98]"
             >
               <span>Live Chat Runner</span>
               <span className="text-[11px]">→</span>
@@ -199,7 +199,7 @@ export function NavShell({
             </div>
             <button
               onClick={() => setIsSettingsOpen(false)}
-              className="w-full rounded-full bg-indigo-600 hover:bg-indigo-700 py-2 text-xs font-semibold text-white transition"
+              className="w-full rounded-full bg-accent hover:bg-accent py-2 text-xs font-semibold text-white transition"
             >
               Done
             </button>
@@ -211,7 +211,7 @@ export function NavShell({
       {isUserOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm animate-fadeIn">
           <div className="w-full max-w-sm rounded-2xl border bg-surface p-6 shadow-2xl text-center space-y-4">
-            <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-indigo-600 text-white text-xl font-black shadow-md shadow-indigo-500/25">
+            <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-accent text-white text-xl font-black shadow-md shadow-accent/25">
               F
             </div>
             <div>
@@ -223,7 +223,7 @@ export function NavShell({
             <div className="space-y-2 pt-2">
               <button
                 onClick={() => setIsUserOpen(false)}
-                className="w-full rounded-full bg-indigo-600 hover:bg-indigo-700 py-2.5 text-xs font-semibold text-white transition"
+                className="w-full rounded-full bg-accent hover:bg-accent py-2.5 text-xs font-semibold text-white transition"
               >
                 Continue as Guest Developer
               </button>
@@ -245,7 +245,7 @@ export function NavShell({
             <div className="absolute -top-3 -right-2 z-50">
               <button
                 onClick={() => setIsWidgetOpen(false)}
-                className="grid h-7 w-7 place-items-center rounded-full bg-slate-900 text-white shadow-md hover:bg-slate-800 transition"
+                className="grid h-7 w-7 place-items-center rounded-full bg-ink text-white shadow-md hover:bg-ink/90 transition"
                 title="Close floating widget"
               >
                 <IconCross className="h-3.5 w-3.5" />
@@ -256,10 +256,10 @@ export function NavShell({
         ) : (
           <button
             onClick={() => setIsWidgetOpen(true)}
-            className="flex items-center gap-2 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 text-xs font-semibold shadow-lg shadow-indigo-600/30 transition hover:scale-105 active:scale-95"
+            className="flex items-center gap-2 rounded-full bg-accent hover:bg-accent text-white px-4 py-2.5 text-xs font-semibold shadow-lg shadow-accent/30 transition hover:scale-105 active:scale-95"
             title="Open Live Floating Agent Chat"
           >
-            <IconSparkles className="h-4 w-4 text-indigo-200" />
+            <IconSparkles className="h-4 w-4 text-on-accent" />
             <span>Live Agent</span>
           </button>
         )}

@@ -15,10 +15,10 @@ export function Feature({
   return (
     <section className="relative">
       {wash !== "none" && (
-        <div className={`wash ${wash === "warm" ? "wash-warm" : "wash-cool"}`} aria-hidden />
+        <div className={`wash ${wash ==="warm" ? "wash-warm" : "wash-cool"}`} aria-hidden />
       )}
       <div className="mx-auto grid max-w-content items-center gap-10 px-4 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
-        <div className={flip ? "lg:order-2" : ""}>
+        <div className={flip ?"lg:order-2" : ""}>
           <div className="flex items-center gap-3">
             <span className="mono-nums font-mono text-[13px] font-bold text-accent">{n}</span>
             <span className="h-px w-10 bg-ink/20" />
@@ -42,7 +42,7 @@ export function Feature({
           </div>
         </div>
 
-        <div className={flip ? "lg:order-1" : ""}>{visual}</div>
+        <div className={flip ?"lg:order-1" : ""}>{visual}</div>
       </div>
     </section>
   );

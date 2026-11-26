@@ -32,10 +32,12 @@ export function Landscape({
   /** Small caption under the panel, e.g. the file the artefact comes from. */
   panelLabel?: string;
 }) {
+  // Panel tints come from the palette, not from raw Tailwind hues, so a
+  // change to --accent moves them too.
   const tints: Record<string, string> = {
-    mint: "from-emerald-50 to-emerald-100/40 dark:from-emerald-950/40 dark:to-emerald-900/10",
-    sky: "from-sky-50 to-indigo-100/40 dark:from-sky-950/40 dark:to-indigo-900/10",
-    slate: "from-slate-100 to-slate-200/50 dark:from-slate-900/60 dark:to-slate-800/20",
+    mint: "from-ok-soft to-ok-soft/40",
+    sky: "from-accent-soft to-accent-soft/40",
+    slate: "from-[rgb(var(--tint))] to-[rgb(var(--tint))]",
   };
 
   return (

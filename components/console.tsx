@@ -107,7 +107,7 @@ export function StatStrip({
           </div>
           <div
             className={`mono-nums mt-2 text-[28px] font-bold leading-none tracking-tight ${
-              s.tone ? tones[s.tone] : ""
+              s.tone ? tones[s.tone] :""
             }`}
           >
             {s.value}

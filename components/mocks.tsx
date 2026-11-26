@@ -45,7 +45,7 @@ function Frame({
         )}
         <span
           className={
-            tone === "terminal"
+            tone ==="terminal"
               ? "font-mono text-[11px] text-muted"
               : "text-[13px] font-semibold tracking-tight"
           }
@@ -304,7 +304,7 @@ export function JudgeMock() {
           <div key={r.id} className="flex items-center gap-3 px-4 py-2.5">
             <span
               className={`grid h-5 w-5 shrink-0 place-items-center rounded-full text-[11px] font-bold ${
-                r.pass ? "bg-ok/12 text-ok" : "bg-bad/12 text-bad"
+                r.pass ?"bg-ok/12 text-ok" : "bg-bad/12 text-bad"
               }`}
             >
               {r.pass ? "✓" : "✕"}
@@ -504,7 +504,7 @@ export function RouterMock() {
     <div className="mock rounded-3xl border bg-surface p-5 shadow-[0_16px_40px_-16px_rgba(5,150,105,0.14)]">
       <div className="flex items-center justify-between border-b pb-3">
         <div className="flex items-center gap-2">
-          <span className="grid h-6 w-6 place-items-center rounded-lg bg-indigo-100 text-indigo-800 dark:bg-emerald-950/60 dark:text-emerald-300">
+          <span className="grid h-6 w-6 place-items-center rounded-lg bg-accent-soft text-accent-text dark:text-accent-text">
             <IconUsers className="h-3.5 w-3.5" />
           </span>
           <div>
@@ -512,7 +512,7 @@ export function RouterMock() {
             <div className="text-[10px] text-muted">2 built members · live routing</div>
           </div>
         </div>
-        <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-indigo-800 dark:bg-emerald-950/60 dark:text-emerald-400">
+        <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-accent-text dark:text-accent-text">
           real request
         </span>
       </div>
@@ -524,7 +524,7 @@ export function RouterMock() {
             onClick={() => ask(n)}
             disabled={busy}
             className={`rounded-lg border px-2.5 py-1 text-left text-[11px] transition disabled:opacity-50 ${
-              i === n ? "border-indigo-500 bg-indigo-50/60 text-ink dark:bg-emerald-950/30" : "text-muted hover:text-ink"
+              i === n ?"border-accent-line bg-accent-soft text-ink " : "text-muted hover:text-ink"
             }`}
           >
             {q}
@@ -543,7 +543,7 @@ export function RouterMock() {
             <span className="h-2 flex-1 overflow-hidden rounded-full bg-ink/[0.07]">
               <span
                 className={`block h-full rounded-full transition-all duration-500 ${
-                  s.agentId === data.winner ? "bg-emerald-600" : "bg-ink/25"
+                  s.agentId === data.winner ?"bg-accent" : "bg-ink/25"
                 }`}
                 style={{ width: `${Math.max(Math.round(s.share * 100), 1)}%` }}
               />

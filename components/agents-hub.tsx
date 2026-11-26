@@ -256,11 +256,11 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                   key={key}
                   onClick={() => setTab(key)}
                   className={`relative pb-3 text-base font-bold transition ${
-                    tab === key ? "text-ink" : "text-muted hover:text-ink"}`}
+                    tab === key ?"text-ink" : "text-muted hover:text-ink"}`}
                 >
                   {label}
                   {tab === key && (
-                    <span className="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-indigo-600" />
+                    <span className="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-accent" />
                   )}
                 </button>
               ))}
@@ -278,7 +278,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                   placeholder={tab === "agents" ? "Search agents…" : "Search agent teams…"}
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="w-full rounded-full border border-ink/10 bg-ink/[0.03] py-2 pl-9 pr-8 text-xs text-ink shadow-xs transition placeholder:text-muted focus:border-indigo-600 focus:bg-surface focus:outline-none"
+                  className="w-full rounded-full border border-ink/10 bg-ink/[0.03] py-2 pl-9 pr-8 text-xs text-ink shadow-xs transition placeholder:text-muted focus:border-accent-line focus:bg-surface focus:outline-none"
                 />
                 {query && (
                   <button
@@ -295,7 +295,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
             {tab === "agents" && (
               <button
                 onClick={() => { setChip(null); setStudioOpen(true); }}
-                className="inline-flex items-center gap-1.5 rounded-full bg-indigo-600 px-5 py-2 text-xs font-semibold text-white shadow-xs transition hover:bg-indigo-700 active:scale-[0.98]"
+                className="inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2 text-xs font-semibold text-white shadow-xs transition hover:bg-accent active:scale-[0.98]"
               >
                 <span className="text-sm font-bold leading-none">+</span>
                 Create My Own Agent
@@ -304,7 +304,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
             {tab === "teams" && (
               <button
                 onClick={() => setTeamBuilderOpen(true)}
-                className="inline-flex items-center gap-1.5 rounded-full bg-indigo-600 px-5 py-2 text-xs font-semibold text-white shadow-xs transition hover:bg-indigo-700 active:scale-[0.98]"
+                className="inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2 text-xs font-semibold text-white shadow-xs transition hover:bg-accent active:scale-[0.98]"
               >
                 <span className="text-sm font-bold leading-none">+</span>
                 Create My Own Agent Team
@@ -327,15 +327,15 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
             <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
               <div className="flex min-w-0 flex-wrap items-center gap-2">
                 {chip && (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-2.5 py-1 text-[11px] font-semibold text-indigo-700 dark:bg-emerald-950/50 dark:text-emerald-300 border border-indigo-500/20">
-                    <span className="grid h-4 w-4 place-items-center rounded-md bg-emerald-600/15 text-indigo-700 dark:text-emerald-400">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold text-accent-text dark:text-accent-text border border-accent-line">
+                    <span className="grid h-4 w-4 place-items-center rounded-md bg-accent/15 text-accent-text">
                       <AgentIcon name={chip.id} className="w-3 h-3" />
                     </span>
                     <span>{chip.name}</span>
                     <button
                       onClick={() => { setChip(null); setComposer(""); }}
                       aria-label={`Remove ${chip.name}`}
-                      className="text-indigo-700/70 hover:text-indigo-900 dark:text-emerald-400/70 ml-0.5"
+                      className="text-accent-text/70 hover:text-accent-text dark:text-accent-text/70 ml-0.5"
                     >
                       <IconCross className="h-2.5 w-2.5" />
                     </button>
@@ -350,7 +350,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
               <button
                 onClick={() => setStudioOpen(true)}
                 disabled={!composer.trim()}
-                className="rounded-full bg-indigo-600 px-5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-indigo-700 disabled:opacity-40"
+                className="rounded-full bg-accent px-5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-accent disabled:opacity-40"
               >
                 Create →
               </button>
@@ -367,7 +367,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                 onClick={() => setCategory(cat)}
                 className={`whitespace-nowrap rounded-full px-4 py-1.5 text-xs font-semibold transition ${
                   category === cat
-                    ? "bg-indigo-600 text-white shadow-sm"
+                    ?"bg-accent text-white shadow-sm"
                     : "bg-ink/[0.04] text-muted hover:bg-ink/[0.08] hover:text-ink"}`}
               >
                 {cat}
@@ -388,7 +388,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                 >
                   <span>Created by:</span>
                   <span className="font-semibold text-ink">{author}</span>
-                  <span className={`transition ${authorOpen ? "rotate-180" : ""}`}>▾</span>
+                  <span className={`transition ${authorOpen ?"rotate-180" : ""}`}>▾</span>
                 </button>
                 {authorOpen && (
                   <div className="absolute left-0 top-full z-20 mt-1.5 min-w-[180px] overflow-hidden rounded-xl border bg-surface py-1 shadow-lg">
@@ -397,7 +397,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                         key={a}
                         onClick={() => { setAuthor(a); setAuthorOpen(false); }}
                         className={`block w-full px-3.5 py-1.5 text-left text-xs transition hover:bg-ink/[0.04] ${
-                          a === author ? "font-semibold text-ink" : "text-muted"}`}
+                          a === author ?"font-semibold text-ink" : "text-muted"}`}
                       >
                         {a}
                         <span className="ml-1.5 text-[10px] text-muted">
@@ -421,13 +421,13 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
             {filteredAgents.map((agent) => (
               <div
                 key={agent.id}
-                className="group flex flex-col justify-between rounded-2xl border bg-surface p-4 shadow-xs transition hover:border-indigo-500/40 hover:shadow-md"
+                className="group flex flex-col justify-between rounded-2xl border bg-surface p-4 shadow-xs transition hover:border-accent-line hover:shadow-md"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex min-w-0 items-start gap-3">
-                      <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-indigo-500/15 ${agent.avatarBg}`}>
-                        <AgentIcon name={agent.id} className="w-5 h-5 text-indigo-700 dark:text-emerald-400" />
+                      <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-accent-line ${agent.avatarBg}`}>
+                        <AgentIcon name={agent.id} className="w-5 h-5 text-accent-text" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <h3 className="truncate text-[14px] font-bold tracking-tight text-ink">
@@ -442,14 +442,14 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                       {agent.runId ? (
                         <button
                           onClick={() => openChat(agent)}
-                          className="rounded-full border border-ink/15 bg-surface px-3.5 py-1 text-[11.5px] font-semibold text-ink shadow-2xs transition hover:border-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300 active:scale-95"
+                          className="rounded-full border border-ink/15 bg-surface px-3.5 py-1 text-[11.5px] font-semibold text-ink shadow-2xs transition hover:border-accent-line hover:bg-accent-soft hover:text-accent-text dark:hover:text-accent-text active:scale-95"
                         >
                           Chat
                         </button>
                       ) : (
                         <button
                           onClick={() => useAsBrief(agent)}
-                          className="rounded-full border border-ink/15 bg-surface px-3 py-1 text-[11.5px] font-semibold text-muted transition hover:border-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300 active:scale-95"
+                          className="rounded-full border border-ink/15 bg-surface px-3 py-1 text-[11.5px] font-semibold text-muted transition hover:border-accent-line hover:bg-accent-soft hover:text-accent-text dark:hover:text-accent-text active:scale-95"
                           title="Load this brief into the composer"
                         >
                           Use brief
@@ -473,13 +473,13 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                       {agent.category}
                     </span>
                     {agent.runId ? (
-                      <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-500/20">
+                      <span className="rounded-full bg-ok-soft px-2 py-0.5 text-[10px] font-semibold text-ok-text border border-accent-line">
                         {agent.badge ?? "Built"}
                       </span>
                     ) : (
                       <span
                         title="No committed run. Nothing was built and nothing was scored."
-                        className="rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-700 dark:bg-amber-950/50 dark:text-amber-300 border border-amber-500/20"
+                        className="rounded-full bg-warn-soft px-2 py-0.5 text-[10px] font-semibold text-warn-text border border-warn"
                       >
                         Brief only
                       </span>
@@ -512,14 +512,14 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
               return (
                 <div
                   key={team.id}
-                  className="flex flex-col justify-between rounded-2xl border bg-surface p-5 shadow-xs transition hover:border-indigo-500/40 hover:shadow-md"
+                  className="flex flex-col justify-between rounded-2xl border bg-surface p-5 shadow-xs transition hover:border-accent-line hover:shadow-md"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2">
                       <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
                         built > 0
-                          ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-400"
-                          : "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300"}`}>
+                          ?"bg-accent-soft text-accent-text  dark:text-accent-text"
+                          : "bg-warn-soft text-warn-text  dark:text-warn-text"}`}>
                         {team.badge}
                       </span>
                       <span className="font-mono text-[11px] text-muted">{team.category}</span>
@@ -542,7 +542,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                           <span
                             key={m.id}
                             title={`${m.name}${m.runId ? " · built" : " · brief"}`}
-                            className="grid h-7 w-7 place-items-center rounded-full border-2 border-surface bg-emerald-50 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300 text-[10px] font-bold shadow-xs"
+                            className="grid h-7 w-7 place-items-center rounded-full border-2 border-surface bg-accent-soft text-accent-text dark:text-accent-text text-[10px] font-bold shadow-xs"
                           >
                             {m.avatar}
                           </span>
@@ -566,7 +566,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                     </span>
                     <button
                       onClick={() => openRoom(team)}
-                      className="rounded-full bg-emerald-600 px-4 py-1.5 text-xs font-semibold text-white shadow-xs transition hover:bg-emerald-700 active:scale-95"
+                      className="rounded-full bg-accent px-4 py-1.5 text-xs font-semibold text-white shadow-xs transition hover:bg-accent active:scale-95"
                     >
                       Open room
                     </button>
@@ -605,7 +605,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                     </div>
                     <div className="flex items-center gap-2">
                       {group.passRate !== null && (
-                        <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300">
+                        <span className="rounded-full bg-accent-soft px-2.5 py-0.5 text-[11px] font-semibold text-accent-text dark:text-accent-text">
                           {Math.round(group.passRate * 100)}% final
                         </span>
                       )}
@@ -655,7 +655,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
             <p className="mt-1 text-xs">Clear the search, or pick another category.</p>
             <button
               onClick={() => { setQuery(""); setCategory("All"); setAuthor("All"); }}
-              className="mt-3 rounded-full bg-emerald-600 px-4 py-1.5 text-xs font-semibold text-white"
+              className="mt-3 rounded-full bg-accent px-4 py-1.5 text-xs font-semibold text-white"
             >
               Reset filters
             </button>
@@ -669,12 +669,12 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
           <div className="relative flex h-full w-full max-w-lg flex-col border-l bg-surface shadow-2xl">
             <div className="flex items-center justify-between border-b bg-canvas/80 px-5 py-3.5 backdrop-blur">
               <div className="flex min-w-0 items-center gap-3">
-                <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-indigo-500/15 ${
-                  chatAgent?.avatarBg ?? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300"}`}>
+                <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-accent-line ${
+                  chatAgent?.avatarBg ??"bg-accent-soft text-accent-text  dark:text-accent-text"}`}>
                   {chatAgent ? (
-                    <AgentIcon name={chatAgent.id} className="w-5 h-5 text-emerald-700 dark:text-emerald-300" />
+                    <AgentIcon name={chatAgent.id} className="w-5 h-5 text-accent-text" />
                   ) : (
-                    <IconUsers className="w-5 h-5 text-emerald-700 dark:text-emerald-300" />
+                    <IconUsers className="w-5 h-5 text-accent-text" />
                   )}
                 </div>
                 <div className="min-w-0">
@@ -713,10 +713,10 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                       {m.text}
                     </p>
                   ) : (
-                    <div className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+                    <div className={`flex ${m.role ==="user" ? "justify-end" : "justify-start"}`}>
                       <div className={`max-w-[88%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-xs leading-relaxed ${
-                        m.role === "user"
-                          ? "rounded-br-sm bg-indigo-600 text-white shadow-sm"
+                        m.role ==="user"
+                          ? "rounded-br-sm bg-accent text-white shadow-sm"
                           : "rounded-bl-sm border bg-ink/[0.04] text-ink"}`}>
                         {m.text}
                       </div>
@@ -740,7 +740,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                               <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-ink/[0.07]">
                                 <span
                                   className={`block h-full rounded-full ${
-                                    s.agentId === m.routing!.winner ? "bg-emerald-600" : "bg-ink/25"}`}
+                                    s.agentId === m.routing!.winner ?"bg-accent" : "bg-ink/25"}`}
                                   style={{ width: `${Math.round(s.share * 100)}%` }}
                                 />
                               </span>
@@ -768,7 +768,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
 
               {busy && (
                 <div className="flex items-center gap-2 text-xs text-muted">
-                  <span className="h-2 w-2 animate-ping rounded-full bg-emerald-600" />
+                  <span className="h-2 w-2 animate-ping rounded-full bg-accent" />
                   {room ? "Routing, then retrieving…" : "Retrieving…"}
                 </div>
               )}
@@ -786,7 +786,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                       type="button"
                       disabled={busy}
                       onClick={() => send(q)}
-                      className="rounded-lg border bg-surface px-2.5 py-1 text-left text-[11px] text-muted transition hover:border-emerald-500 hover:text-ink disabled:opacity-50"
+                      className="rounded-lg border bg-surface px-2.5 py-1 text-left text-[11px] text-muted transition hover:border-accent-line hover:text-ink disabled:opacity-50"
                     >
                       {q}
                     </button>
@@ -807,13 +807,13 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   disabled={busy}
-                  className="flex-1 rounded-full border bg-ink/[0.03] px-4 py-2 text-xs text-ink transition placeholder:text-muted focus:border-indigo-600 focus:bg-surface focus:outline-none"
+                  className="flex-1 rounded-full border bg-ink/[0.03] px-4 py-2 text-xs text-ink transition placeholder:text-muted focus:border-accent-line focus:bg-surface focus:outline-none"
                 />
                 <button
                   type="submit"
                   disabled={busy || !input.trim()}
                   aria-label="Send"
-                  className="rounded-full bg-emerald-600 p-2 text-white shadow-sm transition hover:bg-emerald-700 disabled:opacity-50"
+                  className="rounded-full bg-accent p-2 text-white shadow-sm transition hover:bg-accent disabled:opacity-50"
                 >
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />

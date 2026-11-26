@@ -142,7 +142,7 @@ export function FloatingChatCard({
         <div className="flex flex-col items-center">
           <div className="flex items-center gap-1.5 font-bold tracking-tight text-ink text-sm">
             <span>ForgeAI Assistant</span>
-            <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse" />
+            <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
           </div>
           <span className="text-[10px] text-muted">
             {isLiveMode ? "Interactive Session" : "Auto-streaming live queries"}
@@ -187,13 +187,13 @@ export function FloatingChatCard({
             {liveMessages.map((msg) =>
               msg.role === "agent" ? (
                 <div key={msg.id} className="flex items-start gap-2.5">
-                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-slate-900 text-white shadow-xs">
-                    <IconSparkles className="h-4 w-4 text-emerald-400" />
+                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-ink text-white shadow-xs">
+                    <IconSparkles className="h-4 w-4 text-accent-text" />
                   </div>
-                  <div className="max-w-[82%] rounded-2xl rounded-tl-xs border border-indigo-500/20 bg-indigo-50/70 p-3 text-xs leading-relaxed text-ink dark:bg-emerald-950/40">
+                  <div className="max-w-[82%] rounded-2xl rounded-tl-xs border border-accent-line bg-accent-soft p-3 text-xs leading-relaxed text-ink ">
                     <p>{msg.text}</p>
                     {msg.citation && (
-                      <span className="mt-1.5 inline-block rounded-md bg-indigo-100/80 px-1.5 py-0.5 font-mono text-[9.5px] text-indigo-800 dark:bg-emerald-900/60 dark:text-emerald-300">
+                      <span className="mt-1.5 inline-block rounded-md bg-accent-soft px-1.5 py-0.5 font-mono text-[9.5px] text-accent-text dark:text-accent-text">
                         {msg.citation}
                       </span>
                     )}
@@ -209,7 +209,7 @@ export function FloatingChatCard({
             )}
             {busy && (
               <div className="flex items-center gap-2 text-xs text-muted">
-                <span className="h-2 w-2 animate-ping rounded-full bg-indigo-600" />
+                <span className="h-2 w-2 animate-ping rounded-full bg-accent" />
                 Retrieving from corpus…
               </div>
             )}
@@ -224,13 +224,13 @@ export function FloatingChatCard({
             {[...FORGE_EXCHANGES, ...FORGE_EXCHANGES].map((msg, idx) =>
               msg.role === "agent" ? (
                 <div key={`${msg.id}-${idx}`} className="flex items-start gap-2.5">
-                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-slate-900 text-white shadow-xs">
-                    <IconSparkles className="h-4 w-4 text-emerald-400" />
+                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-ink text-white shadow-xs">
+                    <IconSparkles className="h-4 w-4 text-accent-text" />
                   </div>
-                  <div className="max-w-[82%] rounded-2xl rounded-tl-xs border border-indigo-500/20 bg-indigo-50/70 p-3 text-xs leading-relaxed text-ink dark:bg-emerald-950/40">
+                  <div className="max-w-[82%] rounded-2xl rounded-tl-xs border border-accent-line bg-accent-soft p-3 text-xs leading-relaxed text-ink ">
                     <p>{msg.text}</p>
                     {msg.citation && (
-                      <span className="mt-1.5 inline-block rounded-md bg-indigo-100/80 px-1.5 py-0.5 font-mono text-[9.5px] text-indigo-800 dark:bg-emerald-900/60 dark:text-emerald-300">
+                      <span className="mt-1.5 inline-block rounded-md bg-accent-soft px-1.5 py-0.5 font-mono text-[9.5px] text-accent-text dark:text-accent-text">
                         {msg.citation}
                       </span>
                     )}
@@ -252,7 +252,7 @@ export function FloatingChatCard({
       <div className="border-t border-ink/10 bg-canvas/40 p-3.5">
         <form
           onSubmit={handleSend}
-          className="flex items-center justify-between gap-2 rounded-full border border-ink/10 bg-surface px-3.5 py-2 shadow-2xs transition focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/10"
+          className="flex items-center justify-between gap-2 rounded-full border border-ink/10 bg-surface px-3.5 py-2 shadow-2xs transition focus-within:border-accent-line focus-within:ring-2 focus-within:ring-accent-line"
         >
           {/* Paperclip icon */}
           <button
@@ -286,7 +286,7 @@ export function FloatingChatCard({
           <span>{isLiveMode ? "Press Enter to query" : "Hover chat to pause float"}</span>
           <Link
             href="/chat/hr_policy_live"
-            className="font-semibold text-indigo-700 hover:underline dark:text-emerald-400"
+            className="font-semibold text-accent-text hover:underline dark:text-accent-text"
           >
             Full Live Runner →
           </Link>

@@ -137,13 +137,13 @@ export function MegaNav({ sections }: { sections: MegaSection[] }) {
               onFocus={() => { clear(); setOpen(s.label); }}
               onClick={() => (active ? dismiss(s.label) : setOpen(s.label))}
               className={`flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
-                active ? "bg-ink/[0.05] text-ink" : "text-muted hover:bg-ink/[0.04] hover:text-ink"
+                active ?"bg-ink/[0.05] text-ink" : "text-muted hover:bg-ink/[0.04] hover:text-ink"
               }`}
             >
               {s.label}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4}
                    strokeLinecap="round" strokeLinejoin="round"
-                   className={`h-3 w-3 transition-transform duration-200 ${active ? "rotate-180" : ""}`}>
+                   className={`h-3 w-3 transition-transform duration-200 ${active ?"rotate-180" : ""}`}>
                 <path d="M6 9l6 6 6-6" />
               </svg>
             </button>

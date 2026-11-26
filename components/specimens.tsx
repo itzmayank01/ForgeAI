@@ -17,7 +17,7 @@ export function DefinitionCard({ json }: { json: string }) {
           03_agent_def.final.json
         </span>
       </div>
-      <pre className="max-h-[19rem] overflow-auto p-4 font-mono text-[10.5px] leading-[1.75] text-emerald-200/90">
+      <pre className="max-h-[19rem] overflow-auto p-4 font-mono text-[10.5px] leading-[1.75] text-accent-text">
 {json}
       </pre>
     </div>
