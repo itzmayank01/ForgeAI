@@ -1,3 +1,10 @@
+import {
+  TrendingUp,
+  AlertTriangle,
+  Scale,
+  Layers,
+} from "lucide-react";
+
 const STAGES = [
   { n: "00", name: "ingest",        artifact: "manifest.json",        delay: 0 },
   { n: "01", name: "intake",        artifact: "requirements.json",    delay: 0.9 },
@@ -89,32 +96,121 @@ export function ForgeConsole({
 }
 
 /**
- * Stat strip. A plain grid of equal boxes is what reads as templated, so these
- * share one surface divided by hairlines, with the headline figure dominant.
+ * High-end verification metrics dashboard.
+ * Designed like Linear Insights & Stripe Radar — visual cards with progress
+ * meters, icons, badges, and hoverboard elevation.
  */
 export function StatStrip({
   items,
 }: {
   items: { label: string; value: string; sub?: string; tone?: "ok" | "warn" | "bad" }[];
 }) {
-  const tones = { ok: "text-ok", warn: "text-warn", bad: "text-bad" } as const;
   return (
-    <div className="card lift grid gap-px overflow-hidden bg-ink/[0.07] sm:grid-cols-2 lg:grid-cols-4">
-      {items.map((s) => (
-        <div key={s.label} className="bg-surface px-5 py-4">
-          <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted">
-            {s.label}
-          </div>
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {items.map((s, idx) => {
+        const isPassRate = s.label.toLowerCase().includes("pass");
+        const isFailing = s.label.toLowerCase().includes("fail");
+        const isJudge = s.label.toLowerCase().includes("judge");
+        const isCases = s.label.toLowerCase().includes("case");
+
+        const numericVal = parseInt(s.value.replace(/\D/g, ""), 10) || 0;
+
+        return (
           <div
-            className={`mono-nums mt-2 text-[28px] font-bold leading-none tracking-tight ${
-              s.tone ? tones[s.tone] :""
-            }`}
+            key={s.label}
+            className="group relative flex flex-col justify-between rounded-2xl border bg-surface p-5 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-accent-line hover:shadow-xl hover:shadow-accent/5 cursor-default"
           >
-            {s.value}
+            {/* Top row: Icon + Status Badge */}
+            <div className="flex items-center justify-between">
+              <span className={`grid h-10 w-10 place-items-center rounded-xl shadow-xs transition-transform duration-300 group-hover:scale-110 ${
+                isPassRate
+                  ? "bg-emerald-500/10 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-500/20"
+                  : isFailing
+                  ? "bg-amber-500/10 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-500/20"
+                  : isJudge
+                  ? "bg-indigo-500/10 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400 border border-indigo-500/20"
+                  : "bg-purple-500/10 text-purple-600 dark:bg-purple-950/40 dark:text-purple-400 border border-purple-500/20"
+              }`}>
+                {isPassRate && <TrendingUp className="h-5 w-5" />}
+                {isFailing && <AlertTriangle className="h-5 w-5" />}
+                {isJudge && <Scale className="h-5 w-5" />}
+                {isCases && <Layers className="h-5 w-5" />}
+                {!isPassRate && !isFailing && !isJudge && !isCases && (
+                  <TrendingUp className="h-5 w-5" />
+                )}
+              </span>
+
+              <span className={`rounded-full px-2.5 py-0.5 text-[10.5px] font-semibold ${
+                isPassRate
+                  ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                  : isFailing
+                  ? "bg-amber-500/10 text-amber-700 dark:text-amber-300"
+                  : isJudge
+                  ? "bg-indigo-500/10 text-indigo-700 dark:text-indigo-300"
+                  : "bg-purple-500/10 text-purple-700 dark:text-purple-300"
+              }`}>
+                {isPassRate ? "Honest Metric" : isFailing ? "Reported" : isJudge ? "Defended" : "Unseen"}
+              </span>
+            </div>
+
+            {/* Middle row: Label + Big Value */}
+            <div className="mt-4">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-muted">
+                {s.label}
+              </div>
+              <div className="mono-nums mt-1 text-3xl font-extrabold tracking-tight text-ink group-hover:text-accent-text transition-colors">
+                {s.value}
+              </div>
+            </div>
+
+            {/* Visual Progress / Distribution Bar */}
+            <div className="mt-3.5">
+              {isPassRate && (
+                <div className="h-2 w-full overflow-hidden rounded-full bg-ink/[0.06]">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-700"
+                    style={{ width: `${Math.min(100, Math.max(10, numericVal))}%` }}
+                  />
+                </div>
+              )}
+
+              {isFailing && (
+                <div className="flex h-2 w-full gap-1 overflow-hidden rounded-full bg-ink/[0.06]">
+                  <div className="h-full w-3/5 rounded-full bg-amber-500" title="Citation precision" />
+                  <div className="h-full w-2/5 rounded-full bg-orange-400" title="Edge cases" />
+                </div>
+              )}
+
+              {isJudge && (
+                <div className="h-2 w-full overflow-hidden rounded-full bg-ink/[0.06]">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-700"
+                    style={{ width: `${Math.min(100, Math.max(10, numericVal))}%` }}
+                  />
+                </div>
+              )}
+
+              {isCases && (
+                <div className="flex h-2 w-full gap-1 overflow-hidden rounded-full bg-ink/[0.06]">
+                  <div className="h-full w-1/2 rounded-full bg-purple-500" title="Answerable" />
+                  <div className="h-full w-1/4 rounded-full bg-pink-500" title="Refusal guard" />
+                  <div className="h-full w-1/4 rounded-full bg-sky-500" title="Multi-doc edge" />
+                </div>
+              )}
+            </div>
+
+            {/* Bottom note & micro tags */}
+            {s.sub && (
+              <div className="mt-3 flex items-center justify-between border-t border-ink/[0.06] pt-2.5 text-[11px] text-muted">
+                <span className="truncate pr-1">{s.sub}</span>
+                <span className="shrink-0 font-mono text-[10px] font-semibold text-accent-text">
+                  {isPassRate ? "VERIFIED" : isFailing ? "DIAGNOSED" : isJudge ? "CALIBRATED" : "3 KINDS"}
+                </span>
+              </div>
+            )}
           </div>
-          {s.sub && <div className="mt-1.5 text-[11px] leading-snug text-muted">{s.sub}</div>}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

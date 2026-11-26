@@ -132,6 +132,20 @@ export default async function Home() {
 
         {headline?.report && (
           <div className="mx-auto max-w-content px-4 pb-12">
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-[11.5px] font-bold uppercase tracking-wider text-muted">
+                  Measured Verification Evidence · Autonomous Factory Audit
+                </span>
+              </div>
+              <Link
+                href={`/runs/${headline.id}`}
+                className="text-[11.5px] font-semibold text-accent-text hover:underline"
+              >
+                Inspect Full Audit Trail ({headline.id}) →
+              </Link>
+            </div>
             <StatStrip
               items={[
                 {
