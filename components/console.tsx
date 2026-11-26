@@ -99,6 +99,7 @@ export function ForgeConsole({
  * High-end verification metrics dashboard.
  * Designed like Linear Insights & Stripe Radar — visual cards with progress
  * meters, icons, badges, and hoverboard elevation.
+ * Pixel-perfect contrast in both day/light view and dark view.
  */
 export function StatStrip({
   items,
@@ -107,7 +108,7 @@ export function StatStrip({
 }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {items.map((s, idx) => {
+      {items.map((s) => {
         const isPassRate = s.label.toLowerCase().includes("pass");
         const isFailing = s.label.toLowerCase().includes("fail");
         const isJudge = s.label.toLowerCase().includes("judge");
@@ -118,36 +119,36 @@ export function StatStrip({
         return (
           <div
             key={s.label}
-            className="group relative flex flex-col justify-between rounded-2xl border bg-surface p-5 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-accent-line hover:shadow-xl hover:shadow-accent/5 cursor-default"
+            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white dark:bg-surface p-5 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05),0_1px_3px_rgba(0,0,0,0.03)] dark:shadow-none transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-400 hover:shadow-xl hover:shadow-indigo-500/10 dark:hover:border-accent-line cursor-default"
           >
-            {/* Top row: Icon + Status Badge */}
+            {/* Top row: Crisp Icon Chip + Status Badge */}
             <div className="flex items-center justify-between">
               <span className={`grid h-10 w-10 place-items-center rounded-xl shadow-xs transition-transform duration-300 group-hover:scale-110 ${
                 isPassRate
-                  ? "bg-emerald-500/10 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-500/20"
+                  ? "bg-emerald-50 text-emerald-600 border border-emerald-200/80 dark:bg-emerald-950/60 dark:text-emerald-400 dark:border-emerald-800/40"
                   : isFailing
-                  ? "bg-amber-500/10 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-500/20"
+                  ? "bg-amber-50 text-amber-600 border border-amber-200/80 dark:bg-amber-950/60 dark:text-amber-400 dark:border-amber-800/40"
                   : isJudge
-                  ? "bg-indigo-500/10 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400 border border-indigo-500/20"
-                  : "bg-purple-500/10 text-purple-600 dark:bg-purple-950/40 dark:text-purple-400 border border-purple-500/20"
+                  ? "bg-indigo-50 text-indigo-600 border border-indigo-200/80 dark:bg-indigo-950/60 dark:text-indigo-400 dark:border-indigo-800/40"
+                  : "bg-purple-50 text-purple-600 border border-purple-200/80 dark:bg-purple-950/60 dark:text-purple-400 dark:border-purple-800/40"
               }`}>
-                {isPassRate && <TrendingUp className="h-5 w-5" />}
-                {isFailing && <AlertTriangle className="h-5 w-5" />}
-                {isJudge && <Scale className="h-5 w-5" />}
-                {isCases && <Layers className="h-5 w-5" />}
+                {isPassRate && <TrendingUp className="h-5 w-5 stroke-[2.2]" />}
+                {isFailing && <AlertTriangle className="h-5 w-5 stroke-[2.2]" />}
+                {isJudge && <Scale className="h-5 w-5 stroke-[2.2]" />}
+                {isCases && <Layers className="h-5 w-5 stroke-[2.2]" />}
                 {!isPassRate && !isFailing && !isJudge && !isCases && (
-                  <TrendingUp className="h-5 w-5" />
+                  <TrendingUp className="h-5 w-5 stroke-[2.2]" />
                 )}
               </span>
 
-              <span className={`rounded-full px-2.5 py-0.5 text-[10.5px] font-semibold ${
+              <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${
                 isPassRate
-                  ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                  ? "bg-emerald-50 text-emerald-800 border border-emerald-200/80 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/40"
                   : isFailing
-                  ? "bg-amber-500/10 text-amber-700 dark:text-amber-300"
+                  ? "bg-amber-50 text-amber-800 border border-amber-200/80 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800/40"
                   : isJudge
-                  ? "bg-indigo-500/10 text-indigo-700 dark:text-indigo-300"
-                  : "bg-purple-500/10 text-purple-700 dark:text-purple-300"
+                  ? "bg-indigo-50 text-indigo-800 border border-indigo-200/80 dark:bg-indigo-950/60 dark:text-indigo-300 dark:border-indigo-800/40"
+                  : "bg-purple-50 text-purple-800 border border-purple-200/80 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800/40"
               }`}>
                 {isPassRate ? "Honest Metric" : isFailing ? "Reported" : isJudge ? "Defended" : "Unseen"}
               </span>
@@ -155,10 +156,10 @@ export function StatStrip({
 
             {/* Middle row: Label + Big Value */}
             <div className="mt-4">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-muted">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted">
                 {s.label}
               </div>
-              <div className="mono-nums mt-1 text-3xl font-extrabold tracking-tight text-ink group-hover:text-accent-text transition-colors">
+              <div className="mono-nums mt-1 text-3xl font-black tracking-tight text-slate-900 dark:text-ink group-hover:text-indigo-600 dark:group-hover:text-accent-text transition-colors">
                 {s.value}
               </div>
             </div>
@@ -166,7 +167,7 @@ export function StatStrip({
             {/* Visual Progress / Distribution Bar */}
             <div className="mt-3.5">
               {isPassRate && (
-                <div className="h-2 w-full overflow-hidden rounded-full bg-ink/[0.06]">
+                <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-white/[0.08]">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-700"
                     style={{ width: `${Math.min(100, Math.max(10, numericVal))}%` }}
@@ -175,14 +176,14 @@ export function StatStrip({
               )}
 
               {isFailing && (
-                <div className="flex h-2 w-full gap-1 overflow-hidden rounded-full bg-ink/[0.06]">
+                <div className="flex h-2 w-full gap-1 overflow-hidden rounded-full bg-slate-100 dark:bg-white/[0.08]">
                   <div className="h-full w-3/5 rounded-full bg-amber-500" title="Citation precision" />
                   <div className="h-full w-2/5 rounded-full bg-orange-400" title="Edge cases" />
                 </div>
               )}
 
               {isJudge && (
-                <div className="h-2 w-full overflow-hidden rounded-full bg-ink/[0.06]">
+                <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-white/[0.08]">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-700"
                     style={{ width: `${Math.min(100, Math.max(10, numericVal))}%` }}
@@ -191,7 +192,7 @@ export function StatStrip({
               )}
 
               {isCases && (
-                <div className="flex h-2 w-full gap-1 overflow-hidden rounded-full bg-ink/[0.06]">
+                <div className="flex h-2 w-full gap-1 overflow-hidden rounded-full bg-slate-100 dark:bg-white/[0.08]">
                   <div className="h-full w-1/2 rounded-full bg-purple-500" title="Answerable" />
                   <div className="h-full w-1/4 rounded-full bg-pink-500" title="Refusal guard" />
                   <div className="h-full w-1/4 rounded-full bg-sky-500" title="Multi-doc edge" />
@@ -201,9 +202,9 @@ export function StatStrip({
 
             {/* Bottom note & micro tags */}
             {s.sub && (
-              <div className="mt-3 flex items-center justify-between border-t border-ink/[0.06] pt-2.5 text-[11px] text-muted">
+              <div className="mt-3.5 flex items-center justify-between border-t border-slate-100 dark:border-white/[0.08] pt-2.5 text-[11px] text-slate-500 dark:text-muted font-medium">
                 <span className="truncate pr-1">{s.sub}</span>
-                <span className="shrink-0 font-mono text-[10px] font-semibold text-accent-text">
+                <span className="shrink-0 rounded-md bg-slate-100 px-2 py-0.5 font-mono text-[9.5px] font-bold text-slate-700 dark:bg-white/[0.08] dark:text-slate-300">
                   {isPassRate ? "VERIFIED" : isFailing ? "DIAGNOSED" : isJudge ? "CALIBRATED" : "3 KINDS"}
                 </span>
               </div>
