@@ -14,6 +14,9 @@ import {
 } from "@/components/mocks";
 import { Pill, RunCard } from "@/components/ui";
 import { AgentsHub, type ArtifactGroup } from "@/components/agents-hub";
+import { Landscape } from "@/components/landscape";
+import { Integrations } from "@/components/integrations";
+import { DefinitionCard, ScoreCard } from "@/components/specimens";
 import { FloatingChatCard } from "@/components/floating-chat";
 
 export default async function Home() {
@@ -31,6 +34,35 @@ export default async function Home() {
   const runBriefs = Object.fromEntries(
     realRuns.map((r) => [r.id, r.manifest.brief || r.report?.brief || ""]),
   );
+
+  // Specimens for the landscape panels. Both read from committed artifacts,
+  // so neither can state a figure the repository cannot produce.
+  const scoredRuns = realRuns
+    .filter((r) => r.report && r.report.evaluated !== false)
+    .map((r) => ({
+      id: r.id,
+      rate: r.report!.final_pass_rate,
+      cases: r.suite?.cases.length ?? 0,
+    }));
+
+  const hrDef = realRuns.find((r) => r.id === "hr_policy_live")?.definition;
+  const definitionJson = hrDef
+    ? JSON.stringify(
+        {
+          name: hrDef.name,
+          model: (hrDef as { model?: string }).model,
+          temperature: hrDef.temperature,
+          retrieval: hrDef.retrieval,
+          tools: hrDef.tools,
+          output_contract: {
+            require_citations: hrDef.output_contract.require_citations,
+            refusal_message: hrDef.output_contract.refusal_message,
+          },
+        },
+        null,
+        2,
+      )
+    : "{}";
 
   const artifacts: ArtifactGroup[] = await Promise.all(
     realRuns.map(async (r) => ({
@@ -139,6 +171,29 @@ export default async function Home() {
 
       {/* ── Discover Agents Hub (Exact UI matching Image 2 & 3) ──────── */}
       <AgentsHub runBriefs={runBriefs} artifacts={artifacts} />
+
+      <Landscape
+        eyebrow="Honest by construction"
+        title="The agent is a document you can read, not a prompt you have to trust"
+        standfirst="Every decision the factory made is written down as declarative JSON — the model, the retrieval parameters, the tools that survived the audit, and the exact sentence the agent says when it refuses."
+        points={[
+          {
+            title: "Tools must earn their place",
+            body: "The generator proposes; a deterministic audit decides. A binding survives only if the tool exists and its triggering requirement resolves to a real must-answer topic. Zero tools is a valid outcome.",
+          },
+          {
+            title: "Citations are resolved, not trusted",
+            body: "Sources are numbered rather than labelled with chunk ids, because asked for doc_01_c003 a model reproduces the shape of an id and not the id. Numbers are resolved back in code; anything invented is reported as fabricated.",
+          },
+          {
+            title: "The refusal is part of the contract",
+            body: "The sentence the agent says when the documents cannot answer is written into the definition, so a refusal is a designed response rather than an empty reply.",
+          },
+        ]}
+        visual={<DefinitionCard json={definitionJson} />}
+        panelLabel="runs/hr_policy_live/03_agent_def.final.json"
+        tint="slate"
+      />
 
       {/* ── The 7 Stages & Architecture ─────────────────────────────── */}
       <div id="pipeline" className="scroll-mt-20 pt-10">
@@ -268,24 +323,32 @@ export default async function Home() {
         />
 
       {/* ── runs ─────────────────────────────────────────────────────── */}
-      <section id="runs" className="relative scroll-mt-20">
-        <div className="mx-auto max-w-content px-4 py-16">
-          <div className="flex items-center gap-3">
-            <span className="mono-nums font-mono text-[13px] font-bold text-accent">10</span>
-            <span className="h-px w-10 bg-ink/20" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.13em] text-muted">
-              Demonstrations
-            </span>
-          </div>
-          <h2 className="display mt-5 max-w-2xl text-[clamp(1.75rem,3.3vw,2.45rem)]">
-            Two deliberately dissimilar briefs
-          </h2>
-          <p className="lede mt-5 max-w-2xl">
-            Prose policy documents against a tabular parts catalogue — because a factory
-            that only works on one shape of problem has not been shown to work.
-          </p>
+      <Landscape
+        eyebrow="10 · Demonstrations"
+        title="One factory, measured on prose policy and on a parts catalogue"
+        standfirst="A factory that only works on one shape of problem has not been shown to work. These are the committed scores, not a target."
+        points={[
+          {
+            title: "Nothing is rounded up",
+            body: "Both runs stopped at the iteration cap rather than at a good number, and every proposed fix was measured and reverted because none improved the score.",
+          },
+          {
+            title: "Failures are named individually",
+            body: "The report lists each residual failure by case id with its reason — fact recall, a citation to a chunk never retrieved — instead of summarising them into a percentage.",
+          },
+          {
+            title: "The judge's agreement is published",
+            body: "Cohen's κ against hand-adjudicated labels appears next to the score whether or not it flatters the run. Loosening a judge until it agrees with its author is how a calibration becomes decoration.",
+          },
+        ]}
+        visual={<ScoreCard runs={scoredRuns} />}
+        panelLabel={`runs/*/06_report.json · ${scoredRuns.length} scored runs`}
+        tint="mint"
+      />
 
-          <div className="mt-9 grid gap-4 sm:grid-cols-2">
+      <section id="runs" className="relative scroll-mt-20">
+        <div className="mx-auto max-w-content px-4 pb-16">
+          <div className="grid gap-4 sm:grid-cols-2">
             {runs.map((r) => (
               <RunCard
                 key={r.id}
@@ -304,6 +367,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <Integrations />
 
       <div id="trust" className="scroll-mt-20" />
     </main>

@@ -504,7 +504,7 @@ export function RouterMock() {
     <div className="mock rounded-3xl border bg-surface p-5 shadow-[0_16px_40px_-16px_rgba(5,150,105,0.14)]">
       <div className="flex items-center justify-between border-b pb-3">
         <div className="flex items-center gap-2">
-          <span className="grid h-6 w-6 place-items-center rounded-lg bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
+          <span className="grid h-6 w-6 place-items-center rounded-lg bg-indigo-100 text-indigo-800 dark:bg-emerald-950/60 dark:text-emerald-300">
             <IconUsers className="h-3.5 w-3.5" />
           </span>
           <div>
@@ -512,7 +512,7 @@ export function RouterMock() {
             <div className="text-[10px] text-muted">2 built members · live routing</div>
           </div>
         </div>
-        <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-400">
+        <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-indigo-800 dark:bg-emerald-950/60 dark:text-emerald-400">
           real request
         </span>
       </div>
@@ -524,7 +524,7 @@ export function RouterMock() {
             onClick={() => ask(n)}
             disabled={busy}
             className={`rounded-lg border px-2.5 py-1 text-left text-[11px] transition disabled:opacity-50 ${
-              i === n ? "border-emerald-500 bg-emerald-50/60 text-ink dark:bg-emerald-950/30" : "text-muted hover:text-ink"
+              i === n ? "border-indigo-500 bg-indigo-50/60 text-ink dark:bg-emerald-950/30" : "text-muted hover:text-ink"
             }`}
           >
             {q}

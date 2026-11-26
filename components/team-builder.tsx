@@ -95,7 +95,7 @@ export function TeamBuilder({ isOpen, agents, onClose, onTeamCreated }: TeamBuil
               placeholder="Procurement desk"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-1.5 w-full rounded-xl border bg-ink/[0.02] px-3.5 py-2 text-xs text-ink placeholder:text-muted focus:border-emerald-600 focus:outline-none"
+              className="mt-1.5 w-full rounded-xl border bg-ink/[0.02] px-3.5 py-2 text-xs text-ink placeholder:text-muted focus:border-indigo-600 focus:outline-none"
             />
           </div>
 
@@ -116,8 +116,8 @@ export function TeamBuilder({ isOpen, agents, onClose, onTeamCreated }: TeamBuil
                     onClick={() => toggle(a.id)}
                     className={`flex items-center gap-2.5 rounded-xl border p-2.5 text-left transition ${
                       on
-                        ? "border-emerald-500 bg-emerald-50/60 dark:bg-emerald-950/30"
-                        : "bg-ink/[0.02] hover:border-emerald-400"
+                        ? "border-indigo-500 bg-indigo-50/60 dark:bg-emerald-950/30"
+                        : "bg-ink/[0.02] hover:border-indigo-400"
                     }`}
                   >
                     <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-xl text-sm ${a.avatarBg}`}>
@@ -129,7 +129,7 @@ export function TeamBuilder({ isOpen, agents, onClose, onTeamCreated }: TeamBuil
                         {a.runId ? "built · can answer" : "brief · routes only"}
                       </span>
                     </span>
-                    {on && <span className="text-xs text-emerald-600">✓</span>}
+                    {on && <span className="text-xs text-indigo-600">✓</span>}
                   </button>
                 );
               })}
@@ -157,7 +157,7 @@ export function TeamBuilder({ isOpen, agents, onClose, onTeamCreated }: TeamBuil
             type="button"
             onClick={create}
             disabled={picked.length === 0}
-            className="flex-1 rounded-full bg-emerald-600 py-2.5 text-xs font-semibold text-white shadow-md transition hover:bg-emerald-700 disabled:opacity-50"
+            className="flex-1 rounded-full bg-indigo-600 py-2.5 text-xs font-semibold text-white shadow-md transition hover:bg-indigo-700 disabled:opacity-50"
           >
             Create room
           </button>

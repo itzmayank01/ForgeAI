@@ -107,10 +107,10 @@ export function RunCard({
   synthetic: boolean; iterations: number;
 }) {
   return (
-    <div className="card group relative flex flex-col justify-between p-5 transition hover:border-emerald-500/50 hover:shadow-[0_4px_24px_-8px_rgba(5,150,105,0.18)]">
+    <div className="card group relative flex flex-col justify-between p-5 transition hover:border-indigo-500/50 hover:shadow-[0_4px_24px_-8px_rgba(99,102,241,0.18)]">
       <div>
         <div className="flex items-start justify-between gap-3">
-          <Link href={`/runs/${id}`} className="font-semibold tracking-tight hover:text-emerald-700 transition">
+          <Link href={`/runs/${id}`} className="font-semibold tracking-tight hover:text-indigo-700 transition">
             {id.replace(/^_/, "").replace(/_/g, " ")}
           </Link>
           {synthetic ? <Pill tone="warn">fixture</Pill> : <Pill tone="accent">live run</Pill>}
@@ -135,13 +135,13 @@ export function RunCard({
         <div className="flex items-center gap-2">
           <Link
             href={`/chat/${id}`}
-            className="rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 px-3 py-1 text-[11px] font-semibold hover:bg-emerald-100 transition"
+            className="rounded-full bg-indigo-50 dark:bg-emerald-950/60 text-indigo-700 dark:text-emerald-300 px-3 py-1 text-[11px] font-semibold hover:bg-indigo-100 transition"
           >
             Chat Runner →
           </Link>
           <Link
             href={`/runs/${id}`}
-            className="font-medium text-ink hover:text-emerald-700 transition"
+            className="font-medium text-ink hover:text-indigo-700 transition"
           >
             Inspect →
           </Link>

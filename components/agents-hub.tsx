@@ -260,7 +260,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                 >
                   {label}
                   {tab === key && (
-                    <span className="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-emerald-600" />
+                    <span className="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-indigo-600" />
                   )}
                 </button>
               ))}
@@ -278,7 +278,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                   placeholder={tab === "agents" ? "Search agents…" : "Search agent teams…"}
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="w-full rounded-full border border-ink/10 bg-ink/[0.03] py-2 pl-9 pr-8 text-xs text-ink shadow-xs transition placeholder:text-muted focus:border-emerald-600 focus:bg-surface focus:outline-none"
+                  className="w-full rounded-full border border-ink/10 bg-ink/[0.03] py-2 pl-9 pr-8 text-xs text-ink shadow-xs transition placeholder:text-muted focus:border-indigo-600 focus:bg-surface focus:outline-none"
                 />
                 {query && (
                   <button
@@ -295,7 +295,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
             {tab === "agents" && (
               <button
                 onClick={() => { setChip(null); setStudioOpen(true); }}
-                className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-5 py-2 text-xs font-semibold text-white shadow-xs transition hover:bg-emerald-700 active:scale-[0.98]"
+                className="inline-flex items-center gap-1.5 rounded-full bg-indigo-600 px-5 py-2 text-xs font-semibold text-white shadow-xs transition hover:bg-indigo-700 active:scale-[0.98]"
               >
                 <span className="text-sm font-bold leading-none">+</span>
                 Create My Own Agent
@@ -304,7 +304,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
             {tab === "teams" && (
               <button
                 onClick={() => setTeamBuilderOpen(true)}
-                className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-5 py-2 text-xs font-semibold text-white shadow-xs transition hover:bg-emerald-700 active:scale-[0.98]"
+                className="inline-flex items-center gap-1.5 rounded-full bg-indigo-600 px-5 py-2 text-xs font-semibold text-white shadow-xs transition hover:bg-indigo-700 active:scale-[0.98]"
               >
                 <span className="text-sm font-bold leading-none">+</span>
                 Create My Own Agent Team
@@ -327,15 +327,15 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
             <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
               <div className="flex min-w-0 flex-wrap items-center gap-2">
                 {chip && (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-500/20">
-                    <span className="grid h-4 w-4 place-items-center rounded-md bg-emerald-600/15 text-emerald-700 dark:text-emerald-400">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-2.5 py-1 text-[11px] font-semibold text-indigo-700 dark:bg-emerald-950/50 dark:text-emerald-300 border border-indigo-500/20">
+                    <span className="grid h-4 w-4 place-items-center rounded-md bg-emerald-600/15 text-indigo-700 dark:text-emerald-400">
                       <AgentIcon name={chip.id} className="w-3 h-3" />
                     </span>
                     <span>{chip.name}</span>
                     <button
                       onClick={() => { setChip(null); setComposer(""); }}
                       aria-label={`Remove ${chip.name}`}
-                      className="text-emerald-700/70 hover:text-emerald-900 dark:text-emerald-400/70 ml-0.5"
+                      className="text-indigo-700/70 hover:text-indigo-900 dark:text-emerald-400/70 ml-0.5"
                     >
                       <IconCross className="h-2.5 w-2.5" />
                     </button>
@@ -350,7 +350,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
               <button
                 onClick={() => setStudioOpen(true)}
                 disabled={!composer.trim()}
-                className="rounded-full bg-emerald-600 px-5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-emerald-700 disabled:opacity-40"
+                className="rounded-full bg-indigo-600 px-5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-indigo-700 disabled:opacity-40"
               >
                 Create →
               </button>
@@ -367,7 +367,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                 onClick={() => setCategory(cat)}
                 className={`whitespace-nowrap rounded-full px-4 py-1.5 text-xs font-semibold transition ${
                   category === cat
-                    ? "bg-emerald-600 text-white shadow-sm"
+                    ? "bg-indigo-600 text-white shadow-sm"
                     : "bg-ink/[0.04] text-muted hover:bg-ink/[0.08] hover:text-ink"}`}
               >
                 {cat}
@@ -421,13 +421,13 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
             {filteredAgents.map((agent) => (
               <div
                 key={agent.id}
-                className="group flex flex-col justify-between rounded-2xl border bg-surface p-4 shadow-xs transition hover:border-emerald-500/40 hover:shadow-md"
+                className="group flex flex-col justify-between rounded-2xl border bg-surface p-4 shadow-xs transition hover:border-indigo-500/40 hover:shadow-md"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex min-w-0 items-start gap-3">
-                      <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-emerald-500/15 ${agent.avatarBg}`}>
-                        <AgentIcon name={agent.id} className="w-5 h-5 text-emerald-700 dark:text-emerald-400" />
+                      <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-indigo-500/15 ${agent.avatarBg}`}>
+                        <AgentIcon name={agent.id} className="w-5 h-5 text-indigo-700 dark:text-emerald-400" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <h3 className="truncate text-[14px] font-bold tracking-tight text-ink">
@@ -512,7 +512,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
               return (
                 <div
                   key={team.id}
-                  className="flex flex-col justify-between rounded-2xl border bg-surface p-5 shadow-xs transition hover:border-emerald-500/40 hover:shadow-md"
+                  className="flex flex-col justify-between rounded-2xl border bg-surface p-5 shadow-xs transition hover:border-indigo-500/40 hover:shadow-md"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2">
@@ -669,7 +669,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
           <div className="relative flex h-full w-full max-w-lg flex-col border-l bg-surface shadow-2xl">
             <div className="flex items-center justify-between border-b bg-canvas/80 px-5 py-3.5 backdrop-blur">
               <div className="flex min-w-0 items-center gap-3">
-                <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-emerald-500/15 ${
+                <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-indigo-500/15 ${
                   chatAgent?.avatarBg ?? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300"}`}>
                   {chatAgent ? (
                     <AgentIcon name={chatAgent.id} className="w-5 h-5 text-emerald-700 dark:text-emerald-300" />
@@ -716,7 +716,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                     <div className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
                       <div className={`max-w-[88%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-xs leading-relaxed ${
                         m.role === "user"
-                          ? "rounded-br-sm bg-emerald-600 text-white shadow-sm"
+                          ? "rounded-br-sm bg-indigo-600 text-white shadow-sm"
                           : "rounded-bl-sm border bg-ink/[0.04] text-ink"}`}>
                         {m.text}
                       </div>
@@ -807,7 +807,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   disabled={busy}
-                  className="flex-1 rounded-full border bg-ink/[0.03] px-4 py-2 text-xs text-ink transition placeholder:text-muted focus:border-emerald-600 focus:bg-surface focus:outline-none"
+                  className="flex-1 rounded-full border bg-ink/[0.03] px-4 py-2 text-xs text-ink transition placeholder:text-muted focus:border-indigo-600 focus:bg-surface focus:outline-none"
                 />
                 <button
                   type="submit"

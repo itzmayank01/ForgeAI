@@ -181,7 +181,7 @@ export function BriefStudio({
                 placeholder="Shore staff HR advisor"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1.5 w-full rounded-xl border bg-ink/[0.02] px-3.5 py-2 text-xs text-ink placeholder:text-muted focus:border-emerald-600 focus:outline-none"
+                className="mt-1.5 w-full rounded-xl border bg-ink/[0.02] px-3.5 py-2 text-xs text-ink placeholder:text-muted focus:border-indigo-600 focus:outline-none"
               />
             </div>
 
@@ -196,7 +196,7 @@ export function BriefStudio({
                 placeholder="I need an assistant that answers HR policy questions for shore staff — annual leave and carry-over, parental leave, travel expense reimbursement, and how to raise a grievance. It must never give legal advice."
                 value={brief}
                 onChange={(e) => setBrief(e.target.value)}
-                className="mt-1.5 w-full rounded-xl border bg-ink/[0.02] p-3 text-xs leading-relaxed text-ink placeholder:text-muted focus:border-emerald-600 focus:outline-none"
+                className="mt-1.5 w-full rounded-xl border bg-ink/[0.02] p-3 text-xs leading-relaxed text-ink placeholder:text-muted focus:border-indigo-600 focus:outline-none"
               />
               <p className="mt-1 text-[11px] text-muted">
                 Clauses are split on sentences, dashes and long comma lists — the same shape the
@@ -214,8 +214,8 @@ export function BriefStudio({
                     onClick={() => setCorpus(c.id)}
                     className={`rounded-xl border p-3 text-left transition ${
                       corpus === c.id
-                        ? "border-emerald-500 bg-emerald-50/60 dark:bg-emerald-950/30"
-                        : "bg-ink/[0.02] hover:border-emerald-400"
+                        ? "border-indigo-500 bg-indigo-50/60 dark:bg-emerald-950/30"
+                        : "bg-ink/[0.02] hover:border-indigo-400"
                     }`}
                   >
                     <div className="text-xs font-semibold text-ink">{c.label}</div>
@@ -232,7 +232,7 @@ export function BriefStudio({
             <button
               type="submit"
               disabled={busy || !brief.trim()}
-              className="w-full rounded-full bg-emerald-600 py-3 text-xs font-semibold text-white shadow-md transition hover:bg-emerald-700 disabled:opacity-50"
+              className="w-full rounded-full bg-indigo-600 py-3 text-xs font-semibold text-white shadow-md transition hover:bg-indigo-700 disabled:opacity-50"
             >
               {busy ? "Retrieving…" : "Run pre-flight →"}
             </button>
@@ -353,7 +353,7 @@ export function BriefStudio({
                 <button
                   type="button"
                   onClick={saveBrief}
-                  className="flex-1 rounded-full bg-emerald-600 py-2.5 text-xs font-semibold text-white shadow-md transition hover:bg-emerald-700"
+                  className="flex-1 rounded-full bg-indigo-600 py-2.5 text-xs font-semibold text-white shadow-md transition hover:bg-indigo-700"
                 >
                   Keep this brief in the gallery
                 </button>

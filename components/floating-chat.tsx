@@ -127,7 +127,7 @@ export function FloatingChatCard({
 
   return (
     <div
-      className={`relative mx-auto flex w-full max-w-[390px] flex-col overflow-hidden rounded-3xl border border-ink/10 bg-surface shadow-2xl transition hover:shadow-[0_24px_50px_-12px_rgba(5,150,105,0.18)] ${className}`}
+      className={`relative mx-auto flex w-full max-w-[390px] flex-col overflow-hidden rounded-3xl border border-ink/10 bg-surface shadow-2xl transition hover:shadow-[0_24px_50px_-12px_rgba(99,102,241,0.18)] ${className}`}
     >
       {/* ── Top Header matching reference (← Title ✕) ── */}
       <div className="flex items-center justify-between border-b border-ink/10 bg-canvas/70 px-5 py-3.5 backdrop-blur-md">
@@ -252,7 +252,7 @@ export function FloatingChatCard({
       <div className="border-t border-ink/10 bg-canvas/40 p-3.5">
         <form
           onSubmit={handleSend}
-          className="flex items-center justify-between gap-2 rounded-full border border-ink/10 bg-surface px-3.5 py-2 shadow-2xs transition focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-600/10"
+          className="flex items-center justify-between gap-2 rounded-full border border-ink/10 bg-surface px-3.5 py-2 shadow-2xs transition focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/10"
         >
           {/* Paperclip icon */}
           <button
@@ -286,7 +286,7 @@ export function FloatingChatCard({
           <span>{isLiveMode ? "Press Enter to query" : "Hover chat to pause float"}</span>
           <Link
             href="/chat/hr_policy_live"
-            className="font-semibold text-emerald-700 hover:underline dark:text-emerald-400"
+            className="font-semibold text-indigo-700 hover:underline dark:text-emerald-400"
           >
             Full Live Runner →
           </Link>
