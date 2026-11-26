@@ -132,6 +132,23 @@ of one document set. Its disagreements name three more generator defects:
   attached and should have read the whole file. A whole-table aggregate cannot
   be answered from five chunks, and nothing currently forces the tool.
 
+### Regression mode, run for real
+
+`demos/hr_policy_changed` revises the leave policy - 22 days becomes 25, the
+carry-over cap drops from 5 days to 3, per-diems rise - and **deletes** the
+clause covering sickness during annual leave. Replaying the committed eval set
+against an agent regenerated from those documents:
+
+```
+79% -> 69%   broke 3 · fixed 0 · unchanged 26
+```
+
+The headline fall is not the point; the named cases are. `ans_009` asks whether
+sick days during annual leave are returned to the balance, and its supporting
+clause no longer exists, so the agent stopped being able to answer it. A report
+that only moved the percentage would have hidden which capability was lost.
+Committed at `runs/hr_policy_live/07_regression.md`.
+
 ### Rehearsal on an unseen corpus
 
 `rehearsal/` holds a port-agency brief and documents the factory had never

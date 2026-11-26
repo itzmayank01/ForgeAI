@@ -1,0 +1,29 @@
+{
+  "baseline_run": "hr_policy_live",
+  "corpus_hash_before": "b432e1734f54bb0d",
+  "corpus_hash_after": "09feea6289056da8",
+  "pass_rate_before": 0.793,
+  "pass_rate_after": 0.69,
+  "broke": [
+    {
+      "case_id": "ans_009",
+      "question": "If I get sick while on my annual leave and give a doctor’s note, will those days be counted as sick leave and added back to my annual leave balance?",
+      "before": true,
+      "after": false
+    },
+    {
+      "case_id": "ans_008",
+      "question": "Does unpaid leave count toward continuous service for clause 1.2?",
+      "before": true,
+      "after": false
+    },
+    {
+      "case_id": "edge_calc_01",
+      "question": "What is the total number of days from the appeal hearing period plus the retention period in days?",
+      "before": true,
+      "after": false
+    }
+  ],
+  "fixed": [],
+  "unchanged": 26
+}
