@@ -1314,5 +1314,49 @@
    }
   ],
   "tool_calls": []
+ },
+ "oos_04": {
+  "answer": "",
+  "citations": [],
+  "refused": true,
+  "confidence": 1.0,
+  "retrieved": [
+   {
+    "chunk_id": "doc_00_c001",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance\n3.1 A formal grievance must be submitted in writing to HR using form HR-09a.\n3.2 HR acknowledges receipt within **5 working days**.\n3.3 A grievance hearing is convened within **20 working days** of receipt.\n3.4 The member of staff may be accompanied by a colleague or a trade union\nrepresentative.\n3.5 A written outcome is issued within **10 working days** of the hearing.\n## 4. Stage 3 \u2014 Appeal\n4.1 An appeal must be lodged within **10 working days** of the written outcome.\n4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records",
+    "score": 0.6162
+   },
+   {
+    "chunk_id": "doc_00_c000",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "# Grievance Procedure\n**Policy reference:** HR-09 \u00b7 **Effective:** 1 January 2026\n## 1. Scope\n1.1 This procedure covers complaints about working conditions, treatment by\ncolleagues or managers, application of company policy, and health and safety\nconcerns.\n1.2 Complaints of bullying, harassment or discrimination follow this procedure\nbut are escalated directly to Stage 2.\n## 2. Stage 1 \u2014 Informal resolution\n2.1 Staff are encouraged to raise the matter directly with their line manager\nwithin **15 working days** of the incident.\n2.2 The line manager must acknowledge within **3 working days** and hold an\ninformal discussion within **10 working days**.\n2.3 Where the grievance concerns the line manager, it may be raised with the\nnext manager in the reporting line.\n## 3. Stage 2 \u2014 Formal grievance",
+    "score": 0.5856
+   },
+   {
+    "chunk_id": "doc_00_c002",
+    "doc_id": "doc_00",
+    "filename": "grievance_procedure.md",
+    "text": "4.2 The appeal is heard by a manager not previously involved, within **20\nworking days**.\n4.3 The appeal outcome is final within the company procedure.\n## 5. Records\n5.1 Grievance records are retained for **6 years** from the date of the final\noutcome.\n5.2 Records are confidential and disclosed only to those directly involved in\nthe procedure.\n## 6. Protection\n6.1 No member of staff will be disadvantaged for raising a grievance in good\nfaith.\n6.2 Grievances found to have been raised maliciously may be treated as a\ndisciplinary matter.",
+    "score": 0.5785
+   },
+   {
+    "chunk_id": "doc_02_c002",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "4.4 Taxi fares are reimbursed where public transport is unavailable or where the\njourney falls between 22:00 and 06:00.\n## 5. Approval limits\n5.1 Line managers may approve claims up to **EUR 1,500**.\n5.2 Heads of Department may approve claims up to **EUR 7,500**.\n5.3 Claims above EUR 7,500 require Finance Director approval.\n## 6. Submission deadline\n6.1 Claims must be submitted within **30 days** of the final day of travel.\n6.2 Claims submitted between 31 and 60 days require written justification.\n6.3 Claims submitted after **60 days** are not reimbursed.",
+    "score": 0.5352
+   },
+   {
+    "chunk_id": "doc_02_c000",
+    "doc_id": "doc_02",
+    "filename": "travel_expenses.md",
+    "text": "# Travel and Expense Reimbursement Policy\n**Policy reference:** FIN-11 \u00b7 **Effective:** 1 January 2026\n## 1. Per-diem allowances\n1.1 Domestic travel attracts a per-diem of **EUR 65** per full day.\n1.2 International travel attracts a per-diem of **EUR 95** per full day.\n1.3 Travel to designated high-cost ports (Singapore, Oslo, Tokyo, Zurich)\nattracts a per-diem of **EUR 130** per full day.\n1.4 A part day of **6 hours or more** is claimed at 50% of the applicable rate.\nA part day under 6 hours is not claimable.\n## 2. Receipts\n2.1 Receipts are required for any single item of **EUR 40 or more**.\n2.2 Items under EUR 40 may be claimed without a receipt up to a monthly\naggregate of **EUR 200**.\n2.3 Claims submitted without required receipts are rejected and returned.\n## 3. Accommodation",
+    "score": 0.5289
+   }
+  ],
+  "tool_calls": []
  }
 }

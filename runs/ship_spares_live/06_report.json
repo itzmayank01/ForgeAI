@@ -336,7 +336,12 @@
         "human": true
       }
     ],
-    "stale_labels_dropped": 0
+    "stale_labels_dropped": 0,
+    "iteration": 0,
+    "verdicts_signature": {
+      "judge": "openai/gpt-oss-safeguard-20b",
+      "answers": "1ef7a142afa9c22e1689871b818f1ce8"
+    }
   },
   "stop_reason": "iteration cap (2) reached",
   "budget": {

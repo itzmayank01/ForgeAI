@@ -19,8 +19,8 @@
         "easy": 1.0,
         "hard": 0.5
       },
-      "mean_answer_length": 71,
-      "llm_escalation_rate": 0.069
+      "mean_answer_length": 112,
+      "llm_escalation_rate": 0.034
     },
     {
       "iteration": 1,
@@ -37,7 +37,25 @@
         "easy": 1.0,
         "hard": 0.5
       },
-      "mean_answer_length": 69,
+      "mean_answer_length": 116,
+      "llm_escalation_rate": 0.069
+    },
+    {
+      "iteration": 2,
+      "total": 29,
+      "passed": 23,
+      "pass_rate": 0.793,
+      "by_kind": {
+        "answerable": 0.933,
+        "edge": 0.5,
+        "out_of_scope": 0.833
+      },
+      "by_difficulty": {
+        "medium": 0.882,
+        "easy": 1.0,
+        "hard": 0.5
+      },
+      "mean_answer_length": 112,
       "llm_escalation_rate": 0.034
     }
   ],
@@ -50,7 +68,7 @@
       },
       "diagnoses": [
         {
-          "case_id": "ans_014",
+          "case_id": "ans_010",
           "category": "prompt_defect",
           "evidence": "correct context retrieved but fact recall 0.0",
           "classified_by": "deterministic"
@@ -91,7 +109,7 @@
         "rung": "patch_format_block",
         "rationale": "6 failures classified prompt_defect; applying patch_format_block",
         "targets_case_ids": [
-          "ans_014",
+          "ans_010",
           "edge_multi_00",
           "edge_multi_01",
           "edge_multi_02",
@@ -102,7 +120,7 @@
             "system_prompt": "<1242 chars>"
           },
           "after": {
-            "system_prompt": "<1751 chars, FORMAT revised>"
+            "system_prompt": "<1242 chars, FORMAT revised>"
           }
         }
       },
@@ -110,8 +128,8 @@
       "score_after": 0.793,
       "kept": false,
       "revert_reason": "scored 79% against best 79%; reverted to v0",
-      "seconds": 66.6,
-      "tokens": 37458
+      "seconds": 0.6,
+      "tokens": 885
     },
     {
       "iteration": 1,
@@ -121,7 +139,7 @@
       },
       "diagnoses": [
         {
-          "case_id": "ans_014",
+          "case_id": "ans_010",
           "category": "prompt_defect",
           "evidence": "correct context retrieved but fact recall 0.0",
           "classified_by": "deterministic"
@@ -129,7 +147,7 @@
         {
           "case_id": "edge_multi_00",
           "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
+          "evidence": "correct context retrieved but fact recall 0.5",
           "classified_by": "deterministic"
         },
         {
@@ -141,7 +159,7 @@
         {
           "case_id": "edge_multi_02",
           "category": "prompt_defect",
-          "evidence": "correct context retrieved but fact recall 0.0",
+          "evidence": "correct context retrieved but fact recall 0.5",
           "classified_by": "deterministic"
         },
         {
@@ -162,7 +180,7 @@
         "rung": "patch_scope_block",
         "rationale": "6 failures classified prompt_defect; applying patch_scope_block",
         "targets_case_ids": [
-          "ans_014",
+          "ans_010",
           "edge_multi_00",
           "edge_multi_01",
           "edge_multi_02",
@@ -173,22 +191,22 @@
             "system_prompt": "<1242 chars>"
           },
           "after": {
-            "system_prompt": "<1416 chars, SCOPE revised>"
+            "system_prompt": "<1428 chars, SCOPE revised>"
           }
         }
       },
       "score_before": 0.793,
-      "score_after": 0.0,
-      "kept": true,
-      "revert_reason": null,
-      "seconds": 183.9,
-      "tokens": 98235
+      "score_after": 0.793,
+      "kept": false,
+      "revert_reason": "scored 79% against best 79%; reverted to v0",
+      "seconds": 0.9,
+      "tokens": 1807
     }
   ],
   "residual_failures": [
     {
-      "case_id": "ans_014",
-      "question": "What does policy HR-09 say about how to file a grievance?",
+      "case_id": "ans_010",
+      "question": "Can I get taxi fares reimbursed if I travel after 10pm?",
       "why": "fact recall 0.0"
     },
     {
@@ -249,15 +267,20 @@
         "human": true
       }
     ],
-    "stale_labels_dropped": 0
+    "stale_labels_dropped": 0,
+    "iteration": 0,
+    "verdicts_signature": {
+      "judge": "qwen/qwen3.8-27b",
+      "answers": "eab8e3c3cae080a0ce4b1b0b984b11aa"
+    }
   },
-  "stop_reason": "incomplete eval pass (resume to finish)",
+  "stop_reason": "iteration cap (2) reached",
   "budget": {
     "max_tokens": 500000,
     "max_seconds": 2400,
     "max_iterations": 2,
-    "tokens_used": 97320,
-    "started_at": 1795626954.304658
+    "tokens_used": 1807,
+    "started_at": 1795661108.178433
   },
   "best_version": 0,
   "evaluated": true

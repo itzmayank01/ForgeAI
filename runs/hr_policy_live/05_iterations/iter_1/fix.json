@@ -58,7 +58,7 @@
         "system_prompt": "<1242 chars>"
       },
       "after": {
-        "system_prompt": "<1422 chars, SCOPE revised>"
+        "system_prompt": "<1428 chars, SCOPE revised>"
       }
     }
   },
@@ -66,6 +66,6 @@
   "score_after": 0.0,
   "kept": true,
   "revert_reason": null,
-  "seconds": 237.4,
-  "tokens": 120578
+  "seconds": 0.9,
+  "tokens": 1807
 }

@@ -24,11 +24,38 @@ from .models.agent_def import AgentDefinition
 from .models.common import CorpusSummary
 from .models.requirements import GroundabilityReport, RequirementsDoc
 from .models.evals import CaseVerdict, EvalSuite, Scorecard
-from .models.iteration import Budget, IterationLog, RunReport
+from .models.iteration import Budget, IterationLog, JudgeCalibration, RunReport
 from .runtime.agent import Agent, AgentResponse
 from .stages import critic, evalgen, generator, groundability, intake, judge, optimizer
 
 PASS_TARGET = 0.9
+
+def _load_calibration(out_dir: Path) -> "JudgeCalibration | None":
+    """A previous run's calibration, if it still describes these verdicts."""
+    path = out_dir / "06_report.json"
+    if not path.exists():
+        return None
+    try:
+        cal = (json.loads(path.read_text()) or {}).get("calibration")
+    except (OSError, json.JSONDecodeError):
+        return None
+    if not cal or not cal.get("n_cases"):
+        return None
+    try:
+        prior = JudgeCalibration.model_validate(cal)
+    except Exception:  # noqa: BLE001 - a malformed block must not end a run
+        return None
+    vpath = out_dir / "05_iterations" / f"iter_{prior.iteration}" / "verdicts.json"
+    if not vpath.exists():
+        return None
+    try:
+        current = (json.loads(vpath.read_text()) or {}).get("_signature")
+    except (OSError, json.JSONDecodeError):
+        return None
+    if not prior.verdicts_signature or prior.verdicts_signature != current:
+        return None
+    return prior
+
 
 def verdict_signature(responses: dict) -> dict:
     """What a set of verdicts was produced from.
@@ -440,6 +467,15 @@ def build(
     for n, entry in enumerate(iterations):  # back-fill the measured deltas
         if n + 1 < len(scorecards):
             entry.score_after = scorecards[n + 1].pass_rate
+        else:
+            # The run stopped before this fix was re-scored. The default 0.0
+            # reported it as having scored zero, which reads as "this change
+            # destroyed the agent" rather than "we never found out", and
+            # kept=True claimed a fix had survived a validation that never ran.
+            entry.score_after = None
+            entry.kept = None
+            entry.revert_reason = (
+                "not re-scored: the run stopped before this fix was measured")
 
     # --- 6. report ----------------------------------------------------------
     definition = best_def
@@ -460,6 +496,18 @@ def build(
         stop_reason=stop_reason or "completed", budget=budget,
         best_version=definition.version,
     )
+    # Carry a still-valid calibration across a rebuild. `forgeai calibrate`
+    # writes its result into this file, and re-finalising a run overwrote it -
+    # so a run that had been calibrated silently reverted to reporting no judge
+    # agreement at all. Only carried when the verdicts it describes are
+    # unchanged; otherwise it is dropped, because a kappa for answers that have
+    # moved on is worse than no kappa.
+    prior = _load_calibration(out_dir)
+    if prior is not None:
+        report.calibration = prior
+        log(f"  carried calibration forward: kappa {prior.cohens_kappa} "
+            f"over {prior.n_cases} label(s)")
+
     _write(out_dir / "06_report.json", report)
     if report.evaluated:
         log(f"[6/6] done: {report.final_pass_rate:.0%} pass, "

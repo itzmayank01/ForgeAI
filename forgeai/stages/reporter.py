@@ -43,7 +43,7 @@ def render(report: RunReport, definition: AgentDefinition) -> str:
 
     if report.iterations:
         a("## What changed, and whether it helped\n")
-        if report.best_version == 0 and not any(i.kept for i in report.iterations):
+        if report.best_version == 0 and not any(i.kept is True for i in report.iterations):
             a("> No fix beat the baseline. Every attempted change was reverted and the "
               "shipped agent is the one the generator produced first. That is a real "
               "result: on this corpus the generated definition was already at its best, "
@@ -51,15 +51,26 @@ def render(report: RunReport, definition: AgentDefinition) -> str:
         for it in report.iterations:
             if it.fix is None:
                 continue
-            verdict = "kept" if it.kept else f"REVERTED - {it.revert_reason}"
+            # kept is None when the run stopped before this fix was re-scored.
+            # Calling that "kept" claims a validation that never ran; calling it
+            # "REVERTED" claims a measurement that never happened.
+            if it.kept is None:
+                verdict = "NOT MEASURED - the run stopped before re-scoring it"
+            elif it.kept:
+                verdict = "kept"
+            else:
+                verdict = f"REVERTED - {it.revert_reason}"
             a(f"**Iteration {it.iteration}: `{it.fix.category}` -> `{it.fix.rung}`** ({verdict})\n")
             a(f"- Diagnosed: {it.failures_by_category}")
             a(f"- Rationale: {it.fix.rationale}")
             if it.fix.diff.get("before"):
                 a(f"- Changed: `{it.fix.diff['before']}` -> `{it.fix.diff['after']}`")
             a(f"- Targeted: {', '.join(it.fix.targets_case_ids[:6]) or 'n/a'}")
-            a(f"- Score: {it.score_before:.0%} -> {it.score_after:.0%} "
-              f"(delta {it.delta:+.0%})\n")
+            if it.score_after is None:
+                a(f"- Score: {it.score_before:.0%} -> not measured\n")
+            else:
+                a(f"- Score: {it.score_before:.0%} -> {it.score_after:.0%} "
+                  f"(delta {it.delta:+.0%})\n")
 
     a("## What still fails\n")
     if not report.residual_failures:

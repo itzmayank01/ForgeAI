@@ -353,6 +353,7 @@ def calibrate(
     cal = JudgeCalibration(
         n_cases=n, agreements=agree, agreement_rate=round(po, 3),
         cohens_kappa=round(kappa, 3), stale_labels_dropped=len(stale),
+        iteration=iteration, verdicts_signature=verdicts.get("_signature", {}),
         disagreements=[
             {"case_id": k, "judge": by_id[k], "human": v}
             for k, v in labels.items() if k in by_id and by_id[k] != v

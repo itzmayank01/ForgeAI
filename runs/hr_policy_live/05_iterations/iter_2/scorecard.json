@@ -1,0 +1,18 @@
+{
+  "iteration": 2,
+  "total": 29,
+  "passed": 23,
+  "pass_rate": 0.793,
+  "by_kind": {
+    "answerable": 0.933,
+    "edge": 0.5,
+    "out_of_scope": 0.833
+  },
+  "by_difficulty": {
+    "medium": 0.882,
+    "easy": 1.0,
+    "hard": 0.5
+  },
+  "mean_answer_length": 112,
+  "llm_escalation_rate": 0.034
+}

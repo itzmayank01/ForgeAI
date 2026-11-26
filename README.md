@@ -20,7 +20,7 @@ Measured, not claimed: every figure below is read from a committed artifact.
 
 | run | pass rate | cases | fix iterations | residual | judge agreement |
 |---|---|---|---|---|---|
-| `hr_policy_live` | **79%** (23/29) | 29 | 2 (1 reverted) | 6 | 58% (kappa 0.17) |
+| `hr_policy_live` | **79%** (23/29) | 29 | 2 (both reverted) | 6 | 58% (kappa 0.17) |
 | `ship_spares_live` | **66%** (19/29) | 29 | 2 (both reverted) | 10 | 58% (kappa 0.17) |
 
 HR's 79% is up from an earlier 66%, and the failure taxonomy shows why:
@@ -33,9 +33,11 @@ discouraging it. A second defect fixed alongside it: tools had never fired, in
 90 answers across three runs, because the planner prompt asserted "most
 questions do not" need one and so decided before looking.
 
-Three of the five fix iterations across both runs were **reverted** - the fix
-did not beat the definition the generator produced first. That is the loop
-doing its job, not a missing result.
+**Every fix either run attempted was reverted** - four in total, none beating
+the definition the generator produced first. That is the loop doing its job
+rather than a missing result: on these corpora its task was to establish that
+the baseline was already at its best, and the iteration logs carry the scores
+that settled it.
 
 **The two runs use different models, and that is a free-tier consequence rather
 than a design choice.** Daily token caps are per organization per model, and

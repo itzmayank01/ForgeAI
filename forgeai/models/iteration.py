@@ -47,14 +47,25 @@ class IterationLog(BaseModel):
     diagnoses: list[FailureDiagnosis] = Field(default_factory=list)
     fix: FixAction | None = None
     score_before: float = 0.0
-    score_after: float = 0.0
-    kept: bool = True
+    score_after: float | None = 0.0
+    """None when the run stopped before this fix was re-scored.
+
+    It defaulted to 0.0, so a fix that was never measured was reported as
+    having scored zero - which reads as "this change destroyed the agent"
+    rather than "we ran out of budget before finding out". Requirement 7 is
+    honest reporting; that was the opposite."""
+    kept: bool | None = True
+    """None when no later scorecard exists to judge the fix by. A fix that was
+    merely never refuted has not been kept on evidence."""
     revert_reason: str | None = None
     seconds: float = 0.0
     tokens: int = 0
 
     @property
-    def delta(self) -> float:
+    def delta(self) -> float | None:
+        """None when there is no measured after-score to difference against."""
+        if self.score_after is None:
+            return None
         return round(self.score_after - self.score_before, 3)
 
 
@@ -101,6 +112,12 @@ class JudgeCalibration(BaseModel):
     # the answer the judge scored. Recorded rather than silently discarded: a
     # kappa over 4 surviving pairs is a much weaker claim than one over 12.
     stale_labels_dropped: int = 0
+    # Which verdicts this kappa describes. A rebuild rewrites 06_report.json
+    # and used to drop the calibration with it, so a re-finalised run silently
+    # went back to reporting no judge agreement at all. Carrying it forward is
+    # only safe when the verdicts are unchanged, and this is what proves that.
+    iteration: int = 0
+    verdicts_signature: dict = Field(default_factory=dict)
 
 
 class RunReport(BaseModel):

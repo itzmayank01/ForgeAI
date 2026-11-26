@@ -630,3 +630,96 @@ def test_the_gate_is_precise_on_the_committed_suites() -> None:
     if total == 0:
         pytest.skip("no committed suites yet")
     assert dropped == ["ans_011"], f"expected only ans_011, got {dropped}"
+
+
+# --- a fix nobody re-scored is not a fix that scored zero -------------------
+# hr_policy's report said iteration 1 went 79% -> 0.0% and was "kept". Both were
+# false: the run stopped before iteration 2 completed, so the fix was never
+# re-scored. score_after defaulted to 0.0, which reads as "this change destroyed
+# the agent", and kept defaulted to True, which claims a validation that never
+# ran. Requirement 7 is honest reporting; this was its opposite.
+
+def test_unmeasured_fix_reports_no_score_and_no_verdict() -> None:
+    from forgeai.models.iteration import IterationLog
+    it = IterationLog(iteration=1, score_before=0.793, score_after=None, kept=None)
+    assert it.delta is None, "no after-score means no delta to report"
+
+
+def test_measured_fix_still_reports_its_delta() -> None:
+    from forgeai.models.iteration import IterationLog
+    it = IterationLog(iteration=0, score_before=0.655, score_after=0.793)
+    assert it.delta == pytest.approx(0.138)
+
+
+def test_report_renders_an_unmeasured_iteration_without_crashing() -> None:
+    from forgeai.models.agent_def import AgentDefinition
+    from forgeai.models.evals import Scorecard
+    from forgeai.models.iteration import Budget, FixAction, IterationLog, RunReport
+    from forgeai.stages import reporter
+
+    report = RunReport(
+        run_id="r", brief="b", corpus_hash="h", evaluated=True,
+        final_pass_rate=0.793, budget=Budget(),
+        scorecards=[Scorecard(iteration=0, passed=23, total=29, pass_rate=0.793)],
+        iterations=[IterationLog(
+            iteration=1, score_before=0.793, score_after=None, kept=None,
+            revert_reason="not re-scored: the run stopped before this fix was measured",
+            fix=FixAction(category="prompt_defect", rung="patch_scope_block",
+                          rationale="r", diff={}, targets_case_ids=[]))],
+    )
+    text = reporter.render(report, AgentDefinition(
+        name="a", system_prompt="p"))
+    assert "not measured" in text
+    assert "NOT MEASURED" in text
+    assert "0%" not in text.split("Score:")[1].split("\n")[0], (
+        "an unmeasured fix must not be rendered as having scored zero")
+
+
+# --- a rebuild must not silently discard a valid calibration ---------------
+# `forgeai calibrate` writes its result into 06_report.json, and re-finalising a
+# run overwrote the file -- so a run that HAD been calibrated silently went back
+# to reporting no judge agreement at all, and the audit called it uncalibrated.
+# Carrying it forward is only safe while the verdicts it describes are unchanged.
+
+def _run_dir(tmp_path, sig, cal_sig, n=12):
+    import json
+    (tmp_path / "05_iterations" / "iter_0").mkdir(parents=True)
+    (tmp_path / "05_iterations" / "iter_0" / "verdicts.json").write_text(
+        json.dumps({"_signature": sig, "verdicts": []}))
+    (tmp_path / "06_report.json").write_text(json.dumps({
+        "calibration": {"n_cases": n, "agreements": 7, "agreement_rate": 0.583,
+                        "cohens_kappa": 0.167, "iteration": 0,
+                        "verdicts_signature": cal_sig}}))
+    return tmp_path
+
+
+SIG = {"judge": "qwen/qwen3.8-27b", "answers": "abc123"}
+
+
+def test_calibration_is_carried_when_the_verdicts_are_unchanged(tmp_path) -> None:
+    from forgeai.pipeline import _load_calibration
+    got = _load_calibration(_run_dir(tmp_path, SIG, SIG))
+    assert got is not None and got.cohens_kappa == pytest.approx(0.167)
+
+
+def test_calibration_is_dropped_when_the_answers_moved_on(tmp_path) -> None:
+    from forgeai.pipeline import _load_calibration
+    moved = {"judge": SIG["judge"], "answers": "different"}
+    assert _load_calibration(_run_dir(tmp_path, moved, SIG)) is None
+
+
+def test_calibration_is_dropped_when_the_judge_changed(tmp_path) -> None:
+    from forgeai.pipeline import _load_calibration
+    other_judge = {"judge": "openai/gpt-oss-safeguard-20b", "answers": SIG["answers"]}
+    assert _load_calibration(_run_dir(tmp_path, other_judge, SIG)) is None
+
+
+def test_calibration_without_a_signature_is_not_carried(tmp_path) -> None:
+    # Blocks written before signatures existed cannot be proven current.
+    from forgeai.pipeline import _load_calibration
+    assert _load_calibration(_run_dir(tmp_path, SIG, {})) is None
+
+
+def test_a_run_with_no_prior_report_carries_nothing(tmp_path) -> None:
+    from forgeai.pipeline import _load_calibration
+    assert _load_calibration(tmp_path) is None

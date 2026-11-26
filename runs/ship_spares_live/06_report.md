@@ -9,7 +9,7 @@ commit to a delivery date it cannot evidence.
 
 **Final pass rate: 66%** (agent v0, stopped because: iteration cap (2) reached)
 
-Budget: 211,025/500,000 tokens, 12708.0s/2400s, 2/2 iterations.
+Budget: 211,025/500,000 tokens, 29391.5s/2400s, 2/2 iterations.
 
 ## Per-iteration scorecard
 
