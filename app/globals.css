@@ -126,13 +126,24 @@ body {
 @keyframes bar-fill   { 0% { transform: scaleX(0); } 18%, 100% { transform: scaleX(1); } }
 @keyframes blink      { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
 @keyframes spin-slow  { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes float-upward {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
 
 .stage-row { animation: stage-run 9s ease-in-out infinite; }
 .stage-bar { transform-origin: left; animation: bar-fill 9s ease-in-out infinite; }
 .blink     { animation: blink 1.1s step-end infinite; }
 .animate-spin-slow { animation: spin-slow 12s linear infinite; }
+.animate-float-upward {
+  animation: float-upward 22s linear infinite;
+  will-change: transform;
+}
+.animate-float-upward:hover {
+  animation-play-state: paused;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .stage-row, .stage-bar, .blink, .animate-spin-slow { animation: none; opacity: 1; }
+  .stage-row, .stage-bar, .blink, .animate-spin-slow, .animate-float-upward { animation: none; opacity: 1; }
   .stage-bar { transform: scaleX(1); }
 }

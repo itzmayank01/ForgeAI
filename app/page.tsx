@@ -14,6 +14,7 @@ import {
 } from "@/components/mocks";
 import { Pill, RunCard } from "@/components/ui";
 import { AgentsHub, type ArtifactGroup } from "@/components/agents-hub";
+import { FloatingChatCard } from "@/components/floating-chat";
 
 export default async function Home() {
   const runs = await loadAllRuns();
@@ -253,11 +254,22 @@ export default async function Home() {
           wash="warm"
         />
 
+        <Feature
+          n="09"
+          eyebrow="Interactive runner"
+          title="Floating stream of verified queries and grounded claims"
+          body="Watch real-time verified retrieval. Every claim cites the exact markdown chunk it was retrieved from, out-of-scope questions are refused honestly by construction, and every answer is grounded in committed artifacts rather than free-form hallucination."
+          tags={["Citations verified", "Upward live stream", "Refuses out-of-scope", "Interactive preview"]}
+          visual={<FloatingChatCard />}
+          flip
+          wash="cool"
+        />
+
       {/* ── runs ─────────────────────────────────────────────────────── */}
       <section id="runs" className="relative scroll-mt-20">
         <div className="mx-auto max-w-content px-4 py-16">
           <div className="flex items-center gap-3">
-            <span className="mono-nums font-mono text-[13px] font-bold text-accent">09</span>
+            <span className="mono-nums font-mono text-[13px] font-bold text-accent">10</span>
             <span className="h-px w-10 bg-ink/20" />
             <span className="text-[11px] font-semibold uppercase tracking-[0.13em] text-muted">
               Demonstrations

@@ -7,15 +7,18 @@ import {
   IconCross,
   IconMoon,
   IconSettings,
+  IconSparkles,
   IconSun,
   IconUser,
 } from "@/components/icons";
+import { FloatingChatCard } from "@/components/floating-chat";
 
 export function NavShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
+  const [isWidgetOpen, setIsWidgetOpen] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("forgeai-theme") as "light" | "dark" | null;
@@ -247,6 +250,33 @@ export function NavShell({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       )}
+
+      {/* ── Floating Upward Live Chat Widget (Corner Launcher) ── */}
+      <div className="fixed bottom-5 right-5 z-40">
+        {isWidgetOpen ? (
+          <div className="relative animate-fadeIn">
+            <div className="absolute -top-3 -right-2 z-50">
+              <button
+                onClick={() => setIsWidgetOpen(false)}
+                className="grid h-7 w-7 place-items-center rounded-full bg-slate-900 text-white shadow-md hover:bg-slate-800 transition"
+                title="Close floating widget"
+              >
+                <IconCross className="h-3.5 w-3.5" />
+              </button>
+            </div>
+            <FloatingChatCard className="w-[360px] sm:w-[380px]" />
+          </div>
+        ) : (
+          <button
+            onClick={() => setIsWidgetOpen(true)}
+            className="flex items-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 text-xs font-semibold shadow-lg shadow-emerald-600/30 transition hover:scale-105 active:scale-95"
+            title="Open Live Floating Agent Chat"
+          >
+            <IconSparkles className="h-4 w-4 text-emerald-200" />
+            <span>Live Agent</span>
+          </button>
+        )}
+      </div>
     </div>
   );
 }
