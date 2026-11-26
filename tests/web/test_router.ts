@@ -16,7 +16,7 @@ import { join } from "node:path";
 import { bm25 } from "../../lib/bm25.ts";
 import { routeQuestion, AMBIGUOUS_MARGIN } from "../../lib/router.ts";
 import { splitTopics, probeTopics, MAY_CLASSIFY, CALIBRATION } from "../../lib/preflight.ts";
-import { resolveCitations } from "../../lib/answer.ts";
+import { resolveCitations, isPlausibleKey } from "../../lib/answer.ts";
 import { AGENTS, AGENT_TEAMS, CATEGORIES, builtMembers } from "../../lib/agents.ts";
 
 const root = join(import.meta.dirname, "..", "..", "data", "runs");
@@ -215,4 +215,26 @@ test("every brief-only entry carries a brief the factory could be given", () => 
     assert.ok(a.brief.length > 120, `${a.id} has no usable brief`);
     assert.ok(a.tags.length > 0, `${a.id} has no tags`);
   }
+});
+
+// ── key pool ─────────────────────────────────────────────────────────────
+
+test("every placeholder this repo ships is rejected", () => {
+  // .env.example carries all of these, and the FORGEAI_API_KEYS line is not
+  // commented out, so copying it put three dead entries into the pool.
+  for (const stub of ["gsk_your_key_here", "gsk_key_one", "gsk_key_two", "gsk_key_three"]) {
+    assert.equal(isPlausibleKey(stub), false, `${stub} must never enter the pool`);
+  }
+});
+
+test("a real-shaped key is accepted", () => {
+  assert.equal(isPlausibleKey("gsk_" + "A1b2C3d4E5f6G7h8I9j0".repeat(3)), true);
+  // Another provider's key shape still works; this is a placeholder filter,
+  // not a Groq-only gate.
+  assert.equal(isPlausibleKey("sk-proj-" + "A1b2C3d4E5f6G7h8I9j0".repeat(2)), true);
+});
+
+test("empty and too-short values are rejected", () => {
+  assert.equal(isPlausibleKey(""), false);
+  assert.equal(isPlausibleKey("gsk_short"), false);
 });

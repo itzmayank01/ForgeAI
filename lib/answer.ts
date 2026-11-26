@@ -17,10 +17,28 @@ import { bm25 } from "./bm25";
  * idea because a single key caps the page at 8,000 tokens/minute, and a
  * reviewer clicking a few suggested questions in a row will hit that.
  */
+/**
+ * A real key is `gsk_` and ~52 more base62 characters. Every placeholder this
+ * repository ships -- gsk_your_key_here, gsk_key_one -- is far shorter and
+ * carries underscores the real thing never has, so shape alone separates them.
+ *
+ * A dead entry in the pool is not harmless. The pool rotates onto it, the
+ * provider returns 401, and that request fails. An untouched
+ * FORGEAI_API_KEY=gsk_your_key_here sat in this project's own .env for the
+ * whole build, costing a measured 8 failures in 20 requests once rate limiting
+ * made the loop walk the whole pool.
+ */
+export function isPlausibleKey(value: string): boolean {
+  const body = value.startsWith("gsk_") ? value.slice(4) : value;
+  return /^[A-Za-z0-9-]{20,}$/.test(body);
+}
+
 export const API_KEYS: string[] = (() => {
   const seen = new Set<string>();
   const push = (raw?: string) =>
-    (raw ?? "").split(",").map((s) => s.trim()).filter(Boolean).forEach((k) => seen.add(k));
+    (raw ?? "").split(",").map((s) => s.trim())
+      .filter((k) => k && isPlausibleKey(k))
+      .forEach((k) => seen.add(k));
 
   push(process.env.FORGEAI_API_KEYS);
   push(process.env.FORGEAI_API_KEY);

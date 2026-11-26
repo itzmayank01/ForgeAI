@@ -723,3 +723,37 @@ def test_calibration_without_a_signature_is_not_carried(tmp_path) -> None:
 def test_a_run_with_no_prior_report_carries_nothing(tmp_path) -> None:
     from forgeai.pipeline import _load_calibration
     assert _load_calibration(tmp_path) is None
+
+
+def test_shipped_placeholders_never_enter_the_key_pool():
+    """.env.example's own values must not be accepted as keys.
+
+    The pool filtered exactly one placeholder string, but the example file
+    also ships an UNCOMMENTED
+    `FORGEAI_API_KEYS=gsk_key_one,gsk_key_two,gsk_key_three`, so copying it put
+    three dead entries into the pool. A dead entry is not inert: the pool
+    rotates onto it and that request fails with a 401.
+    """
+    from forgeai.config import is_plausible_key
+
+    for stub in ("gsk_your_key_here", "gsk_key_one", "gsk_key_two", "gsk_key_three"):
+        assert not is_plausible_key(stub), f"{stub} must never enter the pool"
+
+    assert is_plausible_key("gsk_" + "A1b2C3d4E5f6G7h8I9j0" * 3)
+    assert not is_plausible_key("")
+    assert not is_plausible_key("gsk_short")
+
+
+def test_env_example_placeholders_are_all_filtered():
+    """Whatever .env.example ships today, none of it may reach the pool."""
+    import re
+    from pathlib import Path
+    from forgeai.config import is_plausible_key
+
+    text = Path(__file__).resolve().parents[1].joinpath(".env.example").read_text()
+    stubs = re.findall(r"(gsk_[A-Za-z0-9_-]+)", text)
+    assert stubs, ".env.example has no example keys; update this test"
+    for stub in stubs:
+        assert not is_plausible_key(stub), (
+            f".env.example ships {stub!r}, which the key pool would accept"
+        )

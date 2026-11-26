@@ -3,6 +3,7 @@ CLI behave identically."""
 from __future__ import annotations
 
 import os
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -11,6 +12,26 @@ from dotenv import load_dotenv
 load_dotenv()
 
 PLACEHOLDER = "gsk_your_key_here"
+
+
+# A real Groq key is `gsk_` and ~52 more base62 characters. Every placeholder
+# this repository ships -- gsk_your_key_here, gsk_key_one -- is far shorter and
+# carries underscores the real thing never has, so shape alone separates them.
+#
+# Matching one exact placeholder string was not enough. `.env.example` also
+# ships `FORGEAI_API_KEYS=gsk_key_one,gsk_key_two,gsk_key_three` uncommented,
+# so copying the example put three dead entries straight into the pool, and an
+# untouched FORGEAI_API_KEY=gsk_your_key_here sat in this project's own .env
+# for the whole build. A dead entry is not harmless: the pool rotates onto it,
+# the provider returns 401, and that request fails -- measured at 8 failures in
+# 20 requests once rate limiting made the loop walk the whole pool.
+_KEY_SHAPE = re.compile(r"^[A-Za-z0-9-]{20,}$")
+
+
+def is_plausible_key(value: str) -> bool:
+    """False for an obvious placeholder, so it never enters the pool."""
+    body = value[4:] if value.startswith("gsk_") else value
+    return bool(_KEY_SHAPE.fullmatch(body))
 
 
 def _all_keys() -> list[str]:
@@ -29,7 +50,7 @@ def _all_keys() -> list[str]:
     def add(raw: str | None) -> None:
         for part in (raw or "").split(","):
             v = part.strip()
-            if v and v != PLACEHOLDER and v not in found:
+            if v and is_plausible_key(v) and v not in found:
                 found.append(v)
 
     add(os.getenv("FORGEAI_API_KEYS"))
