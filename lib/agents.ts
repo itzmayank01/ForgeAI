@@ -1,19 +1,20 @@
 /**
- * The gallery's catalogue.
+ * The agent catalogue.
  *
- * Two kinds of entry live here and the difference is load-bearing:
+ * An entry is either:
  *
- *   - A BUILT agent has a `runId`. The factory produced it, its artifacts are
- *     committed under runs/, it has a measured pass rate and it can be talked
- *     to against its own documents.
- *   - A BRIEF has no `runId`. Nothing was built. It is a one-paragraph
- *     specification of an agent the factory could be pointed at, and the only
- *     thing the site will do with it is load it into the composer or run a
- *     lexical pre-flight against a corpus you choose.
+ *   1. BUILT BY THE FACTORY: it has a `runId` that points to a committed
+ *      directory under `runs/` holding requirements, an agent definition,
+ *      generated evals, and a final scorecard. It can be chatted with because
+ *      its retrieval runtime can mount its real corpus and invoke its real
+ *      system prompt.
  *
- * An earlier version let briefs "chat" by returning a canned string after a
- * setTimeout. That is a fake agent wearing a real one's clothes, on a site
- * whose entire argument is that it does not fabricate results, so it is gone.
+ *   2. SPECIFIED AS A BRIEF: it has a `brief` stating what it should answer,
+ *      from which documents, and what it must refuse. It has NO committed
+ *      artifacts and has NOT been built. It cannot be chatted with, because
+ *      pretending to chat with an agent that was never generated is the exact
+ *      failure mode ForgeAI exists to eliminate. It can be loaded into the
+ *      brief composer, edited, and pre-flighted.
  */
 
 export type AgentCategory =
@@ -29,29 +30,24 @@ export type AgentCategory =
   | "Legal"
   | "Life";
 
-/** Corpora committed under each run's web/chunks.json that a pre-flight can probe. */
 export type CorpusId = "hr_policy_live" | "ship_spares_live";
 
 export interface AgentItem {
   id: string;
   name: string;
   category: AgentCategory;
+  /** Clean 2-letter monogram for fallback / avatar */
   avatar: string;
+  /** Vector SVG icon key */
+  iconKey?: string;
   avatarBg: string;
   description: string;
-  /** Present only when the factory actually produced this agent. */
   runId?: string;
-  version?: string;
+  version: string;
   author: string;
   badge?: string;
   tags: string[];
-  /**
-   * The one-paragraph brief. For a built agent this is overwritten at render
-   * time with the brief actually committed in its manifest, so the card can
-   * never drift from what was really run.
-   */
   brief: string;
-  /** Closest committed corpus, used to pre-fill the pre-flight picker. */
   corpusHint?: CorpusId;
   sampleQuestions: string[];
 }
@@ -78,8 +74,9 @@ export const AGENTS: AgentItem[] = [
     id: "hr_policy_live",
     name: "HR Policy Assistant",
     category: "Customer Support",
-    avatar: "📋",
-    avatarBg: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300",
+    avatar: "HR",
+    iconKey: "policy",
+    avatarBg: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20",
     description:
       "Shore-staff policy advisor built from three HR documents. Answers with numbered citations and refuses legal, medical and individual-record questions by construction.",
     runId: "hr_policy_live",
@@ -99,8 +96,9 @@ export const AGENTS: AgentItem[] = [
     id: "ship_spares_live",
     name: "Ship Spares Specialist",
     category: "Engineering",
-    avatar: "⚓",
-    avatarBg: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300",
+    avatar: "SS",
+    iconKey: "marine",
+    avatarBg: "bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/20",
     description:
       "Procurement desk assistant over a parts catalogue and two supplier agreements. Quotes price and lead time, works out order totals, refuses to rank suppliers.",
     runId: "ship_spares_live",
@@ -122,8 +120,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-content-creator",
     name: "Content Creator",
     category: "Content Creation",
-    avatar: "🎨",
-    avatarBg: "bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300",
+    avatar: "CC",
+    iconKey: "content",
+    avatarBg: "bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20",
     description:
       "Multi-platform content strategist working from a brand guidelines folder and a library of past campaigns.",
     version: "draft",
@@ -137,8 +136,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-image-prompt-engineer",
     name: "Image Prompt Engineer",
     category: "Design",
-    avatar: "📸",
-    avatarBg: "bg-sky-100 text-sky-800 dark:bg-sky-950/60 dark:text-sky-300",
+    avatar: "IP",
+    iconKey: "camera",
+    avatarBg: "bg-sky-500/10 text-sky-700 dark:text-sky-300 border border-sky-500/20",
     description:
       "Generative-image prompt specialist grounded in a house style guide and a catalogue of approved reference shots.",
     version: "draft",
@@ -152,8 +152,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-visual-storyteller",
     name: "Visual Storyteller",
     category: "Design",
-    avatar: "📖",
-    avatarBg: "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300",
+    avatar: "VS",
+    iconKey: "story",
+    avatarBg: "bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-500/20",
     description:
       "Turns technical material into storyboards and explanatory diagrams, working from a diagram component library.",
     version: "draft",
@@ -167,8 +168,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-video-editing-coach",
     name: "Short-Video Editing Coach",
     category: "Content Creation",
-    avatar: "🎬",
-    avatarBg: "bg-cyan-100 text-cyan-800 dark:bg-cyan-950/60 dark:text-cyan-300",
+    avatar: "VC",
+    iconKey: "video",
+    avatarBg: "bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20",
     description:
       "Post-production coach over an internal editing handbook and retention analytics exports.",
     version: "draft",
@@ -182,8 +184,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-frontend-developer",
     name: "Frontend Developer",
     category: "Engineering",
-    avatar: "💻",
-    avatarBg: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300",
+    avatar: "FE",
+    iconKey: "code",
+    avatarBg: "bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20",
     description:
       "Front-end assistant grounded in a design-system reference and the repository's component conventions.",
     version: "draft",
@@ -197,8 +200,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-training-designer",
     name: "Corporate Training Designer",
     category: "Education",
-    avatar: "🎓",
-    avatarBg: "bg-pink-100 text-pink-800 dark:bg-pink-950/60 dark:text-pink-300",
+    avatar: "CT",
+    iconKey: "education",
+    avatarBg: "bg-pink-500/10 text-pink-700 dark:text-pink-300 border border-pink-500/20",
     description:
       "Curriculum designer working from a competency framework and existing course outlines.",
     version: "draft",
@@ -212,8 +216,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-pitch-deck-builder",
     name: "Pitch Deck Builder",
     category: "Finance",
-    avatar: "📊",
-    avatarBg: "bg-violet-100 text-violet-800 dark:bg-violet-950/60 dark:text-violet-300",
+    avatar: "PD",
+    iconKey: "chart",
+    avatarBg: "bg-violet-500/10 text-violet-700 dark:text-violet-300 border border-violet-500/20",
     description:
       "Fundraising assistant over an internal metrics pack, past decks and a market research folder.",
     version: "draft",
@@ -227,8 +232,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-study-abroad-advisor",
     name: "Study Abroad Advisor",
     category: "Education",
-    avatar: "🌍",
-    avatarBg: "bg-yellow-100 text-yellow-800 dark:bg-yellow-950/60 dark:text-yellow-300",
+    avatar: "SA",
+    iconKey: "globe",
+    avatarBg: "bg-yellow-500/10 text-yellow-800 dark:text-yellow-300 border border-yellow-500/20",
     description:
       "Admissions assistant over university prospectuses and published visa guidance.",
     version: "draft",
@@ -242,8 +248,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-growth-ads-operator",
     name: "Growth Ads Operator",
     category: "Content Creation",
-    avatar: "📈",
-    avatarBg: "bg-orange-100 text-orange-800 dark:bg-orange-950/60 dark:text-orange-300",
+    avatar: "GA",
+    iconKey: "growth",
+    avatarBg: "bg-orange-500/10 text-orange-700 dark:text-orange-300 border border-orange-500/20",
     description:
       "Paid-acquisition assistant over campaign exports and the channel playbook.",
     version: "draft",
@@ -257,8 +264,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-bug-analysis",
     name: "Bug Analysis Agent",
     category: "Engineering",
-    avatar: "🐛",
-    avatarBg: "bg-teal-100 text-teal-800 dark:bg-teal-950/60 dark:text-teal-300",
+    avatar: "BA",
+    iconKey: "bug",
+    avatarBg: "bg-teal-500/10 text-teal-700 dark:text-teal-300 border border-teal-500/20",
     description:
       "Triage assistant over runbooks, past incident write-ups and the service catalogue.",
     version: "draft",
@@ -272,8 +280,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-data-engineer",
     name: "Data Engineer",
     category: "Data Analysis",
-    avatar: "🗄️",
-    avatarBg: "bg-green-100 text-green-800 dark:bg-green-950/60 dark:text-green-300",
+    avatar: "DE",
+    iconKey: "database",
+    avatarBg: "bg-green-500/10 text-green-700 dark:text-green-300 border border-green-500/20",
     description:
       "Warehouse assistant over schema documentation, dbt model descriptions and data contracts.",
     version: "draft",
@@ -287,8 +296,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-ai-engineer",
     name: "AI Engineer",
     category: "Engineering",
-    avatar: "🤖",
-    avatarBg: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300",
+    avatar: "AI",
+    iconKey: "cpu",
+    avatarBg: "bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20",
     description:
       "Model-platform assistant over evaluation reports, model cards and deployment runbooks.",
     version: "draft",
@@ -302,8 +312,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-prompt-engineer",
     name: "Prompt Engineer",
     category: "Engineering",
-    avatar: "⚡",
-    avatarBg: "bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-950/60 dark:text-fuchsia-300",
+    avatar: "PE",
+    iconKey: "bolt",
+    avatarBg: "bg-fuchsia-500/10 text-fuchsia-700 dark:text-fuchsia-300 border border-fuchsia-500/20",
     description:
       "Prompt-library assistant over versioned prompts and their recorded eval deltas.",
     version: "draft",
@@ -317,8 +328,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-model-qa",
     name: "Model QA Specialist",
     category: "IT & Security",
-    avatar: "🔬",
-    avatarBg: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300",
+    avatar: "QA",
+    iconKey: "audit",
+    avatarBg: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20",
     description:
       "Assurance assistant over test plans, release gates and the risk register.",
     version: "draft",
@@ -332,8 +344,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-treasury-analyst",
     name: "Treasury Policy Analyst",
     category: "Investment",
-    avatar: "🏦",
-    avatarBg: "bg-slate-100 text-slate-800 dark:bg-slate-950/60 dark:text-slate-300",
+    avatar: "TA",
+    iconKey: "tax",
+    avatarBg: "bg-slate-500/10 text-slate-700 dark:text-slate-300 border border-slate-500/20",
     description:
       "Policy assistant over the treasury mandate, counterparty limits and approved instrument lists.",
     version: "draft",
@@ -347,8 +360,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-growth-mentor",
     name: "Personal Growth Mentor",
     category: "Life",
-    avatar: "🌱",
-    avatarBg: "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300",
+    avatar: "GM",
+    iconKey: "sparkles",
+    avatarBg: "bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-500/20",
     description:
       "Development assistant over a career framework and the internal coaching handbook.",
     version: "draft",
@@ -362,8 +376,9 @@ export const AGENTS: AgentItem[] = [
     id: "brief-compliance-advisor",
     name: "Legal & Compliance Advisor",
     category: "Legal",
-    avatar: "⚖️",
-    avatarBg: "bg-stone-100 text-stone-800 dark:bg-stone-900/60 dark:text-stone-300",
+    avatar: "CA",
+    iconKey: "policy",
+    avatarBg: "bg-stone-500/10 text-stone-700 dark:text-stone-300 border border-stone-500/20",
     description:
       "Contract assistant over standard templates, the clause library and the vendor risk matrix.",
     version: "draft",
@@ -375,14 +390,6 @@ export const AGENTS: AgentItem[] = [
   },
 ];
 
-/**
- * Teams reference members by agent id, not by display name.
- *
- * The previous version stored loose name strings and the launch button looked
- * for an agent called "Atlas" that does not exist, so every team opened a chat
- * with whichever agent happened to be first in the array. Referencing ids means
- * a broken roster is a type error, not a silently wrong conversation.
- */
 export const AGENT_TEAMS: AgentTeamItem[] = [
   {
     id: "shore-and-vessel-desk",
@@ -462,13 +469,6 @@ export const AGENT_TEAMS: AgentTeamItem[] = [
   },
 ];
 
-/**
- * Categories are derived, never hand-listed.
- *
- * The hand-written list carried three categories no agent belonged to, so
- * three filter pills reliably produced an empty gallery. Deriving them makes a
- * dead pill impossible.
- */
 export const CATEGORIES: string[] = [
   "All",
   ...[...new Set(AGENTS.map((a) => a.category))].sort(),

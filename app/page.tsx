@@ -70,26 +70,26 @@ export default async function Home() {
               to judge an agent nobody hand-wrote.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
                 href="#agents-hub"
                 className="rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_-10px_rgba(5,150,105,0.6)] transition hover:bg-emerald-700 hover:scale-[1.02] active:scale-[0.98]"
               >
-                Browse agents & teams ↓
+                Browse agents &amp; teams ↓
               </a>
               {headline && (
                 <Link
                   href={`/runs/${headline.id}`}
-                  className="rounded-full border bg-surface px-5 py-3 text-sm font-semibold transition hover:bg-ink/[0.03]"
+                  className="rounded-full border border-ink/10 bg-surface px-5 py-3 text-sm font-semibold text-ink shadow-xs transition hover:border-ink/20 hover:bg-ink/[0.03]"
                 >
                   Inspect Evidence{headline.report ? ` (${Math.round(headline.report.final_pass_rate * 100)}%)` : ""}
                 </Link>
               )}
               <Link
                 href="/chat/hr_policy_live"
-                className="rounded-full border border-emerald-500/40 bg-emerald-50/50 dark:bg-emerald-950/20 px-5 py-3 text-sm font-semibold text-emerald-700 dark:text-emerald-300 transition hover:bg-emerald-100"
+                className="rounded-full border border-emerald-500/30 bg-emerald-50/60 dark:bg-emerald-950/30 px-5 py-3 text-sm font-semibold text-emerald-700 dark:text-emerald-300 transition hover:bg-emerald-100/80 dark:hover:bg-emerald-900/40"
               >
-                Live Chat Runner →
+                Chat Runner →
               </Link>
             </div>
           </div>
