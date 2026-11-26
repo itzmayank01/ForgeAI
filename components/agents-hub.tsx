@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
   AGENTS, AGENT_TEAMS, AUTHORS, CATEGORIES, builtMembers,
@@ -91,6 +91,25 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
 
+  // A menu that only closes by clicking its own toggle is a menu that gets
+  // left hanging over the gallery.
+  const authorMenuRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!authorOpen) return;
+    function onDown(e: MouseEvent) {
+      if (!authorMenuRef.current?.contains(e.target as Node)) setAuthorOpen(false);
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setAuthorOpen(false);
+    }
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [authorOpen]);
+
   const authorList = useMemo(
     () => ["All", ...new Set(agents.map((a) => a.author))].filter(
       (a, i, xs) => xs.indexOf(a) === i),
@@ -178,7 +197,13 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
         const res = await fetch("/api/team", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ teamId: room.id, question: q }),
+          body: JSON.stringify({
+            teamId: room.id,
+            question: q,
+            // Rooms assembled here are not in the server's catalogue, so the
+            // roster travels with the request.
+            memberAgentIds: room.members.map((m) => m.agentId),
+          }),
         });
         const data = await res.json();
         if (data.error && !data.routing) {
@@ -348,7 +373,7 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
         {tab !== "artifacts" && (
           <div className="mt-4 flex items-center justify-between text-xs text-muted">
             {tab === "agents" ? (
-              <div className="relative">
+              <div ref={authorMenuRef} className="relative">
                 <button
                   onClick={() => setAuthorOpen((o) => !o)}
                   aria-expanded={authorOpen}

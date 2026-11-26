@@ -18,22 +18,34 @@ export const maxDuration = 30;
  * is not.
  */
 export async function POST(req: Request) {
-  const { teamId, question, routeOnly } = (await req.json()) as {
-    teamId?: string; question?: string; routeOnly?: boolean;
+  const { teamId, question, routeOnly, memberAgentIds } = (await req.json()) as {
+    teamId?: string; question?: string; routeOnly?: boolean; memberAgentIds?: string[];
   };
 
   if (!teamId || !question?.trim()) {
     return NextResponse.json({ error: "teamId and question are required" }, { status: 400 });
   }
 
-  const team = AGENT_TEAMS.find((t) => t.id === teamId);
-  if (!team) {
-    return NextResponse.json({ error: `no team ${teamId}` }, { status: 404 });
+  // A room assembled in the browser exists only in that browser, so the
+  // catalogue cannot hold it and the client sends its roster. Each id is still
+  // resolved against the catalogue of agents, so a caller cannot name a run of
+  // its own choosing -- only the agents the gallery already publishes.
+  const catalogued = AGENT_TEAMS.find((t) => t.id === teamId);
+  const roster = catalogued
+    ? catalogued.members.map((m) => m.agentId)
+    : (memberAgentIds ?? []);
+  const teamName = catalogued?.name ?? "this room";
+
+  if (!catalogued && roster.length === 0) {
+    return NextResponse.json(
+      { error: `no team ${teamId}, and no roster was sent with the request` },
+      { status: 404 },
+    );
   }
 
   const corpora: RouterCorpus[] = [];
-  for (const member of team.members) {
-    const agent = AGENTS.find((a) => a.id === member.agentId);
+  for (const agentId of roster) {
+    const agent = AGENTS.find((a) => a.id === agentId);
     if (!agent?.runId) continue;
     const chunks = await loadChunks(agent.runId);
     if (chunks.length > 0) {
@@ -55,7 +67,7 @@ export async function POST(req: Request) {
       routing: decision,
       answered: false,
       message:
-        `Every member of ${team.name} is a brief, not a built agent. There are ` +
+        `Every member of ${teamName} is a brief, not a built agent. There are ` +
         `no documents behind this room, so there is nothing to answer from. ` +
         `Build a member first and the room will route to it.`,
     });
