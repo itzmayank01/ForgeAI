@@ -44,6 +44,8 @@ def scored(run: Path) -> dict | None:
     return rep if rep and rep.get("evaluated", True) else None
 
 
+from forgeai import tool_discipline  # noqa: E402
+
 runs = real_runs()
 
 # ── F1 intake ─────────────────────────────────────────────────────────────
@@ -183,12 +185,26 @@ for r in runs:
         for v in (load(it) or {}).get("verdicts", []):
             for tc in v.get("tool_calls", []) or []:
                 fired.add(tc.get("tool"))
-    unused = [t for t in attached if t not in fired]
-    ok.append(not unused)
-    notes.append(f"{r.name}: attached {attached}, fired {sorted(fired) or 'none'}"
-                 + (f", UNUSED {unused}" if unused else ""))
+    req = load(r / "01_requirements.json") or {}
+    topics = {(t.get("name") if isinstance(t, dict) else str(t)).strip().lower()
+              for t in req.get("must_answer", [])}
+    triggering = {t["name"]: t.get("triggering_requirement", "")
+                  for t in d.get("tools", [])}
+    v, which = tool_discipline.verdict(attached, fired, triggering, topics)
+    ok.append(v)
+    note = f"{r.name}: attached {attached}, fired {sorted(fired) or 'none'}"
+    if v == tool_discipline.DECORATION:
+        note += " — NOTHING FIRED; attached tools are decoration"
+    elif v == tool_discipline.UNJUSTIFIED:
+        note += f", UNJUSTIFIED+UNUSED {which}"
+    elif v == tool_discipline.COVERAGE_GAP:
+        note += f", justified but not exercised by the suite: {which}"
+    notes.append(note)
 record("F3b", "Attached tools actually fire",
-       PASS if ok and all(ok) else PART, "; ".join(notes))
+       FAIL if tool_discipline.DECORATION in ok
+       else PART if tool_discipline.UNJUSTIFIED in ok
+       else PASS,
+       "; ".join(notes))
 
 # ── F8 runnable product ───────────────────────────────────────────────────
 runner = (ROOT / "forgeai/runtime/runner.py").exists()

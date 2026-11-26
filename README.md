@@ -341,6 +341,20 @@ Capping it also cut a structured call from ~2,400 tokens to ~227.
   across both corpora, each written verbose and terse. Re-derive them if the
   embedding model changes; `stages/groundability.py` records the measurements and
   a contrastive alternative that was tried and rejected on the data.
+- **The generated suites do not exercise every attached tool.** `hr_policy`
+  attaches `current_date` against its "leave policy" topic - leave accrues per
+  calendar year and carry-over expires 31 March, so today's date genuinely
+  bears on it - but no generated case asks a date-dependent question, so the
+  tool never fires. That is a gap in the evals rather than an over-attachment,
+  and the audit reports it as one: it fails a run where *nothing* fires, flags
+  an idle tool that cites no must-answer topic, and otherwise records the
+  coverage gap. A generator that guaranteed a case per attached tool would
+  close this properly.
+- **Whole-table aggregates exceed what retrieval shows the agent.**
+  `ship_spares` asks for the total inventory value of a 40-row catalogue and
+  the agent sums only the rows top-k retrieved. It has `csv_lookup` attached
+  and should read the file; nothing currently forces the tool for questions
+  that span a whole document.
 - **Free-tier quota is the binding constraint, and keys do not multiply it.**
   200k tokens/day *per organization, per model*, against roughly 40–80k per full
   run. The daily cap is the one limit no header reports: a request that fits in

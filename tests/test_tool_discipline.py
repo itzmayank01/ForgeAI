@@ -80,3 +80,51 @@ def test_tool_record_is_json_serializable(tmp_path, monkeypatch):
             "injected plumbing leaked into the provenance record"
         )
     assert "FIL-1210" in text, "tool result should reach the prompt"
+
+
+# --- the audit's tool verdict, including the branch real data cannot reach --
+# Both committed rehearsal runs attach no tools, so the "nothing fired" branch
+# is unreachable from the repository's own artifacts. It is the branch that
+# matters most -- it is the bug this check was written for -- so it is asserted
+# directly rather than left to chance.
+
+from forgeai import tool_discipline as td  # noqa: E402
+
+
+def test_attached_but_never_fired_is_a_failure() -> None:
+    v, which = td.verdict(["calculator", "current_date"], set(),
+                          {"calculator": "travel expenses"}, {"travel expenses"})
+    assert v == td.DECORATION
+    assert which == ["calculator", "current_date"]
+
+
+def test_idle_tool_citing_no_must_answer_topic_is_unjustified() -> None:
+    v, which = td.verdict(
+        ["calculator", "weather"], {"calculator"},
+        {"calculator": "travel expenses", "weather": "sailing conditions"},
+        {"travel expenses"})
+    assert v == td.UNJUSTIFIED
+    assert which == ["weather"], "an HR agent with a weather tool is the brief's example"
+
+
+def test_idle_but_justified_tool_is_an_eval_coverage_gap() -> None:
+    # hr_policy's real shape: current_date is attached against "leave policy"
+    # (leave accrues per calendar year, carry-over expires 31 March) and no
+    # generated case happens to ask a date-dependent question.
+    v, which = td.verdict(
+        ["calculator", "current_date"], {"calculator"},
+        {"calculator": "travel expenses", "current_date": "leave policy"},
+        {"travel expenses", "leave policy", "grievance procedure"})
+    assert v == td.COVERAGE_GAP
+    assert which == ["current_date"]
+
+
+def test_every_attached_tool_firing_is_clean() -> None:
+    v, which = td.verdict(["calculator"], {"calculator"},
+                          {"calculator": "order total calculation"},
+                          {"order total calculation"})
+    assert v == td.CLEAN and which == []
+
+
+def test_attaching_nothing_is_restraint_not_a_defect() -> None:
+    assert td.verdict([], set(), {}, {"anything"})[0] == td.RESTRAINT
