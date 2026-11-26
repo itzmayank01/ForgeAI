@@ -16,3 +16,7 @@ out/
 .vercel/
 .vercel
 .env*
+
+# rotation scratch
+new-keys*.txt
+.env.backup-*
