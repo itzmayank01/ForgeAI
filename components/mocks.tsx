@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AgentIcon, IconUsers } from "@/components/icons";
 
 /**
  * Product mockups for the feature sections.
@@ -471,8 +472,8 @@ export function RouterMock() {
   const [busy, setBusy] = useState(false);
 
   const NAME: Record<string, string> = {
-    hr_policy_live: "📋 HR Policy Assistant",
-    ship_spares_live: "⚓ Ship Spares Specialist",
+    hr_policy_live: "HR Policy Assistant",
+    ship_spares_live: "Ship Spares Specialist",
   };
 
   async function ask(index: number) {
@@ -503,8 +504,8 @@ export function RouterMock() {
     <div className="mock rounded-3xl border bg-surface p-5 shadow-[0_16px_40px_-16px_rgba(5,150,105,0.14)]">
       <div className="flex items-center justify-between border-b pb-3">
         <div className="flex items-center gap-2">
-          <span className="grid h-6 w-6 place-items-center rounded-lg bg-emerald-100 text-[12px] dark:bg-emerald-950/60">
-            👥
+          <span className="grid h-6 w-6 place-items-center rounded-lg bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
+            <IconUsers className="h-3.5 w-3.5" />
           </span>
           <div>
             <div className="text-[13px] font-bold tracking-tight text-ink">Shore &amp; Vessel Desk</div>
@@ -535,8 +536,9 @@ export function RouterMock() {
         {busy && <div className="text-[11px] text-muted">scoring both corpora…</div>}
         {!busy && data?.scores.map((s) => (
           <div key={s.agentId} className="flex items-center gap-2 text-[11px]">
-            <span className="w-[150px] shrink-0 truncate text-muted">
-              {NAME[s.agentId] ?? s.agentId}
+            <span className="w-[170px] shrink-0 truncate text-muted flex items-center gap-1.5">
+              <AgentIcon name={s.agentId} className="w-3.5 h-3.5 shrink-0 text-muted" />
+              <span className="truncate">{NAME[s.agentId] ?? s.agentId}</span>
             </span>
             <span className="h-2 flex-1 overflow-hidden rounded-full bg-ink/[0.07]">
               <span
