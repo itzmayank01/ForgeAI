@@ -127,7 +127,7 @@ if [[ "$PUSH_VERCEL" == true ]]; then
     for k in "${LIVE[@]}"; do
       i=$((i + 1))
       name="FORGEAI_API_KEY"; [[ $i -gt 1 ]] && name="FORGEAI_API_KEY_$i"
-      if printf '%s' "$k" | vercel env add "$name" production >/dev/null 2>&1; then
+      if printf '%s' "$k" | vercel env add "$name" production --yes >/dev/null 2>&1; then
         echo "    added $name"
       else
         echo "    FAILED to add $name" >&2
