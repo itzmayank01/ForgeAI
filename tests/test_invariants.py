@@ -575,3 +575,58 @@ def test_real_facts_are_not_mistaken_for_metadata(fact) -> None:
     # The filter must not reach substantive clauses that merely mention a
     # reference or a date - those are the cases worth keeping.
     assert not evalgen._is_document_metadata(fact)
+
+
+# --- a question cannot name an identifier the documents lack ----------------
+# ship_spares shipped "What is the current stock quantity for part PN-9876?"
+# expecting "stock_qty: 60". No part number in that catalogue uses a PN- prefix
+# at all. The agent refused, correctly, and the case scored it a failure --
+# exactly the pressure that teaches an optimizer to stop refusing.
+
+CORPUS = ("part_number pum-1007 centrifugal ballast pump 2177.99 "
+          "policy reference hr-09 grievance procedure form hr-09a")
+
+
+@pytest.mark.parametrize("question,expected", [
+    ("What is the stock quantity for part PN-9876?", "PN-9876"),
+    ("How do I file under policy HR-42?", "HR-42"),
+    ("What is the lead time for VAL-9999?", "VAL-9999"),
+])
+def test_invented_identifiers_are_caught(question, expected) -> None:
+    assert evalgen._invented_identifier(question, CORPUS) == expected
+
+
+@pytest.mark.parametrize("question", [
+    "What is the stock quantity for part PUM-1007?",
+    "What does policy HR-09 say about grievances?",
+    "Which form do I use to file a grievance?",   # no identifier at all
+    "How much annual leave do shore staff accrue?",
+])
+def test_real_identifiers_and_plain_questions_survive(question) -> None:
+    assert evalgen._invented_identifier(question, CORPUS) is None
+
+
+def test_the_gate_is_precise_on_the_committed_suites() -> None:
+    """Measured, not assumed: across both committed suites this drops exactly
+    the one fabricated case and nothing else."""
+    import json
+    from pathlib import Path
+    from forgeai.ingest.chunker import chunk_corpus
+    from forgeai.ingest.loaders import load_folder
+
+    root = Path(__file__).resolve().parents[1]
+    total, dropped = 0, []
+    for demo in ("hr_policy", "ship_spares"):
+        suite_path = root / "runs" / f"{demo}_live" / "04_eval_suite.json"
+        docs = root / "demos" / demo / "docs"
+        if not (suite_path.exists() and docs.exists()):
+            continue
+        refs, raw, _ = load_folder(docs)
+        corpus = " ".join(c.text.lower() for c in chunk_corpus(refs, raw, 800, 120))
+        for case in json.loads(suite_path.read_text())["cases"]:
+            total += 1
+            if evalgen._invented_identifier(case["question"], corpus):
+                dropped.append(case["id"])
+    if total == 0:
+        pytest.skip("no committed suites yet")
+    assert dropped == ["ans_011"], f"expected only ans_011, got {dropped}"

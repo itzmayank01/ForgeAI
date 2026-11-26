@@ -304,7 +304,40 @@
       "why": "fact recall 0.0"
     }
   ],
-  "calibration": null,
+  "calibration": {
+    "n_cases": 12,
+    "agreements": 7,
+    "agreement_rate": 0.583,
+    "cohens_kappa": 0.167,
+    "disagreements": [
+      {
+        "case_id": "edge_multi_00",
+        "judge": false,
+        "human": true
+      },
+      {
+        "case_id": "ans_013",
+        "judge": false,
+        "human": true
+      },
+      {
+        "case_id": "ans_009",
+        "judge": false,
+        "human": true
+      },
+      {
+        "case_id": "edge_multi_01",
+        "judge": false,
+        "human": true
+      },
+      {
+        "case_id": "ans_011",
+        "judge": false,
+        "human": true
+      }
+    ],
+    "stale_labels_dropped": 0
+  },
   "stop_reason": "iteration cap (2) reached",
   "budget": {
     "max_tokens": 500000,

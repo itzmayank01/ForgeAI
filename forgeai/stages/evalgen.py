@@ -245,8 +245,10 @@ def quality_gate(cases: list[EvalCase], index: ChunkIndex) -> tuple[list[EvalCas
     kept: list[EvalCase] = []
     dropped = {"empty": 0, "no_expected_facts": 0, "oos_is_answerable": 0,
                "fact_not_in_source": 0, "duplicate": 0, "bundled_fact": 0,
-               "dangling_referent": 0, "metadata_fact": 0}
+               "dangling_referent": 0, "metadata_fact": 0,
+               "invented_identifier": 0}
     seen: list[str] = []
+    corpus_text = " ".join(ch.text.lower() for ch in index.chunks)
 
     for c in cases:
         q = c.question.strip()
@@ -278,6 +280,17 @@ def quality_gate(cases: list[EvalCase], index: ChunkIndex) -> tuple[list[EvalCas
             # unanswerable fact enough to sink an otherwise good case.
             if all(_is_document_metadata(f) for f in c.expected_facts):
                 dropped["metadata_fact"] += 1
+                continue
+            # A question naming an identifier the corpus does not contain has
+            # no answer, and an expected fact for it is invented. ship_spares
+            # shipped "What is the current stock quantity for part PN-9876?"
+            # expecting "stock_qty: 60"; no part number in that catalogue even
+            # uses a PN- prefix. The agent refused, correctly, and the case
+            # scored it a failure - which is exactly the pressure that teaches
+            # an optimizer to stop refusing.
+            invented = _invented_identifier(q, corpus_text)
+            if invented:
+                dropped["invented_identifier"] += 1
                 continue
             # A computed answer is derived from the source, not quoted from it:
             # "48977.98" is the correct total for two stock lines and appears
@@ -344,6 +357,22 @@ _METADATA_FIELD = re.compile(
     r"review(?:ed)?|version|revision|document(?:\s+(?:id|number))?|issued|"
     r"supersedes|approved\s+by|owner|author|page|last\s+updated)\b[*_\s]*[:\-]",
     re.IGNORECASE)
+
+
+_IDENTIFIER = re.compile(r"\b[A-Z]{2,}[-_]\d{2,}[A-Za-z0-9-]*\b")
+
+
+def _invented_identifier(question: str, corpus_text: str) -> str | None:
+    """An identifier the question names that appears nowhere in the documents.
+
+    Part numbers, policy references and form codes are the things a question
+    can be most confidently wrong about: either the corpus contains the token
+    or it does not, with no judgement involved.
+    """
+    for ident in _IDENTIFIER.findall(question):
+        if ident.lower() not in corpus_text:
+            return ident
+    return None
 
 
 def _is_document_metadata(fact: str) -> bool:

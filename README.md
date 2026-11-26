@@ -21,38 +21,31 @@ Measured, not claimed: every figure below is read from a committed artifact.
 | run | pass rate | cases | fix iterations | residual | judge agreement |
 |---|---|---|---|---|---|
 | `hr_policy_live` | **79%** (23/29) | 29 | 2 (1 reverted) | 6 | 58% (kappa 0.17) |
-| `ship_spares_live` | not scored | 29 | — | — | — |
+| `ship_spares_live` | **66%** (19/29) | 29 | 2 (both reverted) | 10 | 58% (kappa 0.17) |
 
-`ship_spares_live` is still unscored: the free tier's daily budget (see *Known
-limits*) ran out partway through its first pass. A run with no scorecard reports
-none; nothing here is inferred from a partial pass.
+HR's 79% is up from an earlier 66%, and the failure taxonomy shows why:
+`hallucination` went from 5 occurrences to **zero**. Those five were never
+hallucinations - each was a correct answer whose supporting clause *was* in the
+retrieved context, carrying a citation to a chunk the agent had never been
+shown. Asked to cite `doc_01_c003`, the model reproduced the shape of an id
+rather than the id. Numbering the sources removed the error instead of
+discouraging it. A second defect fixed alongside it: tools had never fired, in
+90 answers across three runs, because the planner prompt asserted "most
+questions do not" need one and so decided before looking.
 
-HR's 79% is up from 66% because two defects were fixed between the two
-measurements, and the failure taxonomy shows it: `hallucination` went from 5
-occurrences to **zero**. Those five were never hallucinations - each was a
-correct answer whose supporting clause *was* in the retrieved context, carrying
-a citation to a chunk the agent had never been shown. Numbering the sources
-removed the error rather than discouraging it.
+Three of the five fix iterations across both runs were **reverted** - the fix
+did not beat the definition the generator produced first. That is the loop
+doing its job, not a missing result.
 
-Iteration 1 scored 79% too, and was **reverted** - a fix that only recovers to a
-tie is not an improvement. That revert is the loop doing its job, not a missing
-result.
-
-Two defects found after that baseline was measured are fixed in the code but not
-yet reflected in any score, because re-measuring needs the budget that is gone:
-
-- **Five of the ten residual failures were one defect.** Each was a correct
-  answer whose supporting clause *was* in the retrieved context, carrying a
-  citation to a chunk the agent had never been shown - asked to cite
-  `doc_01_c003`, the model reproduced the shape of an id rather than the id.
-  Sources are numbered now and resolved to chunk ids in code, so the figure
-  should rise materially on the next full run.
-- **Tools never fired.** 90 answers across three runs, zero tool calls, because
-  the planner prompt asserted "most questions do not" need a tool and so decided
-  before looking. Both are verified working by live smoke test, not by argument.
-
-`RUNTIME_VERSION` is 3 as a result, so the runtime-2 answers above will be
-discarded rather than blended into the next run's scorecard.
+**The two runs use different models, and that is a free-tier consequence rather
+than a design choice.** Daily token caps are per organization per model, and
+both gpt-oss models were spent when `ship_spares` needed to run. So its agent
+runs `qwen/qwen3.8-27b` and its judge `openai/gpt-oss-safeguard-20b`, whose cap
+is its own because caps are per model and nothing had touched it. Requirement 5
+asks that the judge not share a family with the agent; qwen-vs-gpt-oss satisfies
+that exactly as well as the reverse pairing `hr_policy` uses. Each run's
+definition records the model that produced it, and the answer cache refuses to
+blend two models into one scorecard.
 
 ### What calibration found
 
@@ -110,6 +103,32 @@ One limitation stated plainly: these gold labels are **author-adjudicated**, not
 independent. That bounds what the kappa proves, which is why every label in
 `gold/` carries the clause it rests on - a reviewer can check the labelling
 instead of trusting it.
+
+`ship_spares` calibrates to the **same 58% / kappa 0.17** on a completely
+different corpus, which makes the pattern a property of the judge rather than
+of one document set. Its disagreements name three more generator defects:
+
+- **A fabricated subject.** `ans_011` asks the stock quantity for part
+  `PN-9876` and expects `stock_qty: 60`. No part number in that catalogue uses
+  a `PN-` prefix at all. The agent refused, correctly, and the case scored it a
+  failure - exactly the pressure that teaches an optimizer to stop refusing.
+  The gate now drops any case whose question names an identifier absent from
+  the documents; across both committed suites it catches that one case and
+  nothing else.
+- **Terms welded across two contracts.** `edge_multi_00` pairs Nordhavn's
+  24-month warranty with Kowloon's 21-day return window - clauses from two
+  different suppliers' agreements, which cannot both govern one part. The agent
+  said the supplier was unspecified instead of inventing a composite, and was
+  marked wrong for it. Cross-document cases need to share a subject, not merely
+  a content word.
+- **An aggregate beyond retrieval's reach.** `edge_calc_01` asks for the total
+  inventory value of a 40-row catalogue. Here the judge was right and the agent
+  wrong - but so was the case. The true `sum(unit_price * stock_qty)` is
+  1,967,449.20; the agent answered 1,063,554.46 after summing only the rows
+  top-k put in front of it, and the expected fact says 162,168.18, which is
+  neither that nor `sum(unit_price)` (98,283.34). The agent has `csv_lookup`
+  attached and should have read the whole file. A whole-table aggregate cannot
+  be answered from five chunks, and nothing currently forces the tool.
 
 ### Rehearsal on an unseen corpus
 

@@ -1,101 +1,101 @@
 {
-  "_README": "Set `human` to true if the agent's answer is genuinely acceptable, false otherwise. Then: forgeai calibrate --run <run> --gold <this file>",
-  "labels": {
-    "edge_amb_03": {
-      "question": "Which supplier provides that part, SEA-1224?",
-      "answer": "The supplier for part SEA-1224 is Kowloon Diesel Parts.",
-      "judge": true,
-      "judge_notes": "",
-      "human": true,
-      "rationale": "SEA-1224 named; supplier correct"
-    },
-    "ans_010": {
-      "question": "What is the lead time for parts listed in the catalogue?",
-      "answer": "The catalogue shows lead times ranging from 2 days to 60 days, depending on the part. For example, the Centrifugal ballast pump (standard) PUM-1007 has a lead time of 45 days [doc_00_c000]; the Heavy\u2011duty ballast pump PUM-1014 is 60 days [doc_00_c000]; the Fuel transfer pump PUM-1021 is 30 days [doc_00_c000]. Hydraulic return filters have a 21\u2011day lead time [doc_00_c009]; the Stern tube seal ring ",
-      "judge": true,
-      "judge_notes": "",
-      "human": true,
-      "rationale": "reasonable range answer to a vague catalogue-wide question"
-    },
-    "oos_01": {
-      "question": "Can you provide a detailed cost-benefit analysis comparing leasing versus purchasing ship spare parts for our fleet?",
-      "answer": "",
-      "judge": true,
-      "judge_notes": "",
-      "human": true,
-      "rationale": "lease-vs-buy analysis absent from corpus; refused"
-    },
-    "oos_04": {
-      "question": "How should I structure a financing agreement to purchase high-value spares while minimizing tax liabilities?",
-      "answer": "",
-      "judge": true,
-      "judge_notes": "",
-      "human": true,
-      "rationale": "financing structure absent from corpus; refused"
-    },
-    "ans_003": {
-      "question": "Which supplier supplies part number SEA-1224?",
-      "answer": "Kowloon Diesel Parts",
-      "judge": true,
-      "judge_notes": "",
-      "human": true,
-      "rationale": "SEA-1224 named; supplier correct"
-    },
-    "oos_03": {
-      "question": "What is the current market value of a specific individual\u2019s ownership stake in Supplier Kowloon Ltd.?",
-      "answer": "",
-      "judge": true,
-      "judge_notes": "",
-      "human": true,
-      "rationale": "ownership stake absent from corpus; refused"
-    },
-    "ans_009": {
-      "question": "What is the unit price in euros for this part?",
-      "answer": "",
-      "judge": false,
-      "judge_notes": "refused an answerable question",
-      "human": true,
-      "rationale": "'this part' - no part named anywhere; unanswerable"
-    },
-    "edge_amb_01": {
-      "question": "What's the lead time in days for that part?",
-      "answer": "",
-      "judge": false,
-      "judge_notes": "refused an answerable question",
-      "human": true,
-      "rationale": "'that part' - no referent; unanswerable"
-    },
-    "edge_amb_00": {
-      "question": "What's its price in euros according to the catalogue?",
-      "answer": "",
-      "judge": false,
-      "judge_notes": "refused an answerable question",
-      "human": true,
-      "rationale": "'its price' - no referent; unanswerable"
-    },
-    "ans_011": {
-      "question": "How many units of this part are currently in stock?",
-      "answer": "",
-      "judge": false,
-      "judge_notes": "refused an answerable question",
-      "human": true,
-      "rationale": "'this part' - no referent; unanswerable"
-    },
-    "ans_000": {
-      "question": "What is the unit price in euros for the part listed in the parts catalogue?",
-      "answer": "The parts catalogue lists the following unit prices in euros: VAL-1084: 1420.4; VAL-1091: 2201.7; VAL-1098: 4779.37; VAL-1105: 3641.26; PUM-1007: 2177.99; PUM-1014: 2443.54; PUM-1021: 3861.07; VAL-1126: 4068.92; VAL-1133: 4450.68; VAL-1140: 4705.96; FIL-1147: 2723.17; FIL-1168: 3397.19; FIL-1175: 3828.14; FIL-1182: 913.99; FIL-1189: 3696.47; VAL-1112: 348.23; VAL-1119: 4065.44.",
-      "judge": false,
-      "judge_notes": "fact recall 0.0",
-      "human": true,
-      "rationale": "'the part' is ill-posed; listing the catalogue is responsive"
-    },
-    "edge_multi_02": {
-      "question": "What must be obtained before shipping the out-of-stock part SEA-1231?",
-      "answer": "",
-      "judge": false,
-      "judge_notes": "refused an answerable question",
-      "human": true,
-      "rationale": "RMA governs returns, not dispatch; refusing is right"
-    }
+ "_README": "Author-adjudicated gold labels, not independent human labels, read against demos/ship_spares/docs. Every label cites the clause or catalogue row it rests on so a reviewer can check the labelling rather than trust it. Two labels were settled by recomputing from the CSV rather than by reading: edge_calc_01's true total and whether PN-9876 exists.",
+ "labels": {
+  "ans_008": {
+   "question": "Which part number corresponds to the component named SEA-1273?",
+   "answer": "The part number SEA-1273 corresponds to the component described as 'Lip seal 120mm (standard)'.",
+   "judge": true,
+   "judge_notes": "",
+   "human": true,
+   "rationale": "SEA-1273 is the part number; the answer names its description. Correct."
+  },
+  "ans_012": {
+   "question": "What is the return window for items delivered by supplier Kowloon?",
+   "answer": "Returns are accepted within 21 days of delivery.",
+   "judge": true,
+   "judge_notes": "",
+   "human": true,
+   "rationale": "Kowloon 5.1: returns within 21 days of delivery. Exact."
+  },
+  "ans_005": {
+   "question": "What is the lead time in days for part number SEA-1252?",
+   "answer": "The lead time for part number SEA-1252 is 60 days.",
+   "judge": true,
+   "judge_notes": "",
+   "human": true,
+   "rationale": "Matches the catalogue row for SEA-1252 (lead_time_days 60)."
+  },
+  "ans_007": {
+   "question": "Which supplier provides part number SEA-1252?",
+   "answer": "Part number SEA-1252 is provided by Adriatic Supply.",
+   "judge": true,
+   "judge_notes": "",
+   "human": true,
+   "rationale": "Matches the catalogue row for SEA-1252 (supplier Adriatic Supply)."
+  },
+  "ans_014": {
+   "question": "Are consumables returnable after the packaging seal is broken?",
+   "answer": "No, consumables are non-returnable once the packaging seal is broken.",
+   "judge": true,
+   "judge_notes": "",
+   "human": true,
+   "rationale": "Kowloon 5.3: consumables non-returnable once the seal is broken."
+  },
+  "ans_002": {
+   "question": "What is the current stock quantity for part number FIL-1210?",
+   "answer": "The current stock quantity for part number FIL-1210 is 40.",
+   "judge": true,
+   "judge_notes": "",
+   "human": true,
+   "rationale": "Catalogue row FIL-1210, stock_qty 40. Exact."
+  },
+  "edge_multi_00": {
+   "question": "If I return a mechanical part within 21 days of delivery, how many months of warranty coverage will I still have left?",
+   "answer": "The context does not specify a single warranty period for 'mechanical parts' that applies universally, nor does it clarify which supplier's terms apply to the specific part in question. Chunk [1] states mechanical parts carry a 24-month warranty, while Chunk [2] states diesel engine components carry an 18-month warranty. Additionally, the return windows differ between suppliers (30 days in Chunk [",
+   "judge": false,
+   "judge_notes": "refused an answerable question",
+   "human": true,
+   "rationale": "DISAGREES WITH JUDGE. The case pairs Nordhavn's 24-month warranty with Kowloon's 21-day return window -- terms from two different suppliers' contracts, which cannot both govern one part. The agent said the supplier was unspecified instead of inventing a composite, which is correct."
+  },
+  "ans_013": {
+   "question": "What is the restocking fee if I place a replacement order of equal or greater value?",
+   "answer": "The restocking fee is reduced to 10% where a replacement order of equal or greater value is placed simultaneously.",
+   "judge": false,
+   "judge_notes": "fact recall 0.0",
+   "human": true,
+   "rationale": "DISAGREES WITH JUDGE. The question asks the fee WHEN a replacement order is placed, and 10% is exactly right (Kowloon 5.2). Recall scored 0 because the expected fact bundles the 20% base rate the question did not ask about."
+  },
+  "edge_calc_01": {
+   "question": "What is the total inventory value of all parts listed?",
+   "answer": "The total inventory value of all parts listed is \u20ac1,063,554.46. This is calculated by summing the product of unit_price_eur and stock_qty for each unique part: PUM-1007 (\u20ac39,203.82), PUM-1014 (\u20ac9,774.16), PUM-1021 (\u20ac231,664.20), FIL-1189 (\u20ac221,788.20), FIL-1196 (\u20ac2,279.36), FIL-1203 (\u20ac7,822.68), FIL-1210 (\u20ac40,835.20), VAL-1126 (\u20ac16,275.68), VAL-1133 (\u20ac80,112.24), VAL-1140 (\u20ac56,471.52), FIL-1147 (\u20ac",
+   "judge": false,
+   "judge_notes": "fact recall 0.0",
+   "human": false,
+   "rationale": "AGREES WITH JUDGE, though the case is also wrong. True sum(unit_price*stock_qty) over the 40 rows is 1,967,449.20; the agent said 1,063,554.46 and the expected fact says 162,168.18, which is neither that nor sum(unit_price) (98,283.34). The agent summed only the rows top-k retrieval put in front of it. It has csv_lookup attached and should have read the whole file; a whole-table aggregate cannot be answered from five chunks."
+  },
+  "ans_009": {
+   "question": "What is the unit price in euros for the component listed in parts_catalogue.csv?",
+   "answer": "The parts_catalogue.csv contains multiple components with different unit prices. For example, the Centrifugal ballast pump (standard) [PUM-1007] is \u20ac2177.99, the Fuel transfer pump (standard) [PUM-1021] is \u20ac3861.07, the Ball valve DN80 (heavy duty) [VAL-1126] is \u20ac4068.92, and the Fuel oil filter element (standard) [FIL-1147] is \u20ac2723.17. Please specify the part number or description for a precise ",
+   "judge": false,
+   "judge_notes": "fact recall 0.0",
+   "human": true,
+   "rationale": "DISAGREES WITH JUDGE. The question has a dangling referent: 'the component listed in parts_catalogue.csv' names none of the 40. The agent said so and gave examples, which is the right handling of an unanswerable question."
+  },
+  "edge_multi_01": {
+   "question": "If a shipment arrives on March 1 and the invoice is issued on March 5, what is the latest date by which payment must be made?",
+   "answer": "The context provides two different payment terms depending on the supplier. For Nordhavn Marine AS, payment is due 30 days from the invoice date [1], which would be April 4. For Kowloon Diesel Parts Ltd, payment is due 45 days from the bill of lading date [3]. Since the bill of lading date is not provided in the question (only the shipment arrival date of March 1), the exact due date for Kowloon D",
+   "judge": false,
+   "judge_notes": "refused an answerable question",
+   "human": true,
+   "rationale": "DISAGREES WITH JUDGE. Payment terms differ by supplier (45 days from bill of lading at Kowloon, 30 from invoice at Nordhavn) and the question names no supplier. Enumerating both is the honest answer to an underspecified question."
+  },
+  "ans_011": {
+   "question": "What is the current stock quantity for part PN-9876?",
+   "answer": "The provided context does not contain information for part number PN-9876.",
+   "judge": false,
+   "judge_notes": "refused an answerable question",
+   "human": true,
+   "rationale": "DISAGREES WITH JUDGE, and the case is fabricated. PN-9876 appears nowhere in parts_catalogue.csv -- no part number uses a PN- prefix at all -- yet the case expects 'stock_qty: 60'. Refusing was the only correct answer, and the case punishes it."
   }
+ }
 }

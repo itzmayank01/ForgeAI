@@ -9,7 +9,7 @@ commit to a delivery date it cannot evidence.
 
 **Final pass rate: 66%** (agent v0, stopped because: iteration cap (2) reached)
 
-Budget: 211,025/500,000 tokens, 633.8s/2400s, 2/2 iterations.
+Budget: 211,025/500,000 tokens, 12708.0s/2400s, 2/2 iterations.
 
 ## Per-iteration scorecard
 
@@ -58,10 +58,18 @@ Budget: 211,025/500,000 tokens, 633.8s/2400s, 2/2 iterations.
 
 ## Judge calibration
 
-Not calibrated. Every number above is unverified - run `forgeai calibrate` against a hand-labelled gold set before trusting this report.
+Agreement with hand labels: **58%** (7/12), Cohen's kappa 0.17.
+
+Disagreements:
+
+- `edge_multi_00`: judge said False, human said True
+- `ans_013`: judge said False, human said True
+- `ans_009`: judge said False, human said True
+- `edge_multi_01`: judge said False, human said True
+- `ans_011`: judge said False, human said True
 
 ## Final agent definition
 
-- Tools: csv_lookup, calculator
+- Tools: calculator, csv_lookup
 - Retrieval: dense, chunk 800/120, top_k 5, min_score 0.25
 - Temperature: 0.1
