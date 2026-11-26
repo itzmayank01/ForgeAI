@@ -50,12 +50,12 @@ export function NavShell({ children }: { children: React.ReactNode }) {
               className="group flex items-center gap-2.5 font-bold tracking-tight text-ink"
               title="ForgeAI Home"
             >
-              <span className="grid h-8 w-8 place-items-center rounded-xl bg-emerald-600 text-sm font-black text-white shadow-sm shadow-emerald-500/25 transition group-hover:scale-105">
+              <span className="grid h-8 w-8 place-items-center rounded-xl bg-indigo-600 text-sm font-black text-white shadow-sm shadow-indigo-500/25 transition group-hover:scale-105">
                 F
               </span>
               <span className="text-base font-bold tracking-tight">ForgeAI</span>
             </Link>
-            <span className="hidden sm:inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-500/20">
+            <span className="hidden sm:inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-0.5 text-[11px] font-semibold text-indigo-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-indigo-500/20">
               Autonomous Factory
             </span>
           </div>
@@ -92,7 +92,7 @@ export function NavShell({ children }: { children: React.ReactNode }) {
               href="/chat/hr_policy_live"
               className={`rounded-lg px-3 py-1.5 transition ${
                 pathname.startsWith("/chat")
-                  ? "text-emerald-700 dark:text-emerald-300 font-bold bg-emerald-50/60 dark:bg-emerald-950/40"
+                  ? "text-indigo-700 dark:text-emerald-300 font-bold bg-indigo-50/60 dark:bg-emerald-950/40"
                   : "text-muted hover:bg-ink/[0.04] hover:text-ink"
               }`}
             >
@@ -139,7 +139,7 @@ export function NavShell({ children }: { children: React.ReactNode }) {
             {/* Primary Action Button */}
             <Link
               href="/chat/hr_policy_live"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:bg-emerald-700 active:scale-[0.98]"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-indigo-600 px-4 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:bg-indigo-700 active:scale-[0.98]"
             >
               <span>Live Chat Runner</span>
               <span className="text-[11px]">→</span>
@@ -212,7 +212,7 @@ export function NavShell({ children }: { children: React.ReactNode }) {
             </div>
             <button
               onClick={() => setIsSettingsOpen(false)}
-              className="w-full rounded-full bg-emerald-600 hover:bg-emerald-700 py-2 text-xs font-semibold text-white transition"
+              className="w-full rounded-full bg-indigo-600 hover:bg-indigo-700 py-2 text-xs font-semibold text-white transition"
             >
               Done
             </button>
@@ -224,7 +224,7 @@ export function NavShell({ children }: { children: React.ReactNode }) {
       {isUserOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm animate-fadeIn">
           <div className="w-full max-w-sm rounded-2xl border bg-surface p-6 shadow-2xl text-center space-y-4">
-            <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-emerald-600 text-white text-xl font-black shadow-md shadow-emerald-500/25">
+            <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-indigo-600 text-white text-xl font-black shadow-md shadow-indigo-500/25">
               F
             </div>
             <div>
@@ -236,7 +236,7 @@ export function NavShell({ children }: { children: React.ReactNode }) {
             <div className="space-y-2 pt-2">
               <button
                 onClick={() => setIsUserOpen(false)}
-                className="w-full rounded-full bg-emerald-600 hover:bg-emerald-700 py-2.5 text-xs font-semibold text-white transition"
+                className="w-full rounded-full bg-indigo-600 hover:bg-indigo-700 py-2.5 text-xs font-semibold text-white transition"
               >
                 Continue as Guest Developer
               </button>
@@ -269,10 +269,10 @@ export function NavShell({ children }: { children: React.ReactNode }) {
         ) : (
           <button
             onClick={() => setIsWidgetOpen(true)}
-            className="flex items-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 text-xs font-semibold shadow-lg shadow-emerald-600/30 transition hover:scale-105 active:scale-95"
+            className="flex items-center gap-2 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 text-xs font-semibold shadow-lg shadow-indigo-600/30 transition hover:scale-105 active:scale-95"
             title="Open Live Floating Agent Chat"
           >
-            <IconSparkles className="h-4 w-4 text-emerald-200" />
+            <IconSparkles className="h-4 w-4 text-indigo-200" />
             <span>Live Agent</span>
           </button>
         )}

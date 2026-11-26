@@ -51,7 +51,7 @@ export default async function Home() {
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <Pill tone="accent">The Agent That Builds Agents</Pill>
-              <span className="rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 px-2.5 py-0.5 text-xs font-semibold">
+              <span className="rounded-full bg-indigo-100 dark:bg-emerald-950/60 text-indigo-800 dark:text-emerald-300 px-2.5 py-0.5 text-xs font-semibold">
                 Autonomous AI Factory
               </span>
             </div>
@@ -74,7 +74,7 @@ export default async function Home() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
                 href="#agents-hub"
-                className="rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_-10px_rgba(5,150,105,0.6)] transition hover:bg-emerald-700 hover:scale-[1.02] active:scale-[0.98]"
+                className="rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_-10px_rgba(99,102,241,0.6)] transition hover:bg-indigo-700 hover:scale-[1.02] active:scale-[0.98]"
               >
                 Browse agents &amp; teams ↓
               </a>
@@ -88,20 +88,14 @@ export default async function Home() {
               )}
               <Link
                 href="/chat/hr_policy_live"
-                className="rounded-full border border-emerald-500/30 bg-emerald-50/60 dark:bg-emerald-950/30 px-5 py-3 text-sm font-semibold text-emerald-700 dark:text-emerald-300 transition hover:bg-emerald-100/80 dark:hover:bg-emerald-900/40"
+                className="rounded-full border border-indigo-500/30 bg-indigo-50/60 dark:bg-emerald-950/30 px-5 py-3 text-sm font-semibold text-indigo-700 dark:text-emerald-300 transition hover:bg-indigo-100/80 dark:hover:bg-emerald-900/40"
               >
                 Chat Runner →
               </Link>
             </div>
           </div>
 
-          <ForgeConsole
-            runId={headline?.id}
-            cases={headline?.suite?.cases.length}
-            fixesKept={headline?.report?.iterations.filter((i) => i.kept === true).length}
-            stillFailing={headline?.report?.residual_failures.length}
-            passRate={headline?.report?.final_pass_rate ?? null}
-          />
+          <FloatingChatCard className="w-full" />
         </div>
 
         {headline?.report && (
@@ -149,7 +143,7 @@ export default async function Home() {
       {/* ── The 7 Stages & Architecture ─────────────────────────────── */}
       <div id="pipeline" className="scroll-mt-20 pt-10">
         <div className="mx-auto max-w-content px-4 text-center">
-          <span className="rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 px-3 py-1 text-xs font-semibold">
+          <span className="rounded-full bg-indigo-100 dark:bg-emerald-950/60 text-indigo-800 dark:text-emerald-300 px-3 py-1 text-xs font-semibold">
             Orchestration Under Uncertainty
           </span>
           <h2 className="display mt-4 text-[clamp(1.8rem,3.6vw,2.7rem)]">
@@ -256,11 +250,19 @@ export default async function Home() {
 
         <Feature
           n="09"
-          eyebrow="Interactive runner"
-          title="Floating stream of verified queries and grounded claims"
-          body="Watch real-time verified retrieval. Every claim cites the exact markdown chunk it was retrieved from, out-of-scope questions are refused honestly by construction, and every answer is grounded in committed artifacts rather than free-form hallucination."
-          tags={["Citations verified", "Upward live stream", "Refuses out-of-scope", "Interactive preview"]}
-          visual={<FloatingChatCard />}
+          eyebrow="One command"
+          title="Seven stages, in order, each writing the file it is accountable for"
+          body="A build is one command and then nothing to supervise. Each stage emits the artifact named beside it, and the run is readable afterwards from those files alone — which is what makes a claim on this site checkable rather than something you take on trust. The figures underneath are read from the run named in the title bar, so they cannot drift from it."
+          tags={["Unattended", "One artifact per stage", "Resumable", "Figures read from the run"]}
+          visual={
+            <ForgeConsole
+              runId={headline?.id}
+              cases={headline?.suite?.cases.length}
+              fixesKept={headline?.report?.iterations.filter((i) => i.kept === true).length}
+              stillFailing={headline?.report?.residual_failures.length}
+              passRate={headline?.report?.final_pass_rate ?? null}
+            />
+          }
           flip
           wash="cool"
         />

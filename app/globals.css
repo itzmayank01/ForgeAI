@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --canvas: 250 252 251;
-  --ink: 15 23 27;
-  --accent: 5 150 105; /* Emerald 600 #059669 */
-  --accent-soft: 236 253 245; /* Emerald 50 #ecfdf5 */
-  --muted: 100 116 130;
-  --line: 15 23 27 / 0.08;
+  --canvas: 248 248 249;          /* Pure off-white — no green tint */
+  --ink: 12 12 13;                /* Near-black — crisp on white */
+  --accent: 99 102 241;           /* Indigo-500 — premium day accent */
+  --accent-soft: 238 240 254;     /* Indigo-50 — very light tint */
+  --muted: 107 114 128;           /* Gray-500 — neutral */
+  --line: 12 12 13 / 0.09;
   --surface: 255 255 255;
-  --tint: 15 23 27 / 0.025;
-  --ok: 5 150 105;
+  --tint: 12 12 13 / 0.025;
+  --ok: 5 150 105;                /* Emerald — success states only */
   --warn: 217 119 6;
   --bad: 220 38 38;
-  --wash-a: 236 253 245; /* soft mint wash */
-  --wash-b: 240 249 255; /* soft sky wash */
+  --wash-a: 245 243 255;          /* Violet-50 — subtle warm tint */
+  --wash-b: 248 250 252;          /* Slate-50 — neutral cool */
 }
 
 @media (prefers-color-scheme: dark) {

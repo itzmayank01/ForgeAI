@@ -142,7 +142,7 @@ export function FloatingChatCard({
         <div className="flex flex-col items-center">
           <div className="flex items-center gap-1.5 font-bold tracking-tight text-ink text-sm">
             <span>ForgeAI Assistant</span>
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse" />
           </div>
           <span className="text-[10px] text-muted">
             {isLiveMode ? "Interactive Session" : "Auto-streaming live queries"}
@@ -190,10 +190,10 @@ export function FloatingChatCard({
                   <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-slate-900 text-white shadow-xs">
                     <IconSparkles className="h-4 w-4 text-emerald-400" />
                   </div>
-                  <div className="max-w-[82%] rounded-2xl rounded-tl-xs border border-emerald-500/20 bg-emerald-50/70 p-3 text-xs leading-relaxed text-ink dark:bg-emerald-950/40">
+                  <div className="max-w-[82%] rounded-2xl rounded-tl-xs border border-indigo-500/20 bg-indigo-50/70 p-3 text-xs leading-relaxed text-ink dark:bg-emerald-950/40">
                     <p>{msg.text}</p>
                     {msg.citation && (
-                      <span className="mt-1.5 inline-block rounded-md bg-emerald-100/80 px-1.5 py-0.5 font-mono text-[9.5px] text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300">
+                      <span className="mt-1.5 inline-block rounded-md bg-indigo-100/80 px-1.5 py-0.5 font-mono text-[9.5px] text-indigo-800 dark:bg-emerald-900/60 dark:text-emerald-300">
                         {msg.citation}
                       </span>
                     )}
@@ -209,7 +209,7 @@ export function FloatingChatCard({
             )}
             {busy && (
               <div className="flex items-center gap-2 text-xs text-muted">
-                <span className="h-2 w-2 animate-ping rounded-full bg-emerald-600" />
+                <span className="h-2 w-2 animate-ping rounded-full bg-indigo-600" />
                 Retrieving from corpus…
               </div>
             )}
@@ -227,10 +227,10 @@ export function FloatingChatCard({
                   <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-slate-900 text-white shadow-xs">
                     <IconSparkles className="h-4 w-4 text-emerald-400" />
                   </div>
-                  <div className="max-w-[82%] rounded-2xl rounded-tl-xs border border-emerald-500/20 bg-emerald-50/70 p-3 text-xs leading-relaxed text-ink dark:bg-emerald-950/40">
+                  <div className="max-w-[82%] rounded-2xl rounded-tl-xs border border-indigo-500/20 bg-indigo-50/70 p-3 text-xs leading-relaxed text-ink dark:bg-emerald-950/40">
                     <p>{msg.text}</p>
                     {msg.citation && (
-                      <span className="mt-1.5 inline-block rounded-md bg-emerald-100/80 px-1.5 py-0.5 font-mono text-[9.5px] text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300">
+                      <span className="mt-1.5 inline-block rounded-md bg-indigo-100/80 px-1.5 py-0.5 font-mono text-[9.5px] text-indigo-800 dark:bg-emerald-900/60 dark:text-emerald-300">
                         {msg.citation}
                       </span>
                     )}
