@@ -1,4 +1,32 @@
 import type { SVGProps } from "react";
+import {
+  FileText,
+  Anchor,
+  PenTool,
+  Camera,
+  BookOpen,
+  Film,
+  Code2,
+  GraduationCap,
+  BarChart2,
+  Globe,
+  TrendingUp,
+  Bug,
+  Database,
+  Cpu,
+  Zap,
+  ClipboardCheck,
+  Landmark,
+  Sparkles,
+  Scale,
+  ShieldCheck,
+  HeartPulse,
+  Rocket,
+  Search,
+  Layers,
+  UserCheck,
+  PiggyBank,
+} from "lucide-react";
 
 type IconProps = SVGProps<SVGSVGElement>;
 
@@ -375,7 +403,8 @@ export function IconRouter(props: IconProps) {
 }
 
 /**
- * Maps an agent ID or icon key to its corresponding SVG icon.
+ * Maps an agent ID or icon key to a premium Lucide icon.
+ * Each icon is semantically matched to the agent's domain.
  */
 export function AgentIcon({
   name,
@@ -384,62 +413,87 @@ export function AgentIcon({
   name: string;
   className?: string;
 }) {
+  const props = { className, strokeWidth: 1.75 };
   switch (name) {
     case "hr_policy_live":
     case "policy":
-      return <IconPolicy className={className} />;
+      return <FileText {...props} />;
     case "ship_spares_live":
     case "marine":
-      return <IconMarine className={className} />;
+      return <Anchor {...props} />;
     case "brief-content-creator":
     case "content":
-      return <IconContent className={className} />;
+      return <PenTool {...props} />;
     case "brief-image-prompt-engineer":
     case "camera":
-      return <IconCamera className={className} />;
+      return <Camera {...props} />;
     case "brief-visual-storyteller":
     case "story":
-      return <IconStory className={className} />;
+      return <BookOpen {...props} />;
     case "brief-short-video-editing-coach":
     case "video":
-      return <IconVideo className={className} />;
+      return <Film {...props} />;
     case "brief-frontend-developer":
     case "code":
-      return <IconCode className={className} />;
+      return <Code2 {...props} />;
     case "brief-corporate-training-designer":
     case "education":
-      return <IconEducation className={className} />;
+      return <GraduationCap {...props} />;
     case "brief-pitch-deck-builder":
     case "chart":
-      return <IconChart className={className} />;
+      return <BarChart2 {...props} />;
     case "brief-study-abroad-advisor":
     case "globe":
-      return <IconGlobe className={className} />;
+      return <Globe {...props} />;
     case "brief-growth-ads-operator":
     case "growth":
-      return <IconGrowth className={className} />;
+      return <TrendingUp {...props} />;
     case "brief-bug-analysis-agent":
     case "bug":
-      return <IconBug className={className} />;
+      return <Bug {...props} />;
     case "brief-data-engineer":
     case "database":
-      return <IconDatabase className={className} />;
+      return <Database {...props} />;
     case "brief-ai-engineer":
     case "cpu":
-      return <IconCpu className={className} />;
+      return <Cpu {...props} />;
     case "brief-prompt-engineer":
     case "bolt":
-      return <IconBolt className={className} />;
+      return <Zap {...props} />;
     case "brief-model-qa-specialist":
     case "audit":
-      return <IconAudit className={className} />;
+      return <ClipboardCheck {...props} />;
     case "brief-tax-strategy-advisor":
     case "tax":
-      return <IconTax className={className} />;
+      return <Landmark {...props} />;
     case "brief-personal-growth-mentor":
     case "sparkles":
-      return <IconSparkles className={className} />;
+      return <Sparkles {...props} />;
+    case "brief-legal-compliance-advisor":
+    case "legal":
+      return <Scale {...props} />;
+    case "brief-cybersecurity-analyst":
+    case "security":
+      return <ShieldCheck {...props} />;
+    case "brief-health-wellness-coach":
+    case "health":
+      return <HeartPulse {...props} />;
+    case "brief-startup-launch-strategist":
+    case "rocket":
+      return <Rocket {...props} />;
+    case "brief-seo-research-analyst":
+    case "seo":
+      return <Search {...props} />;
+    case "brief-ux-research-analyst":
+    case "ux":
+      return <Layers {...props} />;
+    case "brief-executive-coach":
+    case "coach":
+      return <UserCheck {...props} />;
+    case "brief-financial-planner":
+    case "finance":
+      return <PiggyBank {...props} />;
     default:
-      return <IconCpu className={className} />;
+      return <Cpu {...props} />;
   }
 }

@@ -426,8 +426,8 @@ export function AgentsHub({ runBriefs = {}, artifacts = [] }: AgentsHubProps) {
                 <div>
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex min-w-0 items-start gap-3">
-                      <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-accent-line ${agent.avatarBg}`}>
-                        <AgentIcon name={agent.id} className="w-5 h-5 text-accent-text" />
+                      <div className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-accent-line/60 shadow-sm ${agent.avatarBg}`}>
+                        <AgentIcon name={agent.id} className="w-[22px] h-[22px] text-accent-text" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <h3 className="truncate text-[14px] font-bold tracking-tight text-ink">
