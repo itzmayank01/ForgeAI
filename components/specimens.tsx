@@ -8,7 +8,7 @@
 
 export function DefinitionCard({ json }: { json: string }) {
   return (
-    <div className="overflow-hidden rounded-xl bg-[#0d1512] shadow-[0_18px_40px_-16px_rgba(0,0,0,0.5)] ring-1 ring-white/10">
+    <div className="min-w-0 overflow-hidden rounded-xl bg-[#0d1512] shadow-[0_18px_40px_-16px_rgba(0,0,0,0.5)] ring-1 ring-white/10">
       <div className="flex items-center gap-2 border-b border-white/10 px-3.5 py-2">
         <span className="h-2 w-2 rounded-full bg-white/20" />
         <span className="h-2 w-2 rounded-full bg-white/20" />

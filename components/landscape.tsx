@@ -54,10 +54,14 @@ export function Landscape({
         )}
       </header>
 
-      <div className="mt-10 grid items-start gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-        <div>
+      {/* minmax(0,…) rather than a bare fr: an fr track floors at its
+          min-content width, so the code card's long unwrapped lines widen the
+          left column and crush the points column to a few words per line.
+          Flooring at 0 lets the pre scroll inside its own box instead. */}
+      <div className="mt-10 grid grid-cols-[minmax(0,1fr)] items-start gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14">
+        <div className="min-w-0">
           <div
-            className={`relative overflow-hidden rounded-[22px] bg-gradient-to-br ${tints[tint]} p-5 sm:p-7`}
+            className={`relative min-w-0 overflow-hidden rounded-[22px] bg-gradient-to-br ${tints[tint]} p-5 sm:p-7`}
           >
             {/* A faint grid, so the panel reads as a surface rather than a
                 block of colour. Pure decoration, hidden from assistive tech. */}
@@ -71,7 +75,7 @@ export function Landscape({
                 backgroundSize: "26px 26px",
               }}
             />
-            <div className="relative">{visual}</div>
+            <div className="relative min-w-0">{visual}</div>
           </div>
           {panelLabel && (
             <p className="mt-2.5 pl-1 font-mono text-[11px] text-muted">{panelLabel}</p>

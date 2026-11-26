@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { MegaNav, type MegaSection } from "@/components/mega-nav";
 import {
   IconCross,
   IconMoon,
@@ -13,7 +14,17 @@ import {
 } from "@/components/icons";
 import { FloatingChatCard } from "@/components/floating-chat";
 
-export function NavShell({ children }: { children: React.ReactNode }) {
+export function NavShell({
+  children, navSections = [],
+}: {
+  children: React.ReactNode;
+  /**
+   * Built in the layout, which is a server component and can read the run
+   * artifacts, so the chips in the menu carry measured pass rates rather than
+   * numbers typed into the nav.
+   */
+  navSections?: MegaSection[];
+}) {
   const pathname = usePathname();
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -60,39 +71,15 @@ export function NavShell({ children }: { children: React.ReactNode }) {
             </span>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 text-xs font-semibold text-muted">
-            <Link
-              href="/#agents-hub"
-              className={`rounded-lg px-3 py-1.5 transition ${
-                pathname === "/"
-                  ? "text-ink hover:bg-ink/[0.04]"
-                  : "text-muted hover:bg-ink/[0.04] hover:text-ink"
-              }`}
-            >
-              Agents &amp; Teams
-            </Link>
-            <Link
-              href="/#runs"
-              className={`rounded-lg px-3 py-1.5 transition ${
-                pathname.startsWith("/runs")
-                  ? "text-ink hover:bg-ink/[0.04]"
-                  : "text-muted hover:bg-ink/[0.04] hover:text-ink"
-              }`}
-            >
-              Live Runs
-            </Link>
-            <Link
-              href="/#pipeline"
-              className="rounded-lg px-3 py-1.5 transition text-muted hover:bg-ink/[0.04] hover:text-ink"
-            >
-              The 7 Stages
-            </Link>
+          {/* Desktop navigation: hover boards, plus the one flat
+              destination that is a page rather than a section. */}
+          <nav className="hidden items-center gap-1 text-xs font-semibold text-muted md:flex">
+            <MegaNav sections={navSections} />
             <Link
               href="/chat/hr_policy_live"
               className={`rounded-lg px-3 py-1.5 transition ${
                 pathname.startsWith("/chat")
-                  ? "text-indigo-700 dark:text-emerald-300 font-bold bg-indigo-50/60 dark:bg-emerald-950/40"
+                  ? "bg-emerald-50/60 font-bold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300"
                   : "text-muted hover:bg-ink/[0.04] hover:text-ink"
               }`}
             >

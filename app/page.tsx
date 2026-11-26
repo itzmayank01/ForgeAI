@@ -178,8 +178,8 @@ export default async function Home() {
         standfirst="Every decision the factory made is written down as declarative JSON — the model, the retrieval parameters, the tools that survived the audit, and the exact sentence the agent says when it refuses."
         points={[
           {
-            title: "Tools must earn their place",
-            body: "The generator proposes; a deterministic audit decides. A binding survives only if the tool exists and its triggering requirement resolves to a real must-answer topic. Zero tools is a valid outcome.",
+            title: "Only the tools that survived the audit appear",
+            body: "The generator proposes and a deterministic audit decides, so what is written here is the surviving set rather than the requested one. Zero tools is a valid outcome, and an HR agent carrying a weather tool is a factory defect the test suite asserts against.",
           },
           {
             title: "Citations are resolved, not trusted",
