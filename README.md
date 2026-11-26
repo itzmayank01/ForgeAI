@@ -312,6 +312,117 @@ check — `F3b` — that compares attached tools against tools that actually fir
 That check is the useful artifact here. The bug was invisible precisely because
 both states produce identical-looking evidence.
 
+## The hosted gallery
+
+The site carries a catalogue with three tabs. All three run against committed
+artifacts; none of them simulates anything.
+
+**Agents.** Two entries are agents the factory built — they have a run id, a
+measured pass rate and documents, and you can talk to them. The rest are
+*briefs*: one-paragraph specifications of agents the factory could be pointed
+at, with nothing built behind them. The distinction is drawn from whether the
+run artifacts exist, not from a label someone typed, and a brief cannot be
+chatted with. It can be loaded into the composer, pre-flighted, or built.
+
+**Agent Teams.** A room is a roster plus a router. Put a question to it and it
+is scored against every member's committed documents *before* anyone answers,
+then handed to the best match; the routing table comes back with the reply.
+
+All member corpora are pooled into one document set before scoring, because
+BM25's IDF is computed over whatever set it is given — score each corpus
+separately and the best chunk of every corpus normalises to 1.0, so the numbers
+cannot be compared at all. Pooling gives them a shared IDF. A question that
+shares no term with any member routes nowhere and says so rather than falling
+through to the first member in the list.
+
+A room whose members are all briefs will route and then tell you there is
+nothing behind it to answer from. Its badge is computed from how many members
+were really built, so it cannot present itself as working.
+
+**Artifacts.** Every file each run committed, with its real size, read off
+disk. A stage that never ran has no row rather than an empty placeholder.
+
+### The pre-flight, and the badge it is not allowed to show
+
+"Create" runs a retrieval pre-flight: your brief is split into clauses and each
+one is retrieved against a corpus you choose, so you can read the passage an
+agent built from that brief would actually be handed. The factory itself needs
+the embedding model, a key and several minutes, so it cannot run in a web
+request; the command that does run it is printed instead.
+
+What the pre-flight does **not** show is a supported / unsupported verdict. One
+was built, calibrated and rejected. `npm run calibrate:preflight` scores topics
+the committed runs proved covered against topics they proved absent, taking the
+labels from the artifacts rather than from judgement:
+
+```
+positives n=8   min 0.1283  median 0.5618  max 1.0845
+negatives n=17  min 0.0000  median 0.3287  max 0.9477
+OVERLAP: 5 of 8 positives score at or below the top negative
+```
+
+The distributions overlap badly, so no cut-off separates them. The cause is
+structural rather than a tuning problem: a must-refuse topic is written in the
+documents' own vocabulary — "must not recommend a supplier", against a folder
+of supplier agreements — so lexical overlap is *highest* exactly where support
+is absent. The same reason the Python stage's own notes record a contrastive
+signal being tried and rejected on the data.
+
+The finding is committed to `data/preflight-calibration.json` and the gate is
+read at module load, so the verdict cannot be quietly added back without the
+artifact saying it is allowed. Borrowing groundability's 0.68/0.78 would have
+been easy and wrong: those are embedding-cosine cut-offs derived against
+`bge-small`, and they mean nothing applied to BM25.
+
+### What was removed
+
+Four things on this site asserted results nobody measured, which on a project
+arguing that fabricated results are the whole problem is the worst possible
+defect:
+
+- **"Create My Own Agent" fabricated an evaluation.** It stepped a progress bar
+  through the seven stage names on a `setTimeout`, then reported a pass rate of
+  `Math.floor(Math.random() * 8) + 82`, a groundability of "0.82 cos" and a fix
+  delta of "+18%", and filed the result in the gallery badged "87% Verified".
+  None of it was computed from anything.
+- **Brief-only entries had a fake chat.** They returned a canned paragraph
+  after a 600 ms delay, chosen by category.
+- **Two landing-page panels depicted a product this is not**: a mocked team
+  chat with a fictional agent called "Atlas", and a console announcing
+  "post-training delta applied to weights" and "skill auto-update v1.2 → v1.3".
+  ForgeAI does not fine-tune, has no persistent memory and runs no background
+  consolidation. Those slots now hold the judge and the critic-optimizer, which
+  are the stages that really sit there, plus the live router.
+- **Hardcoded figures contradicted the measured ones on the same screen.** The
+  hero console read "28 cases · 1 fix applied · 82% pass" directly above a stat
+  strip reporting 29 cases and 66%, and the report panel claimed "90% agreement
+  with hand labels, Cohen's κ 0.78" while the real calibration was 58% and κ
+  0.17. Both now read from the run they name, and print "—" rather than a
+  placeholder when there is no run.
+
+Three further dead controls went with them: a "Created by" caret that opened
+nothing (now a filter), category pills for three categories no agent belonged
+to so they always produced an empty gallery (categories are now derived from
+the agents present, so a dead pill is impossible), and a "Launch Team Chat"
+button that looked up an agent named "Atlas" the catalogue never contained and
+therefore silently opened a chat with whichever agent sat first in the array.
+
+### Two bugs the gallery work surfaced
+
+- **A refusal with no text rendered an empty chat bubble.** The model routinely
+  sets `refused: true` and leaves `answer` empty — correctly, when retrieval
+  returned neighbouring material rather than the thing asked about — and taking
+  that literally showed the reader a blank reply. It now falls back to the
+  output contract's own refusal wording.
+- **One rotated key took down a share of all requests.** The hosted pool
+  retried on 429 but treated 401 as fatal, so a single dead key among fourteen
+  failed roughly one request in seven, and far more under rate-limit pressure
+  when the loop walks the pool: measured at 8 failures in 20 requests. A
+  rejected key is now skipped like a throttled one, and the credentials error
+  is only reported when every key is rejected. Same test: 20 of 20.
+
+---
+
 ## Running it
 
 ```bash
@@ -324,6 +435,12 @@ cp .env.example .env     # add a Groq key: https://console.groq.com/keys
 forgeai build --brief <brief.txt> --docs <folder>   # add --resume to continue
 forgeai chat  --run runs/<id>
 forgeai calibrate --run runs/<id> --gold gold/<labels>.json
+```
+
+```bash
+.venv/bin/python -m pytest tests/ -q   # 84 tests, the factory
+npm run test:web                       # 24 tests, the router, pre-flight and citations
+npm run calibrate:preflight            # re-derives the pre-flight's support thresholds
 ```
 
 **Models.** The free tier exposes exactly two usable instruct families —

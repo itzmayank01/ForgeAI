@@ -25,8 +25,15 @@ export function tokenize(text: string): string[] {
 
 export interface Scored<T> { item: T; score: number }
 
+/**
+ * `normalize` divides every score by the best score in `docs`, so the top hit
+ * is always 1.0. That is what the chat UI wants and exactly what a router
+ * must not have: normalised per corpus, the best chunk of EVERY corpus ties at
+ * 1.0 and the comparison carries no information. Routing passes false and
+ * scores one pooled document set so the IDF is shared.
+ */
 export function bm25<T extends { text: string }>(
-  query: string, docs: T[], topK = 5, k1 = 1.5, b = 0.75,
+  query: string, docs: T[], topK = 5, k1 = 1.5, b = 0.75, normalize = true,
 ): Scored<T>[] {
   if (docs.length === 0) return [];
   const terms = tokenize(query);
@@ -60,7 +67,7 @@ export function bm25<T extends { text: string }>(
   const max = Math.max(...scored.map((s) => s.score), 0);
   return scored
     .filter((s) => s.score > 0)
-    .map((s) => ({ ...s, score: max > 0 ? s.score / max : 0 }))
+    .map((s) => ({ ...s, score: normalize ? (max > 0 ? s.score / max : 0) : s.score }))
     .sort((a, b2) => b2.score - a.score)
     .slice(0, topK);
 }

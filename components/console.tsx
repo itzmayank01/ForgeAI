@@ -8,12 +8,36 @@ const STAGES = [
   { n: "06", name: "report",        artifact: "report.md",            delay: 5.4 },
 ];
 
+export interface ForgeConsoleProps {
+  /** The run whose real figures the footer reports. */
+  runId?: string;
+  cases?: number;
+  fixesKept?: number;
+  stillFailing?: number;
+  passRate?: number | null;
+}
+
 /**
  * The hero visual. Deliberately the real pipeline rather than an abstract
  * graphic: seven stages in order, each emitting the artifact it genuinely
  * writes to the run directory.
+ *
+ * The footer used to read "28 cases · 1 fix applied · 2 still failing · 82%
+ * pass" as fixed text, directly above a stat strip reporting the measured 66%
+ * and 10 still failing. Two different sets of numbers for the same run, one of
+ * them invented. It now takes the figures from the run it names, and prints
+ * nothing at all rather than a placeholder when there is no run to report.
  */
-export function ForgeConsole() {
+export function ForgeConsole({
+  runId, cases, fixesKept, stillFailing, passRate,
+}: ForgeConsoleProps = {}) {
+  const footer = [
+    cases !== undefined ? `${cases} cases` : null,
+    fixesKept !== undefined
+      ? `${fixesKept} fix${fixesKept === 1 ? "" : "es"} kept`
+      : null,
+    stillFailing !== undefined ? `${stillFailing} still failing` : null,
+  ].filter(Boolean).join(" · ");
   return (
     <div className="card lift-lg overflow-hidden">
       <div className="flex items-center gap-2 border-b px-4 py-2.5">
@@ -21,7 +45,7 @@ export function ForgeConsole() {
         <span className="h-2.5 w-2.5 rounded-full bg-warn/60" />
         <span className="h-2.5 w-2.5 rounded-full bg-ok/60" />
         <span className="ml-2 font-mono text-[11px] text-muted">
-          forgeai build --brief hr_policy
+          forgeai build --brief {runId ?? "your_brief"}
         </span>
       </div>
 
@@ -51,12 +75,14 @@ export function ForgeConsole() {
 
       <div className="flex items-center justify-between border-t px-4 py-2.5">
         <span className="font-mono text-[11px] text-muted">
-          28 cases · 1 fix applied · 2 still failing
+          {footer || "no committed run in this checkout"}
           <span className="blink ml-1 text-accent">▍</span>
         </span>
-        <span className="rounded-full bg-ok/12 px-2 py-0.5 text-[10px] font-semibold text-ok">
-          82% pass
-        </span>
+        {passRate != null && (
+          <span className="rounded-full bg-ok/12 px-2 py-0.5 text-[10px] font-semibold text-ok">
+            {Math.round(passRate * 100)}% pass
+          </span>
+        )}
       </div>
     </div>
   );

@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "prebuild": "node scripts/sync-runs.mjs",
-    "predev": "node scripts/sync-runs.mjs"
+    "predev": "node scripts/sync-runs.mjs",
+    "test:web": "node --import ./tests/web/ts-resolve.mjs --test 'tests/web/*.ts'",
+    "calibrate:preflight": "node scripts/calibrate-preflight.mjs"
   },
   "dependencies": {
     "next": "^15.5.29",

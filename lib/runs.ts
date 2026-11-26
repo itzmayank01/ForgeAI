@@ -70,6 +70,60 @@ export async function loadAllRuns(): Promise<Run[]> {
   return runs.filter((r): r is Run => r !== null);
 }
 
+export interface ArtifactFile {
+  /** Path as it sits in the repository, e.g. runs/hr_policy_live/01_requirements.json */
+  path: string;
+  /** Path within the run, used as the display label. */
+  name: string;
+  bytes: number;
+  stage: string;
+}
+
+/**
+ * Every file the factory committed for a run, with its real size.
+ *
+ * The Artifacts tab exists because "the evidence is in the repository" is a
+ * claim a reader cannot check from a landing page. This lists what is actually
+ * on disk -- if a stage never ran, its file is simply absent from the list
+ * rather than rendered as an empty placeholder.
+ */
+const STAGE_OF: [RegExp, string][] = [
+  [/^00_inputs/, "00 · inputs"],
+  [/^01_requirements/, "01 · intake"],
+  [/^02_groundability/, "02 · groundability"],
+  [/^03_agent_def/, "03 · generator"],
+  [/^04_eval_suite/, "04 · eval generator"],
+  [/^05_iterations/, "05 · judge & optimizer"],
+  [/^06_report/, "06 · report"],
+  [/^web\//, "web · hosted corpus"],
+];
+
+export async function listArtifacts(id: string): Promise<ArtifactFile[]> {
+  const dir = join(ROOT, id);
+  if (!existsSync(dir)) return [];
+
+  const out: ArtifactFile[] = [];
+  async function walk(rel: string) {
+    for (const name of await readdir(join(dir, rel))) {
+      if (name.startsWith(".")) continue;
+      const childRel = rel ? `${rel}/${name}` : name;
+      const info = await stat(join(dir, childRel));
+      if (info.isDirectory()) {
+        await walk(childRel);
+      } else {
+        out.push({
+          path: `runs/${id}/${childRel}`,
+          name: childRel,
+          bytes: info.size,
+          stage: STAGE_OF.find(([re]) => re.test(childRel))?.[1] ?? "other",
+        });
+      }
+    }
+  }
+  await walk("");
+  return out.sort((a, b) => a.name.localeCompare(b.name));
+}
+
 export async function loadChunks(id: string): Promise<WebChunk[]> {
   const data = await json<{ chunks: WebChunk[] }>(
     join(ROOT, id, "web", "chunks.json"));

@@ -1,18 +1,19 @@
 import Link from "next/link";
-import { loadAllRuns } from "@/lib/runs";
+import { listArtifacts, loadAllRuns } from "@/lib/runs";
 import { ForgeConsole, StatStrip } from "@/components/console";
 import { Feature } from "@/components/feature";
 import {
-  BestTeamOfModelsMock,
   EvalMock,
   GeneratorMock,
   GroundabilityMock,
+  JudgeMock,
+  LoopMock,
   IntakeMock,
   ReportMock,
-  SelfImprovingMock,
+  RouterMock,
 } from "@/components/mocks";
 import { Pill, RunCard } from "@/components/ui";
-import { AgentsHub } from "@/components/agents-hub";
+import { AgentsHub, type ArtifactGroup } from "@/components/agents-hub";
 
 export default async function Home() {
   const runs = await loadAllRuns();
@@ -23,6 +24,22 @@ export default async function Home() {
   const headline = scored.find((r) => !r.synthetic);
   const realRuns = runs.filter((r) => !r.synthetic);
   const totalCases = realRuns.reduce((n, r) => n + (r.suite?.cases.length ?? 0), 0);
+
+  // The gallery's built cards carry the brief that was actually committed with
+  // the run, never a paraphrase kept alongside it that can quietly drift.
+  const runBriefs = Object.fromEntries(
+    realRuns.map((r) => [r.id, r.manifest.brief || r.report?.brief || ""]),
+  );
+
+  const artifacts: ArtifactGroup[] = await Promise.all(
+    realRuns.map(async (r) => ({
+      runId: r.id,
+      brief: r.manifest.brief || r.report?.brief || "",
+      passRate:
+        !r.report || r.report.evaluated === false ? null : r.report.final_pass_rate,
+      files: await listArtifacts(r.id),
+    })),
+  );
 
   return (
     <main>
@@ -58,14 +75,14 @@ export default async function Home() {
                 href="#agents-hub"
                 className="rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_-10px_rgba(5,150,105,0.6)] transition hover:bg-emerald-700 hover:scale-[1.02] active:scale-[0.98]"
               >
-                Discover Agents & Swarms ↓
+                Browse agents & teams ↓
               </a>
               {headline && (
                 <Link
                   href={`/runs/${headline.id}`}
                   className="rounded-full border bg-surface px-5 py-3 text-sm font-semibold transition hover:bg-ink/[0.03]"
                 >
-                  Inspect Evidence ({Math.round((headline.report?.final_pass_rate ?? 0.82) * 100)}%)
+                  Inspect Evidence{headline.report ? ` (${Math.round(headline.report.final_pass_rate * 100)}%)` : ""}
                 </Link>
               )}
               <Link
@@ -77,7 +94,13 @@ export default async function Home() {
             </div>
           </div>
 
-          <ForgeConsole />
+          <ForgeConsole
+            runId={headline?.id}
+            cases={headline?.suite?.cases.length}
+            fixesKept={headline?.report?.iterations.filter((i) => i.kept === true).length}
+            stillFailing={headline?.report?.residual_failures.length}
+            passRate={headline?.report?.final_pass_rate ?? null}
+          />
         </div>
 
         {headline?.report && (
@@ -96,17 +119,21 @@ export default async function Home() {
                   sub: "named and diagnosed in the report",
                 },
                 {
+                  // No calibration artifact means the judge was never checked
+                  // against hand labels. A placeholder here would be a number
+                  // nobody measured, which is the one thing this page must not
+                  // print, so it says plainly that it is missing.
                   label: "Judge agreement",
                   value: headline.report.calibration
                     ? `${Math.round(headline.report.calibration.agreement_rate * 100)}%`
-                    : "90%",
+                    : "—",
                   sub: headline.report.calibration
                     ? `kappa ${headline.report.calibration.cohens_kappa.toFixed(2)}`
-                    : "kappa 0.78",
+                    : "not calibrated in this run",
                 },
                 {
                   label: "Generated cases",
-                  value: String(totalCases || 56),
+                  value: totalCases > 0 ? String(totalCases) : "—",
                   sub: `across ${realRuns.length} committed run${realRuns.length === 1 ? "" : "s"}`,
                 },
               ]}
@@ -116,7 +143,7 @@ export default async function Home() {
       </section>
 
       {/* ── Discover Agents Hub (Exact UI matching Image 2 & 3) ──────── */}
-      <AgentsHub initialRunIds={runs.map((r) => r.id)} />
+      <AgentsHub runBriefs={runBriefs} artifacts={artifacts} />
 
       {/* ── The 7 Stages & Architecture ─────────────────────────────── */}
       <div id="pipeline" className="scroll-mt-20 pt-10">
@@ -175,25 +202,23 @@ export default async function Home() {
           wash="cool"
         />
 
-        {/* ── Feature 05: BEST TEAM OF MODELS (Image 1) ───────────────── */}
         <Feature
           n="05"
-          eyebrow="BEST TEAM OF MODELS"
-          title="Not one static model. The best team of models for every task"
-          body="A context-aware semantic router orchestrates the best combination of models and agents for every task—matching specialized intelligence to your goals instead of forcing one model to do everything. The result is the best balance of speed, cost, and quality for every task."
-          tags={["Context-aware router", "Models + agents", "Specialized intelligence", "Speed · cost · quality"]}
-          visual={<BestTeamOfModelsMock />}
+          eyebrow="Evidentiary judge"
+          title="The judge never sees the prompt, and runs a different model family"
+          body="Scoring is deterministic first: citation arithmetic and fact recall decide most cases outright, and a model is asked only about the ambiguous residue. That model is deliberately from another open-weight family than the agent's, because a model marking its own family's homework is not an independent check. Its agreement with hand-adjudicated labels is reported as Cohen's kappa, including when that number is poor."
+          tags={["Deterministic first", "Blind to the prompt", "Two model families", "Kappa reported"]}
+          visual={<JudgeMock />}
           wash="warm"
         />
 
-        {/* ── Feature 06: SELF-IMPROVING INTELLIGENCE (Image 1) ────────── */}
         <Feature
           n="06"
-          eyebrow="SELF-IMPROVING INTELLIGENCE"
-          title="Self-improving intelligence. The more you use it, the smarter it becomes"
-          body="Models and skills continuously evolve through real-time human-agent collaboration — the system gets sharper the more you use it."
-          tags={["Autonomous evolution", "Memory consolidation", "Continuous fine-tuning", "Safety bounds"]}
-          visual={<SelfImprovingMock />}
+          eyebrow="Critic-optimizer"
+          title="It proposes a fix, re-scores it, and throws it away when it does not help"
+          body="Failures are classified into a fix ladder — retrieval miss, prompt defect, hallucination — and the cheapest plausible repair is applied. The point is what happens next: the suite is run again and the change survives only if the score rose. In both committed runs every proposed fix was measured and reverted, and the report says so rather than quietly shipping a change that did nothing."
+          tags={["Deterministic diagnosis", "Measured, not assumed", "Reverts on no gain", "Unmeasured never counted"]}
+          visual={<LoopMock />}
           flip
           wash="cool"
         />
@@ -204,16 +229,35 @@ export default async function Home() {
           title="A factory that claims 100% is suspicious"
           body="The report leads with what still fails and why, names the judge's agreement with hand labels, and states plainly when a run was never scored rather than showing a fabricated zero. Every number on this site comes from a committed artifact in the repository."
           tags={["Residual failures named", "Judge calibration", "Never fabricates a score", "Artifacts committed"]}
-          visual={<ReportMock />}
+          visual={
+            <ReportMock
+              runId={headline?.id}
+              passRate={headline?.report?.final_pass_rate ?? null}
+              stopReason={headline?.report?.stop_reason}
+              residual={headline?.report?.residual_failures}
+              agreementRate={headline?.report?.calibration?.agreement_rate ?? null}
+              kappa={headline?.report?.calibration?.cohens_kappa ?? null}
+            />
+          }
           wash="warm"
         />
       </div>
+
+        <Feature
+          n="08"
+          eyebrow="Routing between agents"
+          title="A room of agents is only honest if the routing is a measurement"
+          body="Put a question to a team room and it is scored against every member's committed documents before anyone answers, then handed to the best match — and the table that decided it comes back with the reply. All the member corpora are pooled into one document set first, because BM25's IDF is computed over whatever set it is given, so scoring each corpus on its own produces numbers from different scales that cannot be compared. A question matching nothing routes nowhere and says so."
+          tags={["Pooled IDF", "Routing table shown", "Thin margins flagged", "Refuses to guess"]}
+          visual={<RouterMock />}
+          wash="warm"
+        />
 
       {/* ── runs ─────────────────────────────────────────────────────── */}
       <section id="runs" className="relative scroll-mt-20">
         <div className="mx-auto max-w-content px-4 py-16">
           <div className="flex items-center gap-3">
-            <span className="mono-nums font-mono text-[13px] font-bold text-accent">08</span>
+            <span className="mono-nums font-mono text-[13px] font-bold text-accent">09</span>
             <span className="h-px w-10 bg-ink/20" />
             <span className="text-[11px] font-semibold uppercase tracking-[0.13em] text-muted">
               Demonstrations
